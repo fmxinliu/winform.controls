@@ -426,6 +426,12 @@
     <Compile Include="Controls\MultiselectComboBox\TXPopupComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TXDataGridView\TXDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TXDataGridView\TXDataGridView.designer.cs">
+      <DependentUpon>TXDataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TXRangeValue\RangeValueHeader.cs" />
     <Compile Include="Controls\TXRangeValue\RangeValueItem.cs" />
     <Compile Include="Controls\TXRangeValue\TXRangeValue.cs">
@@ -717,6 +723,11 @@
     <Folder Include="Controls\Map\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\setting.ico" />
+    <None Include="Resources\download.ico" />
+    <None Include="Resources\dmu.ico" />
+    <None Include="Resources\conn.ico" />
+    <None Include="Resources\dgv.png" />
     <None Include="Resources\naruto.png" />
     <None Include="Resources\logos.png" />
     <None Include="Resources\load2 %284%29.gif" />
@@ -737,6 +748,9 @@
     <None Include="Resources\loader %282%29.gif" />
     <None Include="Resources\loader %281%29.gif" />
     <None Include="Resources\loader%280%29.gif" />
+    <EmbeddedResource Include="Controls\TXDataGridView\TXDataGridView.resx">
+      <DependentUpon>TXDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TXMonthCalendar\Images\prev_month_vs.bmp" />
     <EmbeddedResource Include="Controls\TXMonthCalendar\Images\prev_year.bmp" />
     <EmbeddedResource Include="Controls\TXMonthCalendar\Images\prev_year_disabled.bmp" />

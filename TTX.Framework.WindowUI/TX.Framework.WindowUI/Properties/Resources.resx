@@ -672,7 +672,7 @@ Parameter name: {1}</value>
         aj0XTdX3O3eOOARwwoscUUYRFABAClvUUUUVxQ+CP+GP5I8nEfxqn+L9Ef/Z
 </value>
   </data>
-  <data name="goto" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="jump" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABQFJREFUSEutVQtM
@@ -14885,5 +14885,20 @@ Parameter name: {1}</value>
         scez4dnQXL79vn8ePx5HNjhrLzY6Oxw7Hod7Fue1vZ6d9J8wfp06/w8I1mIohQXUKQAAAABJRU5ErkJg
         gg==
 </value>
+  </data>
+  <data name="dgv" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dgv.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="conn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\conn.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dmu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dmu.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\setting.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

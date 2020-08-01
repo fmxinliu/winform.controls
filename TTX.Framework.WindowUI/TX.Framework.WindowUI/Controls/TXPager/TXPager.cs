@@ -472,7 +472,7 @@ namespace TX.Framework.WindowUI.Controls
             // 
             this.tsbGoto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbGoto.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tsbGoto.Image = global::TX.Framework.WindowUI.Properties.Resources._goto;
+            this.tsbGoto.Image = global::TX.Framework.WindowUI.Properties.Resources.jump;
             this.tsbGoto.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbGoto.Name = "tsbGoto";
             this.tsbGoto.Size = new System.Drawing.Size( 23, 22 );
