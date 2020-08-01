@@ -432,6 +432,12 @@
     <Compile Include="Controls\TXDataGridView\TXDataGridView.designer.cs">
       <DependentUpon>TXDataGridView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TXFolderBrowserDialog\TXFolderBrowserDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TXFolderBrowserDialog\TXFolderBrowserDialog.Designer.cs">
+      <DependentUpon>TXFolderBrowserDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TXRangeValue\RangeValueHeader.cs" />
     <Compile Include="Controls\TXRangeValue\RangeValueItem.cs" />
     <Compile Include="Controls\TXRangeValue\TXRangeValue.cs">
