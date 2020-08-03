@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly : AssemblyTitle("TXH.Window.UI")]
+[assembly: AssemblyTitle("winform.controls")]
 [assembly : AssemblyDescription("winform ui framework")]
 [assembly : AssemblyConfiguration("")]
-[assembly : AssemblyCompany("tianxiahotel.com")]
-[assembly : AssemblyProduct("TXH.Window.UI")]
-[assembly : AssemblyCopyright("Copyright ©  Tianxiahotel 2012")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("winform.controls")]
+[assembly: AssemblyCopyright("Copyright © 2020")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
 

@@ -140,7 +140,7 @@ namespace WindowsTest {
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txTabControl1);
             this.splitContainer1.Size = new System.Drawing.Size(1288, 702);
-            this.splitContainer1.SplitterDistance = 316;
+            this.splitContainer1.SplitterDistance = 315;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -159,7 +159,7 @@ namespace WindowsTest {
             this.xPanderPanelList1.PanelColors = null;
             this.xPanderPanelList1.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
             this.xPanderPanelList1.ShowExpandIcon = true;
-            this.xPanderPanelList1.Size = new System.Drawing.Size(316, 702);
+            this.xPanderPanelList1.Size = new System.Drawing.Size(315, 702);
             this.xPanderPanelList1.TabIndex = 0;
             this.xPanderPanelList1.Text = "xPanderPanelList1";
             // 
@@ -197,7 +197,7 @@ namespace WindowsTest {
             this.xPanderPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel1.Name = "xPanderPanel1";
             this.xPanderPanel1.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel1.Size = new System.Drawing.Size(316, 627);
+            this.xPanderPanel1.Size = new System.Drawing.Size(315, 627);
             this.xPanderPanel1.TabIndex = 0;
             this.xPanderPanel1.Text = "分组1";
             this.xPanderPanel1.ToolTipTextCloseIcon = null;
@@ -303,7 +303,7 @@ namespace WindowsTest {
             this.xPanderPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel2.Name = "xPanderPanel2";
             this.xPanderPanel2.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel2.Size = new System.Drawing.Size(316, 25);
+            this.xPanderPanel2.Size = new System.Drawing.Size(315, 25);
             this.xPanderPanel2.TabIndex = 1;
             this.xPanderPanel2.Text = "xPanderPanel2";
             this.xPanderPanel2.ToolTipTextCloseIcon = null;
@@ -339,7 +339,7 @@ namespace WindowsTest {
             this.xPanderPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel3.Name = "xPanderPanel3";
             this.xPanderPanel3.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel3.Size = new System.Drawing.Size(316, 25);
+            this.xPanderPanel3.Size = new System.Drawing.Size(315, 25);
             this.xPanderPanel3.TabIndex = 2;
             this.xPanderPanel3.Text = "xPanderPanel3";
             this.xPanderPanel3.ToolTipTextCloseIcon = null;
@@ -375,7 +375,7 @@ namespace WindowsTest {
             this.xPanderPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel4.Name = "xPanderPanel4";
             this.xPanderPanel4.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel4.Size = new System.Drawing.Size(316, 25);
+            this.xPanderPanel4.Size = new System.Drawing.Size(315, 25);
             this.xPanderPanel4.TabIndex = 3;
             this.xPanderPanel4.Text = "xPanderPanel4";
             this.xPanderPanel4.ToolTipTextCloseIcon = null;
@@ -399,7 +399,7 @@ namespace WindowsTest {
             this.txTabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.txTabControl1.Name = "txTabControl1";
             this.txTabControl1.SelectedIndex = 0;
-            this.txTabControl1.Size = new System.Drawing.Size(967, 702);
+            this.txTabControl1.Size = new System.Drawing.Size(968, 702);
             this.txTabControl1.TabCornerRadius = 3;
             this.txTabControl1.TabIndex = 0;
             // 
@@ -426,7 +426,7 @@ namespace WindowsTest {
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(959, 665);
+            this.tabPage1.Size = new System.Drawing.Size(960, 665);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "窗体组件测试";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -690,7 +690,7 @@ namespace WindowsTest {
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(954, 653);
+            this.tabPage2.Size = new System.Drawing.Size(959, 665);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -888,7 +888,7 @@ namespace WindowsTest {
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(954, 653);
+            this.tabPage3.Size = new System.Drawing.Size(959, 665);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -941,7 +941,7 @@ namespace WindowsTest {
             this.txMenuStrip1.Location = new System.Drawing.Point(4, 32);
             this.txMenuStrip1.Name = "txMenuStrip1";
             this.txMenuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.txMenuStrip1.Size = new System.Drawing.Size(946, 24);
+            this.txMenuStrip1.Size = new System.Drawing.Size(951, 24);
             this.txMenuStrip1.TabIndex = 2;
             this.txMenuStrip1.Text = "txMenuStrip1";
             // 
@@ -956,7 +956,7 @@ namespace WindowsTest {
             this.txMenuStrip2.Location = new System.Drawing.Point(4, 4);
             this.txMenuStrip2.Name = "txMenuStrip2";
             this.txMenuStrip2.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.txMenuStrip2.Size = new System.Drawing.Size(946, 28);
+            this.txMenuStrip2.Size = new System.Drawing.Size(951, 28);
             this.txMenuStrip2.TabIndex = 3;
             this.txMenuStrip2.Text = "txMenuStrip2";
             // 
@@ -1008,7 +1008,7 @@ namespace WindowsTest {
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage4.Size = new System.Drawing.Size(954, 653);
+            this.tabPage4.Size = new System.Drawing.Size(959, 665);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "List";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1055,7 +1055,7 @@ namespace WindowsTest {
             this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage5.Size = new System.Drawing.Size(954, 653);
+            this.tabPage5.Size = new System.Drawing.Size(959, 665);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1100,7 +1100,7 @@ namespace WindowsTest {
             this.monthCalendar1.Weekdays.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(65)))), ((int)(((byte)(0)))));
             this.monthCalendar1.Weeknumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             // 
-            // winMain
+            // WinMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1111,7 +1111,7 @@ namespace WindowsTest {
             this.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip = this.txMenuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "winMain";
+            this.Name = "WinMain";
             this.Padding = new System.Windows.Forms.Padding(5, 8, 5, 5);
             this.Text = "主窗体-**ERP系统";
             this.Load += new System.EventHandler(this.winMain_Load);
