@@ -13,17 +13,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class AndAlsoExpression : BinaryExpression
-    {
-        public AndAlsoExpression(Expression left, Expression right)
-            : base(left, right)
-        {
-        }
+namespace System.Text.Template {
+    public class AndAlsoExpression : BinaryExpression {
+        public AndAlsoExpression(Expression left, Expression right) : base(left, right) { }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             object left = Left.Evaluate(context).Value;
 
             if (!context.ToBoolean(left))
@@ -34,8 +28,7 @@ namespace System.Text.Template
             return Expression.Value(context.ToBoolean(right));
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return "(" + Left + " && " + Right + ")";
         }
     }

@@ -1,26 +1,24 @@
-﻿using System;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Collections;
-using System.Reflection;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// 树形多级选择控件
     /// </summary>
     /// User:Ryan  CreateTime:2012-9-27 22:20.
     [ToolboxBitmap(typeof(ComboBox))]
     [ToolboxItem(true)]
-    public partial class TXTreeComboBox : TXPopupComboBox
-    {
+    public partial class TXTreeComboBox : TXPopupComboBox {
         #region private attributes
 
         /// <summary>
@@ -51,9 +49,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region IniControls
 
-        public TXTreeComboBox()
-            : base()
-        {
+        public TXTreeComboBox() : base() {
             //load tree control
             TreeComboBoxContainer container = new TreeComboBoxContainer();
             DropDownControl = container;
@@ -107,8 +103,7 @@ namespace TX.Framework.WindowUI.Controls
 
         [Browsable(true)]
         [Description("设置树的最大深度，0表示无限深度")]
-        public int TreeMaxDegree
-        {
+        public int TreeMaxDegree {
             get { return this._TreeMaxDegree; }
             set { this._TreeMaxDegree = value < 0 ? 0 : value; }
         }
@@ -145,14 +140,11 @@ namespace TX.Framework.WindowUI.Controls
         /// User:Ryan  CreateTime:2012-9-27 21:20.
         [Browsable(true)]
         [Description("设置是否显示checkbox")]
-        public bool CheckBox
-        {
-            get
-            {
+        public bool CheckBox {
+            get {
                 return this.PopDownTree.CheckBoxes;
             }
-            set
-            {
+            set {
                 this._CheckBox = value;
                 this.PopDownTree.CheckBoxes = this._CheckBox;
             }
@@ -165,8 +157,7 @@ namespace TX.Framework.WindowUI.Controls
         /// User:Ryan  CreateTime:2012-9-28 20:23.
         [Browsable(true)]
         [Description("获取或设置多级路径分割字符串")]
-        public string PathSeparator
-        {
+        public string PathSeparator {
             get { return this.PopDownTree.PathSeparator; }
             set { this.PopDownTree.PathSeparator = value; }
         }
@@ -177,16 +168,12 @@ namespace TX.Framework.WindowUI.Controls
         /// <value>The selected node.</value>
         /// User:Ryan  CreateTime:2012-9-27 19:18.
         [Browsable(false)]
-        public TreeNodeEx SelectedNode
-        {
-            get
-            {
+        public TreeNodeEx SelectedNode {
+            get {
                 return this.PopDownTree.SelectedNode as TreeNodeEx;
             }
-            set
-            {
-                if (value != null)
-                {
+            set {
+                if (value != null) {
                     this.PopDownTree.SelectedNode = value;
                     //this.UpdateText(value);
                 }
@@ -198,14 +185,11 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 19:18.
         [Browsable(false)]
-        public new string SelectedValue
-        {
-            get
-            {
+        public new string SelectedValue {
+            get {
                 return this.SelectedNode == null ? string.Empty : this.SelectedNode.Value;
             }
-            set
-            {
+            set {
                 this.SetSelectedNodeByValue(value);
             }
         }
@@ -215,10 +199,8 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 19:20.
         [Browsable(false)]
-        public new string SelectedText
-        {
-            get
-            {
+        public new string SelectedText {
+            get {
                 return this.SelectedNode == null ? string.Empty : this.SelectedNode.Text;
             }
         }
@@ -229,21 +211,16 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 19:26.
         [Browsable(false)]
-        public string[] SelectedValues
-        {
-            get
-            {
+        public string[] SelectedValues {
+            get {
                 List<string> values = this.SelectedNode == null ? null : this.GetFullPathValues(this.SelectedNode);
-                if (values != null)
-                {
+                if (values != null) {
                     values.Reverse();
                     return values.ToArray();
                 }
-                else
-                {
+                else {
                     return null;
                 }
-
             }
         }
 
@@ -252,21 +229,17 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 19:26.
         [Browsable(false)]
-        public string SelectedTexts
-        {
+        public string SelectedTexts {
             get { return this.SelectedNode == null ? string.Empty : this.SelectedNode.FullPath; }
         }
-
 
         /// <summary>
         /// 获取被勾选的节点集合
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 21:37.
         [Browsable(false)]
-        public List<TreeNodeEx> CheckedNodes
-        {
-            get
-            {
+        public List<TreeNodeEx> CheckedNodes {
+            get {
                 return this._CheckedNodes;
             }
         }
@@ -277,23 +250,18 @@ namespace TX.Framework.WindowUI.Controls
         /// <value>The checked values.</value>
         /// User:Ryan  CreateTime:2012-9-27 22:01.
         [Browsable(false)]
-        public string[] CheckedValues
-        {
-            get
-            {
+        public string[] CheckedValues {
+            get {
                 List<string> values = new List<string>();
-                if (this._CheckedNodes != null && this._CheckedNodes.Count > 0)
-                {
+                if (this._CheckedNodes != null && this._CheckedNodes.Count > 0) {
                     this._CheckedNodes.ForEach(s => values.Add(s.Value));
                     return values.ToArray();
                 }
-                else
-                {
+                else {
                     return null;
                 }
             }
-            set
-            {
+            set {
                 this.SetCheckedNodeByValues(value);
                 //this.UpdateText(null);
             }
@@ -305,8 +273,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <value>The checked texts.</value>
         /// User:Ryan  CreateTime:2012-9-28 20:21.
         [Browsable(false)]
-        public string CheckedTexts
-        {
+        public string CheckedTexts {
             get { return this.GetCheckedTexts(); }
         }
 
@@ -329,19 +296,15 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// 控件框点击事件：弹出选择树
         /// </summary>
-        /// <param name="e"></param>
-        protected virtual void TXTreeComboBox_Click(object sender, EventArgs e)
-        {
+        protected virtual void TXTreeComboBox_Click(object sender, EventArgs e) {
             base.ShowDropDown();
         }
 
         /// <summary>
         /// 节点双击事件：隐藏下拉框
         /// </summary>
-        private void PopDownTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (this.DoubleSelecteEnable && (e.Node.Level + 1) >= this.DoubleSelectNodeLevel)
-            {
+        private void PopDownTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
+            if (this.DoubleSelecteEnable && (e.Node.Level + 1) >= this.DoubleSelectNodeLevel) {
                 this.HideDropDown();
             }
         }
@@ -349,8 +312,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// 节点选中后的事件
         /// </summary>/// User:Ryan  CreateTime:2012-9-27 20:15.
-        void PopDownTree_AfterSelect(object sender, TreeViewEventArgs e)
-        {
+        private void PopDownTree_AfterSelect(object sender, TreeViewEventArgs e) {
             this.SetSelectedNode(e.Node as TreeNodeEx);
         }
 
@@ -358,29 +320,19 @@ namespace TX.Framework.WindowUI.Controls
         /// 节点选中后的事件
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-28 15:42.
-        void PopDownTree_AfterCheck(object sender, TreeViewEventArgs e)
-        {
+        private void PopDownTree_AfterCheck(object sender, TreeViewEventArgs e) {
             TreeNodeEx node = e.Node as TreeNodeEx;
-            if (node != null)
-            {
-                if (node is DefaultTreeNode)
-                {
+            if (node != null) {
+                if (node is DefaultTreeNode) {
                     return;
                 }
-                else
-                {
-                    //add
-                    if (node.Checked)
-                    {
+                else {
+                    if (node.Checked) {
                         this._CheckedNodes.Add(node);
                     }
-                    //remove
-                    else
-                    {
+                    else {
                         this._CheckedNodes.Remove(node);
                     }
-
-                    //update text
                     this.UpdateText(node);
                 }
             }
@@ -394,17 +346,14 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="sender">(控件对象).The source of the event.</param>
         /// <param name="e">(事件数据).The <see cref="System.Windows.Forms.TreeViewCancelEventArgs"/> instance containing the event data.</param>
         /// User:Ryan  CreateTime:2012-9-27 18:50.
-        void PopDownTree_BeforeExpand(object sender, TreeViewCancelEventArgs e)
-        {
+        private void PopDownTree_BeforeExpand(object sender, TreeViewCancelEventArgs e) {
             TreeNodeEx node = e.Node as TreeNodeEx;
-            if (!node.LeafNode && node.Datasource == null && node.Nodes[0] != null && node.Nodes[0] is EmptyTreeNode)
-            {
+            if (!node.LeafNode && node.Datasource == null && node.Nodes[0] != null && node.Nodes[0] is EmptyTreeNode) {
                 //clear data
                 node.LeafNode = true;
                 node.Nodes.Clear();
                 //实现该事件以加载子节点数据
-                if (this.LoadChildNodesDataSource != null)
-                {
+                if (this.LoadChildNodesDataSource != null) {
                     TreeNodeEventArgs args = new TreeNodeEventArgs();
                     args.SelectedNode = node;
                     this.LoadChildNodesDataSource(sender, args);
@@ -419,10 +368,8 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Override methods
 
-        protected override void OnResize(EventArgs e)
-        {
-            if (DropDownControl != null)
-            {
+        protected override void OnResize(EventArgs e) {
+            if (DropDownControl != null) {
                 Size Size = new Size(Width, DropDownControl.Height + 20);
                 PopupDropDown.Size = Size;
             }
@@ -438,17 +385,14 @@ namespace TX.Framework.WindowUI.Controls
         /// 初始绑定数据源
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 17:36.
-        public virtual void BindData()
-        {
+        public virtual void BindData() {
             //1.validation parameters
-            if (this.DataSource == null || string.IsNullOrEmpty(this.ValueMember) || string.IsNullOrEmpty(this.DisplayMember))
-            {
+            if (this.DataSource == null || string.IsNullOrEmpty(this.ValueMember) || string.IsNullOrEmpty(this.DisplayMember)) {
                 return;
             }
             //2.get datasouce
             IEnumerable source = this.GetSource(this.DataSource);
-            if (source == null)
-            {
+            if (source == null) {
                 throw new ArgumentException("数据源必须是支持枚举器的列表数据！");
             }
 
@@ -457,16 +401,14 @@ namespace TX.Framework.WindowUI.Controls
             this.PopDownTree.Nodes.Clear();
             this.Text = "";
             //3.1 bind default node
-            if (this.IsInsertDefaultNode)
-            {
+            if (this.IsInsertDefaultNode) {
                 DefaultTreeNode node = new DefaultTreeNode();
                 node.Text = string.IsNullOrEmpty(this.DefaultNodeText) ? node.Text : this.DefaultNodeText;
                 this.PopDownTree.Nodes.Add(node);
                 this.SetSelectedNode(node);
             }
             //3.2 bind tree nodes
-            foreach (object item in source)
-            {
+            foreach (object item in source) {
                 this.BindRootNode(item);
             }
         }
@@ -479,16 +421,14 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="item">The item.</param>
         /// User:Ryan  CreateTime:2012-9-27 17:39.
-        protected virtual void BindRootNode(object item)
-        {
+        protected virtual void BindRootNode(object item) {
             TreeNodeEx node = this.GetRootNode(item);
             this.PopDownTree.Nodes.Add(node);
             //绑定子节点
             this.BindChildNode(item, node);
         }
 
-        protected virtual TreeNodeEx GetRootNode(object item)
-        {
+        protected virtual TreeNodeEx GetRootNode(object item) {
             return new TreeNodeEx(this, item, this.TreeMaxDegree == 1 ? true : false);
         }
 
@@ -502,14 +442,11 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="item">The item.</param>
         /// <param name="node">The node.</param>
         /// User:Ryan  CreateTime:2012-9-27 17:39.
-        protected virtual void BindChildNode(object item, TreeNodeEx node)
-        {
+        protected virtual void BindChildNode(object item, TreeNodeEx node) {
             //绑定多级节点
-            if (!string.IsNullOrEmpty(this.MultiLevelDataSourceMember))
-            {
+            if (!string.IsNullOrEmpty(this.MultiLevelDataSourceMember)) {
                 object dataSource = item.TryGetValue(this.MultiLevelDataSourceMember);
-                if (dataSource != null)
-                {
+                if (dataSource != null) {
                     this.BindChildNode(node, dataSource);
                 }
             }
@@ -524,22 +461,18 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="node">The node.</param>
         /// <param name="dataSource">The data source.</param>
         /// User:Ryan  CreateTime:2012-9-27 17:40.
-        protected virtual void BindChildNode(TreeNodeEx node, object dataSource)
-        {
+        protected virtual void BindChildNode(TreeNodeEx node, object dataSource) {
             //验证绑定树的深度：如果TreeMaxDegree为0标示无限级数，其它只绑定相应级数的数据
-            if (node != null && dataSource != null && (this.TreeMaxDegree == 0 || node.Level < this.TreeMaxDegree - 1))
-            {
+            if (node != null && dataSource != null && (this.TreeMaxDegree == 0 || node.Level < this.TreeMaxDegree - 1)) {
                 node.Datasource = dataSource;
                 //get data source
                 IEnumerable source = this.GetSource(dataSource);
-                if (source == null)
-                {
+                if (source == null) {
                     throw new ArgumentException("数据源必须是支持枚举器的列表数据！");
                 }
                 //bind data
                 node.Nodes.Clear();
-                foreach (object item in source)
-                {
+                foreach (object item in source) {
                     TreeNodeEx childNode = this.GetChildNode(node, item);
                     node.Nodes.Add(childNode);
                     this.BindChildNode(item, childNode);
@@ -547,8 +480,7 @@ namespace TX.Framework.WindowUI.Controls
             }
         }
 
-        protected virtual TreeNodeEx GetChildNode(TreeNodeEx node, object item)
-        {
+        protected virtual TreeNodeEx GetChildNode(TreeNodeEx node, object item) {
             return new TreeNodeEx(this, item, node.Level == this.TreeMaxDegree - 2 ? true : false);
         }
 
@@ -564,8 +496,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Return a data(or instance) of IEnumerable.
         /// </returns>
         /// User:Ryan  CreateTime:2012-9-27 17:41.
-        protected virtual IEnumerable GetSource(object dataSource)
-        {
+        protected virtual IEnumerable GetSource(object dataSource) {
             if (dataSource == null)
                 return null;
             IEnumerable source = dataSource as IEnumerable;
@@ -582,8 +513,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// 清除所有数据（Clear）
         /// </summary>
-        public void Clear()
-        {
+        public void Clear() {
             this.PopDownTree.Nodes.Clear();
         }
         #endregion
@@ -598,8 +528,7 @@ namespace TX.Framework.WindowUI.Controls
         ///  IniTree（初始化树）
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 10:49.
-        private void IniTree()
-        {
+        private void IniTree() {
             this.PopDownTree.FullRowSelect = true;
             this.PopDownTree.ItemHeight = 18;
             this.PopDownTree.Dock = DockStyle.Fill;
@@ -617,12 +546,10 @@ namespace TX.Framework.WindowUI.Controls
         /// 获取指定接的的全部值
         /// </summary>
         /// User:Ryan  CreateTime:2012-9-27 19:25.
-        private List<string> GetFullPathValues(TreeNodeEx node)
-        {
+        private List<string> GetFullPathValues(TreeNodeEx node) {
             List<string> list = new List<string>();
             list.Add(node.Value);
-            if (node.Parent != null)
-            {
+            if (node.Parent != null) {
                 list.AddRange(this.GetFullPathValues(node.Parent as TreeNodeEx));
             }
 
@@ -637,18 +564,14 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="node">The node.</param>
         /// User:Ryan  CreateTime:2012-9-27 20:14.
-        private void SetSelectedNode(TreeNodeEx node)
-        {
+        private void SetSelectedNode(TreeNodeEx node) {
             this.UpdateText(node);
-            if (node is DefaultTreeNode)
-            {
+            if (node is DefaultTreeNode) {
                 this.SelectedNode = null;
             }
-            else
-            {
+            else {
                 this.SelectedNode = node;
-                if (this.OnTreeNodeSelected != null)
-                {
+                if (this.OnTreeNodeSelected != null) {
                     TreeNodeEventArgs args = new TreeNodeEventArgs();
                     args.SelectedNode = this.SelectedNode;
                     this.OnTreeNodeSelected(this.PopDownTree, args);
@@ -659,36 +582,27 @@ namespace TX.Framework.WindowUI.Controls
 
         #region SetSelectedNodeByValue（根据值设置选中节点）
 
-        private void SetSelectedNodeByValue(string value)
-        {
-            if (this.PopDownTree.Nodes != null && this.PopDownTree.Nodes.Count > 0)
-            {
-                foreach (TreeNodeEx node in this.PopDownTree.Nodes)
-                {
+        private void SetSelectedNodeByValue(string value) {
+            if (this.PopDownTree.Nodes != null && this.PopDownTree.Nodes.Count > 0) {
+                foreach (TreeNodeEx node in this.PopDownTree.Nodes) {
                     this.SetSelectedNodeByValue(value, node);
                 }
             }
         }
 
-        private void SetSelectedNodeByValue(string value, TreeNodeEx node)
-        {
-            if (node == null)
-            {
+        private void SetSelectedNodeByValue(string value, TreeNodeEx node) {
+            if (node == null) {
                 return;
             }
 
-            if (node.Value.Equals(value))
-            {
+            if (node.Value.Equals(value)) {
                 //this.SelectedNode = node;
                 this.SetSelectedNode(node);
                 return;
             }
-            else
-            {
-                if (node.Nodes != null && node.Nodes.Count > 0)
-                {
-                    foreach (TreeNodeEx item in node.Nodes)
-                    {
+            else {
+                if (node.Nodes != null && node.Nodes.Count > 0) {
+                    foreach (TreeNodeEx item in node.Nodes) {
                         this.SetSelectedNodeByValue(value, item);
                     }
                 }
@@ -698,43 +612,34 @@ namespace TX.Framework.WindowUI.Controls
 
         #region GetCheckedNodes（获取被勾选的节点集合）
 
-        private List<TreeNodeEx> GetCheckedNodes()
-        {
-            if (this.PopDownTree.CheckBoxes && this.PopDownTree.Nodes != null && this.PopDownTree.Nodes.Count > 0)
-            {
+        private List<TreeNodeEx> GetCheckedNodes() {
+            if (this.PopDownTree.CheckBoxes && this.PopDownTree.Nodes != null && this.PopDownTree.Nodes.Count > 0) {
                 List<TreeNodeEx> list = new List<TreeNodeEx>();
-                foreach (TreeNodeEx item in this.PopDownTree.Nodes)
-                {
+                foreach (TreeNodeEx item in this.PopDownTree.Nodes) {
                     list.AddRange(this.GetCheckedNodes(item));
                 }
 
                 return list;
             }
-            else
-            {
+            else {
                 return null;
             }
         }
 
-        private List<TreeNodeEx> GetCheckedNodes(TreeNodeEx node)
-        {
-            if (node != null && this.PopDownTree.CheckBoxes)
-            {
+        private List<TreeNodeEx> GetCheckedNodes(TreeNodeEx node) {
+            if (node != null && this.PopDownTree.CheckBoxes) {
                 List<TreeNodeEx> list = new List<TreeNodeEx>();
-                if (node.Checked)
-                {
+                if (node.Checked) {
                     list.Add(node);
                 }
 
-                if (node.Nodes != null && node.Nodes.Count > 0)
-                {
+                if (node.Nodes != null && node.Nodes.Count > 0) {
                     list.AddRange(this.GetCheckedNodes(node));
                 }
 
                 return list;
             }
-            else
-            {
+            else {
                 return null;
             }
         }
@@ -742,11 +647,9 @@ namespace TX.Framework.WindowUI.Controls
 
         #region GetCheckedTexts（获取被勾选节点文本字符）
 
-        private string GetCheckedTexts()
-        {
+        private string GetCheckedTexts() {
             StringBuilder sb = new StringBuilder();
-            if (this._CheckedNodes != null && this._CheckedNodes.Count > 0)
-            {
+            if (this._CheckedNodes != null && this._CheckedNodes.Count > 0) {
                 this._CheckedNodes.ForEach(s => sb.Append(string.Concat(this.PopDownTree.PathSeparator, s.Text)));
             }
             return sb.ToString();
@@ -755,40 +658,29 @@ namespace TX.Framework.WindowUI.Controls
 
         #region SetCheckedNodeByValues（根据值设置被勾选的节点）
 
-        private void SetCheckedNodeByValues(string[] values)
-        {
-            if (values == null || values.Length <= 0)
-            {
+        private void SetCheckedNodeByValues(string[] values) {
+            if (values == null || values.Length <= 0) {
                 return;
             }
 
-            if (this.PopDownTree.Nodes != null && this.PopDownTree.Nodes.Count > 0)
-            {
-                foreach (TreeNodeEx node in this.PopDownTree.Nodes)
-                {
+            if (this.PopDownTree.Nodes != null && this.PopDownTree.Nodes.Count > 0) {
+                foreach (TreeNodeEx node in this.PopDownTree.Nodes) {
                     this.SetCheckedNodeByValues(values, node);
                 }
             }
         }
 
-
-        private void SetCheckedNodeByValues(string[] values, TreeNodeEx node)
-        {
-            if (node == null)
-            {
+        private void SetCheckedNodeByValues(string[] values, TreeNodeEx node) {
+            if (node == null) {
                 return;
             }
 
-            if (values.Contains(node.Value))
-            {
+            if (values.Contains(node.Value)) {
                 node.Checked = true;
             }
-            else
-            {
-                if (node.Nodes != null && node.Nodes.Count > 0)
-                {
-                    foreach (TreeNodeEx item in node.Nodes)
-                    {
+            else {
+                if (node.Nodes != null && node.Nodes.Count > 0) {
+                    foreach (TreeNodeEx item in node.Nodes) {
                         this.SetCheckedNodeByValues(values, item);
                     }
                 }
@@ -803,25 +695,19 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="node">The node.</param>
         /// User:Ryan  CreateTime:2012-9-27 21:58.
-        private void UpdateText(TreeNodeEx node)
-        {
-            if (node == null)
-            {
+        private void UpdateText(TreeNodeEx node) {
+            if (node == null) {
                 return;
             }
 
-            if (this.CheckBox)
-            {
+            if (this.CheckBox) {
                 this.Text = this.GetCheckedTexts();
             }
-            else
-            {
-                if (this.ShowFullPathText)
-                {
+            else {
+                if (this.ShowFullPathText) {
                     this.Text = node.FullPath;
                 }
-                else
-                {
+                else {
                     this.Text = node.Text;
                 }
             }

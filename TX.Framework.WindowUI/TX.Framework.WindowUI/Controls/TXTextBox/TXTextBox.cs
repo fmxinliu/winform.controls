@@ -1,22 +1,25 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// 自定义TextBox（组合控件）
     /// </summary>
     /// User:Ryan  CreateTime:2011-08-19 15:19.
     [ToolboxBitmap(typeof(TextBox))]
-    public partial class TXTextBox : UserControl
-    {
+    public partial class TXTextBox : UserControl {
         #region fileds
+
+        /// <summary>
+        /// 静态图标按钮对象
+        /// </summary>
+        private static readonly object _ImageButton = new object();
 
         /// <summary>
         /// 圆角值
@@ -49,11 +52,6 @@ namespace TX.Framework.WindowUI.Controls
         private Size _Offset = new Size(2, 1);
 
         /// <summary>
-        /// 静态图标按钮对象
-        /// </summary>
-        private static readonly object _ImageButton = new object();
-
-        /// <summary>
         /// 内嵌的图标显示控件（用这个控件可以显示任意的图标了，包括动画图标）
         /// </summary>
         private PictureBox _pictureBox;
@@ -84,8 +82,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         [Category("TXEvents")]
         [Description("当图标按钮被点击时发生")]
-        public event ImageButtonClickEventHandler OnImageButtonClick
-        {
+        public event ImageButtonClickEventHandler OnImageButtonClick {
             add { base.Events.AddHandler(_ImageButton, value); }
             remove { base.Events.RemoveHandler(_ImageButton, value); }
         }
@@ -104,9 +101,7 @@ namespace TX.Framework.WindowUI.Controls
         /// (构造函数).Initializes a new instance of the <see cref="TXTextBox"/> class.
         /// </summary>
         /// User:Ryan  CreateTime:2011-08-19 15:31.
-        public TXTextBox()
-            : base()
-        {
+        public TXTextBox() : base() {
             SetStyle(
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
@@ -136,26 +131,21 @@ namespace TX.Framework.WindowUI.Controls
         [Browsable(true)]
         [Description("圆角的半径值")]
         [DefaultValue(1)]
-        public int CornerRadius
-        {
+        public int CornerRadius {
             get { return this._CornerRadius; }
-            set
-            {
+            set {
                 this._CornerRadius = value;
-                if (value > this._Offset.Width * 3)
-                {
+                if (value > this._Offset.Width * 3) {
                     this.Offset = new Size(value / 3, this.Offset.Height);
                 }
-                else
-                {
+                else {
                     this.Invalidate();
                 }
             }
         }
 
         [Browsable(false)]
-        public new BorderStyle BorderStyle
-        {
+        public new BorderStyle BorderStyle {
             get { return BorderStyle.None; }
         }
 
@@ -177,11 +167,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("边框颜色")]
-        public Color BorderColor
-        {
+        public Color BorderColor {
             get { return this._BorderColor; }
-            set
-            {
+            set {
                 this._BorderColor = value;
                 base.Invalidate();
             }
@@ -195,21 +183,17 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("必填")]
-        public bool Required
-        {
+        public bool Required {
             get { return this._Required; }
-            set
-            {
+            set {
                 this._Required = value;
-                if (value)
-                {
+                if (value) {
                     this.Image = string.IsNullOrEmpty(this.Text) ? Properties.Resources.requried : Properties.Resources.check;
                     this.ImageAlignment = ToolStripItemAlignment.Right;
                     this.ImageSize = new Size(14, 14);
                     this.OnImageButtonClick += new ImageButtonClickEventHandler(TXTextBox_OnImageButtonClick);
                 }
-                else
-                {
+                else {
                     //this.Image = null;
                     //this.ImageSize = new Size(18, 18);
                     this.OnImageButtonClick -= new ImageButtonClickEventHandler(TXTextBox_OnImageButtonClick);
@@ -227,11 +211,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("边框的高亮色")]
-        public Color HeightLightBolorColor
-        {
+        public Color HeightLightBolorColor {
             get { return this._HeightLightBolorColor; }
-            set
-            {
+            set {
                 this._HeightLightBolorColor = value;
             }
         }
@@ -244,14 +226,11 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("图标")]
-        public Image Image
-        {
+        public Image Image {
             get { return this._pictureBox.Image; }
-            set
-            {
+            set {
                 this._pictureBox.Image = value;
-                if (value != null)
-                {
+                if (value != null) {
                     this._pictureBox.Size = new Size(16, 16);
                 }
 
@@ -269,11 +248,9 @@ namespace TX.Framework.WindowUI.Controls
         [Browsable(true)]
         [Description("图标的大小")]
         [DefaultValue(typeof(Size), "18,18")]
-        public Size ImageSize
-        {
+        public Size ImageSize {
             get { return this._pictureBox.Size; }
-            set
-            {
+            set {
                 this._pictureBox.Size = value;
                 this.Invalidate();
             }
@@ -288,11 +265,9 @@ namespace TX.Framework.WindowUI.Controls
         [Browsable(true)]
         [Description("图标的安放位置")]
         [DefaultValue(typeof(ToolStripItemAlignment), "Left")]
-        public ToolStripItemAlignment ImageAlignment
-        {
+        public ToolStripItemAlignment ImageAlignment {
             get { return this._ImageAlignment; }
-            set
-            {
+            set {
                 this._ImageAlignment = value;
                 this.ResetControlSize();
                 this.Invalidate();
@@ -308,11 +283,9 @@ namespace TX.Framework.WindowUI.Controls
         [Browsable(true)]
         [Description("控件内部的偏移量")]
         [DefaultValue(typeof(Size), "2,1")]
-        public Size Offset
-        {
+        public Size Offset {
             get { return this._Offset; }
-            set
-            {
+            set {
                 this._Offset = value;
                 this.ResetControlSize();
                 this.Invalidate();
@@ -329,11 +302,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public new Font Font
-        {
+        public new Font Font {
             get { return base.Font; }
-            set
-            {
+            set {
                 base.Font = value;
                 this._TextBox.Font = value;
             }
@@ -349,11 +320,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public new Color ForeColor
-        {
+        public new Color ForeColor {
             get { return base.ForeColor; }
-            set
-            {
+            set {
                 base.ForeColor = value;
                 this._TextBox.ForeColor = value;
             }
@@ -366,11 +335,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public new RightToLeft RightToLeft
-        {
+        public new RightToLeft RightToLeft {
             get { return base.RightToLeft; }
-            set
-            {
+            set {
                 base.RightToLeft = value;
                 this._TextBox.RightToLeft = value;
             }
@@ -390,14 +357,11 @@ namespace TX.Framework.WindowUI.Controls
         [Browsable(true)]
         [Description("这个，你懂的！")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public override System.Windows.Forms.DockStyle Dock
-        {
-            get
-            {
+        public override System.Windows.Forms.DockStyle Dock {
+            get {
                 return base.Dock;
             }
-            set
-            {
+            set {
                 base.Dock = value;
             }
         }
@@ -413,18 +377,14 @@ namespace TX.Framework.WindowUI.Controls
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [DefaultValue("")]
-        public new string Text
-        {
-            get
-            {
+        public new string Text {
+            get {
                 return this._TextBox.Text;
             }
-            set
-            {
+            set {
                 this._TextBox.Text = string.IsNullOrEmpty(value) || value.Contains("txTextBox") ? string.Empty : value;
                 ////Requried attribute
-                if (this.Required)
-                {
+                if (this.Required) {
                     this.Image = string.IsNullOrEmpty(value) ? Properties.Resources.requried : Properties.Resources.check;
                 }
             }
@@ -440,14 +400,11 @@ namespace TX.Framework.WindowUI.Controls
         [Description("最大输入字符数")]
         [DefaultValue(32767)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public int MaxLength
-        {
-            get
-            {
+        public int MaxLength {
+            get {
                 return this._TextBox.MaxLength;
             }
-            set
-            {
+            set {
                 this._TextBox.MaxLength = value > 0 ? value : 0;
             }
         }
@@ -462,21 +419,16 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否支持多行输入")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [DefaultValue(false)]
-        public bool Multiline
-        {
-            get
-            {
+        public bool Multiline {
+            get {
                 return this._TextBox.Multiline;
             }
-            set
-            {
+            set {
                 this._TextBox.Multiline = value;
-                if (value)
-                {
+                if (value) {
                     this.Size = new Size(250, 45);
                 }
-                else
-                {
+                else {
                     this.Size = new Size(180, 25);
                 }
             }
@@ -492,14 +444,11 @@ namespace TX.Framework.WindowUI.Controls
         [Description("密码字符")]
         [DefaultValue("")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public char PasswordChar
-        {
-            get
-            {
+        public char PasswordChar {
+            get {
                 return this._TextBox.PasswordChar;
             }
-            set
-            {
+            set {
                 this._TextBox.PasswordChar = value;
             }
         }
@@ -514,14 +463,11 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否只读")]
         [DefaultValue(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool ReadOnly
-        {
-            get
-            {
+        public bool ReadOnly {
+            get {
                 return this._TextBox.ReadOnly;
             }
-            set
-            {
+            set {
                 this._TextBox.ReadOnly = value;
                 this.Invalidate();
             }
@@ -537,14 +483,11 @@ namespace TX.Framework.WindowUI.Controls
         [Description("多行输入时的滚动条显示")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [DefaultValue(typeof(ScrollBars), "None")]
-        public ScrollBars ScrollBars
-        {
-            get
-            {
+        public ScrollBars ScrollBars {
+            get {
                 return this._TextBox.ScrollBars;
             }
-            set
-            {
+            set {
                 this._TextBox.ScrollBars = value;
             }
         }
@@ -560,11 +503,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Browsable(true)]
-        public new bool Enabled
-        {
+        public new bool Enabled {
             get { return this._TextBox.Enabled; }
-            set
-            {
+            set {
                 this._TextBox.Enabled = value;
             }
         }
@@ -573,61 +514,50 @@ namespace TX.Framework.WindowUI.Controls
 
         #region  private Events
 
-        private void _TextBox_LostFocus(object sender, EventArgs e)
-        {
+        private void _TextBox_LostFocus(object sender, EventArgs e) {
             this._ControlState = EnumControlState.Default;
             this.Invalidate();
         }
 
-        private void _TextBox_GotFocus(object sender, EventArgs e)
-        {
+        private void _TextBox_GotFocus(object sender, EventArgs e) {
             this._ControlState = EnumControlState.HeightLight;
             this.Invalidate();
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             this.DrawBorder(e.Graphics);
         }
 
-        protected override void OnSizeChanged(EventArgs e)
-        {
+        protected override void OnSizeChanged(EventArgs e) {
             base.OnSizeChanged(e);
             this.ResetControlSize();
         }
 
-        protected override void OnCreateControl()
-        {
+        protected override void OnCreateControl() {
             base.OnCreateControl();
             this.ResetControlSize();
             this.Text = this.Text == this.Name ? string.Empty : this.Text;
         }
 
-        private void _pictureBox_Click(object sender, EventArgs e)
-        {
+        private void _pictureBox_Click(object sender, EventArgs e) {
             ImageButtonClickEventHandler handler = base.Events[_ImageButton] as ImageButtonClickEventHandler;
-            if (handler != null)
-            {
+            if (handler != null) {
                 handler(this.Text, e);
             }
         }
 
-        private void _TextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (this.Required)
-            {
+        private void _TextBox_TextChanged(object sender, EventArgs e) {
+            if (this.Required) {
                 this.Image = string.IsNullOrEmpty(this.Text.Trim()) ? Properties.Resources.requried : Properties.Resources.check;
             }
 
-            if (this.OnTextChanged != null)
-            {
+            if (this.OnTextChanged != null) {
                 this.OnTextChanged(sender, e);
             }
         }
 
-        private void TXTextBox_OnImageButtonClick(object sender, EventArgs e)
-        {
+        private void TXTextBox_OnImageButtonClick(object sender, EventArgs e) {
             Forms.TXMessageBoxExtensions.Warning("亲，该项为必填哦！");
         }
 
@@ -635,23 +565,19 @@ namespace TX.Framework.WindowUI.Controls
 
         #region public methods
 
-        public void SelectAll()
-        {
+        public void SelectAll() {
             this._TextBox.SelectAll();
         }
 
-        public void Focus()
-        {
+        public void Focus() {
             this._TextBox.Focus();
         }
 
-        public void Select()
-        {
+        public void Select() {
             this._TextBox.Select();
         }
 
-        public void Select(int start, int length)
-        {
+        public void Select(int start, int length) {
             this._TextBox.Select(start, length);
         }
 
@@ -659,16 +585,13 @@ namespace TX.Framework.WindowUI.Controls
 
         #region private methods
 
-        private void ResetControlSize()
-        {
-            if (this._pictureBox.Image == null)
-            {
+        private void ResetControlSize() {
+            if (this._pictureBox.Image == null) {
                 this._pictureBox.Size = Size.Empty;
             }
 
             int mid = this.Height / 2;
-            switch (this._ImageAlignment)
-            {
+            switch (this._ImageAlignment) {
                 case ToolStripItemAlignment.Left:
                     this._pictureBox.Location = new Point(this._Offset.Width + 1, mid - this.ImageSize.Height / 2);
                     this._TextBox.Size = new Size(this.Width - this._pictureBox.Right - this._Offset.Width * 2 - 3, this.Height - this._Offset.Height * 2 - 6);
@@ -682,8 +605,7 @@ namespace TX.Framework.WindowUI.Controls
             }
         }
 
-        private void DrawBorder(Graphics g)
-        {
+        private void DrawBorder(Graphics g) {
             GDIHelper.InitializeGraphics(g);
             Rectangle rect = new Rectangle(1, 1, this.Width - 3, this.Height - 3);
             RoundRectangle roundRect = new RoundRectangle(rect, this._CornerRadius);
@@ -693,8 +615,7 @@ namespace TX.Framework.WindowUI.Controls
             //this._TextBox.ForeColor = this._ForeColor;
             GDIHelper.FillPath(g, roundRect, c, c);
             GDIHelper.DrawPathBorder(g, roundRect, this._BorderColor);
-            if (this._ControlState == EnumControlState.HeightLight)
-            {
+            if (this._ControlState == EnumControlState.HeightLight) {
                 GDIHelper.DrawPathBorder(g, roundRect, SkinManager.CurrentSkin.HeightLightControlColor.Second);
                 GDIHelper.DrawPathOuterBorder(g, roundRect, SkinManager.CurrentSkin.HeightLightControlColor.First);
             }
@@ -704,8 +625,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region InitializeComponent
 
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this._TextBox = new System.Windows.Forms.TextBox();
             this._pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
@@ -745,7 +665,6 @@ namespace TX.Framework.WindowUI.Controls
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

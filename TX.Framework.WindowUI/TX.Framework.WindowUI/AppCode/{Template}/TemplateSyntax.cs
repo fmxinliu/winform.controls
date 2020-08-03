@@ -13,30 +13,28 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
+namespace System.Text.Template {
     /// <summary>
-    /// Ä£°æÖ§³ÖÓï·¨
+    /// æ¨¡ç‰ˆæ”¯æŒè¯­æ³•
     /// </summary>
-    public enum TemplateSyntax
-    {
+    public enum TemplateSyntax {
         /// <summary>
-        /// Velocity·ç¸ñÓï·¨
+        /// Velocityé£æ ¼è¯­æ³•
         /// </summary>
         Velocity,
 
         /// <summary>
-        /// Ë«À¨ºÅÓï·¨
+        /// åŒæ‹¬å·è¯­æ³•
         /// </summary>
         DoubleCurly,
 
         /// <summary>
-        /// XMLÓï·¨
+        /// XMLè¯­æ³•
         /// </summary>
         Xml,
 
         /// <summary>
-        /// HTMLÓï·¨
+        /// HTMLè¯­æ³•
         /// </summary>
         ProMeshHtml
     }

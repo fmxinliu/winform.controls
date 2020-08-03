@@ -2,13 +2,11 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
+namespace TX.Framework.WindowUI.Controls.Docking {
     [Flags]
     [Serializable]
     [Editor(typeof(DockAreasEditor), typeof(System.Drawing.Design.UITypeEditor))]
-    public enum DockAreas
-    {
+    public enum DockAreas {
         Float = 1,
         DockLeft = 2,
         DockRight = 4,
@@ -17,8 +15,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
         Document = 32
     }
 
-    public enum DockState
-    {
+    public enum DockState {
         Unknown = 0,
         Float = 1,
         DockTopAutoHide = 2,
@@ -33,16 +30,14 @@ namespace TX.Framework.WindowUI.Controls.Docking
         Hidden = 11
     }
 
-    public enum DockAlignment
-    {
+    public enum DockAlignment {
         Left,
         Right,
         Top,
         Bottom
     }
 
-    public enum DocumentStyle
-    {
+    public enum DocumentStyle {
         DockingMdi,
         DockingWindow,
         DockingSdi,
@@ -52,8 +47,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
     /// <summary>
     /// The location to draw the DockPaneStrip for Document style windows.
     /// </summary>
-    public enum DocumentTabStripLocation
-    {
+    public enum DocumentTabStripLocation {
         Top,
         Bottom
     }

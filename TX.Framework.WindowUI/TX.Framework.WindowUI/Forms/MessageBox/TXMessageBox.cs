@@ -1,20 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Windows.Forms;
+using System.Linq;
 using System.Media;
+using System.Text;
+using System.Windows.Forms;
 using TX.Framework.WindowUI.Controls;
 
-namespace TX.Framework.WindowUI.Forms
-{
-    internal partial class TXMessageBox : BaseForm
-    {
+namespace TX.Framework.WindowUI.Forms {
+    internal partial class TXMessageBox : BaseForm {
         #region fileds
+
+        private readonly int _MaxWidth = 600;
+
+        private readonly int _MaxHeight = 400;
 
         private string _CaptionText;
 
@@ -22,14 +24,9 @@ namespace TX.Framework.WindowUI.Forms
 
         private EnumMessageBox _MessageMode;
 
-        private readonly int _MaxWidth = 600;
-
-        private readonly int _MaxHeight = 400;
-
         #endregion
 
-        public TXMessageBox()
-        {
+        public TXMessageBox() {
             InitializeComponent();
             //this.ShowInTaskbar = false;
             this.ResizeEnable = false;
@@ -45,13 +42,10 @@ namespace TX.Framework.WindowUI.Forms
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - this.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - this.Height / 2);
         }
 
-        public TXMessageBox(string captionText, string message, EnumMessageBox messageBoxMode)
-            : this()
-        {
+        public TXMessageBox(string captionText, string message, EnumMessageBox messageBoxMode) : this() {
             this._CaptionText = captionText;
             this._MessageMode = messageBoxMode;
-            if (messageBoxMode == EnumMessageBox.Error)
-            {
+            if (messageBoxMode == EnumMessageBox.Error) {
                 this.CapitionLogo = Properties.Resources.logo3;
             }
 
@@ -59,85 +53,73 @@ namespace TX.Framework.WindowUI.Forms
             this.ResetSize();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
-        {
+        private void BtnOK_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.OK;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
+        private void BtnCancel_Click(object sender, EventArgs e) {
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void TXMessageBox_Load(object sender, EventArgs e)
-        {
+        private void TXMessageBox_Load(object sender, EventArgs e) {
             this.BindData();
         }
 
-
-        private void BindData()
-        {
+        private void BindData() {
             this.Text = this._CaptionText;
             this.labMessage.Text = this._Message;
-            switch (this._MessageMode)
-            {
+            switch (this._MessageMode) {
                 case EnumMessageBox.Info:
                     this.pbImage.Image = Properties.Resources.info;
                     btnCancel.Visible = false;
                     btnOK.Location = new Point((this.Width - btnOK.Width) / 2, btnOK.Location.Y);
-                    this.playSound(Properties.Resources.Music_Info);
+                    this.PlaySound(Properties.Resources.Music_Info);
                     break;
                 case EnumMessageBox.Question:
                     this.pbImage.Image = Properties.Resources.question;
-                    this.playSound(Properties.Resources.Music_Question);
+                    this.PlaySound(Properties.Resources.Music_Question);
                     break;
                 case EnumMessageBox.Warning:
                     this.pbImage.Image = Properties.Resources.warning;
                     btnCancel.Visible = false;
                     btnOK.Location = new Point((this.Width - btnOK.Width) / 2, btnOK.Location.Y);
-                    this.playSound(Properties.Resources.Music_Warning);
+                    this.PlaySound(Properties.Resources.Music_Warning);
                     break;
                 case EnumMessageBox.Error:
                     this.pbImage.Image = Properties.Resources.error;
                     btnCancel.Visible = false;
                     btnOK.Location = new Point((this.Width - btnOK.Width) / 2, btnOK.Location.Y);
-                    this.playSound(Properties.Resources.Music_Error);
+                    this.PlaySound(Properties.Resources.Music_Error);
                     break;
             }
         }
 
         #region //播放声音
 
-        private void playSound(Stream fileStream)
-        {
-            using (SoundPlayer sp = new SoundPlayer())
-            {
+        private void PlaySound(Stream fileStream) {
+            using (SoundPlayer sp = new SoundPlayer()) {
                 sp.Stream = fileStream;
                 sp.Play();
             }
         }
         #endregion
 
-        private void ResetSize()
-        {
+        private void ResetSize() {
             Size labSize = labMessage.Size;
             Size minSize = TextRenderer.MeasureText("鄺", this.Font);
             int maxLineCount = labSize.Height / minSize.Height;
             int maxWordCount = (labSize.Width * labSize.Height) / (minSize.Width * minSize.Width);
-            using (Graphics g = labMessage.CreateGraphics())
-            {
+            using (Graphics g = labMessage.CreateGraphics()) {
                 int wordCount, lineCount;
                 g.MeasureString(this._Message, this.Font,
                     new SizeF(labSize.Width, this._MaxHeight),
                     StringFormat.GenericDefault, out wordCount, out lineCount);
 
-                if (lineCount > maxLineCount)
-                {
+                if (lineCount > maxLineCount) {
                     this.Size = new SizeF(this.Size.Width, this.Size.Height + minSize.Height * (lineCount - maxLineCount)).ToSize();
                 }
 
-                if (wordCount > maxWordCount)
-                {
+                if (wordCount > maxWordCount) {
                     float rate = this._Message.Length / maxWordCount;
                     rate = 1 + (rate - 1) / 8;
                     this.Size = new SizeF(this.Size.Width * rate, this.Size.Height * rate).ToSize();

@@ -13,13 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class MultiplyExpression : BinaryArithmicExpression
-    {
-        public MultiplyExpression(Expression left, Expression right)
-            : base("*", left, right)
-        {
-        }
+namespace System.Text.Template {
+    public class MultiplyExpression : BinaryArithmicExpression {
+        public MultiplyExpression(Expression left, Expression right) : base("*", left, right) { }
     }
 }

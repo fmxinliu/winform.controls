@@ -2,31 +2,26 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    public interface IDockContent
-    {
-        DockContentHandler DockHandler    {    get;    }
+namespace TX.Framework.WindowUI.Controls.Docking {
+    public interface IDockContent {
+        DockContentHandler DockHandler { get; }
         void OnActivated(EventArgs e);
         void OnDeactivate(EventArgs e);
     }
 
-    public interface INestedPanesContainer
-    {
-        DockState DockState    {    get;    }
-        Rectangle DisplayingRectangle    {    get;    }
-        NestedPaneCollection NestedPanes    {    get;    }
-        VisibleNestedPaneCollection VisibleNestedPanes    {    get;    }
-        bool IsFloat    {    get;    }
+    public interface INestedPanesContainer {
+        DockState DockState { get; }
+        Rectangle DisplayingRectangle { get; }
+        NestedPaneCollection NestedPanes { get; }
+        VisibleNestedPaneCollection VisibleNestedPanes { get; }
+        bool IsFloat { get; }
     }
 
-    internal interface IDragSource
-    {
+    internal interface IDragSource {
         Control DragControl { get; }
     }
 
-    internal interface IDockDragSource : IDragSource
-    {
+    internal interface IDockDragSource : IDragSource {
         Rectangle BeginDrag(Point ptMouse);
         bool IsDockStateValid(DockState dockState);
         bool CanDockTo(DockPane pane);
@@ -35,8 +30,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
         void DockTo(DockPanel panel, DockStyle dockStyle);
     }
 
-    internal interface ISplitterDragSource : IDragSource
-    {
+    internal interface ISplitterDragSource : IDragSource {
         void BeginDrag(Rectangle rectSplitter);
         void EndDrag();
         bool IsVertical { get; }

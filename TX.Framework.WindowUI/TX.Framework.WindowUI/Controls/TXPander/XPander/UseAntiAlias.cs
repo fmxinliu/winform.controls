@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Set the SmoothingMode=AntiAlias until instance disposed.
     /// </summary>
-    public class UseAntiAlias : IDisposable
-    {
+    public class UseAntiAlias : IDisposable {
         #region FieldsPrivate
 
         private Graphics m_graphics;
@@ -23,14 +21,12 @@ namespace TX.Framework.WindowUI.Controls
         /// Initialize a new instance of the UseAntiAlias class.
         /// </summary>
         /// <param name="graphics">Graphics instance.</param>
-        public UseAntiAlias(Graphics graphics)
-        {
-            if (graphics == null)
-            {
+        public UseAntiAlias(Graphics graphics) {
+            if (graphics == null) {
                 throw new ArgumentNullException("graphics",
                     string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    TX.Framework.WindowUI.Properties.Resources.IDS_ArgumentException,
-                    "graphics"));
+                        TX.Framework.WindowUI.Properties.Resources.IDS_ArgumentException,
+                        "graphics"));
             }
 
             this.m_graphics = graphics;
@@ -38,17 +34,15 @@ namespace TX.Framework.WindowUI.Controls
             this.m_graphics.SmoothingMode = SmoothingMode.AntiAlias;
         }
         /// <summary>
-        /// destructor of the UseAntiAlias class.
+        /// Finalizes an instance of the UseAntiAlias class.
         /// </summary>
-        ~UseAntiAlias()
-        {
+        ~UseAntiAlias() {
             Dispose(false);
         }
         /// <summary>
         /// Releases all resources used by the class. 
         /// </summary>
-        public void Dispose()
-        {
+        public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -59,10 +53,8 @@ namespace TX.Framework.WindowUI.Controls
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
+        protected virtual void Dispose(bool disposing) {
+            if (disposing == true) {
                 //Revert the SmoothingMode back to original setting.
                 this.m_graphics.SmoothingMode = this.m_smoothingMode;
             }

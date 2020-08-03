@@ -1,7 +1,6 @@
 using System;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provides data for the XPanderStateChange event.
     /// </summary>
@@ -12,24 +11,22 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public class XPanderStateChangeEventArgs : EventArgs
-    {
+    public class XPanderStateChangeEventArgs : EventArgs {
         #region FieldsPrivate
-        
+
         private bool m_bExpand;
-        
+
         #endregion
-        
+
         #region Properties
-        
+
         /// <summary>
         /// Gets a value indicating whether the panel expands.
         /// </summary>
-        public bool Expand
-        {
-            get {return m_bExpand;}
+        public bool Expand {
+            get { return m_bExpand; }
         }
-        
+
         #endregion
 
         #region MethodsPublic
@@ -37,8 +34,7 @@ namespace TX.Framework.WindowUI.Controls
         /// arguments used when a XPanderStateChange event occurs.
         /// </summary>
         /// <param name="bExpand">Gets a value indicating whether the panel expands.</param>
-        public XPanderStateChangeEventArgs(bool bExpand)
-        {
+        public XPanderStateChangeEventArgs(bool bExpand) {
             this.m_bExpand = bExpand;
         }
 

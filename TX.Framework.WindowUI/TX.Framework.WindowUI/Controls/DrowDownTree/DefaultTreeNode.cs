@@ -1,15 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
-    public class DefaultTreeNode : TreeNodeEx
-    {
-        public DefaultTreeNode()
-            : base()
-        {
+namespace TX.Framework.WindowUI.Controls {
+    public class DefaultTreeNode : TreeNodeEx {
+        public DefaultTreeNode() : base() {
             base.Value = "-1";
             base.Text = "--请选择--";
             base.LeafNode = true;
@@ -17,9 +13,7 @@ namespace TX.Framework.WindowUI.Controls
             this.IsDefaultNode = true;
         }
 
-        public DefaultTreeNode(string text)
-            : this()
-        {
+        public DefaultTreeNode(string text) : this() {
             base.Text = text;
         }
 

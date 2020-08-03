@@ -11,29 +11,25 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Text;
 
-namespace System.Text.Template
-{
+namespace System.Text.Template {
     /// <summary>
-    /// ƒ£∞Ê“˝«Ê
+    /// Ê®°ÊùøÂºïÊìé
     /// </summary>
-    public class TemplateEngine
-    {
+    public class TemplateEngine {
         public static TemplateEngine Velocity = new Velocity();
 
         private TemplateConfig _Config;
         private IExpressionParser _ExpressionParser;
 
-        public TemplateEngine(TemplateConfig config, IExpressionParser expressionParser)
-        {
+        public TemplateEngine(TemplateConfig config, IExpressionParser expressionParser) {
             _Config = config;
             _ExpressionParser = expressionParser;
         }
 
-        public string Render(string template, ITemplateContext templateContext)
-        {
+        public string Render(string template, ITemplateContext templateContext) {
             TemplateParser templateParser = new TemplateParser(_Config);
 
             //1. syntax tree
@@ -46,15 +42,12 @@ namespace System.Text.Template
             return ast.Render(parser, context);
         }
 
-        public void Render(string template, ITemplateContext context, TextWriter output)
-        {
+        public void Render(string template, ITemplateContext context, TextWriter output) {
             output.Write(this.Render(template, context));
         }
 
-        public static TemplateEngine Create(TemplateSyntax templateSyntax)
-        {
-            switch (templateSyntax)
-            {
+        public static TemplateEngine Create(TemplateSyntax templateSyntax) {
+            switch (templateSyntax) {
                 case TemplateSyntax.Velocity:
                     return TemplateEngine.Velocity;
 
@@ -74,12 +67,8 @@ namespace System.Text.Template
     }
 
     public class TemplateEngine<TConfig, TParser> : TemplateEngine
-        where TConfig : TemplateConfig, new()
-        where TParser : ExpressionParser, new()
-    {
-        public TemplateEngine()
-            : base(new TConfig(), new TParser())
-        {
-        }
+    where TConfig : TemplateConfig, new()
+    where TParser : ExpressionParser, new() {
+        public TemplateEngine() : base(new TConfig(), new TParser()) { }
     }
 }

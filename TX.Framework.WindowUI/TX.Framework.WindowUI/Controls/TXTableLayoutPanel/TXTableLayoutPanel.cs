@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,18 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [ToolboxBitmap(typeof(TableLayoutPanel))]
-    public class TXTableLayoutPanel : TableLayoutPanel
-    {
+    public class TXTableLayoutPanel : TableLayoutPanel {
         private ScrollBars _ScrollBars = ScrollBars.Vertical;
 
         private Color _BorderColor = SkinManager.CurrentSkin.BorderColor;
 
-        public TXTableLayoutPanel()
-            : base()
-        {
+        public TXTableLayoutPanel() : base() {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.DoubleBuffer, true);
@@ -31,13 +27,10 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Description("滚动条的显示方式")]
         [DefaultValue(typeof(ScrollBars), "Vertical")]
-        public ScrollBars ScrollBars
-        {
+        public ScrollBars ScrollBars {
             get { return this._ScrollBars; }
-            set
-            {
-                if (value != this._ScrollBars)
-                {
+            set {
+                if (value != this._ScrollBars) {
                     this._ScrollBars = value;
                     base.Invalidate();
                 }
@@ -46,11 +39,9 @@ namespace TX.Framework.WindowUI.Controls
 
         [Category("TXProperties")]
         [Description("边框颜色")]
-        public Color BorderColor
-        {
+        public Color BorderColor {
             get { return _BorderColor; }
-            set
-            {
+            set {
                 this._BorderColor = value;
                 base.Invalidate(true);
             }
@@ -61,33 +52,27 @@ namespace TX.Framework.WindowUI.Controls
         [DefaultValue(0)]
         public int BorderWidth { get; set; }
 
-        protected override void WndProc(ref Message m)
-        {
+        protected override void WndProc(ref Message m) {
             base.WndProc(ref m);
-            switch (m.Msg)
-            {
-                case (int)WindowMessages.WM_PAINT:
-                    if (this.BorderWidth > 0)
-                    {
-                        using (Graphics g = Graphics.FromHwnd(m.HWnd))
-                        {
+            switch (m.Msg) {
+                case (int) WindowMessages.WM_PAINT:
+                    if (this.BorderWidth > 0) {
+                        using (Graphics g = Graphics.FromHwnd(m.HWnd)) {
                             Rectangle rect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
                             GDIHelper.DrawPathBorder(g, new RoundRectangle(rect, 0), this._BorderColor, this.BorderWidth);
                         }
                     }
                     break;
-                case (int)WindowMessages.WM_VSCROLL:
-                case (int)WindowMessages.WM_HSCROLL:
+                case (int) WindowMessages.WM_VSCROLL:
+                case (int) WindowMessages.WM_HSCROLL:
                     this.Invalidate(true);
                     break;
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
-            switch (this._ScrollBars)
-            {
+            switch (this._ScrollBars) {
                 case ScrollBars.Horizontal:
                     Win32.ShowScrollBar(base.Handle, 1, 0);
                     break;

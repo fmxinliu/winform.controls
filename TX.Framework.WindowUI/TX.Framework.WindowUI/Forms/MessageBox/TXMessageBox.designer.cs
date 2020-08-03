@@ -1,8 +1,6 @@
-﻿using TX.Framework.WindowUI.Controls;
-namespace TX.Framework.WindowUI.Forms
-{
-    partial class TXMessageBox
-    {
+using TX.Framework.WindowUI.Controls;
+namespace TX.Framework.WindowUI.Forms {
+    partial class TXMessageBox {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -12,10 +10,8 @@ namespace TX.Framework.WindowUI.Forms
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -27,8 +23,7 @@ namespace TX.Framework.WindowUI.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.txPanel1 = new TX.Framework.WindowUI.Controls.TXPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.labMessage = new System.Windows.Forms.Label();
@@ -150,7 +145,7 @@ namespace TX.Framework.WindowUI.Forms
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取 消";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // btnOK
             // 
@@ -161,7 +156,7 @@ namespace TX.Framework.WindowUI.Forms
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "确 定";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // TXMessageBox
             // 

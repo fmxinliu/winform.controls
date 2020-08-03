@@ -13,22 +13,13 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace System.Text.Template
-{
-    internal class StaticMethod : MethodDefinition
-    {
-        public StaticMethod(MethodInfo methodInfo)
-            : base(methodInfo)
-        {
-        }
+namespace System.Text.Template {
+    internal class StaticMethod : MethodDefinition {
+        public StaticMethod(MethodInfo methodInfo) : base(methodInfo) { }
 
-        public StaticMethod(Type type, string methodName)
-            : base(type, methodName)
-        {
-        }
+        public StaticMethod(Type type, string methodName) : base(type, methodName) { }
 
-        public override object Invoke(Type[] types, object[] parameters, out Type returnType)
-        {
+        public override object Invoke(Type[] types, object[] parameters, out Type returnType) {
             MethodInfo methodInfo = GetMethodInfo(types);
 
             returnType = methodInfo.ReturnType;

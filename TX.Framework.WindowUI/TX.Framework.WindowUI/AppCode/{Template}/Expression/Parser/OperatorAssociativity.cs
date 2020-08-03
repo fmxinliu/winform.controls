@@ -13,10 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public enum OperatorAssociativity
-    {
+namespace System.Text.Template {
+    public enum OperatorAssociativity {
         Left,
         Right
     }

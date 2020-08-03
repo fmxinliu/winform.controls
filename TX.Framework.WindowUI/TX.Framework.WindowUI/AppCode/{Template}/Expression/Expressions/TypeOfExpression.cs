@@ -13,22 +13,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class TypeOfExpression : Expression
-    {
-        private static Type GetTypeOfClassName(ClassName className)
-        {
+namespace System.Text.Template {
+    public class TypeOfExpression : Expression {
+        private static Type GetTypeOfClassName(ClassName className) {
             return className.Type;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             return Expression.Value(new Converter<ClassName, Type>(GetTypeOfClassName));
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return "typeof";
         }
     }

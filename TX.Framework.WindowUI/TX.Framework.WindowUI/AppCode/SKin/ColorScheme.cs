@@ -1,19 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     #region  线性色彩 LinearColor
 
     /// <summary>
     /// 线性色彩
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-2 23:09.
-    internal class LinearColor
-    {
+    internal class LinearColor {
         #region Initializes
 
         /// <summary>
@@ -22,8 +20,7 @@ namespace TX.Framework.WindowUI
         /// <param name="color1">The color1.</param>
         /// <param name="color2">The color2.</param>
         /// User:Ryan  CreateTime:2011-07-19 13:24.
-        public LinearColor(Color color1, Color color2)
-        {
+        public LinearColor(Color color1, Color color2) {
             this.First = color1;
             this.Second = color2;
         }
@@ -51,8 +48,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// 阶梯渐变色彩
     /// </summary>
-    internal struct GradientColor
-    {
+    internal struct GradientColor {
         /// <summary>
         /// (构造函数).Initializes a new instance of the <see cref="GradientColor"/> struct.
         /// </summary>
@@ -61,8 +57,7 @@ namespace TX.Framework.WindowUI
         /// <param name="factors">The factors.</param>
         /// <param name="positions">The positions.</param>
         /// User:Ryan  CreateTime:2012-8-2 23:16.
-        public GradientColor(Color color1, Color color2, float[] factors, float[] positions)
-        {
+        public GradientColor(Color color1, Color color2, float[] factors, float[] positions) {
             this.First = color1;
             this.Second = color2;
             this.Factors = factors == null ? new float[] { } : factors;
@@ -88,7 +83,6 @@ namespace TX.Framework.WindowUI
         /// 色彩渲染位置（0到1的浮点数值）
         /// </summary>
         public float[] Positions;
-
     }
 
     #endregion

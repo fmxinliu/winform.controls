@@ -1,18 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [ToolboxBitmap(typeof(CheckBox))]
-    public class TXCheckBox : CheckBox
-    {
+    public class TXCheckBox : CheckBox {
         #region fileds
 
         /// <summary>
@@ -39,9 +37,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Initializes
 
-        public TXCheckBox()
-            : base()
-        {
+        public TXCheckBox() : base() {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.DoubleBuffer, true);
@@ -61,11 +57,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [Description("圆角的半径值")]
         [DefaultValue(1)]
-        public int CornerRadius
-        {
+        public int CornerRadius {
             get { return this._CornerRadius; }
-            set
-            {
+            set {
                 this._CornerRadius = value;
                 this.Invalidate();
             }
@@ -74,67 +68,55 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DefaultValue(typeof(Size), "14,14")]
         [Description("复选框的大小")]
-        public Size BoxSize
-        {
+        public Size BoxSize {
             get { return this._BoxSize; }
-            set
-            {
+            set {
                 this._BoxSize = value;
                 this.Invalidate();
             }
         }
 
         [Browsable(false)]
-        public new RightToLeft RightToLeft
-        {
+        public new RightToLeft RightToLeft {
             get { return RightToLeft.No; }
             set { base.RightToLeft = RightToLeft.No; }
         }
 
         [Browsable(false)]
-        public new ContentAlignment TextAlign
-        {
+        public new ContentAlignment TextAlign {
             get { return ContentAlignment.MiddleLeft; }
             set { base.TextAlign = ContentAlignment.MiddleLeft; }
         }
 
         [Browsable(false)]
-        public new Size MinimumSize
-        {
+        public new Size MinimumSize {
             get { return new Size(20, 20); }
             set { base.MinimumSize = new Size(20, 20); }
-
         }
         #endregion
 
         #region Override methods
 
-        protected override void OnMouseEnter(EventArgs e)
-        {
+        protected override void OnMouseEnter(EventArgs e) {
             base.OnMouseEnter(e);
             this._ControlState = EnumControlState.HeightLight;
         }
 
-        protected override void OnMouseLeave(EventArgs e)
-        {
+        protected override void OnMouseLeave(EventArgs e) {
             base.OnMouseLeave(e);
             this._ControlState = EnumControlState.Default;
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
+        protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
-            if (e.Button == MouseButtons.Left && e.Clicks == 1)
-            {
+            if (e.Button == MouseButtons.Left && e.Clicks == 1) {
                 this._ControlState = EnumControlState.Focused;
             }
         }
 
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
+        protected override void OnMouseUp(MouseEventArgs e) {
             base.OnMouseUp(e);
-            if (e.Button == MouseButtons.Left && e.Clicks == 1)
-            {
+            if (e.Button == MouseButtons.Left && e.Clicks == 1) {
                 this._ControlState = EnumControlState.Default;
                 //if (ClientRectangle.Contains(e.Location))
                 //{
@@ -147,8 +129,7 @@ namespace TX.Framework.WindowUI.Controls
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             base.OnPaintBackground(e);
             this.DrawContent(e.Graphics);
@@ -165,8 +146,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="g">The Graphics.</param>
         /// User:Ryan  CreateTime:2011-07-29 15:44.
-        private void DrawContent(Graphics g)
-        {
+        private void DrawContent(Graphics g) {
             GDIHelper.InitializeGraphics(g);
             int w = this.Width;
             int h = this.Height;
@@ -178,8 +158,7 @@ namespace TX.Framework.WindowUI.Controls
             textRect.Height = this.Height - this._Margin * 2;
             textRect.Width = textSize.Width;
             RoundRectangle roundRect = new RoundRectangle(boxRect, this._CornerRadius);
-            switch (this._ControlState)
-            {
+            switch (this._ControlState) {
                 case EnumControlState.HeightLight:
                     //GDIHelper.DrawPathOuterBorder(g, roundRect, SkinManager.CurrentSkin.OuterBorderColor);
                     GDIHelper.DrawPathBorder(g, roundRect, SkinManager.CurrentSkin.OuterBorderColor);
@@ -194,8 +173,7 @@ namespace TX.Framework.WindowUI.Controls
 
             //TextRenderer.DrawText(g, this.Text, this.Font, textRect, c, TextFormatFlags.Default);
             GDIHelper.DrawImageAndString(g, textRect, null, Size.Empty, this.Text, this.Font, c);
-            switch (this.CheckState)
-            {
+            switch (this.CheckState) {
                 case System.Windows.Forms.CheckState.Checked:
                     GDIHelper.DrawCheckedStateByImage(g, boxRect);
                     break;

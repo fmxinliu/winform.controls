@@ -1,21 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// 范围设置控件
     /// </summary>
     /// User:Ryan  CreateTime:2012-11-19 15:42.
     [ToolboxItem(true)]
-    public partial class TXRangeValue : UserControl
-    {
+    public partial class TXRangeValue : UserControl {
         #region private attributes
 
         /// <summary>
@@ -46,8 +44,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #endregion
 
-        public TXRangeValue()
-        {
+        public TXRangeValue() {
             InitializeComponent();
             this._RangeValues = new RangeValueCollection();
             this._Header = new RangeValueHeader();
@@ -67,16 +64,12 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <value></value>
         /// User:Ryan  CreateTime:2012-11-19 15:42.
-        public RangeValueCollection RangeValues
-        {
-            get
-            {
+        public RangeValueCollection RangeValues {
+            get {
                 return this.GetRangeValues();
             }
-            set
-            {
-                if (value != null)
-                {
+            set {
+                if (value != null) {
                     this._RangeValues = value;
                     this.BindData();
                 }
@@ -100,14 +93,12 @@ namespace TX.Framework.WindowUI.Controls
         public bool IsValid { get; protected set; }
 
         /// <summary>
-        ///是否允许编辑
+        /// 是否允许编辑
         /// </summary>
         /// User:Ryan  CreateTime:2012-11-19 15:45.
-        public bool EditEnable
-        {
+        public bool EditEnable {
             get { return this._EditEnable; }
-            set
-            {
+            set {
                 this._EditEnable = value;
                 this.linkAdd.Enabled = value;
             }
@@ -119,27 +110,21 @@ namespace TX.Framework.WindowUI.Controls
         /// <value></value>
         /// User:Ryan  CreateTime:2012-11-19 16:49.
         [Browsable(true)]
-        public RangeValueHeader Header
-        {
+        public RangeValueHeader Header {
             get { return this._Header; }
-            set
-            {
-                if (value != null)
-                {
+            set {
+                if (value != null) {
                     this._Header = value;
                 }
             }
         }
 
         [Browsable(true)]
-        public override string Text
-        {
-            get
-            {
+        public override string Text {
+            get {
                 return base.Text;
             }
-            set
-            {
+            set {
                 base.Text = value;
                 this.TitleRender();
             }
@@ -149,13 +134,11 @@ namespace TX.Framework.WindowUI.Controls
 
         #region private events
 
-        private void HeaderValueChanged(object obj, EventArgs args)
-        {
+        private void HeaderValueChanged(object obj, EventArgs args) {
             this.TitleRender();
         }
 
-        private void linkAdd_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
+        private void LinkAdd_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             this.AddItem(new RangeValueItem());
         }
 
@@ -165,17 +148,14 @@ namespace TX.Framework.WindowUI.Controls
 
         #region GetRangeValues
 
-        public RangeValueCollection GetRangeValues()
-        {
+        public RangeValueCollection GetRangeValues() {
             List<RangeValueItem> list = new List<RangeValueItem>();
             string mes = string.Empty;
-            if (this.TryParseInput(out mes, list))
-            {
+            if (this.TryParseInput(out mes, list)) {
                 this.IsValid = true;
                 return new RangeValueCollection(list);
             }
-            else
-            {
+            else {
                 this.IsValid = false;
                 this.ErrorMessage = mes;
                 return null;
@@ -193,8 +173,7 @@ namespace TX.Framework.WindowUI.Controls
         /// 标题的界面刷新
         /// </summary>
         /// User:Ryan  CreateTime:2012-11-19 15:40.
-        private void TitleRender()
-        {
+        private void TitleRender() {
             this.labLower.Text = this.Header.LowerValueTitle;
             this.labUpper.Text = this.Header.UpperValueTitle;
             this.labValue.Text = this.Header.ValueTitle;
@@ -208,8 +187,7 @@ namespace TX.Framework.WindowUI.Controls
         /// 初始化控件的值（Inis the controls.）
         /// </summary>
         /// User:Ryan  CreateTime:2012-11-19 15:48.
-        public void IniControls()
-        {
+        public void IniControls() {
             this._RowIndex = 0;
             this._TxtLowerLimit = new List<TXTextBox>();
             this._TxtUpperLimit = new List<TXTextBox>();
@@ -227,11 +205,9 @@ namespace TX.Framework.WindowUI.Controls
 
         #region AddItem
 
-        private void AddItem(RangeValueItem item)
-        {
+        private void AddItem(RangeValueItem item) {
             //1. validation
-            if (item == null)
-            {
+            if (item == null) {
                 return;
             }
             RowStyle rs = new RowStyle(SizeType.Absolute, 30F);
@@ -258,15 +234,12 @@ namespace TX.Framework.WindowUI.Controls
 
         #region BindData
 
-        private void BindData()
-        {
+        private void BindData() {
             this.IniControls();
-            if (this._RangeValues != null && this._RangeValues.Count > 0)
-            {
+            if (this._RangeValues != null && this._RangeValues.Count > 0) {
                 //sort:order by lower value
                 this._RangeValues.Sort();
-                foreach (var item in this._RangeValues)
-                {
+                foreach (var item in this._RangeValues) {
                     this.AddItem(item);
                 }
             }
@@ -281,12 +254,10 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="message">The message.</param>
         /// <param name="list">The list.</param>
         /// <returns>Return a object of System.Boolean</returns>
-        private bool TryParseInput(out string message, List<RangeValueItem> list)
-        {
+        private bool TryParseInput(out string message, List<RangeValueItem> list) {
             message = string.Empty;
             int len = this._TxtValue.Count();
-            if (len <= 0)
-            {
+            if (len <= 0) {
                 message = "不能保存空数据！";
                 return false;
             }
@@ -295,37 +266,31 @@ namespace TX.Framework.WindowUI.Controls
             decimal upper;
             decimal value;
             RangeValueItem item;
-            for (int i = 0; i < len; i++)
-            {
-                if (this._TxtLowerLimit[i] == null || this._TxtLowerLimit[i].Visible == false)
-                {
+            for (int i = 0; i < len; i++) {
+                if (this._TxtLowerLimit[i] == null || this._TxtLowerLimit[i].Visible == false) {
                     continue;
                 }
                 ////上限必须大于下限；不可有范围交叉
-                if (decimal.TryParse(this._TxtLowerLimit[i].Text.Trim(), out lower)
-                    && decimal.TryParse(this._TxtUpperLimit[i].Text.Trim(), out upper)
-                    && decimal.TryParse(this._TxtValue[i].Text.Trim(), out value)
-                    )
-                {
+                if (decimal.TryParse(this._TxtLowerLimit[i].Text.Trim(), out lower) &&
+                    decimal.TryParse(this._TxtUpperLimit[i].Text.Trim(), out upper) &&
+                    decimal.TryParse(this._TxtValue[i].Text.Trim(), out value)
+                ) {
                     item = new RangeValueItem();
                     item.LowerValue = lower;
                     item.UpperValue = upper;
                     item.Value = value;
                     //判断交叉
-                    if (this.TryParseCross(list, item))
-                    {
+                    if (this.TryParseCross(list, item)) {
                         message = "范围设置与前面的范围设置存在交叉，请重新设置！";
                         this._TxtLowerLimit[i].Focus();
                         this._TxtLowerLimit[i].SelectAll();
                         return false;
                     }
-                    else
-                    {
+                    else {
                         list.Add(item);
                     }
                 }
-                else
-                {
+                else {
                     this._TxtLowerLimit[i].Focus();
                     this._TxtLowerLimit[i].SelectAll();
                     string temp = message == string.Empty ? "上限必须大于下限，且输入必须为有效的数值类型" : message;
@@ -344,24 +309,19 @@ namespace TX.Framework.WindowUI.Controls
         /// 判断指定优惠设置是否与现有设置存在交叉，true：有交叉；false：没有交叉
         /// </summary>
         /// <returns>Return a object of System.Boolean</returns>
-        private bool TryParseCross(List<RangeValueItem> list, RangeValueItem info)
-        {
-            if (list == null || list.Count <= 0)
-            {
+        private bool TryParseCross(List<RangeValueItem> list, RangeValueItem info) {
+            if (list == null || list.Count <= 0) {
                 return false;
             }
 
             bool state = false;
-            foreach (RangeValueItem item in list)
-            {
-                if (info.LowerValue >= item.LowerValue && info.LowerValue < item.UpperValue)
-                {
+            foreach (RangeValueItem item in list) {
+                if (info.LowerValue >= item.LowerValue && info.LowerValue < item.UpperValue) {
                     state = true;
                     break;
                 }
 
-                if (info.UpperValue > item.LowerValue && info.UpperValue <= item.UpperValue)
-                {
+                if (info.UpperValue > item.LowerValue && info.UpperValue <= item.UpperValue) {
                     state = true;
                     break;
                 }
@@ -373,8 +333,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region DeleteItem
 
-        private void DeleteItem(object obj, EventArgs args)
-        {
+        private void DeleteItem(object obj, EventArgs args) {
             LinkLabel link = obj as LinkLabel;
             int index = link.Name.ToString().ToInt32();
             link.Visible = false;
@@ -394,8 +353,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region CreateControls
 
-        private LinkLabel CreateDelLinkBtn(int index)
-        {
+        private LinkLabel CreateDelLinkBtn(int index) {
             LinkLabel link = new LinkLabel();
             link.Dock = DockStyle.Fill;
             link.Text = " 删 除 ";
@@ -406,8 +364,7 @@ namespace TX.Framework.WindowUI.Controls
             return link;
         }
 
-        private TXTextBox CreateTextBox(string text)
-        {
+        private TXTextBox CreateTextBox(string text) {
             TXTextBox txt = new TXTextBox();
             txt.Dock = DockStyle.Fill;
             txt.Text = text;

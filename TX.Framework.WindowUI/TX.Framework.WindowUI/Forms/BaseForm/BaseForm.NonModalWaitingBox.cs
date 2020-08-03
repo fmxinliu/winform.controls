@@ -1,54 +1,53 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Drawing.Imaging;
+
 using TX.Framework.WindowUI.Controls;
 
-namespace TX.Framework.WindowUI.Forms
-{
-    public partial class BaseForm
-    {
+namespace TX.Framework.WindowUI.Forms {
+    public partial class BaseForm {
         #region private attribute
+
+        /// <summary>
+        /// 等候的标准信息
+        /// </summary>
+        private readonly string[] iWaittingMessage = new string[] {
+            "请稍等......",
+            "亲，我们正努力的处理，请稍等... ",
+            "The request is being processed,please wait...",
+            "有时候，等待也是一种幸福...",
+            "您的指令已收到，正在非常努力的执行...",
+            "请稍等，让我来见证那奇迹的诞生...",
+            "有一种等待，叫做望穿秋水...",
+            "生命是一个奋斗的过程，也是等待的过程...",
+            "有一种幸福，叫做等待...",
+            "等待，本身也是一种勇气！",
+            "星云大师：在等待的日子里，刻苦读书，谦卑做人，养得深根，日后才能枝叶茂盛！",
+            "有些人注定是等待别人的，有些人是注定被人等候的。",
+            "听说雪会来，于是，我等待，一场倾城的飞扬。",
+            "缘分是需要需要耐心等待的！要相信，在遇见Ta之前所经历的一切都是为等待",
+            "你一定要等，不要失望，不要犹疑。这么大的世界，这么长的人生，总有一个人让你想温柔的对待。",
+            "生活是一场漫长的旅行，不要浪费时间，去等待那些不愿与你携手同行的人。",
+            "人生只有走出来的美丽，没有等出来的辉煌。",
+            "其实，我不是一定要等你，只是等上了，就等不了别人了。——《朝露若颜》"
+        };
 
         /// <summary>
         /// 显示的等待框
         /// </summary>
         private System.Windows.Forms.Panel waitingBox;
 
-        /// <summary>
-        /// 等候的标准信息
-        /// </summary>
-        private readonly string[] iWaittingMessage = new string[] { 
-            "请稍等......",
-            "亲，我们正努力的处理，请稍等... "
-            ,"The request is being processed,please wait..."
-            ,"有时候，等待也是一种幸福..."
-            ,"您的指令已收到，正在非常努力的执行..."
-            ,"请稍等，让我来见证那奇迹的诞生..."
-            ,"有一种等待，叫做望穿秋水..."
-            ,"生命是一个奋斗的过程，也是等待的过程..."
-            ,"有一种幸福，叫做等待..."
-            ,"等待，本身也是一种勇气！"
-            ,"星云大师：在等待的日子里，刻苦读书，谦卑做人，养得深根，日后才能枝叶茂盛！"
-            ,"有些人注定是等待别人的，有些人是注定被人等候的。"
-            ,"听说雪会来，于是，我等待，一场倾城的飞扬。"
-            ,"缘分是需要需要耐心等待的！要相信，在遇见Ta之前所经历的一切都是为等待"
-            ,"你一定要等，不要失望，不要犹疑。这么大的世界，这么长的人生，总有一个人让你想温柔的对待。"
-            ,"生活是一场漫长的旅行，不要浪费时间，去等待那些不愿与你携手同行的人。"
-            ,"人生只有走出来的美丽，没有等出来的辉煌。"
-            ,"其实，我不是一定要等你，只是等上了，就等不了别人了。——《朝露若颜》"
-        };
+        private TXPanel waitingBoxInnerPanel;
 
-        TXPanel waitingBoxInnerPanel;
-
-        Label waitingBoxLab;
+        private Label waitingBoxLab;
 
         private bool _IsWaitingBoxCreated = false;
 
@@ -71,8 +70,7 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <value>The wainting box message.</value>
         /// User:Ryan  CreateTime:2011-10-24 14:41.
-        public string WaintingBoxMessage
-        {
+        public string WaintingBoxMessage {
             set { this.Invoke(new Action<string>(this.SetWaitingMessage), value); }
         }
 
@@ -92,10 +90,8 @@ namespace TX.Framework.WindowUI.Forms
         /// <param name="method">等待需要执行的方法（无参数）.</param>
         /// <param name="message">等候显示消息.</param>
         /// User:Ryan  CreateTime:2011-10-24 11:28.
-        public void Waiting(MethodInvoker method, string message)
-        {
-            if (this._isOnWaiting)
-            {
+        public void Waiting(MethodInvoker method, string message) {
+            if (this._isOnWaiting) {
                 return;
             }
             this._isOnWaiting = true;
@@ -119,8 +115,7 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="method">等待需要执行的方法（无参数）.</param>
         /// User:Ryan  CreateTime:2011-10-24 11:28.
-        public void Waiting(MethodInvoker method)
-        {
+        public void Waiting(MethodInvoker method) {
             this.Waiting(method, string.Empty);
         }
 
@@ -135,33 +130,24 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="results">The results.</param>
         /// User:Ryan  CreateTime:2012-8-5 16:23.
-        private void WorkComplete(IAsyncResult results)
-        {
-            if (!this.waitingBox.Visible || !this.IsHandleCreated)
-            {
+        private void WorkComplete(IAsyncResult results) {
+            if (!this.waitingBox.Visible || !this.IsHandleCreated) {
                 return;
             }
 
-            if (this.waitingBox.InvokeRequired)
-            {
+            if (this.waitingBox.InvokeRequired) {
                 this.Invoke(new Action<IAsyncResult>(this.WorkComplete), results);
             }
-            else
-            {
-                try
-                {
-                    ((MethodInvoker)results.AsyncState).EndInvoke(results);
+            else {
+                try {
+                    ((MethodInvoker) results.AsyncState).EndInvoke(results);
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     //this.Invoke(new MethodInvoker(() => { throw ex; }));
                     //throw ex; 
                     new WorkThreadExceptionHandler(ThrowException).BeginInvoke(ex, null, null);
-                }
-                finally
-                {
-                    this.Invoke(new MethodInvoker(() =>
-                    {
+                } finally {
+                    this.Invoke(new MethodInvoker(() => {
                         waitingBox.Visible = false;
                         this.AcceptButton = this._btnAcceptOfKeyboard;
                         this.CancelButton = this._btnCancelOfKeyboard;
@@ -172,10 +158,8 @@ namespace TX.Framework.WindowUI.Forms
             }
         }
 
-        private void ThrowException(Exception ex)
-        {
-            if (this.OnWorkThreadException != null)
-            {
+        private void ThrowException(Exception ex) {
+            if (this.OnWorkThreadException != null) {
                 this.OnWorkThreadException(ex);
             }
         }
@@ -187,10 +171,8 @@ namespace TX.Framework.WindowUI.Forms
         /// Creates the waiting box.
         /// </summary>
         /// User:Ryan  CreateTime:2012-8-5 16:22.
-        private void CreateWaitingBox()
-        {
-            if (!this._IsWaitingBoxCreated)
-            {
+        private void CreateWaitingBox() {
+            if (!this._IsWaitingBoxCreated) {
                 #region CreateWaitingBox
 
                 this.waitingBox = new System.Windows.Forms.Panel();
@@ -224,8 +206,7 @@ namespace TX.Framework.WindowUI.Forms
                 ////...
                 waitingBox.Controls.Add(waitingBoxInnerPanel);
                 waitingBox.BringToFront();
-                if (!this.Controls.Contains(waitingBox))
-                {
+                if (!this.Controls.Contains(waitingBox)) {
                     this.Controls.Add(waitingBox);
                 }
                 waitingBox.Show();
@@ -251,13 +232,10 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="message">The message.</param>
         /// User:Ryan  CreateTime:2012-8-5 16:22.
-        private void SetWaitingMessage(string message)
-        {
+        private void SetWaitingMessage(string message) {
             message = " " + message.Trim();
-            if (this.waitingBoxLab != null && this.waitingBoxInnerPanel != null)
-            {
-                using (Graphics g = this.CreateGraphics())
-                {
+            if (this.waitingBoxLab != null && this.waitingBoxInnerPanel != null) {
+                using (Graphics g = this.CreateGraphics()) {
                     int w = Convert.ToInt32(g.MeasureString(message, this.waitingBoxLab.Font).Width);
                     w = w >= 200 ? w : 200;
                     w = this.Width - 100 >= w ? w : this.Width - 100;
@@ -278,8 +256,7 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <returns>Return a data(or instance) of Bitmap.</returns>
         /// User:Ryan  CreateTime:2012-8-5 16:21.
-        private Bitmap CreateBacgroundImage()
-        {
+        private Bitmap CreateBacgroundImage() {
             Rectangle rect = this.WorkRectangle;
             int w = rect.Width;
             int h = rect.Height;
@@ -287,28 +264,22 @@ namespace TX.Framework.WindowUI.Forms
                 this.Location.Y + this.CaptionHeight + this.Padding.Top);
             Point p = this.Parent == null ? p1 : this.PointToScreen(p1);
             Bitmap TempImg = new Bitmap(w, h);
-            try
-            {
+            try {
 
                 Bitmap img = new Bitmap(w, h);
-                using (Graphics g = Graphics.FromImage(TempImg))
-                {
+                using (Graphics g = Graphics.FromImage(TempImg)) {
                     g.CopyFromScreen(p, new Point(0, 0), new Size(w, h));
                 }
 
-                using (Graphics g = Graphics.FromImage(img))
-                {
+                using (Graphics g = Graphics.FromImage(img)) {
                     GDIHelper.DrawImage(g, new Rectangle(0, 0, w, h), TempImg, 0.36F);
                 }
 
                 return img;
             }
-            catch
-            {
+            catch {
                 return null;
-            }
-            finally
-            {
+            } finally {
                 TempImg.Dispose();
             }
         }

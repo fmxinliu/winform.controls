@@ -13,24 +13,20 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace System.Text.Template
-{
-    public class CSharpParser : ExpressionParser
-    {
+namespace System.Text.Template {
+    public class CSharpParser : ExpressionParser {
         private static readonly NumberFormatInfo _NumberFormat;
         public MissingFieldHandler MissingMember;
         public MissingFieldHandler InterceptMember;
 
-        static CSharpParser()
-        {
+        static CSharpParser() {
             _NumberFormat = new NumberFormatInfo();
             _NumberFormat.NumberDecimalSeparator = ".";
             _NumberFormat.NumberGroupSeparator = ",";
             _NumberFormat.NumberGroupSizes = new int[] { 3 };
         }
 
-        public CSharpParser()
-        {
+        public CSharpParser() {
             AddTerm(@"""([^""\\]|\\['""\\0abfnrtv]|\\x[a-fA-F0-9][a-fA-F0-9]{0,3})*""", EvalStringLiteral);
             AddTerm(@"'([^'\\]|\\['""\\0abfnrtv]|\\x[a-fA-F0-9][a-fA-F0-9]{0,3})'", EvalCharLiteral);
 
@@ -75,13 +71,11 @@ namespace System.Text.Template
             FunctionCallPrecedence = 20;
         }
 
-        protected virtual Expression EvalTypeCast(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalTypeCast(string token, Expression[] terms) {
             return new TypeCastExpression(new VariableExpression(token.Substring(1, token.Length - 2).Trim()), terms[0]);
         }
 
-        protected virtual Expression EvalIsAsOperator(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalIsAsOperator(string token, Expression[] terms) {
             if (token == "as")
                 return new AsExpression(terms[0], terms[1]);
 
@@ -91,26 +85,22 @@ namespace System.Text.Template
             return null;
         }
 
-        protected virtual Expression EvalTernary(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalTernary(string token, Expression[] terms) {
             return new ConditionalExpression(terms[0], terms[1], terms[2]);
         }
 
-        private static char UnEscape(string s)
-        {
+        private static char UnEscape(string s) {
             if (s.Length == 1)
                 return s[0];
 
-            if (s.Length == 2)
-            {
-                switch (s[1])
-                {
+            if (s.Length == 2) {
+                switch (s[1]) {
                     case '\\':
                     case '\"':
                     case '\'':
                         return s[1];
                     case '0':
-                        return (char)0;
+                        return (char) 0;
                     case 'a':
                         return '\a';
                     case 'b':
@@ -129,40 +119,33 @@ namespace System.Text.Template
                         throw new ArgumentException();
                 }
             }
-            else
-            {
-                return (char)Convert.ToUInt16(s.Substring(2), 16);
+            else {
+                return (char) Convert.ToUInt16(s.Substring(2), 16);
             }
         }
 
-        protected virtual Expression EvalTypeOf(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalTypeOf(string token, Expression[] terms) {
             return new TypeOfExpression();
         }
 
-        protected virtual Expression EvalCharLiteral(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalCharLiteral(string token, Expression[] terms) {
             return Expression.Value(UnEscape(token.Substring(1, token.Length - 2)));
         }
 
-        protected virtual Expression EvalNumber(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalNumber(string token, Expression[] terms) {
             string s = token;
 
             Type type = null;
 
-            if (!char.IsDigit(s[s.Length - 1]))
-            {
+            if (!char.IsDigit(s[s.Length - 1])) {
                 string suffix = "" + char.ToUpper(s[s.Length - 1]);
                 s = s.Remove(s.Length - 1);
-                if (!char.IsDigit(s[s.Length - 1]))
-                {
+                if (!char.IsDigit(s[s.Length - 1])) {
                     suffix = char.ToUpper(s[s.Length - 1]) + suffix;
                     s = s.Remove(s.Length - 1);
                 }
 
-                switch (suffix)
-                {
+                switch (suffix) {
                     case "M":
                         type = typeof(decimal);
                         break;
@@ -188,48 +171,40 @@ namespace System.Text.Template
             if (type != null)
                 return new ValueExpression(Convert.ChangeType(s, type, _NumberFormat), type);
 
-            if (s.LastIndexOf('.') >= 0)
-            {
+            if (s.LastIndexOf('.') >= 0) {
                 return Expression.Value(Convert.ToDouble(s, _NumberFormat));
             }
-            else
-            {
+            else {
                 long n = Convert.ToInt64(s);
                 if (n > Int32.MaxValue || n < Int32.MinValue)
                     return Expression.Value(n);
                 else
-                    return Expression.Value((int)n);
+                    return Expression.Value((int) n);
             }
         }
 
-        protected virtual Expression EvalVarName(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalVarName(string token, Expression[] terms) {
             return new VariableExpression(token);
         }
 
-        protected virtual Expression EvalFunction(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalFunction(string token, Expression[] terms) {
             Expression[] parameters = new Expression[terms.Length - 1];
 
             Array.Copy(terms, 1, parameters, 0, parameters.Length);
 
-            if (token == "[")
-            {
+            if (token == "[") {
                 return new IndexExpression(terms[0], parameters);
             }
-            else
-            {
+            else {
                 return new CallExpression(terms[0], parameters);
             }
         }
 
-        protected virtual Expression EvalCoalesce(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalCoalesce(string token, Expression[] terms) {
             return new CoalesceExpression(terms[0], terms[1]);
         }
 
-        protected virtual Expression EvalShortcutOperator(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalShortcutOperator(string token, Expression[] terms) {
             if (token == "&&")
                 return new AndAlsoExpression(terms[0], terms[1]);
 
@@ -239,10 +214,8 @@ namespace System.Text.Template
             return null;
         }
 
-        protected virtual Expression EvalUnary(string token, Expression[] terms)
-        {
-            switch (token)
-            {
+        protected virtual Expression EvalUnary(string token, Expression[] terms) {
+            switch (token) {
                 case "!":
                     return new NegationExpression(terms[0]);
                 case "-":
@@ -254,18 +227,15 @@ namespace System.Text.Template
             }
         }
 
-        protected virtual Expression EvalOperator(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalOperator(string token, Expression[] terms) {
             return Expression.Op(token, terms[0], terms[1]);
         }
 
-        protected virtual Expression EvalAssignment(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalAssignment(string token, Expression[] terms) {
             return new AssignmentExpression(terms[0], terms[1]);
         }
 
-        protected virtual Expression EvalStringLiteral(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalStringLiteral(string token, Expression[] terms) {
             string s = token.Substring(1, token.Length - 2);
 
             if (s.IndexOf('\\') < 0)
@@ -276,47 +246,38 @@ namespace System.Text.Template
             bool inEscape = false;
             string hexString = null;
 
-            for (int i = 0; i < s.Length; i++)
-            {
+            for (int i = 0; i < s.Length; i++) {
                 char c = s[i];
 
-                if (inEscape)
-                {
-                    if (c == 'x')
-                    {
+                if (inEscape) {
+                    if (c == 'x') {
                         hexString = "";
                         continue;
                     }
 
-                    if (hexString == null && (c != 'x' || c != 'X'))
-                    {
+                    if (hexString == null && (c != 'x' || c != 'X')) {
                         output += UnEscape("\\" + c);
                         inEscape = false;
                         continue;
                     }
 
-                    if (hexString == null)
-                    {
+                    if (hexString == null) {
                         inEscape = false;
                     }
-                    else
-                    {
-                        if (((char.ToLower(c) < 'a' || char.ToLower(c) > 'f') && (c < '0' || c > '9')) || hexString.Length == 4)
-                        {
+                    else {
+                        if (((char.ToLower(c) < 'a' || char.ToLower(c) > 'f') && (c < '0' || c > '9')) || hexString.Length == 4) {
                             output += UnEscape("\\x" + hexString);
                             inEscape = false;
                             hexString = null;
                         }
-                        else
-                        {
+                        else {
                             hexString += c;
                             continue;
                         }
                     }
                 }
 
-                if (c != '\\')
-                {
+                if (c != '\\') {
                     output += c;
                     continue;
                 }
@@ -327,8 +288,7 @@ namespace System.Text.Template
             return Expression.Value(output);
         }
 
-        protected virtual Expression EvalDotOperator(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalDotOperator(string token, Expression[] terms) {
             VariableExpression varExpression = terms[1] as VariableExpression;
 
             if (varExpression == null)
@@ -337,8 +297,7 @@ namespace System.Text.Template
             return new FieldExpression(terms[0], varExpression.Variable, MissingMember, InterceptMember);
         }
 
-        protected virtual Expression EvalConstructor(string token, Expression[] terms)
-        {
+        protected virtual Expression EvalConstructor(string token, Expression[] terms) {
             string className = token.Substring(3).Trim();
             return new ConstructorExpression(new VariableExpression(className), terms);
         }

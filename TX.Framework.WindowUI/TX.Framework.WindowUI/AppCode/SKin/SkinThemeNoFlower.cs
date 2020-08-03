@@ -1,29 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     /// <summary>
     /// 主题色彩：如花美眷，似水流年
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-7 22:22.
-    internal class SkinThemeNoFlower : SkinTheme
-    {
-        public SkinThemeNoFlower()
-            : base()
-        {
-        }
+    internal class SkinThemeNoFlower : SkinTheme {
+        public SkinThemeNoFlower() : base() { }
 
         /// <summary>
         /// 初始化主题色彩方案
         /// </summary>
         /// User:Ryan  CreateTime:2012-8-7 22:11.
         /// User:Ryan  CreateTime:2012-8-7 22:22.
-        public override void IniSkinTheme()
-        {
+        public override void IniSkinTheme() {
             this.ThemeStyle = EnumTheme.NoFlower;
             this.ThemeName = "如花美眷，似水流年";
             this.BackGroundImage = Properties.Resources.bg02;

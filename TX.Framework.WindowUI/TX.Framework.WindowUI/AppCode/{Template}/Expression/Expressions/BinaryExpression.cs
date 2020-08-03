@@ -13,26 +13,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public abstract class BinaryExpression : Expression
-    {
+namespace System.Text.Template {
+    public abstract class BinaryExpression : Expression {
         private readonly Expression _Left;
         private readonly Expression _Right;
 
-        protected BinaryExpression(Expression left, Expression right)
-        {
+        protected BinaryExpression(Expression left, Expression right) {
             _Left = left;
             _Right = right;
         }
 
-        public Expression Left
-        {
+        public Expression Left {
             get { return _Left; }
         }
-     
-        public Expression Right
-        {
+
+        public Expression Right {
             get { return _Right; }
         }
     }

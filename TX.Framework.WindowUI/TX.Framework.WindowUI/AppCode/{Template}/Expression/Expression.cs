@@ -13,74 +13,59 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public abstract class Expression : IExpression
-    {
+namespace System.Text.Template {
+    public abstract class Expression : IExpression {
         public abstract ValueExpression Evaluate(ITemplateContext context);
 
-        IValueType IExpression.Evaluate(ITemplateContext context)
-        {
+        IValueType IExpression.Evaluate(ITemplateContext context) {
             ValueExpression value = this.Evaluate(context);
-            if ( value == null )
-            {
+            if (value == null) {
                 return null;
             }
             return new ValueExpression(value.Value, value.Type);
         }
 
-        public T Evaluate<T>(ITemplateContext context)
-        {
-            return (T)Evaluate(context).Value;
+        public T Evaluate<T>(ITemplateContext context) {
+            return (T) Evaluate(context).Value;
         }
 
-        protected static ValueExpression[] EvaluateExpressionArray(Expression[] expressions, ITemplateContext context)
-        {
+        protected static ValueExpression[] EvaluateExpressionArray(Expression[] expressions, ITemplateContext context) {
             return Array.ConvertAll<Expression, ValueExpression>(expressions, delegate(Expression expression) { return expression.Evaluate(context); });
         }
 
-        public static AddExpression operator +(Expression left, Expression right)
-        {
+        public static AddExpression operator +(Expression left, Expression right) {
             return new AddExpression(left, right);
         }
 
-        public static SubtractExpression operator -(Expression left, Expression right)
-        {
+        public static SubtractExpression operator -(Expression left, Expression right) {
             return new SubtractExpression(left, right);
         }
 
-        public static MultiplyExpression operator *(Expression left, Expression right)
-        {
+        public static MultiplyExpression operator *(Expression left, Expression right) {
             return new MultiplyExpression(left, right);
         }
 
-        public static DivideExpression operator /(Expression left, Expression right)
-        {
+        public static DivideExpression operator /(Expression left, Expression right) {
             return new DivideExpression(left, right);
         }
 
-        public static ValueExpression<T> Value<T>(T value)
-        {
+        public static ValueExpression<T> Value<T>(T value) {
             return new ValueExpression<T>(value);
         }
 
-        public static ValueExpression Value(object value, Type type)
-        {
+        public static ValueExpression Value(object value, Type type) {
             return new ValueExpression(value, type);
         }
 
-        public static BinaryArithmicExpression Op(string op, Expression left, Expression right)
-        {
+        public static BinaryArithmicExpression Op(string op, Expression left, Expression right) {
             return new BinaryArithmicExpression(op, left, right);
         }
 
-        public static AndAlsoExpression AndAlso(Expression left, Expression right)
-        {
+        public static AndAlsoExpression AndAlso(Expression left, Expression right) {
             return new AndAlsoExpression(left, right);
         }
 
-        public static OrElseExpression OrElse(Expression left, Expression right)
-        {
+        public static OrElseExpression OrElse(Expression left, Expression right) {
             return new OrElseExpression(left, right);
         }
     }

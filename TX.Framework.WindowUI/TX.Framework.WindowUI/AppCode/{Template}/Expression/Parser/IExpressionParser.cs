@@ -13,10 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public interface IExpressionParser
-    {
+namespace System.Text.Template {
+    public interface IExpressionParser {
         IExpression Parse(string expression);
     }
 }

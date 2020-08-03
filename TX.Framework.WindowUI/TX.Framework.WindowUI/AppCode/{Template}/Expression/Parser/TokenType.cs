@@ -13,27 +13,25 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public enum TokenType
-    {
+namespace System.Text.Template {
+    public enum TokenType {
         /// <summary>
-        /// ²Ù×÷Êı
+        /// æ“ä½œæ•°
         /// </summary>
         Term,
 
         /// <summary>
-        /// µ¥Ä¿²Ù×÷·û
+        /// å•ç›®æ“ä½œç¬¦
         /// </summary>
         UnaryOperator,
 
         /// <summary>
-        /// ¶şÔª²Ù×÷·û
+        /// äºŒå…ƒæ“ä½œç¬¦
         /// </summary>
         Operator,
-       
+
         /// <summary>
-        /// ÈıÔª²Ù×÷·û
+        /// ä¸‰å…ƒæ“ä½œç¬¦
         /// </summary>
         TernaryOperator,
 
@@ -41,22 +39,22 @@ namespace System.Text.Template
         TernaryOperator2,
 
         /// <summary>
-        /// ·½·¨»òº¯Êı
+        /// æ–¹æ³•æˆ–å‡½æ•°
         /// </summary>
         FunctionCall,
 
         /// <summary>
-        /// ×óÀ¨ºÅ
+        /// å·¦æ‹¬å·
         /// </summary>
         LeftParen,
 
         /// <summary>
-        /// ÓÒÀ¨ºÅ
+        /// å³æ‹¬å·
         /// </summary>
         RightParen,
 
         /// <summary>
-        /// ²ÎÊı·Ö¸î·û
+        /// å‚æ•°åˆ†å‰²ç¬¦
         /// </summary>
         ArgumentSeparator
     }

@@ -13,12 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class VelocityConfig : TemplateConfig
-    {
-        public VelocityConfig()
-        {
+namespace System.Text.Template {
+    public class VelocityConfig : TemplateConfig {
+        public VelocityConfig() {
             AddToken(TemplateTokenType.ForEach, @"#(foreach|{foreach})\s*\((?<iterator>[a-z_][a-z0-9_]*)\s+in\s+(?<expression>.*?)\s*\)", true);
             AddToken(TemplateTokenType.While, @"#(while|{while})\s*\((?<expression>.*?)\s*\)", true);
             AddToken(TemplateTokenType.EndBlock, @"#(end|{end})", true);

@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
+using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Baseclass for a bse styled colortable.
     /// </summary>
@@ -15,14 +14,12 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public class PanelColorsBse : PanelColors
-    {
+    public class PanelColorsBse : PanelColors {
         #region Properties
         /// <summary>
         /// Gets the associated PanelStyle for the XPanderControls
         /// </summary>
-        public override PanelStyle PanelStyle
-        {
+        public override PanelStyle PanelStyle {
             get { return PanelStyle.Office2007; }
         }
         #endregion
@@ -31,27 +28,20 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Initialize a new instance of the PanelColorsBse class.
         /// </summary>
-        public PanelColorsBse()
-            : base()
-        {
-        }
+        public PanelColorsBse() : base() { }
         /// <summary>
         /// Initialize a new instance of the PanelColorsBse class.
         /// </summary>
         /// <param name="basePanel">Base class for the panel or xpanderpanel control.</param>
-        public PanelColorsBse(BasePanel basePanel)
-            : base(basePanel)
-        {
-        }
+        public PanelColorsBse(BasePanel basePanel) : base(basePanel) { }
         #endregion
-        
+
         #region MethodsProtected
         /// <summary>
         /// Initialize a color Dictionary with defined Bse colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<KnownColors, System.Drawing.Color> rgbTable)
-        {
+        protected override void InitColors(Dictionary<KnownColors, System.Drawing.Color> rgbTable) {
             base.InitColors(rgbTable);
             rgbTable[KnownColors.PanelCaptionSelectedGradientBegin] = Color.FromArgb(156, 163, 254);
             rgbTable[KnownColors.PanelCaptionSelectedGradientEnd] = Color.FromArgb(90, 98, 254);

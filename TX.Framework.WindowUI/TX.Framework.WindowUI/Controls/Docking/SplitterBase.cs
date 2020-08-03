@@ -4,20 +4,15 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    internal class SplitterBase : Control
-    {
-        public SplitterBase()
-        {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    internal class SplitterBase : Control {
+        public SplitterBase() {
             SetStyle(ControlStyles.Selectable, false);
         }
 
-        public override DockStyle Dock
-        {
-            get    {    return base.Dock;    }
-            set
-            {
+        public override DockStyle Dock {
+            get { return base.Dock; }
+            set {
                 SuspendLayout();
                 base.Dock = value;
 
@@ -34,18 +29,16 @@ namespace TX.Framework.WindowUI.Controls.Docking
                     Cursor = Cursors.HSplit;
                 else
                     Cursor = Cursors.Default;
-                    
+
                 ResumeLayout();
             }
         }
 
-        protected virtual int SplitterSize
-        {
-            get    {    return 0;    }
+        protected virtual int SplitterSize {
+            get { return 0; }
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
+        protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
 
             if (e.Button != MouseButtons.Left)
@@ -54,14 +47,11 @@ namespace TX.Framework.WindowUI.Controls.Docking
             StartDrag();
         }
 
-        protected virtual void StartDrag()
-        {
-        }
+        protected virtual void StartDrag() { }
 
-        protected override void WndProc(ref Message m)
-        {
+        protected override void WndProc(ref Message m) {
             // eat the WM_MOUSEACTIVATE message
-            if (m.Msg == (int)Win32.Msgs.WM_MOUSEACTIVATE)
+            if (m.Msg == (int) Win32.Msgs.WM_MOUSEACTIVATE)
                 return;
 
             base.WndProc(ref m);

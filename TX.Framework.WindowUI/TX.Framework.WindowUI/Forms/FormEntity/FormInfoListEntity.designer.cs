@@ -1,8 +1,6 @@
-﻿using TX.Framework.WindowUI.Controls;
-namespace TX.Framework.WindowUI.Forms
-{
-    partial class FormInfoListEntity
-    {
+using TX.Framework.WindowUI.Controls;
+namespace TX.Framework.WindowUI.Forms {
+    partial class FormInfoListEntity {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -12,10 +10,8 @@ namespace TX.Framework.WindowUI.Forms
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -27,8 +23,7 @@ namespace TX.Framework.WindowUI.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.Text.Template.TemplateContext templateContext1 = new System.Text.Template.TemplateContext();
             this.pager = new TX.Framework.WindowUI.Controls.TXPager();
             this.toolBar = new TX.Framework.WindowUI.Controls.TXToolBar();
@@ -78,8 +73,8 @@ namespace TX.Framework.WindowUI.Forms
             this.toolBar.Name = "toolBar";
             this.toolBar.Size = new System.Drawing.Size(827, 28);
             this.toolBar.TabIndex = 0;
-            this.toolBar.CheckAll += new System.EventHandler(this.toolBar_CheckAll);
-            this.toolBar.CheckInvert += new System.EventHandler(this.toolBar_CheckInvert);
+            this.toolBar.CheckAll += new System.EventHandler(this.ToolBar_CheckAll);
+            this.toolBar.CheckInvert += new System.EventHandler(this.ToolBar_CheckInvert);
             // 
             // tlvList
             // 

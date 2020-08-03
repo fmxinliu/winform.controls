@@ -1,20 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
-using System.Drawing;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 
-namespace TX.Framework.WindowUI.Forms
-{
+namespace TX.Framework.WindowUI.Forms {
     /// <summary>
     /// 主窗口
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-3 23:08.
-    public partial class MainForm : BaseForm
-    {
+    public partial class MainForm : BaseForm {
         #region private attributes
 
         /// <summary>
@@ -42,9 +40,7 @@ namespace TX.Framework.WindowUI.Forms
         /// (构造函数).Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
         /// User:Ryan  CreateTime:2012-8-4 13:04.
-        public MainForm()
-            : base()
-        {
+        public MainForm() : base() {
             this._RibbonButtonSize = new Size(34, 34);
             base.CapitionLogo = null;
             this.LogoSize = new Size(32, 32); //Old:72,30 new :100,32
@@ -63,9 +59,8 @@ namespace TX.Framework.WindowUI.Forms
         [Description("当主窗口皮肤图标按钮被点击后发生")]
         public event EventHandler<BtnEventArgs> OnSkinButtonClick;
 
-        private void MainForm_OnSkinButtonClick(object sender, BtnEventArgs e)
-        {
-            frmSkinManager frm = new frmSkinManager();
+        private void MainForm_OnSkinButtonClick(object sender, BtnEventArgs e) {
+            FrmSkinManager frm = new FrmSkinManager();
             frm.ShowDialog();
             frm.Dispose();
         }
@@ -79,14 +74,11 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <value>The skin box rect.</value>
         /// User:Ryan  CreateTime:2012-8-4 13:17.
-        protected Rectangle SkinBoxRect
-        {
-            get
-            {
-                if (base.ControlBox)
-                {
+        protected Rectangle SkinBoxRect {
+            get {
+                if (base.ControlBox) {
                     return new Rectangle(base.Width - 1 - base.ControlBoxSize.Width - base.MinimizeBoxRect.Width - base.MaximizeBoxRect.Width - base.CloseBoxRect.Width,
-                       0, base.ControlBoxSize.Width, base.ControlBoxSize.Height);
+                        0, base.ControlBoxSize.Width, base.ControlBoxSize.Height);
                 }
 
                 return Rectangle.Empty;
@@ -98,10 +90,8 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <value>The ribbon BTN rect.</value>
         /// User:Ryan  CreateTime:2012-8-4 13:17.
-        protected Rectangle RibbonBtnRect
-        {
-            get
-            {
+        protected Rectangle RibbonBtnRect {
+            get {
                 return new Rectangle(this.Offset.X, this.CaptionHeight / 2 - this._RibbonButtonSize.Height / 2 + 1, this._RibbonButtonSize.Width,
                     this._RibbonButtonSize.Height);
             }
@@ -112,14 +102,11 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <value>The logo rect.</value>
         /// User:Ryan  CreateTime:2012-8-4 13:18.
-        protected override Rectangle LogoRect
-        {
-            get
-            {
-                if (base.ShowIcon && this.CapitionLogo != null)
-                {
+        protected override Rectangle LogoRect {
+            get {
+                if (base.ShowIcon && this.CapitionLogo != null) {
                     return new Rectangle(this.RibbonBtnRect.Right + this.Offset.X, this.CaptionHeight / 2 - this.LogoSize.Height / 2 + 1, this.LogoSize.Width,
-                    this.LogoSize.Height);
+                        this.LogoSize.Height);
                 }
 
                 return Rectangle.Empty;
@@ -137,93 +124,78 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="m">windows窗体消息</param>
         /// User:Ryan  CreateTime:2011-07-28 10:22.
-        protected override void WmNcHitTest(ref Message m)
-        {
+        protected override void WmNcHitTest(ref Message m) {
             int wparam = m.LParam.ToInt32();
             Point point = new Point(
                 Win32.LOWORD(wparam), Win32.HIWORD(wparam));
             point = PointToClient(point);
-            if (this.RibbonBtnRect.Contains(point))
-            {
-                m.Result = new IntPtr((int)NCHITTEST.HTCLIENT);
+            if (this.RibbonBtnRect.Contains(point)) {
+                m.Result = new IntPtr((int) NCHITTEST.HTCLIENT);
                 return;
             }
             ////调整窗体大小
-            if (this.ResizeEnable && this.CaptionHeight > 0)
-            {
+            if (this.ResizeEnable && this.CaptionHeight > 0) {
                 int w = 4;
-                if (point.X <= w && point.Y <= w)
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTTOPLEFT);
+                if (point.X <= w && point.Y <= w) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTTOPLEFT);
                     return;
                 }
 
-                if (point.X >= (base.Width - w) && point.Y <= w)
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTTOPRIGHT);
+                if (point.X >= (base.Width - w) && point.Y <= w) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTTOPRIGHT);
                     return;
                 }
 
-                if (point.X >= (base.Width - w) && point.Y >= (base.Height - w))
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTBOTTOMRIGHT);
+                if (point.X >= (base.Width - w) && point.Y >= (base.Height - w)) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTBOTTOMRIGHT);
                     return;
                 }
 
-                if (point.X <= w && point.Y >= (base.Height - w))
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTBOTTOMLEFT);
+                if (point.X <= w && point.Y >= (base.Height - w)) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTBOTTOMLEFT);
                     return;
                 }
 
-                if (point.Y <= w)
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTTOP);
+                if (point.Y <= w) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTTOP);
                     return;
                 }
 
-                if (point.Y >= (base.Height - w))
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTBOTTOM);
+                if (point.Y >= (base.Height - w)) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTBOTTOM);
                     return;
                 }
 
-                if (point.X <= w)
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTLEFT);
+                if (point.X <= w) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTLEFT);
                     return;
                 }
 
-                if (point.X >= (base.Width - w))
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTRIGHT);
+                if (point.X >= (base.Width - w)) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTRIGHT);
                     return;
                 }
             }
 
-            if (point.Y <= this.CaptionHeight)
-            {
-                if (!this.CloseBoxRect.Contains(point)
-                    && !this.MaximizeBoxRect.Contains(point)
-                    && !this.MinimizeBoxRect.Contains(point)
-                    && !this.SkinBoxRect.Contains(point)
-                    && !this.RibbonBtnRect.Contains(point)
-                    )
-                {
-                    m.Result = new IntPtr((int)NCHITTEST.HTCAPTION);
+            if (point.Y <= this.CaptionHeight) {
+                if (!this.CloseBoxRect.Contains(point) &&
+                    !this.MaximizeBoxRect.Contains(point) &&
+                    !this.MinimizeBoxRect.Contains(point) &&
+                    !this.SkinBoxRect.Contains(point) &&
+                    !this.RibbonBtnRect.Contains(point)
+                ) {
+                    m.Result = new IntPtr((int) NCHITTEST.HTCAPTION);
                     return;
                 }
-                else
-                {
+                else {
                     ////终于算是找着你了，都可以移动了
-                    m.Result = new IntPtr((int)NCHITTEST.HTCLIENT);
+                    m.Result = new IntPtr((int) NCHITTEST.HTCLIENT);
                     return;
                 }
             }
 
-            if (this.CaptionHeight > 0)
-            {
-                m.Result = new IntPtr((int)NCHITTEST.HTCAPTION);
+            if (this.CaptionHeight > 0) {
+                m.Result = new IntPtr((int) NCHITTEST.HTCAPTION);
             }
         }
         #endregion
@@ -235,8 +207,7 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="g">The g.</param>
         /// User:Ryan  CreateTime:2012-8-4 13:38.
-        protected override void DrawControlBox(Graphics g)
-        {
+        protected override void DrawControlBox(Graphics g) {
             base.DrawControlBox(g);
             this.DrawSkinControlBox(g);
         }
@@ -249,11 +220,9 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="g">The g.</param>
         /// User:Ryan  CreateTime:2012-8-5 14:13.
-        protected override void DrawCaption(Graphics g)
-        {
+        protected override void DrawCaption(Graphics g) {
             base.DrawCaption(g);
-            if (this.CaptionHeight > 0)
-            {
+            if (this.CaptionHeight > 0) {
                 this.DrawRibbonBtn(g);
             }
         }
@@ -261,39 +230,31 @@ namespace TX.Framework.WindowUI.Forms
 
         #region 鼠标事件扑捉
 
-        protected override void ProcessMouseDown(Point p)
-        {
+        protected override void ProcessMouseDown(Point p) {
 
-            if (!this.RibbonBtnRect.IsEmpty && this.RibbonBtnRect.Contains(p))
-            {
+            if (!this.RibbonBtnRect.IsEmpty && this.RibbonBtnRect.Contains(p)) {
                 this._RibbonBtnState = EnumControlState.Focused;
             }
 
-            if (!this.SkinBoxRect.IsEmpty && this.SkinBoxRect.Contains(p))
-            {
+            if (!this.SkinBoxRect.IsEmpty && this.SkinBoxRect.Contains(p)) {
                 this._SkinBtnState = EnumControlState.Focused;
             }
 
             base.ProcessMouseDown(p);
         }
 
-        protected override void ProcessMouseUp(Point p)
-        {
-            if (!this.RibbonBtnRect.IsEmpty && this.RibbonBtnRect.Contains(p))
-            {
+        protected override void ProcessMouseUp(Point p) {
+            if (!this.RibbonBtnRect.IsEmpty && this.RibbonBtnRect.Contains(p)) {
                 this._RibbonBtnState = EnumControlState.Default;
-                if (this.OnRibbonButtonClick != null)
-                {
+                if (this.OnRibbonButtonClick != null) {
                     BtnEventArgs e = new BtnEventArgs(this.RibbonBtnRect);
                     this.OnRibbonButtonClick(null, e);
                 }
             }
 
-            if (!this.SkinBoxRect.IsEmpty && this.SkinBoxRect.Contains(p))
-            {
+            if (!this.SkinBoxRect.IsEmpty && this.SkinBoxRect.Contains(p)) {
                 this._SkinBtnState = EnumControlState.Default;
-                if (this.OnSkinButtonClick != null)
-                {
+                if (this.OnSkinButtonClick != null) {
                     BtnEventArgs e = new BtnEventArgs(this.SkinBoxRect);
                     this.OnSkinButtonClick(null, e);
                 }
@@ -302,23 +263,19 @@ namespace TX.Framework.WindowUI.Forms
             base.ProcessMouseUp(p);
         }
 
-        protected override void ProcessMouseLeave(Point p)
-        {
+        protected override void ProcessMouseLeave(Point p) {
             this._SkinBtnState = EnumControlState.Default;
             this._RibbonBtnState = EnumControlState.Default;
             base.ProcessMouseLeave(p);
         }
 
-        protected override void ProcessMouseMove(Point p)
-        {
+        protected override void ProcessMouseMove(Point p) {
             this._SkinBtnState = EnumControlState.Default;
-            if (!this.RibbonBtnRect.IsEmpty && this.RibbonBtnRect.Contains(p))
-            {
+            if (!this.RibbonBtnRect.IsEmpty && this.RibbonBtnRect.Contains(p)) {
                 this._RibbonBtnState = EnumControlState.HeightLight;
             }
 
-            if (!this.SkinBoxRect.IsEmpty && this.SkinBoxRect.Contains(p))
-            {
+            if (!this.SkinBoxRect.IsEmpty && this.SkinBoxRect.Contains(p)) {
                 this._SkinBtnState = EnumControlState.HeightLight;
             }
 
@@ -335,10 +292,8 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="g">The g.</param>
         /// User:Ryan  CreateTime:2012-8-4 13:37.
-        private void DrawSkinControlBox(Graphics g)
-        {
-            if (!this.SkinBoxRect.IsEmpty)
-            {
+        private void DrawSkinControlBox(Graphics g) {
+            if (!this.SkinBoxRect.IsEmpty) {
                 base.ControlBoxRender.DrawControlBox(g, this.SkinBoxRect, this._SkinBtnState);
                 GDIHelper.DrawImage(g, this.SkinBoxRect, Properties.Resources.skin, this._SkinBoxSize);
             }
@@ -353,8 +308,7 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="g">The g.</param>
         /// User:Ryan  CreateTime:2012-8-5 14:13.
-        protected void DrawRibbonBtn(Graphics g)
-        {
+        protected void DrawRibbonBtn(Graphics g) {
             Rectangle exRect = new Rectangle(0, base.CaptionHeight, this.Width, this.Height - base.CaptionHeight + 1);
             g.SetClip(exRect, CombineMode.Exclude);
             GDIHelper.InitializeGraphics(g);
@@ -365,8 +319,7 @@ namespace TX.Framework.WindowUI.Forms
             Blend blend = new Blend();
             blend.Positions = new float[] { 0f, 0.3f, 0.5f, 0.8f, 1f };
             blend.Factors = new float[] { 0.15f, 0.55f, 0.7f, 0.8f, 0.95f };
-            switch (this._RibbonBtnState)
-            {
+            switch (this._RibbonBtnState) {
                 case EnumControlState.HeightLight:
                     c1 = Color.FromArgb(225, 179, 27);
                     c2 = Color.FromArgb(255, 251, 232);

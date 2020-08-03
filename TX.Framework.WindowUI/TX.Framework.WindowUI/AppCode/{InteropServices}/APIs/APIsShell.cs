@@ -1,14 +1,11 @@
 using System;
-using System.Runtime.InteropServices;
 using System.IO;
+using System.Runtime.InteropServices;
 
-namespace System.Runtime.InteropServices.APIs
-{
-    public class APIsShell
-    {
+namespace System.Runtime.InteropServices.APIs {
+    public class APIsShell {
         #region GetShellFolder function
-        public static COMInterfaces.IShellFolder GetShellFolder(IntPtr handle, string path, out IntPtr FolderID)
-        {
+        public static COMInterfaces.IShellFolder GetShellFolder(IntPtr handle, string path, out IntPtr FolderID) {
             string tempPath = path;
 
             // Get the desktop folder
@@ -17,7 +14,7 @@ namespace System.Runtime.InteropServices.APIs
 
             System.Guid IID_IShellFolder = new System.Guid("000214E6-0000-0000-C000-000000000046");
             IntPtr Pidl = IntPtr.Zero;
-            uint i,j=0;
+            uint i, j = 0;
             // Connect to "My Computer"
             APIsShell.SHGetSpecialFolderLocation(handle, APIsEnums.ShellSpecialFolders.DRIVES, out Pidl);
             COMInterfaces.IShellFolder tempfolder;
@@ -25,10 +22,9 @@ namespace System.Runtime.InteropServices.APIs
             Marshal.ReleaseComObject(returnedShellFolder);
             returnedShellFolder = tempfolder;
             int lastindexposition = 0;
-            while(lastindexposition != -1)
-            {
+            while (lastindexposition != -1) {
                 lastindexposition = tempPath.IndexOf('\\');
-                if(lastindexposition == -1) break;
+                if (lastindexposition == -1) break;
                 string foldername = tempPath.Remove(lastindexposition, tempPath.Length - lastindexposition) + @"\";
                 returnedShellFolder.ParseDisplayName(handle, IntPtr.Zero, foldername, out i, out Pidl, ref j);
                 returnedShellFolder.BindToObject(Pidl, IntPtr.Zero, ref IID_IShellFolder, out tempfolder);
@@ -37,16 +33,15 @@ namespace System.Runtime.InteropServices.APIs
                 tempPath = tempPath.Substring(++lastindexposition);
             }
             FolderID = Pidl;
-            return(returnedShellFolder);
+            return (returnedShellFolder);
         }
         #endregion
         #region Copy, Delete, Move, Rename
-        public static bool DoOperation(IntPtr Handle, string[] source, string dest, APIsEnums.FileOperations operation)
-        {
+        public static bool DoOperation(IntPtr Handle, string[] source, string dest, APIsEnums.FileOperations operation) {
             APIsStructs.SHFILEOPSTRUCT fileop = new APIsStructs.SHFILEOPSTRUCT();
             fileop.hwnd = Handle;
             fileop.lpszProgressTitle = Enum.GetName(typeof(APIsEnums.FileOperations), operation);
-            fileop.wFunc = (uint) operation;
+            fileop.wFunc = (uint)operation;
             fileop.pFrom = Marshal.StringToHGlobalUni(StringArrayToMultiString(source));
             fileop.pTo = Marshal.StringToHGlobalUni(dest);
             fileop.fAnyOperationsAborted = 0;
@@ -54,25 +49,23 @@ namespace System.Runtime.InteropServices.APIs
 
             return SHFileOperation(ref fileop) == 0;
         }
-        private static String StringArrayToMultiString(String[] stringArray)
-        {
+        private static String StringArrayToMultiString(String[] stringArray) {
             String multiString = "";
 
             if (stringArray == null)
                 return "";
 
-            for (int i=0 ; i<stringArray.Length ; i++)
+            for (int i = 0; i < stringArray.Length; i++)
                 multiString += stringArray[i] + '\0';
-    
+
             multiString += '\0';
-    
+
             return multiString;
         }
         #endregion
         #region Properties Launch
-        public static int ViewFileProperties(string path)
-        {
-            if(!File.Exists(path)) return(-1);
+        public static int ViewFileProperties(string path) {
+            if (!File.Exists(path)) return (-1);
             APIsStructs.SHELLEXECUTEINFO info = new APIsStructs.SHELLEXECUTEINFO();
             info.cbSize = Marshal.SizeOf(typeof(APIsStructs.SHELLEXECUTEINFO));
             info.fMask = APIsEnums.ShellExecuteFlags.INVOKEIDLIST;
@@ -85,11 +78,10 @@ namespace System.Runtime.InteropServices.APIs
             info.hInstApp = IntPtr.Zero;
             IntPtr ptr = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(APIsStructs.SHELLEXECUTEINFO)));
             Marshal.StructureToPtr(info, ptr, false);
-            return(ShellExecuteEx(ptr));
+            return (ShellExecuteEx(ptr));
         }
-        public static int ViewDirectoryProperties(string path)
-        {
-            if(!Directory.Exists(path)) return(-1);
+        public static int ViewDirectoryProperties(string path) {
+            if (!Directory.Exists(path)) return (-1);
             APIsStructs.SHELLEXECUTEINFO info = new APIsStructs.SHELLEXECUTEINFO();
             info.cbSize = Marshal.SizeOf(typeof(APIsStructs.SHELLEXECUTEINFO));
             info.fMask = APIsEnums.ShellExecuteFlags.INVOKEIDLIST;
@@ -102,14 +94,13 @@ namespace System.Runtime.InteropServices.APIs
             info.hInstApp = IntPtr.Zero;
             IntPtr ptr = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(APIsStructs.SHELLEXECUTEINFO)));
             Marshal.StructureToPtr(info, ptr, false);
-            return(ShellExecuteEx(ptr));
+            return (ShellExecuteEx(ptr));
         }
         #endregion
         #region GetIcon
-        static uint FILE_ATTRIBUTE_DIRECTORY        = 0x00000010;
-        static uint FILE_ATTRIBUTE_NORMAL           = 0x00000080;
-        public static System.Drawing.Icon GetFileIcon(string strPath, bool bSmall)
-        {
+        private static uint FILE_ATTRIBUTE_DIRECTORY = 0x00000010;
+        private static uint FILE_ATTRIBUTE_NORMAL = 0x00000080;
+        public static System.Drawing.Icon GetFileIcon(string strPath, bool bSmall) {
             APIsStructs.SHFILEINFO info = new APIsStructs.SHFILEINFO(true);
             APIsEnums.ShellGetFileInformationFlags flags =
                 APIsEnums.ShellGetFileInformationFlags.Icon |
@@ -123,8 +114,7 @@ namespace System.Runtime.InteropServices.APIs
             System.Drawing.Icon icon = System.Drawing.Icon.FromHandle(info.hIcon);
             return icon;
         }
-        public static System.Drawing.Icon GetFolderIcon(string strPath, bool bSmall, bool bOpen)
-        {
+        public static System.Drawing.Icon GetFolderIcon(string strPath, bool bSmall, bool bOpen) {
             APIsStructs.SHFILEINFO info = new APIsStructs.SHFILEINFO(true);
             APIsEnums.ShellGetFileInformationFlags flags =
                 APIsEnums.ShellGetFileInformationFlags.Icon |
@@ -144,15 +134,14 @@ namespace System.Runtime.InteropServices.APIs
         #region SHParseDisplayName
         [DllImport("shell32.dll")]
         public static extern Int32 SHParseDisplayName(
-            [MarshalAs(UnmanagedType.LPWStr)]
-            String pszName,
+            [MarshalAs(UnmanagedType.LPWStr)] String pszName,
             IntPtr pbc,
             out IntPtr ppidl,
             UInt32 sfgaoIn,
             out UInt32 psfgaoOut);
         #endregion
         #region SHGetDataFromIDList
-        [DllImport("shell32.dll", CharSet=CharSet.Auto)]
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         public static extern uint SHGetDataFromIDList(
             COMInterfaces.IShellFolder psf,
             IntPtr pidl,
@@ -161,20 +150,20 @@ namespace System.Runtime.InteropServices.APIs
             int cb);
         #endregion
         #region SHGetPathFromIDList
-        [DllImport("Shell32.Dll", CharSet=CharSet.Auto)]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [DllImport("Shell32.Dll", CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern Boolean SHGetPathFromIDList(
             IntPtr pidl,
-            [In,Out,MarshalAs(UnmanagedType.LPTStr)] String pszPath);
+            [In, Out, MarshalAs(UnmanagedType.LPTStr)] String pszPath);
         #endregion
         #region SHGetSpecialFolderPath
-        [DllImport("Shell32.Dll", CharSet=CharSet.Auto)]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [DllImport("Shell32.Dll", CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern Boolean SHGetSpecialFolderPath(
             IntPtr hwndOwner,
-            [In,Out,MarshalAs(UnmanagedType.LPTStr)] String pszPath,
+            [In, Out, MarshalAs(UnmanagedType.LPTStr)] String pszPath,
             APIsEnums.ShellSpecialFolders nFolder,
-            [In,MarshalAs(UnmanagedType.Bool)] Boolean fCreate);
+            [In, MarshalAs(UnmanagedType.Bool)] Boolean fCreate);
         #endregion
         #region SHGetDesktopFolder
         /// <summary>
@@ -208,9 +197,8 @@ namespace System.Runtime.InteropServices.APIs
         /// <summary>
         /// Copies, moves, renames, or deletes a file system object.
         /// </summary>
-        [DllImport("shell32.dll", CharSet=CharSet.Unicode)]
-        public static extern Int32 SHFileOperation(
-            ref APIsStructs.SHFILEOPSTRUCT FileOp);
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        public static extern Int32 SHFileOperation(ref APIsStructs.SHFILEOPSTRUCT FileOp);
         #endregion
         #region SHGetFileInfo
         [DllImport("Shell32.dll")]
@@ -226,8 +214,8 @@ namespace System.Runtime.InteropServices.APIs
         /// Execute the file
         /// </summary>
         [DllImport("Shell32.dll")]
-        public static extern int ShellExecute
-            (IntPtr Hwnd,
+        public static extern int ShellExecute(
+            IntPtr Hwnd,
             string strOperation,
             string strFile,
             string strParametres,
@@ -243,11 +231,10 @@ namespace System.Runtime.InteropServices.APIs
         /// <summary>
         /// Takes a STRRET structure returned by IShellFolder::GetDisplayNameOf, converts it to a string, and places the result in a buffer.
         /// </summary>
-        [DllImport("Shlwapi.Dll", CharSet=CharSet.Auto)]
+        [DllImport("Shlwapi.Dll", CharSet = CharSet.Auto)]
         public static extern uint StrRetToBuf(
             APIsStructs.STRRET pstr,
-            IntPtr pidl,
-            [In,Out,MarshalAs(UnmanagedType.LPTStr)] String pszBuf,
+            IntPtr pidl, [In, Out, MarshalAs(UnmanagedType.LPTStr)] String pszBuf,
             uint cchBuf);
         #endregion
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,18 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Forms
-{
-    public partial class FormInfoListEntity : FormListEntity
-    {
-        public FormInfoListEntity()
-        {
+namespace TX.Framework.WindowUI.Forms {
+    public partial class FormInfoListEntity : FormListEntity {
+        public FormInfoListEntity() {
             InitializeComponent();
         }
-        private void FormInfoListEntity_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
+        private void FormInfoListEntity_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
                 this.pager.OnSearchClick(sender, e);
             }
         }
@@ -33,12 +28,9 @@ namespace TX.Framework.WindowUI.Forms
         /// <param name="sender">(控件对象).The source of the event.</param>
         /// <param name="e">(事件数据).The <see cref="System.EventArgs"/> instance containing the event data.</param>
         /// User:Ryan  CreateTime:2011-08-19 11:13.
-        protected virtual void toolBar_CheckAll(object sender, EventArgs e)
-        {
-            if (tlvList.CheckBoxes && tlvList.Items.Count > 0)
-            {
-                foreach (ListViewItem item in tlvList.Items)
-                {
+        protected virtual void ToolBar_CheckAll(object sender, EventArgs e) {
+            if (tlvList.CheckBoxes && tlvList.Items.Count > 0) {
+                foreach (ListViewItem item in tlvList.Items) {
                     item.Checked = true;
                 }
             }
@@ -50,12 +42,9 @@ namespace TX.Framework.WindowUI.Forms
         /// <param name="sender">(控件对象).The source of the event.</param>
         /// <param name="e">(事件数据).The <see cref="System.EventArgs"/> instance containing the event data.</param>
         /// User:Ryan  CreateTime:2011-08-19 11:13.
-        protected virtual void toolBar_CheckInvert(object sender, EventArgs e)
-        {
-            if (tlvList.CheckBoxes && tlvList.Items.Count > 0)
-            {
-                foreach (ListViewItem item in tlvList.Items)
-                {
+        protected virtual void ToolBar_CheckInvert(object sender, EventArgs e) {
+            if (tlvList.CheckBoxes && tlvList.Items.Count > 0) {
+                foreach (ListViewItem item in tlvList.Items) {
                     item.Checked = item.Checked ? false : true;
                 }
             }
@@ -63,6 +52,5 @@ namespace TX.Framework.WindowUI.Forms
         #endregion
 
         #endregion
-
     }
 }

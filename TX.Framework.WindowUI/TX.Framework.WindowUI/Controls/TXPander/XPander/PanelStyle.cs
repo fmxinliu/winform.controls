@@ -1,7 +1,6 @@
 using System;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Contains information about the style of the panels or TXPanderpanels
     /// </summary>
@@ -12,8 +11,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public enum PanelStyle
-    {
+    public enum PanelStyle {
         /// <summary>
         /// Draws the panels caption in the default office 2003 style.
         /// </summary>

@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Contains the constants for the XPanderControls
     /// </summary>
-    public static class Constants
-    {
+    public static class Constants {
         /// <summary>
         /// The minimum height for the captionbars in the panels
         /// </summary>

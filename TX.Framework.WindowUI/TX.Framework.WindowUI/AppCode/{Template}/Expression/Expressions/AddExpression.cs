@@ -13,13 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class AddExpression : BinaryArithmicExpression
-    {
-        public AddExpression(Expression left, Expression right)
-            : base("+", left, right)
-        {
-        }
+namespace System.Text.Template {
+    public class AddExpression : BinaryArithmicExpression {
+        public AddExpression(Expression left, Expression right) : base("+", left, right) { }
     }
 }

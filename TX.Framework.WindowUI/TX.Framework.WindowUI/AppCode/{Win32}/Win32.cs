@@ -1,19 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Globalization;
-using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     /// <summary>
     /// Win32API
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-3 15:23.
-    internal class Win32
-    {
+    internal class Win32 {
         #region fileds
 
         public static readonly IntPtr TRUE = new IntPtr(1);
@@ -30,7 +28,6 @@ namespace TX.Framework.WindowUI
         /// <param name="whnd">The WHND.</param>
         /// <param name="dwtime">The dwtime.</param>
         /// <param name="dwflag">动画标识，多个以|分隔）</param>
-        /// <returns></returns>
         /// User:K.Anding  CreateTime:2011-7-19 23:55.
         [DllImport("user32")]
         public static extern bool AnimateWindow(IntPtr whnd, int dwtime, int dwflag);
@@ -81,7 +78,6 @@ namespace TX.Framework.WindowUI
         /// <summary>
         /// 获取ComboBox的控件信息
         /// </summary>
-        /// <returns></returns>
         [DllImport("user32.dll")]
         public static extern bool GetComboBoxInfo(IntPtr hwndCombo, ref ComboBoxInfo info);
 
@@ -103,9 +99,6 @@ namespace TX.Framework.WindowUI
         [DllImport("gdi32.dll")]
         public static extern int CreateRoundRectRgn(int x1, int y1, int x2, int y2, int x3, int y3);
 
-        /// <summary>
-        /// 
-        /// </summary>
         [DllImport("user32.dll")]
         public static extern IntPtr BeginPaint(IntPtr hWnd, ref PAINTSTRUCT ps);
 
@@ -123,18 +116,18 @@ namespace TX.Framework.WindowUI
         public static extern short GetKeyState(int nVirtKey);
 
         [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
+        [return : MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetCursorPos(ref Point lpPoint);
 
         [DllImport("user32.dll")]
-        public extern static int OffsetRect(ref RECT lpRect, int x, int y);
+        public static extern int OffsetRect(ref RECT lpRect, int x, int y);
 
         [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
+        [return : MarshalAs(UnmanagedType.Bool)]
         public static extern bool PtInRect([In] ref RECT lprc, Point pt);
 
         [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
+        [return : MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetClientRect(IntPtr hWnd, ref RECT r);
 
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
@@ -169,10 +162,8 @@ namespace TX.Framework.WindowUI
         /// 取地两位值
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns></returns>
         /// User:Ryan  CreateTime:2011-07-26 15:29.
-        public static int LOWORD(int value)
-        {
+        public static int LOWORD(int value) {
             return value & 0xFFFF;
         }
 
@@ -180,17 +171,13 @@ namespace TX.Framework.WindowUI
         /// 取高两位值
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns></returns>
         /// User:Ryan  CreateTime:2011-07-26 15:30.
-        public static int HIWORD(int value)
-        {
+        public static int HIWORD(int value) {
             return value >> 16;
         }
 
-        public static IntPtr GetWindowLong(HandleRef hWnd, int nIndex)
-        {
-            if (IntPtr.Size == 4)
-            {
+        public static IntPtr GetWindowLong(HandleRef hWnd, int nIndex) {
+            if (IntPtr.Size == 4) {
                 return GetWindowLong32(hWnd, nIndex);
             }
             return GetWindowLongPtr64(hWnd, nIndex);

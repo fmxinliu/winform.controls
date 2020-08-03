@@ -1,13 +1,13 @@
 using System;
-using System.Text;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Text;
 using System.Windows.Forms;
-using System.ComponentModel;
+
 using TX.Framework.WindowUI.Properties;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Base class for the panel or xpanderpanel control. 
     /// </summary>
@@ -19,8 +19,7 @@ namespace TX.Framework.WindowUI.Controls
     /// REMAINS UNCHANGED. 
     /// </copyright>
     [DesignTimeVisibleAttribute(false)]
-    public class BasePanel : ScrollableControl, IPanel
-    {
+    public class BasePanel : ScrollableControl, IPanel {
         #region Constants
 
         /// <summary>
@@ -131,13 +130,10 @@ namespace TX.Framework.WindowUI.Controls
         [Description("Style of the panel")]
         [DefaultValue(0)]
         [Category("Appearance")]
-        public virtual TX.Framework.WindowUI.Controls.PanelStyle PanelStyle
-        {
+        public virtual TX.Framework.WindowUI.Controls.PanelStyle PanelStyle {
             get { return this.m_ePanelStyle; }
-            set
-            {
-                if (value.Equals(this.m_ePanelStyle) == false)
-                {
+            set {
+                if (value.Equals(this.m_ePanelStyle) == false) {
                     this.m_ePanelStyle = value;
                     OnPanelStyleChanged(this, new PanelStyleChangeEventArgs(this.m_ePanelStyle));
                 }
@@ -148,13 +144,10 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         [Description("Gets or sets the image that is displayed on a Panels caption.")]
         [Category("Appearance")]
-        public Image Image
-        {
+        public Image Image {
             get { return this.m_image; }
-            set
-            {
-                if (value != this.m_image)
-                {
+            set {
+                if (value != this.m_image) {
                     this.m_image = value;
                     this.Invalidate(this.CaptionRectangle);
                 }
@@ -167,13 +160,10 @@ namespace TX.Framework.WindowUI.Controls
         [DefaultValue(TX.Framework.WindowUI.Controls.ColorScheme.Professional)]
         [Browsable(true)]
         [Category("Appearance")]
-        public virtual TX.Framework.WindowUI.Controls.ColorScheme ColorScheme
-        {
+        public virtual TX.Framework.WindowUI.Controls.ColorScheme ColorScheme {
             get { return this.m_eColorScheme; }
-            set
-            {
-                if (value.Equals(this.m_eColorScheme) == false)
-                {
+            set {
+                if (value.Equals(this.m_eColorScheme) == false) {
                     this.m_eColorScheme = value;
                     OnColorSchemeChanged(this, new ColorSchemeChangeEventArgs(this.m_eColorScheme));
                 }
@@ -183,19 +173,16 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets or sets the height of the panels caption.  
         /// </summary>
         [Description("Gets or sets the height of the panels caption."),
-        DefaultValue(25),
-        Category("Appearance")]
-        public int CaptionHeight
-        {
+         DefaultValue(25),
+         Category("Appearance")]
+        public int CaptionHeight {
             get { return m_iCaptionHeight; }
-            set
-            {
-                if (value < Constants.CaptionMinHeight)
-                {
+            set {
+                if (value < Constants.CaptionMinHeight) {
                     throw new InvalidOperationException(
                         string.Format(
-                        System.Globalization.CultureInfo.CurrentUICulture,
-                        Resources.IDS_InvalidOperationExceptionInteger, value, "CaptionHeight", Constants.CaptionMinHeight));
+                            System.Globalization.CultureInfo.CurrentUICulture,
+                            Resources.IDS_InvalidOperationExceptionInteger, value, "CaptionHeight", Constants.CaptionMinHeight));
                 }
                 this.m_iCaptionHeight = value;
                 OnCaptionHeightChanged(this, EventArgs.Empty);
@@ -207,15 +194,11 @@ namespace TX.Framework.WindowUI.Controls
         [Description("Gets or sets the font of the text displayed on the caption.")]
         [DefaultValue(typeof(Font), "Microsoft Sans Serif; 8,25pt; style=Bold")]
         [Category("Appearance")]
-        public Font CaptionFont
-        {
+        public Font CaptionFont {
             get { return this.m_captionFont; }
-            set
-            {
-                if (value != null)
-                {
-                    if (value.Equals(this.m_captionFont) == false)
-                    {
+            set {
+                if (value != null) {
+                    if (value.Equals(this.m_captionFont) == false) {
                         this.m_captionFont = value;
                         this.Invalidate(this.CaptionRectangle);
                     }
@@ -229,20 +212,15 @@ namespace TX.Framework.WindowUI.Controls
         [DefaultValue(false)]
         [Category("Appearance")]
         [RefreshProperties(RefreshProperties.Repaint)]
-        public virtual bool Expand
-        {
+        public virtual bool Expand {
             get { return this.m_bExpand; }
-            set
-            {
-                if (value.Equals(this.m_bExpand) == false)
-                {
+            set {
+                if (value.Equals(this.m_bExpand) == false) {
                     this.m_bExpand = value;
-                    if (this.m_bExpand == true)
-                    {
+                    if (this.m_bExpand == true) {
                         OnPanelExpanding(this, new XPanderStateChangeEventArgs(this.m_bExpand));
                     }
-                    else
-                    {
+                    else {
                         OnPanelCollapsing(this, new XPanderStateChangeEventArgs(this.m_bExpand));
                     }
                 }
@@ -256,13 +234,10 @@ namespace TX.Framework.WindowUI.Controls
         [DefaultValue(true)]
         [Browsable(false)]
         [Category("Appearance")]
-        public virtual bool ShowBorder
-        {
+        public virtual bool ShowBorder {
             get { return this.m_bShowBorder; }
-            set
-            {
-                if (value.Equals(this.m_bShowBorder) == false)
-                {
+            set {
+                if (value.Equals(this.m_bShowBorder) == false) {
                     this.m_bShowBorder = value;
                     this.Invalidate(false);
                 }
@@ -274,13 +249,10 @@ namespace TX.Framework.WindowUI.Controls
         [Description("Gets or sets a value indicating whether the expand icon in a Panel or XPanderPanel is visible.")]
         [DefaultValue(false)]
         [Category("Appearance")]
-        public virtual bool ShowExpandIcon
-        {
+        public virtual bool ShowExpandIcon {
             get { return this.m_bShowExpandIcon; }
-            set
-            {
-                if (value.Equals(this.m_bShowExpandIcon) == false)
-                {
+            set {
+                if (value.Equals(this.m_bShowExpandIcon) == false) {
                     this.m_bShowExpandIcon = value;
                     this.Invalidate(false);
                 }
@@ -296,8 +268,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </value>
         [Description("Specifies the text to show on a ToolTip when the mouse moves over the closeicon.")]
         [Category("Behavior")]
-        public virtual string ToolTipTextCloseIcon
-        {
+        public virtual string ToolTipTextCloseIcon {
             get { return this.m_strToolTipTextCloseIcon; }
             set { this.m_strToolTipTextCloseIcon = value; }
         }
@@ -311,8 +282,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </value> 
         [Description("Specifies the text to show on a ToolTip when the mouse moves over the expandicon and the panel is collapsed.")]
         [Category("Behavior")]
-        public virtual string ToolTipTextExpandIconPanelCollapsed
-        {
+        public virtual string ToolTipTextExpandIconPanelCollapsed {
             get { return this.m_strToolTipTextExpandIconPanelCollapsed; }
             set { this.m_strToolTipTextExpandIconPanelCollapsed = value; }
         }
@@ -326,8 +296,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </value> 
         [Description("Specifies the text to show on a ToolTip when the mouse moves over the expandicon and the panel is expanded.")]
         [Category("Behavior")]
-        public virtual string ToolTipTextExpandIconPanelExpanded
-        {
+        public virtual string ToolTipTextExpandIconPanelExpanded {
             get { return this.m_strToolTipTextExpandIconPanelExpanded; }
             set { this.m_strToolTipTextExpandIconPanelExpanded = value; }
         }
@@ -337,13 +306,10 @@ namespace TX.Framework.WindowUI.Controls
         [Description("Gets or sets a value indicating whether the close icon in a Panel or XPanderPanel is visible.")]
         [DefaultValue(false)]
         [Category("Appearance")]
-        public virtual bool ShowCloseIcon
-        {
+        public virtual bool ShowCloseIcon {
             get { return this.m_bShowCloseIcon; }
-            set
-            {
-                if (value.Equals(this.m_bShowCloseIcon) == false)
-                {
+            set {
+                if (value.Equals(this.m_bShowCloseIcon) == false) {
                     this.m_bShowCloseIcon = value;
                     this.Invalidate(false);
                 }
@@ -352,58 +318,49 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets the panelcolors table.
         /// </summary>
-        protected PanelColors PanelColors
-        {
+        protected PanelColors PanelColors {
             get { return m_panelColors; }
         }
         /// <summary>
         /// Gets or sets the HoverState of the CaptionBar at a Panel or XPanderPanel.
         /// </summary>
-        internal HoverState HoverStateCaptionBar
-        {
+        internal HoverState HoverStateCaptionBar {
             get { return this.m_hoverStateCaptionBar; }
             set { this.m_hoverStateCaptionBar = value; }
         }
         /// <summary>
         /// Gets or sets the HoverState of the CloseIcon in a captionbar at a Panel or XPanderPanel.
         /// </summary>
-        internal HoverState HoverStateCloseIcon
-        {
+        internal HoverState HoverStateCloseIcon {
             get { return this.m_hoverStateCloseIcon; }
             set { this.m_hoverStateCloseIcon = value; }
         }
         /// <summary>
         /// Gets or sets the HoverState of the ExpandIcon in a captionbar at a Panel or XPanderPanel.
         /// </summary>
-        internal HoverState HoverStateExpandIcon
-        {
+        internal HoverState HoverStateExpandIcon {
             get { return this.m_hoverStateExpandIcon; }
             set { this.m_hoverStateExpandIcon = value; }
         }
         /// <summary>
         /// Gets or sets the size of an image in the captionbar.
         /// </summary>
-        internal Size ImageSize
-        {
+        internal Size ImageSize {
             get { return this.m_imageSize; }
             set { this.m_imageSize = value; }
         }
         /// <summary>
         /// Gets the size of a captionbar in a Panel or XPanderPanel
         /// </summary>
-        internal Rectangle CaptionRectangle
-        {
+        internal Rectangle CaptionRectangle {
             get { return new Rectangle(0, 0, this.ClientRectangle.Width, this.CaptionHeight); }
         }
         /// <summary>
         /// Gets the Rectangle of an Image in a captionbar
         /// </summary>
-        internal Rectangle ImageRectangle
-        {
-            get
-            {
-                if (this.m_imageRectangle == Rectangle.Empty)
-                {
+        internal Rectangle ImageRectangle {
+            get {
+                if (this.m_imageRectangle == Rectangle.Empty) {
                     this.m_imageRectangle = new Rectangle(
                         CaptionSpacing,
                         this.CaptionHeight,
@@ -420,15 +377,13 @@ namespace TX.Framework.WindowUI.Controls
         /// Sets the PanelProperties for a Panel or XPanderPanel
         /// </summary>
         /// <param name="panelColors">The PanelColors table</param>
-        public virtual void SetPanelProperties(PanelColors panelColors)
-        {
-            if (panelColors == null)
-            {
+        public virtual void SetPanelProperties(PanelColors panelColors) {
+            if (panelColors == null) {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    Resources.IDS_ArgumentException,
-                    "panelColors"));
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        Resources.IDS_ArgumentException,
+                        "panelColors"));
             }
             this.m_panelColors = panelColors;
             this.ColorScheme = ColorScheme.Professional;
@@ -440,8 +395,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Initializes a new instance of the BasePanel class.
         /// </summary>
-        protected BasePanel()
-        {
+        protected BasePanel() {
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.UserPaint, true);
@@ -455,14 +409,12 @@ namespace TX.Framework.WindowUI.Controls
             this.m_imageSize = new Size(16, 16);
             this.m_imageRectangle = Rectangle.Empty;
             this.m_toolTip = new System.Windows.Forms.ToolTip();
-
         }
         /// <summary>
         /// Raises the TextChanged event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected override void OnTextChanged(EventArgs e)
-        {
+        protected override void OnTextChanged(EventArgs e) {
             this.Invalidate(this.CaptionRectangle);
             base.OnTextChanged(e);
         }
@@ -471,12 +423,10 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A EventArgs that contains the event data.</param>
-        protected virtual void OnColorSchemeChanged(object sender, ColorSchemeChangeEventArgs e)
-        {
+        protected virtual void OnColorSchemeChanged(object sender, ColorSchemeChangeEventArgs e) {
             this.PanelColors.Clear();
             this.Invalidate(false);
-            if (this.ColorSchemeChanged != null)
-            {
+            if (this.ColorSchemeChanged != null) {
                 this.ColorSchemeChanged(sender, e);
             }
         }
@@ -484,14 +434,11 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the MouseUp event
         /// </summary>
         /// <param name="e">A MouseEventArgs that contains data about the OnMouseUp event.</param>
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
-            if ((this.ShowExpandIcon == true) && (this.RectangleExpandIcon.Contains(e.X, e.Y) == true))
-            {
+        protected override void OnMouseUp(MouseEventArgs e) {
+            if ((this.ShowExpandIcon == true) && (this.RectangleExpandIcon.Contains(e.X, e.Y) == true)) {
                 OnExpandClick(this, EventArgs.Empty);
             }
-            if ((this.ShowCloseIcon == true) && (this.RectangleCloseIcon.Contains(e.X, e.Y) == true))
-            {
+            if ((this.ShowCloseIcon == true) && (this.RectangleCloseIcon.Contains(e.X, e.Y) == true)) {
                 OnCloseClick(this, EventArgs.Empty);
             }
             base.OnMouseUp(e);
@@ -500,55 +447,41 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the MouseMove event
         /// </summary>
         /// <param name="e">A MouseEventArgs that contains the event data.</param>
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            if (this.CaptionRectangle.Contains(e.X, e.Y) == true)
-            {
-                if (this.m_hoverStateCaptionBar == HoverState.None)
-                {
+        protected override void OnMouseMove(MouseEventArgs e) {
+            if (this.CaptionRectangle.Contains(e.X, e.Y) == true) {
+                if (this.m_hoverStateCaptionBar == HoverState.None) {
                     this.m_hoverStateCaptionBar = HoverState.Hover;
                     OnCaptionBarHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateCaptionBar));
                 }
             }
-            else
-            {
-                if (this.m_hoverStateCaptionBar == HoverState.Hover)
-                {
+            else {
+                if (this.m_hoverStateCaptionBar == HoverState.Hover) {
                     this.m_hoverStateCaptionBar = HoverState.None;
                     OnCaptionBarHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateCaptionBar));
                 }
             }
 
-            if ((this.ShowExpandIcon == true) || (this.ShowCloseIcon == true))
-            {
-                if (this.RectangleExpandIcon.Contains(e.X, e.Y) == true)
-                {
-                    if (this.m_hoverStateExpandIcon == HoverState.None)
-                    {
+            if ((this.ShowExpandIcon == true) || (this.ShowCloseIcon == true)) {
+                if (this.RectangleExpandIcon.Contains(e.X, e.Y) == true) {
+                    if (this.m_hoverStateExpandIcon == HoverState.None) {
                         this.m_hoverStateExpandIcon = HoverState.Hover;
                         OnExpandIconHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateExpandIcon));
                     }
                 }
-                else
-                {
-                    if (this.m_hoverStateExpandIcon == HoverState.Hover)
-                    {
+                else {
+                    if (this.m_hoverStateExpandIcon == HoverState.Hover) {
                         this.m_hoverStateExpandIcon = HoverState.None;
                         OnExpandIconHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateExpandIcon));
                     }
                 }
-                if (this.RectangleCloseIcon.Contains(e.X, e.Y) == true)
-                {
-                    if (this.m_hoverStateCloseIcon == HoverState.None)
-                    {
+                if (this.RectangleCloseIcon.Contains(e.X, e.Y) == true) {
+                    if (this.m_hoverStateCloseIcon == HoverState.None) {
                         this.m_hoverStateCloseIcon = HoverState.Hover;
                         OnCloseIconHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateCloseIcon));
                     }
                 }
-                else
-                {
-                    if (this.m_hoverStateCloseIcon == HoverState.Hover)
-                    {
+                else {
+                    if (this.m_hoverStateCloseIcon == HoverState.Hover) {
                         this.m_hoverStateCloseIcon = HoverState.None;
                         OnCloseIconHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateCloseIcon));
                     }
@@ -560,20 +493,16 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the MouseLeave event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            if (this.m_hoverStateCaptionBar == HoverState.Hover)
-            {
+        protected override void OnMouseLeave(EventArgs e) {
+            if (this.m_hoverStateCaptionBar == HoverState.Hover) {
                 this.m_hoverStateCaptionBar = HoverState.None;
                 OnCaptionBarHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateCaptionBar));
             }
-            if (this.m_hoverStateExpandIcon == HoverState.Hover)
-            {
+            if (this.m_hoverStateExpandIcon == HoverState.Hover) {
                 this.m_hoverStateExpandIcon = HoverState.None;
                 OnExpandIconHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateExpandIcon));
             }
-            if (this.m_hoverStateCloseIcon == HoverState.Hover)
-            {
+            if (this.m_hoverStateCloseIcon == HoverState.Hover) {
                 this.m_hoverStateCloseIcon = HoverState.None;
                 OnCloseIconHoverStateChanged(this, new HoverStateChangeEventArgs(this.m_hoverStateCloseIcon));
             }
@@ -584,10 +513,8 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A XPanderStateChangeEventArgs that contains the event data.</param>
-        protected virtual void OnPanelExpanding(object sender, XPanderStateChangeEventArgs e)
-        {
-            if (this.PanelExpanding != null)
-            {
+        protected virtual void OnPanelExpanding(object sender, XPanderStateChangeEventArgs e) {
+            if (this.PanelExpanding != null) {
                 this.PanelExpanding(sender, e);
             }
         }
@@ -596,10 +523,8 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A XPanderStateChangeEventArgs that contains the event data.</param>
-        protected virtual void OnPanelCollapsing(object sender, XPanderStateChangeEventArgs e)
-        {
-            if (this.PanelCollapsing != null)
-            {
+        protected virtual void OnPanelCollapsing(object sender, XPanderStateChangeEventArgs e) {
+            if (this.PanelCollapsing != null) {
                 this.PanelCollapsing(sender, e);
             }
         }
@@ -608,11 +533,9 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A PanelStyleChangeEventArgs that contains the event data.</param>
-        protected virtual void OnPanelStyleChanged(object sender, PanelStyleChangeEventArgs e)
-        {
+        protected virtual void OnPanelStyleChanged(object sender, PanelStyleChangeEventArgs e) {
             PanelStyle panelStyle = e.PanelStyle;
-            switch (panelStyle)
-            {
+            switch (panelStyle) {
                 case PanelStyle.Default:
                     m_panelColors = new PanelColors(this);
                     break;
@@ -621,8 +544,7 @@ namespace TX.Framework.WindowUI.Controls
                     break;
             }
             Invalidate(true);
-            if (this.PanelStyleChanged != null)
-            {
+            if (this.PanelStyleChanged != null) {
                 this.PanelStyleChanged(sender, e);
             }
         }
@@ -631,10 +553,8 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnCloseClick(object sender, EventArgs e)
-        {
-            if (this.CloseClick != null)
-            {
+        protected virtual void OnCloseClick(object sender, EventArgs e) {
+            if (this.CloseClick != null) {
                 this.CloseClick(sender, e);
             }
         }
@@ -643,11 +563,9 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected virtual void OnExpandClick(object sender, EventArgs e)
-        {
+        protected virtual void OnExpandClick(object sender, EventArgs e) {
             this.Invalidate(false);
-            if (this.ExpandClick != null)
-            {
+            if (this.ExpandClick != null) {
                 this.ExpandClick(sender, e);
             }
         }
@@ -656,43 +574,32 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A HoverStateChangeEventArgs that contains the event data.</param>
-        protected virtual void OnExpandIconHoverStateChanged(object sender, HoverStateChangeEventArgs e)
-        {
-            if (e.HoverState == HoverState.Hover)
-            {
-                if (this.Cursor != Cursors.Hand)
-                {
+        protected virtual void OnExpandIconHoverStateChanged(object sender, HoverStateChangeEventArgs e) {
+            if (e.HoverState == HoverState.Hover) {
+                if (this.Cursor != Cursors.Hand) {
                     this.Cursor = Cursors.Hand;
-                    if (this.Expand == true)
-                    {
-                        if (this is Panel)
-                        {
-                            if (string.IsNullOrEmpty(this.m_strToolTipTextExpandIconPanelExpanded) == false)
-                            {
+                    if (this.Expand == true) {
+                        if (this is Panel) {
+                            if (string.IsNullOrEmpty(this.m_strToolTipTextExpandIconPanelExpanded) == false) {
                                 this.m_toolTip.SetToolTip(this, this.m_strToolTipTextExpandIconPanelExpanded);
                             }
                         }
                     }
-                    else
-                    {
-                        if (string.IsNullOrEmpty(this.m_strToolTipTextExpandIconPanelCollapsed) == false)
-                        {
+                    else {
+                        if (string.IsNullOrEmpty(this.m_strToolTipTextExpandIconPanelCollapsed) == false) {
                             this.m_toolTip.SetToolTip(this, this.m_strToolTipTextExpandIconPanelCollapsed);
                         }
                     }
                 }
             }
-            else
-            {
-                if (this.Cursor == Cursors.Hand)
-                {
+            else {
+                if (this.Cursor == Cursors.Hand) {
                     this.m_toolTip.SetToolTip(this, string.Empty);
                     this.m_toolTip.Hide(this);
                     this.Cursor = Cursors.Default;
                 }
             }
-            if (this.ExpandIconHoverStateChanged != null)
-            {
+            if (this.ExpandIconHoverStateChanged != null) {
                 this.ExpandIconHoverStateChanged(sender, e);
             }
         }
@@ -701,12 +608,10 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A EventArgs that contains the event data.</param>
-        protected virtual void OnCaptionHeightChanged(object sender, EventArgs e)
-        {
+        protected virtual void OnCaptionHeightChanged(object sender, EventArgs e) {
             OnLayout(new LayoutEventArgs(this, null));
             this.Invalidate(false);
-            if (this.CaptionHeightChanged != null)
-            {
+            if (this.CaptionHeightChanged != null) {
                 this.CaptionHeightChanged(sender, e);
             }
         }
@@ -715,22 +620,17 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A HoverStateChangeEventArgs that contains the event data.</param>
-        protected virtual void OnCaptionBarHoverStateChanged(object sender, HoverStateChangeEventArgs e)
-        {
-            if (this is XPanderPanel)
-            {
-                if (e.HoverState == HoverState.Hover)
-                {
-                    if (this.Cursor != Cursors.Hand)
-                    {
+        protected virtual void OnCaptionBarHoverStateChanged(object sender, HoverStateChangeEventArgs e) {
+            if (this is XPanderPanel) {
+                if (e.HoverState == HoverState.Hover) {
+                    if (this.Cursor != Cursors.Hand) {
                         this.Cursor = Cursors.Hand;
                     }
                 }
                 else { this.Cursor = Cursors.Default; }
                 this.Invalidate(CaptionRectangle);
             }
-            if (this.CaptionBarHoverStateChanged != null)
-            {
+            if (this.CaptionBarHoverStateChanged != null) {
                 this.CaptionBarHoverStateChanged(sender, e);
             }
         }
@@ -739,30 +639,23 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A HoverStateChangeEventArgs that contains the event data.</param>
-        protected virtual void OnCloseIconHoverStateChanged(object sender, HoverStateChangeEventArgs e)
-        {
-            if (e.HoverState == HoverState.Hover)
-            {
-                if (this.Cursor != Cursors.Hand)
-                {
+        protected virtual void OnCloseIconHoverStateChanged(object sender, HoverStateChangeEventArgs e) {
+            if (e.HoverState == HoverState.Hover) {
+                if (this.Cursor != Cursors.Hand) {
                     this.Cursor = Cursors.Hand;
                 }
-                if (string.IsNullOrEmpty(this.m_strToolTipTextCloseIcon) == false)
-                {
+                if (string.IsNullOrEmpty(this.m_strToolTipTextCloseIcon) == false) {
                     this.m_toolTip.SetToolTip(this, this.m_strToolTipTextCloseIcon);
                 }
             }
-            else
-            {
-                if (this.Cursor == Cursors.Hand)
-                {
+            else {
+                if (this.Cursor == Cursors.Hand) {
                     this.m_toolTip.SetToolTip(this, string.Empty);
                     this.m_toolTip.Hide(this);
                     this.Cursor = Cursors.Default;
                 }
             }
-            if (this.CloseIconHoverStateChanged != null)
-            {
+            if (this.CloseIconHoverStateChanged != null) {
                 this.CloseIconHoverStateChanged(sender, e);
             }
         }
@@ -771,15 +664,12 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A EventArgs that contains the event data.</param>
-        protected virtual void OnCustomColorsChanged(object sender, EventArgs e)
-        {
-            if (this.ColorScheme == ColorScheme.Custom)
-            {
+        protected virtual void OnCustomColorsChanged(object sender, EventArgs e) {
+            if (this.ColorScheme == ColorScheme.Custom) {
                 this.PanelColors.Clear();
                 this.Invalidate(false);
             }
-            if (this.CustomColorsChanged != null)
-            {
+            if (this.CustomColorsChanged != null) {
                 this.CustomColorsChanged(sender, e);
             }
         }
@@ -800,24 +690,19 @@ namespace TX.Framework.WindowUI.Controls
             Color fontColor,
             string strText,
             RightToLeft rightToLeft,
-            StringAlignment stringAlignment)
-        {
-            if (graphics == null)
-            {
+            StringAlignment stringAlignment) {
+            if (graphics == null) {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    Resources.IDS_ArgumentException,
-                    typeof(Graphics).Name));
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        Resources.IDS_ArgumentException,
+                        typeof(Graphics).Name));
             }
 
-            using (SolidBrush stringBrush = new SolidBrush(fontColor))
-            {
-                using (StringFormat stringFormat = new StringFormat())
-                {
+            using (SolidBrush stringBrush = new SolidBrush(fontColor)) {
+                using (StringFormat stringFormat = new StringFormat()) {
                     stringFormat.FormatFlags = StringFormatFlags.NoWrap;
-                    if (rightToLeft == RightToLeft.Yes)
-                    {
+                    if (rightToLeft == RightToLeft.Yes) {
                         stringFormat.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
                     }
                     stringFormat.Trimming = StringTrimming.EllipsisCharacter;
@@ -835,23 +720,20 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="imageRectangle">A rectangle structure that specifies the bounds of the linear gradient.</param>
         /// <param name="foreColorImage">The foreground color of this image</param>
         /// <param name="iconPositionY">The vertical position for the icon image</param>
-        protected static void DrawIcon(Graphics graphics, Image imgPanelIcon, Rectangle imageRectangle, Color foreColorImage, int iconPositionY)
-        {
-            if (graphics == null)
-            {
+        protected static void DrawIcon(Graphics graphics, Image imgPanelIcon, Rectangle imageRectangle, Color foreColorImage, int iconPositionY) {
+            if (graphics == null) {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    Resources.IDS_ArgumentException,
-                    typeof(Graphics).Name));
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        Resources.IDS_ArgumentException,
+                        typeof(Graphics).Name));
             }
-            if (imgPanelIcon == null)
-            {
+            if (imgPanelIcon == null) {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    Resources.IDS_ArgumentException,
-                    typeof(Image).Name));
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        Resources.IDS_ArgumentException,
+                        typeof(Image).Name));
             }
 
             int iconPositionX = imageRectangle.Left;
@@ -864,8 +746,7 @@ namespace TX.Framework.WindowUI.Controls
                 imgPanelIcon.Width,
                 imgPanelIcon.Height - 1);
 
-            using (System.Drawing.Imaging.ImageAttributes imageAttribute = new System.Drawing.Imaging.ImageAttributes())
-            {
+            using (System.Drawing.Imaging.ImageAttributes imageAttribute = new System.Drawing.Imaging.ImageAttributes()) {
                 imageAttribute.SetColorKey(Color.Magenta, Color.Magenta);
                 System.Drawing.Imaging.ColorMap colorMap = new System.Drawing.Imaging.ColorMap();
                 colorMap.OldColor = Color.FromArgb(0, 60, 166);
@@ -881,18 +762,15 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="graphics">The Graphics to draw on.</param>
         /// <param name="image">Image to draw.</param>
         /// <param name="imageRectangle">Rectangle structure that specifies the location and size of the drawn image.</param>
-        protected static void DrawImage(Graphics graphics, Image image, Rectangle imageRectangle)
-        {
-            if (graphics == null)
-            {
+        protected static void DrawImage(Graphics graphics, Image image, Rectangle imageRectangle) {
+            if (graphics == null) {
                 throw new ArgumentNullException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    Resources.IDS_ArgumentException,
-                    typeof(Graphics).Name));
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        Resources.IDS_ArgumentException,
+                        typeof(Graphics).Name));
             }
-            if (image != null)
-            {
+            if (image != null) {
                 graphics.DrawImage(image, imageRectangle);
             }
         }
@@ -917,18 +795,15 @@ namespace TX.Framework.WindowUI.Controls
             RightToLeft rightToLeft,
             Font fontCaption,
             Color captionForeColor,
-            string strCaptionText)
-        {
+            string strCaptionText) {
             //DrawImages
             int iTextPositionX1 = iSpacing;
             int iTextPositionX2 = captionRectangle.Right - iSpacing;
 
             imageRectangle.Y = (captionRectangle.Height - imageRectangle.Height) / 2;
 
-            if (rightToLeft == RightToLeft.No)
-            {
-                if (image != null)
-                {
+            if (rightToLeft == RightToLeft.No) {
+                if (image != null) {
                     DrawImage(graphics, image, imageRectangle);
                     iTextPositionX1 += imageRectangle.Width + iSpacing;
                 }
@@ -941,10 +816,8 @@ namespace TX.Framework.WindowUI.Controls
             textRectangle.Width -= iTextPositionX1 + iSpacing;
             textRectangle.Y += (textRectangle.Height - Convert.ToInt32(graphics.MeasureString(strCaptionText, fontCaption).Height)) / 2;
             //textRectangle.Inflate(0, -2);
-            if (rightToLeft == RightToLeft.Yes)
-            {
-                if (image != null)
-                {
+            if (rightToLeft == RightToLeft.Yes) {
+                if (image != null) {
                     Rectangle imageRectangleRight = imageRectangle;
                     imageRectangleRight.X = iTextPositionX2 - imageRectangle.Width;
                     DrawImage(graphics, image, imageRectangleRight);
@@ -953,7 +826,6 @@ namespace TX.Framework.WindowUI.Controls
             }
             textRectangle.Width = iTextPositionX2 - iTextPositionX1;
             DrawString(graphics, textRectangle, fontCaption, captionForeColor, strCaptionText, rightToLeft, StringAlignment.Near);
-
         }
         /// <summary>
         /// Draws the text and image objects at the specified location. 
@@ -994,41 +866,33 @@ namespace TX.Framework.WindowUI.Controls
             ref Rectangle rectangleImageExandPanel,
             Font fontCaption,
             Color captionForeColor,
-            string strCaptionText)
-        {
+            string strCaptionText) {
             //DrawImages
             int iTextPositionX1 = iSpacing;
             int iTextPositionX2 = captionRectangle.Right - iSpacing;
 
             imageRectangle.Y = (captionRectangle.Height - imageRectangle.Height) / 2;
 
-            if (rightToLeft == RightToLeft.No)
-            {
-                if (image != null)
-                {
+            if (rightToLeft == RightToLeft.No) {
+                if (image != null) {
                     DrawImage(graphics, image, imageRectangle);
                     iTextPositionX1 += imageRectangle.Width + iSpacing;
                     iTextPositionX2 -= iTextPositionX1;
                 }
             }
-            else
-            {
-                if ((bShowCloseIcon == true) && (imageClosePanel != null))
-                {
+            else {
+                if ((bShowCloseIcon == true) && (imageClosePanel != null)) {
                     rectangleImageClosePanel = imageRectangle;
                     rectangleImageClosePanel.X = imageRectangle.X;
-                    if (bIsClosable == true)
-                    {
+                    if (bIsClosable == true) {
                         DrawIcon(graphics, imageClosePanel, rectangleImageClosePanel, foreColorCloseIcon, imageRectangle.Y);
                     }
                     iTextPositionX1 = rectangleImageClosePanel.X + rectangleImageClosePanel.Width;
                 }
-                if ((bShowExpandIcon == true) && (imageExandPanel != null))
-                {
+                if ((bShowExpandIcon == true) && (imageExandPanel != null)) {
                     rectangleImageExandPanel = imageRectangle;
                     rectangleImageExandPanel.X = imageRectangle.X;
-                    if ((bShowCloseIcon == true) && (imageClosePanel != null))
-                    {
+                    if ((bShowCloseIcon == true) && (imageClosePanel != null)) {
                         rectangleImageExandPanel.X = iTextPositionX1 + (iSpacing / 2);
                     }
                     DrawIcon(graphics, imageExandPanel, rectangleImageExandPanel, foreColorExpandIcon, imageRectangle.Y);
@@ -1041,41 +905,33 @@ namespace TX.Framework.WindowUI.Controls
             RectangleF textRectangle = captionRectangle;
             textRectangle.X = iTextPositionX1;
             textRectangle.Width -= iTextPositionX1 + iSpacing;
-            if (rightToLeft == RightToLeft.No)
-            {
-                if ((bShowCloseIcon == true) && (imageClosePanel != null))
-                {
+            if (rightToLeft == RightToLeft.No) {
+                if ((bShowCloseIcon == true) && (imageClosePanel != null)) {
                     rectangleImageClosePanel = imageRectangle;
                     rectangleImageClosePanel.X = captionRectangle.Right - iSpacing - imageRectangle.Width;
-                    if (bIsClosable == true)
-                    {
+                    if (bIsClosable == true) {
                         DrawIcon(graphics, imageClosePanel, rectangleImageClosePanel, foreColorCloseIcon, imageRectangle.Y);
                     }
                     iTextPositionX2 = rectangleImageClosePanel.X;
                 }
-                if ((bShowExpandIcon == true) && (imageExandPanel != null))
-                {
+                if ((bShowExpandIcon == true) && (imageExandPanel != null)) {
                     rectangleImageExandPanel = imageRectangle;
                     rectangleImageExandPanel.X = captionRectangle.Right - iSpacing - imageRectangle.Width;
-                    if ((bShowCloseIcon == true) && (imageClosePanel != null))
-                    {
+                    if ((bShowCloseIcon == true) && (imageClosePanel != null)) {
                         rectangleImageExandPanel.X = iTextPositionX2 - (iSpacing / 2) - imageRectangle.Width;
                     }
                     DrawIcon(graphics, imageExandPanel, rectangleImageExandPanel, foreColorExpandIcon, imageRectangle.Y);
                     iTextPositionX2 = rectangleImageExandPanel.X;
                 }
-                if ((bShowCloseIcon == true)
-                    && (imageClosePanel != null)
-                    && (bShowExpandIcon == true)
-                    && (imageExandPanel != null))
-                {
+                if ((bShowCloseIcon == true) &&
+                    (imageClosePanel != null) &&
+                    (bShowExpandIcon == true) &&
+                    (imageExandPanel != null)) {
                     iTextPositionX2 -= iSpacing;
                 }
             }
-            else
-            {
-                if (image != null)
-                {
+            else {
+                if (image != null) {
                     Rectangle imageRectangleRight = imageRectangle;
                     imageRectangleRight.X = iTextPositionX2 - imageRectangle.Width;
                     DrawImage(graphics, image, imageRectangleRight);
@@ -1088,8 +944,7 @@ namespace TX.Framework.WindowUI.Controls
             DrawString(graphics, textRectangle, fontCaption, captionForeColor, strCaptionText, rightToLeft, StringAlignment.Near);
 
             //if the XPanderPanel not closable then the RectangleCloseIcon must be empty
-            if (bIsClosable == false)
-            {
+            if (bIsClosable == false) {
                 rectangleImageClosePanel = Rectangle.Empty;
             }
         }
@@ -1112,10 +967,10 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="bIsExpanded">A value indicating whether the panel is expanded or collapsed</param>
         /// <param name="imageExandPanel">The expand image that is displayed on a panel's caption.</param>
         /// <param name="foreColorExpandPanel">The foreground color of the expand image displayed by this caption.</param>
-        /// <param name="rectangleImageExandPanel"></param>
+        /// <param name="rectangleImageExandPanel">The foreground color of the expand rectangle image.</param>
         /// <param name="fontCaption">The font of the text displayed on a panel's caption.</param>
         /// <param name="captionForeColor">The foreground color of the text displayed on a panel's caption.</param>
-        /// <param name="collapsedForeColor"></param>
+        /// <param name="collapsedForeColor">collapsed ForeColor</param>
         /// <param name="strCaptionText">The text which is associated with this caption.</param>
         protected static void DrawImagesAndText(
             Graphics graphics,
@@ -1138,14 +993,11 @@ namespace TX.Framework.WindowUI.Controls
             Font fontCaption,
             Color captionForeColor,
             Color collapsedForeColor,
-            string strCaptionText)
-        {
-            switch (dockStyle)
-            {
+            string strCaptionText) {
+            switch (dockStyle) {
                 case DockStyle.Left:
                 case DockStyle.Right:
-                    if (bIsExpanded == true)
-                    {
+                    if (bIsExpanded == true) {
                         DrawImagesAndText(
                             graphics,
                             captionRectangle,
@@ -1166,8 +1018,7 @@ namespace TX.Framework.WindowUI.Controls
                             captionForeColor,
                             strCaptionText);
                     }
-                    else
-                    {
+                    else {
                         rectangleImageClosePanel = Rectangle.Empty;
                         DrawVerticalImagesAndText(
                             graphics,
@@ -1218,9 +1069,8 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="middleColor">The middle color of the gradient used on the caption bar</param>
         /// <param name="endColor">The end color of the gradient used on the caption bar</param>
         /// <param name="linearGradientMode">Specifies the type of fill a Pen object uses to fill lines.</param>
-        /// <param name="flipHorizontal"></param>
-        protected static void RenderDoubleBackgroundGradient(Graphics graphics, Rectangle bounds, Color beginColor, Color middleColor, Color endColor, LinearGradientMode linearGradientMode, bool flipHorizontal)
-        {
+        /// <param name="flipHorizontal">flip on Horizontal</param>
+        protected static void RenderDoubleBackgroundGradient(Graphics graphics, Rectangle bounds, Color beginColor, Color middleColor, Color endColor, LinearGradientMode linearGradientMode, bool flipHorizontal) {
             int iUpperHeight = bounds.Height / 2;
             int iLowerHeight = bounds.Height - iUpperHeight;
 
@@ -1243,22 +1093,18 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="beginColor">The starting color of the gradient used on the panel background</param>
         /// <param name="endColor">The end color of the gradient used on the panel background</param>
         /// <param name="linearGradientMode">Specifies the type of fill a Pen object uses to fill lines.</param>
-        protected static void RenderBackgroundGradient(Graphics graphics, Rectangle bounds, Color beginColor, Color endColor, LinearGradientMode linearGradientMode)
-        {
-            if (graphics == null)
-            {
+        protected static void RenderBackgroundGradient(Graphics graphics, Rectangle bounds, Color beginColor, Color endColor, LinearGradientMode linearGradientMode) {
+            if (graphics == null) {
                 throw new ArgumentException(
                     string.Format(
-                    System.Globalization.CultureInfo.CurrentUICulture,
-                    Resources.IDS_ArgumentException,
-                    typeof(Graphics).Name));
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        Resources.IDS_ArgumentException,
+                        typeof(Graphics).Name));
             }
-            if (IsZeroWidthOrHeight(bounds))
-            {
+            if (IsZeroWidthOrHeight(bounds)) {
                 return;
             }
-            using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(bounds, beginColor, endColor, linearGradientMode))
-            {
+            using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(bounds, beginColor, endColor, linearGradientMode)) {
                 graphics.FillRectangle(linearGradientBrush, bounds);
             }
         }
@@ -1270,19 +1116,16 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="colorGradientBegin">The starting color of the gradient used on the button background</param>
         /// <param name="colorGradientMiddle">The middle color of the gradient used on the button background</param>
         /// <param name="colorGradientEnd">The end color of the gradient used on the button background</param>
-        protected static void RenderButtonBackground(Graphics graphics, Rectangle bounds, Color colorGradientBegin, Color colorGradientMiddle, Color colorGradientEnd)
-        {
+        protected static void RenderButtonBackground(Graphics graphics, Rectangle bounds, Color colorGradientBegin, Color colorGradientMiddle, Color colorGradientEnd) {
             RectangleF upperRectangle = bounds;
             upperRectangle.Height = bounds.Height * 0.4f;
 
             using (LinearGradientBrush upperLinearGradientBrush = new LinearGradientBrush(
-                    upperRectangle,
-                    colorGradientBegin,
-                    colorGradientMiddle,
-                    LinearGradientMode.Vertical))
-            {
-                if (upperLinearGradientBrush != null)
-                {
+                upperRectangle,
+                colorGradientBegin,
+                colorGradientMiddle,
+                LinearGradientMode.Vertical)) {
+                if (upperLinearGradientBrush != null) {
                     Blend blend = new Blend();
                     blend.Positions = new float[] { 0.0F, 1.0F };
                     blend.Factors = new float[] { 0.0F, 0.6F };
@@ -1296,13 +1139,11 @@ namespace TX.Framework.WindowUI.Controls
             lowerRectangle.Height = bounds.Height - upperRectangle.Height;
 
             using (LinearGradientBrush lowerLinearGradientBrush = new LinearGradientBrush(
-                    lowerRectangle,
-                    colorGradientMiddle,
-                    colorGradientEnd,
-                    LinearGradientMode.Vertical))
-            {
-                if (lowerLinearGradientBrush != null)
-                {
+                lowerRectangle,
+                colorGradientMiddle,
+                colorGradientEnd,
+                LinearGradientMode.Vertical)) {
+                if (lowerLinearGradientBrush != null) {
                     graphics.FillRectangle(lowerLinearGradientBrush, lowerRectangle);
                 }
             }
@@ -1310,8 +1151,7 @@ namespace TX.Framework.WindowUI.Controls
             RectangleF correctionRectangle = lowerRectangle;
             correctionRectangle.Y -= 1;
             correctionRectangle.Height = 2;
-            using (SolidBrush solidBrush = new SolidBrush(colorGradientMiddle))
-            {
+            using (SolidBrush solidBrush = new SolidBrush(colorGradientMiddle)) {
                 graphics.FillRectangle(solidBrush, correctionRectangle);
             }
         }
@@ -1323,12 +1163,9 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="colorGradientBegin">The starting color of the gradient used on the button background</param>
         /// <param name="colorGradientEnd">The end color of the gradient used on the button background</param>
         /// <param name="bHover">A indicator that represents when the mouse cursor hovers over</param>
-        protected static void RenderFlatButtonBackground(Graphics graphics, Rectangle bounds, Color colorGradientBegin, Color colorGradientEnd, bool bHover)
-        {
-            using (LinearGradientBrush gradientBrush = GetFlatGradientBackBrush(bounds, colorGradientBegin, colorGradientEnd, bHover))
-            {
-                if (gradientBrush != null)
-                {
+        protected static void RenderFlatButtonBackground(Graphics graphics, Rectangle bounds, Color colorGradientBegin, Color colorGradientEnd, bool bHover) {
+            using (LinearGradientBrush gradientBrush = GetFlatGradientBackBrush(bounds, colorGradientBegin, colorGradientEnd, bHover)) {
+                if (gradientBrush != null) {
                     graphics.FillRectangle(gradientBrush, bounds);
                 }
             }
@@ -1340,17 +1177,16 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="bounds">Rectangle structure that specifies the backgrounds location.</param>
         /// <param name="radius">The radius in the graphics path</param>
         /// <returns>the specified graphics path</returns>
-        protected static GraphicsPath GetPath(Rectangle bounds, int radius)
-        {
+        protected static GraphicsPath GetPath(Rectangle bounds, int radius) {
             int x = bounds.X;
             int y = bounds.Y;
             int width = bounds.Width;
             int height = bounds.Height;
             GraphicsPath graphicsPath = new GraphicsPath();
-            graphicsPath.AddArc(x, y, radius, radius, 180, 90);                                    //Upper left corner
-            graphicsPath.AddArc(x + width - radius, y, radius, radius, 270, 90);                //Upper right corner
-            graphicsPath.AddArc(x + width - radius, y + height - radius, radius, radius, 0, 90);//Lower right corner
-            graphicsPath.AddArc(x, y + height - radius, radius, radius, 90, 90);                                //Lower left corner
+            graphicsPath.AddArc(x, y, radius, radius, 180, 90); //Upper left corner
+            graphicsPath.AddArc(x + width - radius, y, radius, radius, 270, 90); //Upper right corner
+            graphicsPath.AddArc(x + width - radius, y + height - radius, radius, radius, 0, 90); //Lower right corner
+            graphicsPath.AddArc(x, y + height - radius, radius, radius, 90, 90); //Lower left corner
             graphicsPath.CloseFigure();
             return graphicsPath;
         }
@@ -1360,16 +1196,15 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="bounds">Rectangle structure that specifies the backgrounds location.</param>
         /// <param name="radius">The radius in the graphics path</param>
         /// <returns>the specified graphics path</returns>
-        protected static GraphicsPath GetUpperBackgroundPath(Rectangle bounds, int radius)
-        {
+        protected static GraphicsPath GetUpperBackgroundPath(Rectangle bounds, int radius) {
             int x = bounds.X;
             int y = bounds.Y;
             int width = bounds.Width;
             int height = bounds.Height;
             GraphicsPath graphicsPath = new GraphicsPath();
-            graphicsPath.AddLine(x, y + height, x, y - radius);                 //Left Line
-            graphicsPath.AddArc(x, y, radius, radius, 180, 90);                 //Upper left corner
-            graphicsPath.AddArc(x + width - radius, y, radius, radius, 270, 90);//Upper right corner
+            graphicsPath.AddLine(x, y + height, x, y - radius); //Left Line
+            graphicsPath.AddArc(x, y, radius, radius, 180, 90); //Upper left corner
+            graphicsPath.AddArc(x + width - radius, y, radius, radius, 270, 90); //Upper right corner
             graphicsPath.AddLine(x + width, y + radius, x + width, y + height); //Right Line
             graphicsPath.CloseFigure();
             return graphicsPath;
@@ -1380,17 +1215,16 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="bounds">Rectangle structure that specifies the backgrounds location.</param>
         /// <param name="radius">The radius in the graphics path</param>
         /// <returns>The specified graphics path</returns>
-        protected static GraphicsPath GetBackgroundPath(Rectangle bounds, int radius)
-        {
+        protected static GraphicsPath GetBackgroundPath(Rectangle bounds, int radius) {
             int x = bounds.X;
             int y = bounds.Y;
             int width = bounds.Width;
             int height = bounds.Height;
             GraphicsPath graphicsPath = new GraphicsPath();
-            graphicsPath.AddArc(x, y, radius, radius, 180, 90);                                    //Upper left corner
-            graphicsPath.AddArc(x + width - radius, y, radius, radius, 270, 90);                //Upper right corner
-            graphicsPath.AddArc(x + width - radius, y + height - radius, radius, radius, 0, 90);//Lower right corner
-            graphicsPath.AddArc(x, y + height - radius, radius, radius, 90, 90);                //Lower left corner
+            graphicsPath.AddArc(x, y, radius, radius, 180, 90); //Upper left corner
+            graphicsPath.AddArc(x + width - radius, y, radius, radius, 270, 90); //Upper right corner
+            graphicsPath.AddArc(x + width - radius, y + height - radius, radius, radius, 0, 90); //Lower right corner
+            graphicsPath.AddArc(x, y + height - radius, radius, radius, 90, 90); //Lower left corner
             graphicsPath.CloseFigure();
             return graphicsPath;
         }
@@ -1401,23 +1235,18 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="colorGradientBegin">A Color structure that represents the starting color for the gradient.</param>
         /// <param name="colorGradientEnd">A Color structure that represents the end color for the gradient.</param>
         /// <param name="bHover">A indicator that represents when the mouse cursor hovers over</param>
-        /// <returns></returns>
-        protected static LinearGradientBrush GetFlatGradientBackBrush(Rectangle bounds, Color colorGradientBegin, Color colorGradientEnd, bool bHover)
-        {
+        protected static LinearGradientBrush GetFlatGradientBackBrush(Rectangle bounds, Color colorGradientBegin, Color colorGradientEnd, bool bHover) {
             LinearGradientBrush linearGradientBrush = null;
             Blend blend = new Blend();
             blend.Positions = new float[] { 0.0F, 0.2F, 0.3F, 0.4F, 0.5F, 0.6F, 0.7F, 0.8F, 1.0F };
-            if (bHover == false)
-            {
+            if (bHover == false) {
                 blend.Factors = new float[] { 0.0F, 0.0F, 0.2F, 0.4F, 0.6F, 0.4F, 0.2F, 0.0F, 0.0F };
             }
-            else
-            {
+            else {
                 blend.Factors = new float[] { 0.4F, 0.5F, 0.6F, 0.8F, 1.0F, 0.8F, 0.6F, 0.5F, 0.4F };
             }
             linearGradientBrush = linearGradientBrush = new LinearGradientBrush(bounds, colorGradientBegin, colorGradientEnd, LinearGradientMode.Horizontal);
-            if (linearGradientBrush != null)
-            {
+            if (linearGradientBrush != null) {
                 linearGradientBrush.Blend = blend;
             }
             return linearGradientBrush;
@@ -1427,10 +1256,8 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="rectangle">the rectangle to check</param>
         /// <returns>true if the with or height of the rectangle is 0 else false</returns>
-        protected static bool IsZeroWidthOrHeight(Rectangle rectangle)
-        {
-            if (rectangle.Width != 0)
-            {
+        protected static bool IsZeroWidthOrHeight(Rectangle rectangle) {
+            if (rectangle.Width != 0) {
                 return (rectangle.Height == 0);
             }
             return true;
@@ -1439,17 +1266,13 @@ namespace TX.Framework.WindowUI.Controls
 
         #region MethodsPrivate
 
-        private static void RenderDoubleBackgroundGradient(Graphics graphics, Rectangle bounds, Color beginColor, Color middleColor, Color endColor, int firstGradientWidth, int secondGradientWidth, LinearGradientMode mode, bool flipHorizontal)
-        {
-            if ((bounds.Width != 0) && (bounds.Height != 0))
-            {
+        private static void RenderDoubleBackgroundGradient(Graphics graphics, Rectangle bounds, Color beginColor, Color middleColor, Color endColor, int firstGradientWidth, int secondGradientWidth, LinearGradientMode mode, bool flipHorizontal) {
+            if ((bounds.Width != 0) && (bounds.Height != 0)) {
                 Rectangle rectangle1 = bounds;
                 Rectangle rectangle2 = bounds;
                 bool flag1 = true;
-                if (mode == LinearGradientMode.Horizontal)
-                {
-                    if (flipHorizontal)
-                    {
+                if (mode == LinearGradientMode.Horizontal) {
+                    if (flipHorizontal) {
                         Color color1 = endColor;
                         endColor = beginColor;
                         beginColor = color1;
@@ -1459,32 +1282,25 @@ namespace TX.Framework.WindowUI.Controls
                     rectangle1.X = bounds.Right - rectangle1.Width;
                     flag1 = bounds.Width > (firstGradientWidth + secondGradientWidth);
                 }
-                else
-                {
+                else {
                     rectangle2.Height = firstGradientWidth;
                     rectangle1.Height = secondGradientWidth + 1;
                     rectangle1.Y = bounds.Bottom - rectangle1.Height;
                     flag1 = bounds.Height > (firstGradientWidth + secondGradientWidth);
                 }
-                if (flag1)
-                {
-                    using (Brush brush1 = new SolidBrush(middleColor))
-                    {
+                if (flag1) {
+                    using (Brush brush1 = new SolidBrush(middleColor)) {
                         graphics.FillRectangle(brush1, bounds);
                     }
-                    using (Brush brush2 = new LinearGradientBrush(rectangle2, beginColor, middleColor, mode))
-                    {
+                    using (Brush brush2 = new LinearGradientBrush(rectangle2, beginColor, middleColor, mode)) {
                         graphics.FillRectangle(brush2, rectangle2);
                     }
-                    using (LinearGradientBrush brush3 = new LinearGradientBrush(rectangle1, middleColor, endColor, mode))
-                    {
-                        if (mode == LinearGradientMode.Horizontal)
-                        {
+                    using (LinearGradientBrush brush3 = new LinearGradientBrush(rectangle1, middleColor, endColor, mode)) {
+                        if (mode == LinearGradientMode.Horizontal) {
                             rectangle1.X++;
                             rectangle1.Width--;
                         }
-                        else
-                        {
+                        else {
                             rectangle1.Y++;
                             rectangle1.Height--;
                         }
@@ -1492,8 +1308,7 @@ namespace TX.Framework.WindowUI.Controls
                         return;
                     }
                 }
-                using (Brush brush4 = new LinearGradientBrush(bounds, beginColor, endColor, mode))
-                {
+                using (Brush brush4 = new LinearGradientBrush(bounds, beginColor, endColor, mode)) {
                     graphics.FillRectangle(brush4, bounds);
                 }
             }
@@ -1512,12 +1327,10 @@ namespace TX.Framework.WindowUI.Controls
             ref Rectangle rectangleImageExandPanel,
             Font captionFont,
             Color collapsedCaptionForeColor,
-            string strCaptionText)
-        {
+            string strCaptionText) {
             imageRectangle.Y = (captionRectangle.Height - imageRectangle.Height) / 2;
 
-            if (imageExandPanel != null)
-            {
+            if (imageExandPanel != null) {
                 rectangleImageExandPanel = imageRectangle;
                 rectangleImageExandPanel.X = (panelRectangle.Width - imageRectangle.Width) / 2;
                 DrawIcon(graphics, imageExandPanel, rectangleImageExandPanel, foreColorExpandPanel, imageRectangle.Y);
@@ -1526,8 +1339,7 @@ namespace TX.Framework.WindowUI.Controls
             int iTextPositionY1 = CaptionSpacing;
             int iTextPositionY2 = panelRectangle.Height - CaptionSpacing;
 
-            if (image != null)
-            {
+            if (image != null) {
                 imageRectangle.Y = iTextPositionY2 - imageRectangle.Height;
                 imageRectangle.X = (panelRectangle.Width - imageRectangle.Width) / 2;
                 DrawImage(graphics, image, imageRectangle);
@@ -1542,10 +1354,8 @@ namespace TX.Framework.WindowUI.Controls
                 iTextPositionY2,
                 captionRectangle.Height);
 
-            using (SolidBrush textBrush = new SolidBrush(collapsedCaptionForeColor))
-            {
-                if (dockStyle == DockStyle.Left)
-                {
+            using (SolidBrush textBrush = new SolidBrush(collapsedCaptionForeColor)) {
+                if (dockStyle == DockStyle.Left) {
                     graphics.TranslateTransform(0, panelRectangle.Height);
                     graphics.RotateTransform(-90);
 
@@ -1560,8 +1370,7 @@ namespace TX.Framework.WindowUI.Controls
 
                     graphics.ResetTransform();
                 }
-                if (dockStyle == DockStyle.Right)
-                {
+                if (dockStyle == DockStyle.Right) {
                     graphics.TranslateTransform(panelRectangle.Width, 0);
                     graphics.RotateTransform(90);
 

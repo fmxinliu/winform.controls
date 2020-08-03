@@ -12,15 +12,7 @@
     <AssemblyName>TX.Framework.WindowUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -141,7 +133,9 @@
     <Compile Include="AppCode\{Reference}\Reflection\Emit\ArraySetEmitter.cs" />
     <Compile Include="AppCode\{Reference}\Reflection\Emit\BaseEmitter.cs" />
     <Compile Include="AppCode\{Reference}\Reflection\Emit\CtorInvocationEmitter.cs" />
-    <Compile Include="AppCode\{Reference}\Reflection\Emit\EmitHelper.cs" />
+    <Compile Include="AppCode\{Reference}\Reflection\Emit\EmitHelper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="AppCode\{Reference}\Reflection\Emit\InvocationEmitter.cs" />
     <Compile Include="AppCode\{Reference}\Reflection\Emit\LookupUtils.cs" />
     <Compile Include="AppCode\{Reference}\Reflection\Emit\MapEmitter.cs" />
@@ -206,7 +200,7 @@
     <Compile Include="AppCode\{InteropServices}\APIs\TextUtil.cs" />
     <Compile Include="AppCode\Model\Enums.cs" />
     <Compile Include="AppCode\Model\RoundRectangle.cs" />
-    <Compile Include="AppCode\Model\Structs.CS" />
+    <Compile Include="AppCode\Model\Structs.cs" />
     <Compile Include="AppCode\{Template}\AST\ExpressionNode.cs" />
     <Compile Include="AppCode\{Template}\AST\ForeachNode.cs" />
     <Compile Include="AppCode\{Template}\AST\IfNode.cs" />
@@ -490,23 +484,23 @@
     <Compile Include="Controls\TXGroupBox\TXGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TXHtmlEditor\frmAddImage.cs">
+    <Compile Include="Controls\TXHtmlEditor\FrmAddImage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\TXHtmlEditor\frmAddImage.designer.cs">
-      <DependentUpon>frmAddImage.cs</DependentUpon>
+    <Compile Include="Controls\TXHtmlEditor\FrmAddImage.designer.cs">
+      <DependentUpon>FrmAddImage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TXHtmlEditor\frmPreview.cs">
+    <Compile Include="Controls\TXHtmlEditor\FrmPreview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\TXHtmlEditor\frmPreview.designer.cs">
-      <DependentUpon>frmPreview.cs</DependentUpon>
+    <Compile Include="Controls\TXHtmlEditor\FrmPreview.designer.cs">
+      <DependentUpon>FrmPreview.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TXHtmlEditor\frmSourceCode.cs">
+    <Compile Include="Controls\TXHtmlEditor\FrmSourceCode.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\TXHtmlEditor\frmSourceCode.designer.cs">
-      <DependentUpon>frmSourceCode.cs</DependentUpon>
+    <Compile Include="Controls\TXHtmlEditor\FrmSourceCode.designer.cs">
+      <DependentUpon>FrmSourceCode.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TXHtmlEditor\TXHtmlEditor.cs">
       <SubType>UserControl</SubType>
@@ -664,11 +658,11 @@
       <SubType>Form</SubType>
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ErrorBox\frmErrorBox.cs">
+    <Compile Include="Forms\ErrorBox\FrmErrorBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ErrorBox\frmErrorBox.designer.cs">
-      <DependentUpon>frmErrorBox.cs</DependentUpon>
+    <Compile Include="Forms\ErrorBox\FrmErrorBox.designer.cs">
+      <DependentUpon>FrmErrorBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormEntity\FormInfoEntity.cs">
       <SubType>Form</SubType>
@@ -689,11 +683,11 @@
       <DependentUpon>FormListEntity.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm\BtnEventArgs.cs" />
-    <Compile Include="Forms\MainForm\frmSkinManager.cs">
+    <Compile Include="Forms\MainForm\FrmSkinManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm\frmSkinManager.designer.cs">
-      <DependentUpon>frmSkinManager.cs</DependentUpon>
+    <Compile Include="Forms\MainForm\FrmSkinManager.designer.cs">
+      <DependentUpon>FrmSkinManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm\MainForm.cs">
       <SubType>Form</SubType>
@@ -825,14 +819,14 @@
     <EmbeddedResource Include="Controls\TreeListView\TreeListView.resx">
       <DependentUpon>TreeListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TXHtmlEditor\frmAddImage.resx">
-      <DependentUpon>frmAddImage.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TXHtmlEditor\FrmAddImage.resx">
+      <DependentUpon>FrmAddImage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TXHtmlEditor\frmPreview.resx">
-      <DependentUpon>frmPreview.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TXHtmlEditor\FrmPreview.resx">
+      <DependentUpon>FrmPreview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TXHtmlEditor\frmSourceCode.resx">
-      <DependentUpon>frmSourceCode.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\TXHtmlEditor\FrmSourceCode.resx">
+      <DependentUpon>FrmSourceCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TXHtmlEditor\TXHtmlEditor.resx">
       <DependentUpon>TXHtmlEditor.cs</DependentUpon>
@@ -858,8 +852,8 @@
     <EmbeddedResource Include="Forms\BaseForm\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ErrorBox\frmErrorBox.resx">
-      <DependentUpon>frmErrorBox.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ErrorBox\FrmErrorBox.resx">
+      <DependentUpon>FrmErrorBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEntity\FormInfoListEntity.resx">
       <DependentUpon>FormInfoListEntity.cs</DependentUpon>
@@ -867,8 +861,8 @@
     <EmbeddedResource Include="Forms\FormEntity\FormListEntity.resx">
       <DependentUpon>FormListEntity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm\frmSkinManager.resx">
-      <DependentUpon>frmSkinManager.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm\FrmSkinManager.resx">
+      <DependentUpon>FrmSkinManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageBox\TXMessageBox.resx">
       <DependentUpon>TXMessageBox.cs</DependentUpon>
@@ -1047,6 +1041,7 @@
     <Content Include="Controls\Docking\Resources\DockPane_OptionOverflow.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.3\Microsoft.SourceAnalysis.Targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

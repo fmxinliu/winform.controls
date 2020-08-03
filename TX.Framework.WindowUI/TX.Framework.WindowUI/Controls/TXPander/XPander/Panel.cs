@@ -2,16 +2,16 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Data;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using TX.Framework.WindowUI.Properties;
-using System.Diagnostics;
 
-namespace TX.Framework.WindowUI.Controls
-{
+using TX.Framework.WindowUI.Properties;
+
+namespace TX.Framework.WindowUI.Controls {
     #region Class Panel
     /// <summary>
     /// Used to group collections of controls. 
@@ -28,11 +28,10 @@ namespace TX.Framework.WindowUI.Controls
     /// REMAINS UNCHANGED.
     /// </copyright>
     [Designer(typeof(PanelDesigner)),
-    DesignTimeVisibleAttribute(true)]
+     DesignTimeVisibleAttribute(true)]
     [DefaultEvent("CloseClick")]
     [ToolboxBitmap(typeof(System.Windows.Forms.Panel))]
-    public partial class Panel : BasePanel
-    {
+    public partial class Panel : BasePanel {
         #region FieldsPrivate
 
         private Rectangle m_restoreBounds;
@@ -55,8 +54,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <value>The associated <see cref="Splitter"/></value>
         [Description("The associated Splitter.")]
         [Category("Behavior")]
-        public virtual System.Windows.Forms.Splitter AssociatedSplitter
-        {
+        public virtual System.Windows.Forms.Splitter AssociatedSplitter {
             get { return this.m_associatedSplitter; }
             set { this.m_associatedSplitter = value; }
         }
@@ -66,8 +64,7 @@ namespace TX.Framework.WindowUI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Description("The custom colors which are used for the panel.")]
         [Category("Appearance")]
-        public CustomPanelColors CustomColors
-        {
+        public CustomPanelColors CustomColors {
             get { return this.m_customColors; }
         }
         /// <summary>
@@ -75,14 +72,11 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override bool Expand
-        {
-            get
-            {
+        public override bool Expand {
+            get {
                 return base.Expand;
             }
-            set
-            {
+            set {
                 base.Expand = value;
             }
         }
@@ -90,15 +84,12 @@ namespace TX.Framework.WindowUI.Controls
         /// LinearGradientMode of the panels background
         /// </summary>
         [Description("LinearGradientMode of the Panels background"),
-        DefaultValue(1),
-        Category("Appearance")]
-        public LinearGradientMode LinearGradientMode
-        {
+         DefaultValue(1),
+         Category("Appearance")]
+        public LinearGradientMode LinearGradientMode {
             get { return this.m_linearGradientMode; }
-            set
-            {
-                if (value.Equals(this.m_linearGradientMode) == false)
-                {
+            set {
+                if (value.Equals(this.m_linearGradientMode) == false) {
                     this.m_linearGradientMode = value;
                     this.Invalidate(false);
                 }
@@ -119,13 +110,10 @@ namespace TX.Framework.WindowUI.Controls
         [Description("A value indicating whether the panels captionbar is displayed.")]
         [DefaultValue(true)]
         [Category("Behavior")]
-        public bool ShowCaptionbar
-        {
+        public bool ShowCaptionbar {
             get { return this.m_bShowCaptionbar; }
-            set
-            {
-                if (value.Equals(this.m_bShowCaptionbar) == false)
-                {
+            set {
+                if (value.Equals(this.m_bShowCaptionbar) == false) {
                     this.m_bShowCaptionbar = value;
                     this.Invalidate(true);
                 }
@@ -137,13 +125,10 @@ namespace TX.Framework.WindowUI.Controls
         [Description("Gets or sets a value indicating whether the controls background is transparent")]
         [DefaultValue(true)]
         [Category("Behavior")]
-        public bool ShowTransparentBackground
-        {
+        public bool ShowTransparentBackground {
             get { return this.m_bShowTransparentBackground; }
-            set
-            {
-                if (value.Equals(this.m_bShowTransparentBackground) == false)
-                {
+            set {
+                if (value.Equals(this.m_bShowTransparentBackground) == false) {
                     this.m_bShowTransparentBackground = value;
                     this.Invalidate(false);
                 }
@@ -155,13 +140,10 @@ namespace TX.Framework.WindowUI.Controls
         [Description("Gets or sets a value indicating whether the controls caption professional colorscheme is the same then the XPanderPanels")]
         [DefaultValue(false)]
         [Category("Behavior")]
-        public bool ShowXPanderPanelProfessionalStyle
-        {
+        public bool ShowXPanderPanelProfessionalStyle {
             get { return this.m_bShowXPanderPanelProfessionalStyle; }
-            set
-            {
-                if (value.Equals(this.m_bShowXPanderPanelProfessionalStyle) == false)
-                {
+            set {
+                if (value.Equals(this.m_bShowXPanderPanelProfessionalStyle) == false) {
                     this.m_bShowXPanderPanelProfessionalStyle = value;
                     this.Invalidate(false);
                 }
@@ -174,8 +156,7 @@ namespace TX.Framework.WindowUI.Controls
         /// A Rect that specifies the size and location of a panel before being either collapsed
         /// </remarks>
         [Browsable(false)]
-        public Rectangle RestoreBounds
-        {
+        public Rectangle RestoreBounds {
             get { return this.m_restoreBounds; }
         }
         #endregion
@@ -184,11 +165,10 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Initializes a new instance of the Panel class.
         /// </summary>
-        public Panel()
-        {
+        public Panel() {
             InitializeComponent();
 
-            this.CaptionFont = new Font("ËÎÌå", 9.5F);
+            this.CaptionFont = new Font("ï¿½ï¿½ï¿½ï¿½", 9.5F);
             this.BackColor = Color.Transparent;
             this.ForeColor = SystemColors.ControlText;
             this.ShowTransparentBackground = true;
@@ -206,8 +186,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Sets the PanelProperties for the Panel
         /// </summary>
         /// <param name="panelColors">The PanelColors table</param>
-        public override void SetPanelProperties(PanelColors panelColors)
-        {
+        public override void SetPanelProperties(PanelColors panelColors) {
             this.m_imgHoverBackground = null;
             base.SetPanelProperties(panelColors);
         }
@@ -215,10 +194,8 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the rectangle that represents the display area of the Panel.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override Rectangle DisplayRectangle
-        {
-            get
-            {
+        public override Rectangle DisplayRectangle {
+            get {
                 Padding padding = this.Padding;
                 Rectangle displayRectangle = new Rectangle(
                     this.ClientRectangle.Left + padding.Left,
@@ -226,21 +203,17 @@ namespace TX.Framework.WindowUI.Controls
                     this.ClientRectangle.Width - padding.Left - padding.Right,
                     this.ClientRectangle.Height - padding.Top - padding.Bottom);
 
-                if (this.m_bShowCaptionbar == true)
-                {
-                    if (this.Controls.Count > 0)
-                    {
+                if (this.m_bShowCaptionbar == true) {
+                    if (this.Controls.Count > 0) {
                         XPanderPanelList xpanderPanelList = this.Controls[0] as XPanderPanelList;
-                        if ((xpanderPanelList != null) && (xpanderPanelList.Dock == DockStyle.Fill))
-                        {
+                        if ((xpanderPanelList != null) && (xpanderPanelList.Dock == DockStyle.Fill)) {
                             displayRectangle = new Rectangle(
                                 padding.Left,
                                 this.CaptionHeight + padding.Top + Constants.BorderThickness,
                                 this.ClientRectangle.Width - padding.Left - padding.Right,
                                 this.ClientRectangle.Height - this.CaptionHeight - padding.Top - padding.Bottom - (2 * Constants.BorderThickness));
                         }
-                        else
-                        {
+                        else {
                             displayRectangle = new Rectangle(
                                 padding.Left + Constants.BorderThickness,
                                 this.CaptionHeight + padding.Top + Constants.BorderThickness,
@@ -260,8 +233,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected override void OnExpandClick(object sender, EventArgs e)
-        {
+        protected override void OnExpandClick(object sender, EventArgs e) {
             this.Expand = !this.Expand;
             base.OnExpandClick(sender, e);
         }
@@ -270,8 +242,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A HoverStateChangeEventArgs that contains the event data.</param>
-        protected override void OnExpandIconHoverStateChanged(object sender, HoverStateChangeEventArgs e)
-        {
+        protected override void OnExpandIconHoverStateChanged(object sender, HoverStateChangeEventArgs e) {
             Invalidate(this.RectangleExpandIcon);
             base.OnExpandIconHoverStateChanged(sender, e);
         }
@@ -280,8 +251,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A HoverStateChangeEventArgs that contains the event data.</param>
-        protected override void OnCloseIconHoverStateChanged(object sender, HoverStateChangeEventArgs e)
-        {
+        protected override void OnCloseIconHoverStateChanged(object sender, HoverStateChangeEventArgs e) {
             Invalidate(this.RectangleCloseIcon);
             base.OnCloseIconHoverStateChanged(sender, e);
         }
@@ -289,18 +259,14 @@ namespace TX.Framework.WindowUI.Controls
         /// Paints the background of the control.
         /// </summary>
         /// <param name="pevent">A PaintEventArgs that contains information about the control to paint.</param>
-        protected override void OnPaintBackground(PaintEventArgs pevent)
-        {
+        protected override void OnPaintBackground(PaintEventArgs pevent) {
             base.OnPaintBackground(pevent);
-            if (this.ShowTransparentBackground == true)
-            {
+            if (this.ShowTransparentBackground == true) {
                 this.BackColor = Color.Transparent;
             }
-            else
-            {
+            else {
                 Rectangle rectangleBounds = this.ClientRectangle;
-                if (this.m_bShowCaptionbar == true)
-                {
+                if (this.m_bShowCaptionbar == true) {
                     this.BackColor = Color.Transparent;
                     rectangleBounds = new Rectangle(
                         this.ClientRectangle.Left,
@@ -320,19 +286,15 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the Paint event.
         /// </summary>
         /// <param name="e">A PaintEventArgs that contains the event data.</param>
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             PanelStyle panelStyle = this.PanelStyle;
-            if (this.m_bShowCaptionbar == false)
-            {
+            if (this.m_bShowCaptionbar == false) {
                 return;
             }
 
-            using (UseAntiAlias antiAlias = new UseAntiAlias(e.Graphics))
-            {
+            using (UseAntiAlias antiAlias = new UseAntiAlias(e.Graphics)) {
                 Graphics graphics = e.Graphics;
-                using (UseClearTypeGridFit clearTypeGridFit = new UseClearTypeGridFit(graphics))
-                {
+                using (UseClearTypeGridFit clearTypeGridFit = new UseClearTypeGridFit(graphics)) {
                     Rectangle captionRectangle = this.CaptionRectangle;
                     Color colorGradientBegin = this.PanelColors.PanelCaptionGradientBegin;
                     Color colorGradientEnd = this.PanelColors.PanelCaptionGradientEnd;
@@ -341,10 +303,9 @@ namespace TX.Framework.WindowUI.Controls
                     bool bShowXPanderPanelProfessionalStyle = this.ShowXPanderPanelProfessionalStyle;
                     ColorScheme colorSchema = this.ColorScheme;
 
-                    if ((bShowXPanderPanelProfessionalStyle == true)
-                        && (colorSchema == ColorScheme.Professional)
-                        && (panelStyle != PanelStyle.Office2007))
-                    {
+                    if ((bShowXPanderPanelProfessionalStyle == true) &&
+                        (colorSchema == ColorScheme.Professional) &&
+                        (panelStyle != PanelStyle.Office2007)) {
                         colorGradientBegin = this.PanelColors.XPanderPanelCaptionGradientBegin;
                         colorGradientEnd = this.PanelColors.XPanderPanelCaptionGradientEnd;
                         colorGradientMiddle = this.PanelColors.XPanderPanelCaptionGradientMiddle;
@@ -358,20 +319,17 @@ namespace TX.Framework.WindowUI.Controls
                     string strText = this.Text;
                     DockStyle dockStyle = this.Dock;
                     bool bExpand = this.Expand;
-                    if (this.m_imageClosePanel == null)
-                    {
+                    if (this.m_imageClosePanel == null) {
                         this.m_imageClosePanel = Resources.closePanel;
                     }
                     Color colorCloseIcon = this.PanelColors.PanelCaptionCloseIcon;
-                    if (colorCloseIcon == Color.Empty)
-                    {
+                    if (colorCloseIcon == Color.Empty) {
                         colorCloseIcon = colorText;
                     }
                     bool bShowExpandIcon = this.ShowExpandIcon;
                     bool bShowCloseIcon = this.ShowCloseIcon;
 
-                    switch (panelStyle)
-                    {
+                    switch (panelStyle) {
                         case TX.Framework.WindowUI.Controls.PanelStyle.Default:
                         case PanelStyle.Office2007:
                             DrawStyleDefault(graphics,
@@ -390,8 +348,7 @@ namespace TX.Framework.WindowUI.Controls
                         this.PanelColors.InnerBorderColor);
 
                     if ((dockStyle == DockStyle.Fill) || (dockStyle == DockStyle.None) ||
-                        ((bShowExpandIcon == false) && (bShowCloseIcon == false)))
-                    {
+                        ((bShowExpandIcon == false) && (bShowCloseIcon == false))) {
                         DrawImagesAndText(
                             graphics,
                             captionRectangle,
@@ -405,8 +362,7 @@ namespace TX.Framework.WindowUI.Controls
 
                         return;
                     }
-                    if ((bShowExpandIcon == true) || (bShowCloseIcon == true))
-                    {
+                    if ((bShowExpandIcon == true) || (bShowCloseIcon == true)) {
                         Image imageExpandPanel = GetExpandImage(dockStyle, bExpand);
 
                         DrawImagesAndText(
@@ -432,30 +388,24 @@ namespace TX.Framework.WindowUI.Controls
                             this.PanelColors.PanelCollapsedCaptionText,
                             strText);
 
-                        if (this.m_imgHoverBackground == null)
-                        {
+                        if (this.m_imgHoverBackground == null) {
                             this.m_imgHoverBackground = GetPanelIconBackground(
                                 graphics,
                                 this.ImageRectangle,
                                 this.PanelColors.PanelCaptionSelectedGradientBegin,
                                 this.PanelColors.PanelCaptionSelectedGradientEnd);
                         }
-                        if (this.m_imgHoverBackground != null)
-                        {
+                        if (this.m_imgHoverBackground != null) {
                             Rectangle rectangleCloseIcon = this.RectangleCloseIcon;
-                            if (rectangleCloseIcon != Rectangle.Empty)
-                            {
-                                if (this.HoverStateCloseIcon == HoverState.Hover)
-                                {
+                            if (rectangleCloseIcon != Rectangle.Empty) {
+                                if (this.HoverStateCloseIcon == HoverState.Hover) {
                                     graphics.DrawImage(this.m_imgHoverBackground, rectangleCloseIcon);
                                     DrawIcon(graphics, this.m_imageClosePanel, rectangleCloseIcon, colorCloseIcon, rectangleCloseIcon.Y);
                                 }
                             }
                             Rectangle rectangleExpandIcon = this.RectangleExpandIcon;
-                            if (rectangleExpandIcon != Rectangle.Empty)
-                            {
-                                if (this.HoverStateExpandIcon == HoverState.Hover)
-                                {
+                            if (rectangleExpandIcon != Rectangle.Empty) {
+                                if (this.HoverStateExpandIcon == HoverState.Hover) {
                                     graphics.DrawImage(this.m_imgHoverBackground, rectangleExpandIcon);
                                     DrawIcon(graphics, imageExpandPanel, rectangleExpandIcon, colorText, rectangleExpandIcon.Y);
                                 }
@@ -470,29 +420,22 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A XPanderStateChangeEventArgs that contains the event data.</param>
-        protected override void OnPanelCollapsing(object sender, XPanderStateChangeEventArgs e)
-        {
-            if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right))
-            {
-                foreach (Control control in this.Controls)
-                {
+        protected override void OnPanelCollapsing(object sender, XPanderStateChangeEventArgs e) {
+            if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right)) {
+                foreach (Control control in this.Controls) {
                     control.Hide();
                 }
             }
 
-            if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right))
-            {
-                if (this.ClientRectangle.Width > this.CaptionHeight)
-                {
+            if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right)) {
+                if (this.ClientRectangle.Width > this.CaptionHeight) {
                     this.m_restoreBounds = this.ClientRectangle;
                 }
                 this.Width = this.CaptionHeight;
             }
 
-            if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom))
-            {
-                if (this.ClientRectangle.Height > this.CaptionHeight)
-                {
+            if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom)) {
+                if (this.ClientRectangle.Height > this.CaptionHeight) {
                     this.m_restoreBounds = this.ClientRectangle;
                 }
                 this.Height = this.CaptionHeight;
@@ -505,23 +448,18 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A XPanderStateChangeEventArgs that contains the event data.</param>
-        protected override void OnPanelExpanding(object sender, XPanderStateChangeEventArgs e)
-        {
-            if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right))
-            {
-                foreach (Control control in this.Controls)
-                {
+        protected override void OnPanelExpanding(object sender, XPanderStateChangeEventArgs e) {
+            if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right)) {
+                foreach (Control control in this.Controls) {
                     control.Show();
                 }
                 //When ClientRectangle.Width > CaptionHeight the panel size has changed
                 //otherwise the captionclick event was executed
-                if (this.ClientRectangle.Width == this.CaptionHeight)
-                {
+                if (this.ClientRectangle.Width == this.CaptionHeight) {
                     this.Width = this.m_restoreBounds.Width;
                 }
             }
-            if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom))
-            {
+            if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom)) {
                 this.Height = this.m_restoreBounds.Height;
             }
 
@@ -532,17 +470,14 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A EventArgs that contains the event data.</param>
-        protected override void OnPanelStyleChanged(object sender, PanelStyleChangeEventArgs e)
-        {
+        protected override void OnPanelStyleChanged(object sender, PanelStyleChangeEventArgs e) {
             OnLayout(new LayoutEventArgs(this, null));
             base.OnPanelStyleChanged(sender, e);
-
         }
         /// <summary>
         /// Raises the CreateControl method.
         /// </summary>
-        protected override void OnCreateControl()
-        {
+        protected override void OnCreateControl() {
             this.m_restoreBounds = this.ClientRectangle;
             this.MinimumSize = new Size(this.CaptionHeight, this.CaptionHeight);
             base.OnCreateControl();
@@ -551,40 +486,28 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the Resize event.
         /// </summary>
         /// <param name="e">An EventArgs that contains the event data.</param>
-        protected override void OnResize(EventArgs e)
-        {
-            if (this.ShowExpandIcon == true)
-            {
-                if (this.Expand == false)
-                {
-                    if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right))
-                    {
-                        if (this.Width > this.CaptionHeight)
-                        {
+        protected override void OnResize(EventArgs e) {
+            if (this.ShowExpandIcon == true) {
+                if (this.Expand == false) {
+                    if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right)) {
+                        if (this.Width > this.CaptionHeight) {
                             this.Expand = true;
                         }
                     }
-                    if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom))
-                    {
-                        if (this.Height > this.CaptionHeight)
-                        {
+                    if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom)) {
+                        if (this.Height > this.CaptionHeight) {
                             this.Expand = true;
                         }
                     }
                 }
-                else
-                {
-                    if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right))
-                    {
-                        if (this.Width == this.CaptionHeight)
-                        {
+                else {
+                    if ((this.Dock == DockStyle.Left) || (this.Dock == DockStyle.Right)) {
+                        if (this.Width == this.CaptionHeight) {
                             this.Expand = false;
                         }
                     }
-                    if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom))
-                    {
-                        if (this.Height == this.CaptionHeight)
-                        {
+                    if ((this.Dock == DockStyle.Top) || (this.Dock == DockStyle.Bottom)) {
+                        if (this.Height == this.CaptionHeight) {
                             this.Expand = false;
                         }
                     }
@@ -596,11 +519,9 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the <see cref="Control.VisibleChanged"/>VisibleChanged event.
         /// </summary>
         /// <param name="e">An <see cref="System.EventArgs"/> that contains the event data.</param>
-        protected override void OnVisibleChanged(EventArgs e)
-        {
+        protected override void OnVisibleChanged(EventArgs e) {
             System.Windows.Forms.Splitter associatedSplitter = this.AssociatedSplitter;
-            if (associatedSplitter != null)
-            {
+            if (associatedSplitter != null) {
                 associatedSplitter.Visible = this.Visible;
             }
             base.OnVisibleChanged(e);
@@ -612,18 +533,12 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the background for an panelicon image
         /// </summary>
         /// <param name="graphics">The Graphics to draw on.</param>
-        /// <param name="rectanglePanelIcon"></param>
-        /// <param name="backgroundColorBegin"></param>
-        /// <param name="backgroundColorEnd"></param>
-        /// <returns></returns>
-        private static Image GetPanelIconBackground(Graphics graphics, Rectangle rectanglePanelIcon, Color backgroundColorBegin, Color backgroundColorEnd)
-        {
+        private static Image GetPanelIconBackground(Graphics graphics, Rectangle rectanglePanelIcon, Color backgroundColorBegin, Color backgroundColorEnd) {
             Rectangle rectangle = rectanglePanelIcon;
             rectangle.X = 0;
             rectangle.Y = 0;
             Image image = new Bitmap(rectanglePanelIcon.Width, rectanglePanelIcon.Height, graphics);
-            using (Graphics imageGraphics = Graphics.FromImage(image))
-            {
+            using (Graphics imageGraphics = Graphics.FromImage(image)) {
                 RenderBackgroundGradient(
                     imageGraphics,
                     rectangle,
@@ -638,8 +553,7 @@ namespace TX.Framework.WindowUI.Controls
             Rectangle captionRectangle,
             Color colorGradientBegin,
             Color colorGradientEnd,
-            Color colorGradientMiddle)
-        {
+            Color colorGradientMiddle) {
             RenderDoubleBackgroundGradient(
                 graphics,
                 captionRectangle,
@@ -655,10 +569,8 @@ namespace TX.Framework.WindowUI.Controls
             Rectangle panelRectangle,
             Rectangle captionRectangle,
             Color borderColor,
-            Color innerBorderColor)
-        {
-            using (Pen borderPen = new Pen(borderColor))
-            {
+            Color innerBorderColor) {
+            using (Pen borderPen = new Pen(borderColor)) {
                 // Draws the innerborder around the captionbar
                 Rectangle innerBorderRectangle = captionRectangle;
                 innerBorderRectangle.Width -= Constants.BorderThickness;
@@ -684,8 +596,7 @@ namespace TX.Framework.WindowUI.Controls
                     captionRectangle.Width,
                     captionRectangle.Y + captionRectangle.Height);
 
-                if (panelRectangle.Height == captionRectangle.Height)
-                {
+                if (panelRectangle.Height == captionRectangle.Height) {
                     return;
                 }
 
@@ -694,50 +605,40 @@ namespace TX.Framework.WindowUI.Controls
                 panelBorderRectangle.Y = captionRectangle.Height;
                 panelBorderRectangle.Height -= captionRectangle.Height + (int)borderPen.Width;
                 panelBorderRectangle.Width -= (int)borderPen.Width;
-                Point[] points =
-                    {
-                        new Point(panelBorderRectangle.X, panelBorderRectangle.Y),
-                        new Point(panelBorderRectangle.X, panelBorderRectangle.Y + panelBorderRectangle.Height),
-                        new Point(panelBorderRectangle.X + panelBorderRectangle.Width ,panelBorderRectangle.Y + panelBorderRectangle.Height),
-                        new Point(panelBorderRectangle.X + panelBorderRectangle.Width ,panelBorderRectangle.Y)
-                    };
+                Point[] points = {
+                    new Point(panelBorderRectangle.X, panelBorderRectangle.Y),
+                    new Point(panelBorderRectangle.X, panelBorderRectangle.Y + panelBorderRectangle.Height),
+                    new Point(panelBorderRectangle.X + panelBorderRectangle.Width, panelBorderRectangle.Y + panelBorderRectangle.Height),
+                    new Point(panelBorderRectangle.X + panelBorderRectangle.Width, panelBorderRectangle.Y)
+                };
                 graphics.DrawLines(borderPen, points);
             }
         }
 
-        private static Image GetExpandImage(DockStyle dockStyle, bool bIsExpanded)
-        {
+        private static Image GetExpandImage(DockStyle dockStyle, bool bIsExpanded) {
             Image image = null;
-            if ((dockStyle == DockStyle.Left) && (bIsExpanded == true))
-            {
+            if ((dockStyle == DockStyle.Left) && (bIsExpanded == true)) {
                 image = Resources.ChevronLeft;
             }
-            else if ((dockStyle == DockStyle.Left) && (bIsExpanded == false))
-            {
+            else if ((dockStyle == DockStyle.Left) && (bIsExpanded == false)) {
                 image = Resources.ChevronRight;
             }
-            else if ((dockStyle == DockStyle.Right) && (bIsExpanded == true))
-            {
+            else if ((dockStyle == DockStyle.Right) && (bIsExpanded == true)) {
                 image = Resources.ChevronRight;
             }
-            else if ((dockStyle == DockStyle.Right) && (bIsExpanded == false))
-            {
+            else if ((dockStyle == DockStyle.Right) && (bIsExpanded == false)) {
                 image = Resources.ChevronLeft;
             }
-            else if ((dockStyle == DockStyle.Top) && (bIsExpanded == true))
-            {
+            else if ((dockStyle == DockStyle.Top) && (bIsExpanded == true)) {
                 image = Resources.ChevronUp;
             }
-            else if ((dockStyle == DockStyle.Top) && (bIsExpanded == false))
-            {
+            else if ((dockStyle == DockStyle.Top) && (bIsExpanded == false)) {
                 image = Resources.ChevronDown;
             }
-            else if ((dockStyle == DockStyle.Bottom) && (bIsExpanded == true))
-            {
+            else if ((dockStyle == DockStyle.Bottom) && (bIsExpanded == true)) {
                 image = Resources.ChevronDown;
             }
-            else if ((dockStyle == DockStyle.Bottom) && (bIsExpanded == false))
-            {
+            else if ((dockStyle == DockStyle.Bottom) && (bIsExpanded == false)) {
                 image = Resources.ChevronUp;
             }
 
@@ -745,7 +646,6 @@ namespace TX.Framework.WindowUI.Controls
         }
 
         #endregion
-
     }
 
     #endregion
@@ -754,8 +654,7 @@ namespace TX.Framework.WindowUI.Controls
     /// <summary>
     /// Extends the design mode behavior of a Panel control that supports nested controls.
     /// </summary>
-    internal class PanelDesigner : System.Windows.Forms.Design.ParentControlDesigner
-    {
+    internal class PanelDesigner : System.Windows.Forms.Design.ParentControlDesigner {
         #region FieldsPrivate
         #endregion
 
@@ -763,24 +662,18 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Initializes a new instance of the PanelDesigner class.
         /// </summary>
-        public PanelDesigner()
-        {
-        }
+        public PanelDesigner() { }
         /// <summary>
         /// Initializes the designer with the specified component.
         /// </summary>
-        /// <param name="component"></param>
-        public override void Initialize(System.ComponentModel.IComponent component)
-        {
+        public override void Initialize(System.ComponentModel.IComponent component) {
             base.Initialize(component);
         }
         /// <summary>
         /// Gets the design-time action lists supported by the component associated with the designer.
         /// </summary>
-        public override DesignerActionListCollection ActionLists
-        {
-            get
-            {
+        public override DesignerActionListCollection ActionLists {
+            get {
                 // Create action list collection
                 DesignerActionListCollection actionLists = new DesignerActionListCollection();
 
@@ -801,8 +694,7 @@ namespace TX.Framework.WindowUI.Controls
         /// top of the control.
         /// </summary>
         /// <param name="e">A PaintEventArgs that provides data for the event.</param>
-        protected override void OnPaintAdornments(PaintEventArgs e)
-        {
+        protected override void OnPaintAdornments(PaintEventArgs e) {
             base.OnPaintAdornments(e);
         }
 
@@ -815,62 +707,54 @@ namespace TX.Framework.WindowUI.Controls
     /// <summary>
     /// Provides the class for types that define a list of items used to create a smart tag panel for the Panel.
     /// </summary>
-    public class PanelDesignerActionList : DesignerActionList
-    {
+    public class PanelDesignerActionList : DesignerActionList {
         #region Properties
         /// <summary>
         /// Gets or sets a value indicating whether the panels captionbar is displayed.
         /// </summary>
-        public bool ShowCaptionbar
-        {
+        public bool ShowCaptionbar {
             get { return this.Panel.ShowCaptionbar; }
             set { SetProperty("ShowCaptionbar", value); }
         }
         /// <summary>
         /// Gets or sets a value indicating whether the controls background is transparent.
         /// </summary>
-        public bool ShowTransparentBackground
-        {
+        public bool ShowTransparentBackground {
             get { return this.Panel.ShowTransparentBackground; }
             set { SetProperty("ShowTransparentBackground", value); }
         }
         /// <summary>
         /// Gets or sets a value indicating whether the controls caption professional colorscheme is the same then the XPanderPanels
         /// </summary>
-        public bool ShowXPanderPanelProfessionalStyle
-        {
+        public bool ShowXPanderPanelProfessionalStyle {
             get { return this.Panel.ShowXPanderPanelProfessionalStyle; }
             set { SetProperty("ShowXPanderPanelProfessionalStyle", value); }
         }
         /// <summary>
         /// Gets or sets a value indicating whether the expand icon of the panel is visible
         /// </summary>
-        public bool ShowExpandIcon
-        {
+        public bool ShowExpandIcon {
             get { return this.Panel.ShowExpandIcon; }
             set { SetProperty("ShowExpandIcon", value); }
         }
         /// <summary>
         /// Gets or sets a value indicating whether the close icon is visible
         /// </summary>
-        public bool ShowCloseIcon
-        {
+        public bool ShowCloseIcon {
             get { return this.Panel.ShowCloseIcon; }
             set { SetProperty("ShowCloseIcon", value); }
         }
         /// <summary>
         /// Gets or sets the style of the panel.
         /// </summary>
-        public PanelStyle PanelStyle
-        {
+        public PanelStyle PanelStyle {
             get { return this.Panel.PanelStyle; }
             set { SetProperty("PanelStyle", value); }
         }
         /// <summary>
         /// Gets or sets the color schema which is used for the panel.
         /// </summary>
-        public ColorScheme ColorScheme
-        {
+        public ColorScheme ColorScheme {
             get { return this.Panel.ColorScheme; }
             set { SetProperty("ColorScheme", value); }
         }
@@ -882,8 +766,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="component">A component related to the DesignerActionList.</param>
         public PanelDesignerActionList(System.ComponentModel.IComponent component)
-            : base(component)
-        {
+            : base(component) {
             // Automatically display smart tag panel when
             // design-time component is dropped onto the
             // Windows Forms Designer
@@ -893,77 +776,73 @@ namespace TX.Framework.WindowUI.Controls
         /// Returns the collection of DesignerActionItem objects contained in the list.
         /// </summary>
         /// <returns> A DesignerActionItem array that contains the items in this list.</returns>
-        public override DesignerActionItemCollection GetSortedActionItems()
-        {
+        public override DesignerActionItemCollection GetSortedActionItems() {
             // Create list to store designer action items
             DesignerActionItemCollection actionItems = new DesignerActionItemCollection();
 
             actionItems.Add(
-              new DesignerActionMethodItem(
-                this,
-                "ToggleDockStyle",
-                GetDockStyleText(),
-                "Design",
-                "Dock or undock this control in it's parent container.",
-                true));
+                new DesignerActionMethodItem(
+                    this,
+                    "ToggleDockStyle",
+                    GetDockStyleText(),
+                    "Design",
+                    "Dock or undock this control in it's parent container.",
+                    true));
 
             actionItems.Add(
                 new DesignerActionPropertyItem(
-                "ShowTransparentBackground",
-                "Show transparent backcolor",
-                GetCategory(this.Panel, "ShowTransparentBackground")));
+                    "ShowTransparentBackground",
+                    "Show transparent backcolor",
+                    GetCategory(this.Panel, "ShowTransparentBackground")));
 
             actionItems.Add(
                 new DesignerActionPropertyItem(
-                "ShowXPanderPanelProfessionalStyle",
-                "Show the XPanderPanels professional colorscheme",
-                GetCategory(this.Panel, "ShowXPanderPanelProfessionalStyle")));
+                    "ShowXPanderPanelProfessionalStyle",
+                    "Show the XPanderPanels professional colorscheme",
+                    GetCategory(this.Panel, "ShowXPanderPanelProfessionalStyle")));
 
             actionItems.Add(
                 new DesignerActionPropertyItem(
-                "ShowCaptionbar",
-                "Show the captionbar on top of the panel",
-                GetCategory(this.Panel, "ShowCaptionbar")));
+                    "ShowCaptionbar",
+                    "Show the captionbar on top of the panel",
+                    GetCategory(this.Panel, "ShowCaptionbar")));
 
             actionItems.Add(
                 new DesignerActionPropertyItem(
-                "ShowExpandIcon",
-                "Show the expand panel icon (not at DockStyle.None or DockStyle.Fill)",
-                GetCategory(this.Panel, "ShowExpandIcon")));
+                    "ShowExpandIcon",
+                    "Show the expand panel icon (not at DockStyle.None or DockStyle.Fill)",
+                    GetCategory(this.Panel, "ShowExpandIcon")));
 
             actionItems.Add(
                 new DesignerActionPropertyItem(
-                "ShowCloseIcon",
-                "Show the close panel icon (not at DockStyle.None or DockStyle.Fill)",
-                GetCategory(this.Panel, "ShowCloseIcon")));
+                    "ShowCloseIcon",
+                    "Show the close panel icon (not at DockStyle.None or DockStyle.Fill)",
+                    GetCategory(this.Panel, "ShowCloseIcon")));
 
             actionItems.Add(
                 new DesignerActionPropertyItem(
-                "PanelStyle",
-                "Select PanelStyle",
-                GetCategory(this.Panel, "PanelStyle")));
+                    "PanelStyle",
+                    "Select PanelStyle",
+                    GetCategory(this.Panel, "PanelStyle")));
 
             actionItems.Add(
-               new DesignerActionPropertyItem(
-               "ColorScheme",
-               "Select ColorScheme",
-               GetCategory(this.Panel, "ColorScheme")));
+                new DesignerActionPropertyItem(
+                    "ColorScheme",
+                    "Select ColorScheme",
+                    GetCategory(this.Panel, "ColorScheme")));
 
             return actionItems;
         }
         /// <summary>
         /// Dock/Undock designer action method implementation
         /// </summary>
-        public void ToggleDockStyle()
-        {
+        public void ToggleDockStyle() {
 
             // Toggle ClockControl's Dock property
-            if (this.Panel.Dock != DockStyle.Fill)
-            {
+            if (this.Panel.Dock != DockStyle.Fill) {
                 SetProperty("Dock", DockStyle.Fill);
             }
-            else
-            {
+            else {
                 SetProperty("Dock", DockStyle.None);
             }
         }
@@ -976,29 +855,23 @@ namespace TX.Framework.WindowUI.Controls
         // display name for the Dock/Undock property,
         // based on the ClockControl's current Dock 
         // property value
-        private string GetDockStyleText()
-        {
-            if (this.Panel.Dock == DockStyle.Fill)
-            {
+        private string GetDockStyleText() {
+            if (this.Panel.Dock == DockStyle.Fill) {
                 return "Undock in parent container";
             }
-            else
-            {
+            else {
                 return "Dock in parent container";
             }
         }
 
-        private Panel Panel
-        {
+        private Panel Panel {
             get { return (Panel)this.Component; }
         }
 
-        // Helper method to safely set a component’s property
-        private void SetProperty(string propertyName, object value)
-        {
+        // Helper method to safely set a componentï¿½s property
+        private void SetProperty(string propertyName, object value) {
             // Get property
-            System.ComponentModel.PropertyDescriptor property
-                = System.ComponentModel.TypeDescriptor.GetProperties(this.Panel)[propertyName];
+            System.ComponentModel.PropertyDescriptor property = System.ComponentModel.TypeDescriptor.GetProperties(this.Panel)[propertyName];
             // Set property value
             property.SetValue(this.Panel, value);
         }
@@ -1006,11 +879,12 @@ namespace TX.Framework.WindowUI.Controls
         // Helper method to return the Category string from a
         // CategoryAttribute assigned to a property exposed by 
         //the specified object
-        private static string GetCategory(object source, string propertyName)
-        {
+        private static string GetCategory(object source, string propertyName) {
             System.Reflection.PropertyInfo property = source.GetType().GetProperty(propertyName);
             CategoryAttribute attribute = (CategoryAttribute)property.GetCustomAttributes(typeof(CategoryAttribute), false)[0];
-            if (attribute == null) return null;
+            if (attribute == null) {
+                return null;
+            }
             return attribute.Category;
         }
 
@@ -1018,5 +892,4 @@ namespace TX.Framework.WindowUI.Controls
     }
 
     #endregion
-
 }

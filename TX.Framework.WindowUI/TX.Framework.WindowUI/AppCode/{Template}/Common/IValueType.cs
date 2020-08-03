@@ -13,12 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public interface IValueType
-    {
+namespace System.Text.Template {
+    public interface IValueType {
         object Value { get; set; }
 
-        Type Type { get;set; }
+        Type Type { get; set; }
     }
 }

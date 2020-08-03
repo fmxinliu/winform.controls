@@ -1,39 +1,33 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     /// <summary>
     /// 可设置圆角的矩形区域
     /// </summary>
     /// User:Ryan  CreateTime:2011-07-19 9:52.
-    internal class RoundRectangle
-    {
+    internal class RoundRectangle {
         #region Initializes
 
         /// <summary>
         /// (构造函数).Initializes a new instance of the <see cref="RoundRectangle"/> class.
         /// </summary>
-        /// <param name="roundRect">The roundRect.</param>
+        /// <param name="rect">The roundRect.</param>
         /// <param name="radius">The radius.</param>
         /// User:Ryan  CreateTime:2011-07-19 16:59.
-        public RoundRectangle(Rectangle rect, int radius)
-            : this(rect, new CornerRadius(radius))
-        {
-        }
+        public RoundRectangle(Rectangle rect, int radius) : this(rect, new CornerRadius(radius)) { }
 
         /// <summary>
         /// (构造函数).Initializes a new instance of the <see cref="RoundRectangle"/> class.
         /// </summary>
-        /// <param name="roundRect">The roundRect.</param>
-        /// <param name="_CornerRadius">The corner radius.</param>
+        /// <param name="rect">The roundRect.</param>
+        /// <param name="cornerRadius">The corner radius.</param>
         /// User:Ryan  CreateTime:2011-07-19 16:59.
-        public RoundRectangle(Rectangle rect, CornerRadius cornerRadius)
-        {
+        public RoundRectangle(Rectangle rect, CornerRadius cornerRadius) {
             this.Rect = rect;
             this.CornerRadius = cornerRadius;
         }
@@ -67,8 +61,7 @@ namespace TX.Framework.WindowUI
         /// Return a data(or instance) of GraphicsPath.
         /// </returns>
         /// User:Ryan  CreateTime:2011-07-20 11:52.
-        public GraphicsPath ToGraphicsBezierPath()
-        {
+        public GraphicsPath ToGraphicsBezierPath() {
             GraphicsPath path = new GraphicsPath();
             int x = this.Rect.X;
             int y = this.Rect.Y;
@@ -89,10 +82,8 @@ namespace TX.Framework.WindowUI
         /// <summary>
         /// 获取该圆角矩形的GraphicsPath对象(圆角使用矩形圆弧曲线曲线实现)
         /// </summary>
-        /// <returns></returns>
         /// User:K.Anding  CreateTime:2011-7-31 23:25.
-        public GraphicsPath ToGraphicsArcPath()
-        {
+        public GraphicsPath ToGraphicsArcPath() {
             GraphicsPath path = new GraphicsPath();
             int x = this.Rect.X;
             int y = this.Rect.Y;
@@ -115,8 +106,7 @@ namespace TX.Framework.WindowUI
         /// Return a data(or instance) of GraphicsPath.
         /// </returns>
         /// User:Ryan  CreateTime:2011-07-20 11:52.
-        public GraphicsPath ToGraphicsAnglesWingPath()
-        {
+        public GraphicsPath ToGraphicsAnglesWingPath() {
             GraphicsPath path = new GraphicsPath();
             int x = this.Rect.X;
             int y = this.Rect.Y;

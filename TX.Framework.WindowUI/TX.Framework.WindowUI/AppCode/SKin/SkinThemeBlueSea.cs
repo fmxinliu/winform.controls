@@ -1,29 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     /// <summary>
     /// 主题色彩：面朝大海，春暖花开
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-7 22:17.
-    internal class SkinThemeBlueSea : SkinTheme
-    {
-        public SkinThemeBlueSea()
-            : base()
-        {
-        }
+    internal class SkinThemeBlueSea : SkinTheme {
+        public SkinThemeBlueSea() : base() { }
 
         /// <summary>
         /// 初始化主题色彩方案
         /// </summary>
         /// User:Ryan  CreateTime:2012-8-7 22:11.
         /// User:Ryan  CreateTime:2012-8-7 22:18.
-        public override void IniSkinTheme()
-        {
+        public override void IniSkinTheme() {
             this.ThemeStyle = EnumTheme.BlueSea;
             this.ThemeName = "面朝大海，春暖花开";
             this.BackGroundImage = Properties.Resources.bg06;

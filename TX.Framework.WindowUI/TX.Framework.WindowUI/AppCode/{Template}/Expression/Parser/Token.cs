@@ -13,109 +13,95 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    internal class Token
-    {
+namespace System.Text.Template {
+    internal class Token {
         private readonly TokenDefinition _tokenDefinition;
         private readonly string _text;
         internal int NumTerms = 0;
         private Token _alternate;
 
-        internal Token(TokenDefinition tokenDefinition, string text)
-        {
+        internal Token(TokenDefinition tokenDefinition, string text) {
             _text = text;
             _tokenDefinition = tokenDefinition;
 
-            switch (tokenDefinition.Type)
-            {
-                case TokenType.TernaryOperator: NumTerms = 3; break;
-                case TokenType.UnaryOperator: NumTerms = 1; break;
-                case TokenType.Operator: NumTerms = 2; break;
+            switch (tokenDefinition.Type) {
+                case TokenType.TernaryOperator:
+                    NumTerms = 3;
+                    break;
+                case TokenType.UnaryOperator:
+                    NumTerms = 1;
+                    break;
+                case TokenType.Operator:
+                    NumTerms = 2;
+                    break;
             }
 
             if (_tokenDefinition.Alternate != null)
                 _alternate = new Token(_tokenDefinition.Alternate, text);
         }
 
-        internal TokenType TokenType
-        {
+        internal TokenType TokenType {
             get { return _tokenDefinition.Type; }
         }
 
-        internal OperatorAssociativity Associativity
-        {
+        internal OperatorAssociativity Associativity {
             get { return _tokenDefinition.Associativity; }
         }
 
-        internal int Precedence
-        {
+        internal int Precedence {
             get { return _tokenDefinition.Precedence; }
         }
 
-        internal string Text
-        {
+        internal string Text {
             get { return _text; }
         }
 
-        internal TokenEvaluator TokenEvaluator
-        {
+        internal TokenEvaluator TokenEvaluator {
             get { return _tokenDefinition.Evaluator; }
         }
 
-        internal bool IsOperator
-        {
+        internal bool IsOperator {
             get { return (TokenType == TokenType.Operator) || (TokenType == TokenType.UnaryOperator); }
         }
 
-        internal bool IsTerm
-        {
+        internal bool IsTerm {
             get { return (TokenType == TokenType.Term); }
         }
 
-        internal bool IsUnary
-        {
+        internal bool IsUnary {
             get { return (TokenType == TokenType.UnaryOperator); }
         }
 
-        internal bool IsFunction
-        {
+        internal bool IsFunction {
             get { return (TokenType == TokenType.FunctionCall); }
         }
 
-        internal bool IsLeftParen
-        {
+        internal bool IsLeftParen {
             get { return (TokenType == TokenType.LeftParen); }
         }
 
-        internal bool IsRightParen
-        {
+        internal bool IsRightParen {
             get { return (TokenType == TokenType.RightParen); }
         }
 
-        internal bool IsArgumentSeparator
-        {
+        internal bool IsArgumentSeparator {
             get { return TokenType == TokenType.ArgumentSeparator; }
         }
 
-        public bool IsPartial
-        {
+        public bool IsPartial {
             get { return _tokenDefinition.IsPartial; }
         }
 
-        public Token Alternate
-        {
+        public Token Alternate {
             get { return _alternate; }
             set { _alternate = value; }
         }
 
-        public TokenDefinition Root
-        {
+        public TokenDefinition Root {
             get { return _tokenDefinition.Root; }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return _text;
         }
     }

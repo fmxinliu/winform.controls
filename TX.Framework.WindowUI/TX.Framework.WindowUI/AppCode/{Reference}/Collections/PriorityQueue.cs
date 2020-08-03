@@ -13,8 +13,7 @@ using System;
 using System.Collections;
 using System.Threading;
 
-namespace System.Collections
-{
+namespace System.Collections {
     /// <summary>
     /// <para>
     /// An implementation of System.Collections.Queue that supports
@@ -29,8 +28,7 @@ namespace System.Collections
     /// a priority.
     /// </para>
     /// </summary>
-    public sealed class PriorityQueue : System.Collections.Queue
-    {
+    public sealed class PriorityQueue : System.Collections.Queue {
         /// <summary>
         /// A predefined priority corresponding to the number 20
         /// </summary>
@@ -68,15 +66,13 @@ namespace System.Collections
         private int sublistCount = 0;
         private Sublist highestPrioritySublist = null;
 
-
         private int defaultPriority = 0;
         private Sublist defaultPrioritySublist = null;
 
         /// <summary>
         /// Constructs a new PriorityQueue instance.
         /// </summary>
-        public PriorityQueue()
-        {
+        public PriorityQueue() {
             peekWaitHeader = new WaitingThreadNode();
             peekWaitHeader.next = peekWaitHeader;
             peekWaitHeader.previous = peekWaitHeader;
@@ -88,8 +84,7 @@ namespace System.Collections
             waitNodeCacheHeader = new WaitingThreadNode();
 
             Sublist sublist;
-            for (int x = 0; x <= 20; x++)
-            {
+            for (int x = 0; x <= 20; x++) {
                 sublist = new Sublist();
                 sublist.priority = x;
                 sublistArray[x] = sublist;
@@ -105,46 +100,35 @@ namespace System.Collections
         /// a priority level.  This is required to support the Queue interface, and also
         /// allows use of a priority queue by code that knows nothing of priority levels
         /// </summary>
-        public int DefaultPriority
-        {
-            get
-            {
-                lock (monitor)
-                {
+        public int DefaultPriority {
+            get {
+                lock (monitor) {
                     return defaultPriority;
                 }
             }
-            set
-            {
-                lock (monitor)
-                {
-                    if (value < 0)
-                    {
+            set {
+                lock (monitor) {
+                    if (value < 0) {
                         throw new ArgumentException("Negative priorities are not allowed");
                     }
                     defaultPriority = value;
-                    if (defaultPriority > 20)
-                    {
+                    if (defaultPriority > 20) {
                         defaultPrioritySublist = GetSublist(defaultPriority);
                     }
-                    else
-                    {
+                    else {
                         defaultPrioritySublist = sublistArray[defaultPriority];
                     }
                 }
             }
         }
 
-        private Sublist GetSublist(int _priority)
-        {
-            Sublist sublist = (Sublist)sublistMap[_priority];
-            if (sublist == null)
-            {
+        private Sublist GetSublist(int _priority) {
+            Sublist sublist = (Sublist) sublistMap[_priority];
+            if (sublist == null) {
                 sublist = new Sublist();
                 sublist.priority = _priority;
                 sublistMap.Add(_priority, sublist);
-                if (sublistCount == sublistArray.Length)
-                {
+                if (sublistCount == sublistArray.Length) {
                     Sublist[] newSublistArray = new Sublist[sublistArray.Length * 2];
                     Array.Copy(sublistArray, 0, newSublistArray, 0, sublistArray.Length);
                     sublistArray = newSublistArray;
@@ -158,22 +142,16 @@ namespace System.Collections
         /// <summary>
         /// Removes all objects from the queue
         /// </summary>
-        public override void Clear()
-        {
-            lock (monitor)
-            {
-                if (count > 0)
-                {
+        public override void Clear() {
+            lock (monitor) {
+                if (count > 0) {
                     Sublist sublist;
-                    for (int x = 0; x < sublistCount; x++)
-                    {
+                    for (int x = 0; x < sublistCount; x++) {
                         sublist = sublistArray[x];
-                        if (sublist.count > 0)
-                        {
+                        if (sublist.count > 0) {
                             count -= sublist.count;
                             sublist.Clear();
-                            if (count == 0)
-                            {
+                            if (count == 0) {
                                 return;
                             }
                         }
@@ -187,29 +165,21 @@ namespace System.Collections
         /// (see the DefaultPriority property)
         /// </summary>
         /// <param name="_object">The object to add to the queue</param>
-        public override void Add(object _object)
-        {
-            lock (monitor)
-            {
-                if (!isOpen)
-                {
+        public override void Add(object _object) {
+            lock (monitor) {
+                if (!isOpen) {
                     throw new InvalidOperationException("This instance is closed, and cannot accept input");
                 }
-                else if ((!isNullAllowed) && (_object == null))
-                {
+                else if ((!isNullAllowed) && (_object == null)) {
                     throw new ArgumentNullException("This instance does not allow null input");
                 }
 
-                if (peekWaitCount > 0)
-                {
-                    lock (peekWaitHeader)
-                    {
-                        if (peekWaitCount > 0)
-                        {
+                if (peekWaitCount > 0) {
+                    lock (peekWaitHeader) {
+                        if (peekWaitCount > 0) {
                             WaitingThreadNode node;
                             node = peekWaitHeader.next;
-                            while (node != peekWaitHeader)
-                            {
+                            while (node != peekWaitHeader) {
                                 node.valueReturned = true;
                                 node.returnValue = _object;
                                 node.previous = null;
@@ -223,12 +193,9 @@ namespace System.Collections
                     }
                 }
 
-                if (removeWaitCount > 0)
-                {
-                    lock (removeWaitHeader)
-                    {
-                        if (removeWaitCount > 0)
-                        {
+                if (removeWaitCount > 0) {
+                    lock (removeWaitHeader) {
+                        if (removeWaitCount > 0) {
                             WaitingThreadNode node = removeWaitHeader.next;
                             removeWaitHeader.next = node.next;
                             removeWaitHeader.next.previous = removeWaitHeader;
@@ -236,8 +203,7 @@ namespace System.Collections
                             node.previous = null;
                             removeWaitCount--;
 
-                            lock (node)
-                            {
+                            lock (node) {
                                 node.valueReturned = true;
                                 node.returnValue = _object;
                                 Monitor.Pulse(node);
@@ -245,11 +211,9 @@ namespace System.Collections
                         }
                     }
                 }
-                else
-                {
+                else {
                     defaultPrioritySublist.AddLast(_object);
-                    if ((highestPrioritySublist == null) || (highestPrioritySublist.priority < defaultPriority))
-                    {
+                    if ((highestPrioritySublist == null) || (highestPrioritySublist.priority < defaultPriority)) {
                         highestPrioritySublist = defaultPrioritySublist;
                     }
                     count++;
@@ -262,34 +226,25 @@ namespace System.Collections
         /// </summary>
         /// <param name="_object">The object to add to the queue</param>
         /// <param name="_priority">The priority to attach to the object (the higher the priority, the earlier it will be returned from the queue)</param>
-        public void Add(object _object, int _priority)
-        {
-            if (_priority < 0)
-            {
+        public void Add(object _object, int _priority) {
+            if (_priority < 0) {
                 throw new ArgumentException("Negative priorities are not allowed");
             }
-            lock (monitor)
-            {
-                if (!isOpen)
-                {
+            lock (monitor) {
+                if (!isOpen) {
                     throw new InvalidOperationException("This instance is closed, and cannot accept input");
                 }
-                else if ((!isNullAllowed) && (_object == null))
-                {
+                else if ((!isNullAllowed) && (_object == null)) {
                     throw new ArgumentNullException("This instance does not allow null input");
                 }
 
                 WaitingThreadNode node;
 
-                if (peekWaitCount > 0)
-                {
-                    lock (peekWaitHeader)
-                    {
-                        if (peekWaitCount > 0)
-                        {
+                if (peekWaitCount > 0) {
+                    lock (peekWaitHeader) {
+                        if (peekWaitCount > 0) {
                             node = peekWaitHeader.next;
-                            while (node != peekWaitHeader)
-                            {
+                            while (node != peekWaitHeader) {
                                 node.valueReturned = true;
                                 node.returnValue = _object;
                                 node.previous = null;
@@ -303,12 +258,9 @@ namespace System.Collections
                     }
                 }
 
-                if (removeWaitCount > 0)
-                {
-                    lock (removeWaitHeader)
-                    {
-                        if (removeWaitCount > 0)
-                        {
+                if (removeWaitCount > 0) {
+                    lock (removeWaitHeader) {
+                        if (removeWaitCount > 0) {
                             node = removeWaitHeader.next;
                             removeWaitHeader.next = node.next;
                             removeWaitHeader.next.previous = removeWaitHeader;
@@ -316,8 +268,7 @@ namespace System.Collections
                             node.previous = null;
                             removeWaitCount--;
 
-                            lock (node)
-                            {
+                            lock (node) {
                                 node.valueReturned = true;
                                 node.returnValue = _object;
                                 Monitor.Pulse(node);
@@ -325,20 +276,16 @@ namespace System.Collections
                         }
                     }
                 }
-                else
-                {
+                else {
                     Sublist sublist;
-                    if (_priority <= 20)
-                    {
+                    if (_priority <= 20) {
                         sublist = sublistArray[_priority];
                     }
-                    else
-                    {
+                    else {
                         sublist = GetSublist(_priority);
                     }
                     sublist.AddLast(_object);
-                    if ((highestPrioritySublist == null) || (highestPrioritySublist.priority < _priority))
-                    {
+                    if ((highestPrioritySublist == null) || (highestPrioritySublist.priority < _priority)) {
                         highestPrioritySublist = sublist;
                     }
                     count++;
@@ -350,22 +297,15 @@ namespace System.Collections
         /// Gets the next (highest-priority) object without removing it from the queue
         /// </summary>
         /// <returns>The highest-priority object on the queue, or null if the queue is empty</returns>
-        public override object Peek()
-        {
-            lock (monitor)
-            {
-                if (count > 0)
-                {
-                    if (highestPrioritySublist != null)
-                    {
+        public override object Peek() {
+            lock (monitor) {
+                if (count > 0) {
+                    if (highestPrioritySublist != null) {
                         return highestPrioritySublist.elements[highestPrioritySublist.startIndex];
                     }
-                    else
-                    {
-                        for (int x = (sublistCount - 1); x > 0; x--)
-                        {
-                            if (sublistArray[x].count > 0)
-                            {
+                    else {
+                        for (int x = (sublistCount - 1); x > 0; x--) {
+                            if (sublistArray[x].count > 0) {
                                 highestPrioritySublist = sublistArray[x];
                                 return highestPrioritySublist.elements[highestPrioritySublist.startIndex];
                             }
@@ -381,22 +321,15 @@ namespace System.Collections
         /// </summary>
         /// <param name="_millisecondsTimeout">The number of milliseconds to wait for input if the queue is initially empty</param>
         /// <returns>The highest-priority object on the queue, or null if the queue is initially empty and the timeout expires</returns>
-        public override object Peek(int _millisecondsTimeout)
-        {
-            lock (monitor)
-            {
-                if (count > 0)
-                {
-                    if (highestPrioritySublist != null)
-                    {
+        public override object Peek(int _millisecondsTimeout) {
+            lock (monitor) {
+                if (count > 0) {
+                    if (highestPrioritySublist != null) {
                         return highestPrioritySublist.elements[highestPrioritySublist.startIndex];
                     }
-                    else
-                    {
-                        for (int x = (sublistCount - 1); x > 0; x--)
-                        {
-                            if (sublistArray[x].count > 0)
-                            {
+                    else {
+                        for (int x = (sublistCount - 1); x > 0; x--) {
+                            if (sublistArray[x].count > 0) {
                                 highestPrioritySublist = sublistArray[x];
                                 return highestPrioritySublist.elements[highestPrioritySublist.startIndex];
                             }
@@ -404,27 +337,23 @@ namespace System.Collections
                     }
                 }
 
-                if ((_millisecondsTimeout <= 0) || (!isOpen))
-                {
+                if ((_millisecondsTimeout <= 0) || (!isOpen)) {
                     return null;
                 }
             }
 
             object returnValue = null;
-            lock (peekWaitHeader)
-            {
+            lock (peekWaitHeader) {
                 peekWaitCount++;
 
                 WaitingThreadNode node;
 
-                if (waitNodeCacheCount > 0)
-                {
+                if (waitNodeCacheCount > 0) {
                     node = waitNodeCacheHeader.next;
                     waitNodeCacheHeader.next = node.next;
                     waitNodeCacheCount--;
                 }
-                else
-                {
+                else {
                     node = new WaitingThreadNode();
                 }
 
@@ -433,20 +362,17 @@ namespace System.Collections
                 peekWaitHeader.previous = node;
                 node.next = peekWaitHeader;
 
-                try
-                {
+                try {
                     Monitor.Wait(peekWaitHeader, _millisecondsTimeout);
                 }
                 catch { }
 
-                if (node.valueReturned)
-                {
+                if (node.valueReturned) {
                     returnValue = node.returnValue;
                     node.returnValue = null;
                     node.valueReturned = false;
                 }
-                else
-                {
+                else {
                     node.previous.next = node.next;
                     node.next.previous = node.previous;
                     node.previous = null;
@@ -464,34 +390,25 @@ namespace System.Collections
         /// Removes the next (highest-priority) object from the queue
         /// </summary>
         /// <returns>The next object from the highest priority currently contained by the queue</returns>
-        public override object Remove()
-        {
+        public override object Remove() {
             object returnValue = null;
-            lock (monitor)
-            {
-                if (count > 0)
-                {
-                    if (highestPrioritySublist != null)
-                    {
+            lock (monitor) {
+                if (count > 0) {
+                    if (highestPrioritySublist != null) {
                         returnValue = highestPrioritySublist.RemoveFirst();
-                        if (highestPrioritySublist.count == 0)
-                        {
+                        if (highestPrioritySublist.count == 0) {
                             highestPrioritySublist = null;
                         }
                         count--;
                         return returnValue;
                     }
-                    else
-                    {
+                    else {
                         Sublist sublist;
-                        for (int x = (sublistCount - 1); x >= 0; x--)
-                        {
+                        for (int x = (sublistCount - 1); x >= 0; x--) {
                             sublist = sublistArray[x];
-                            if (sublist.count > 0)
-                            {
+                            if (sublist.count > 0) {
                                 returnValue = sublist.RemoveFirst();
-                                if (sublist.count > 0)
-                                {
+                                if (sublist.count > 0) {
                                     highestPrioritySublist = sublist;
                                 }
                                 count--;
@@ -509,36 +426,27 @@ namespace System.Collections
         /// the queue is initially empty and the specified timeout is reached without
         /// input
         /// </summary>
-        /// <param name="_millisecondsTimeout"></param>
+        /// <param name="_millisecondsTimeout">time out</param>
         /// <returns>The next object from the highest priority currently contained by the queue</returns>
-        public override object Remove(int _millisecondsTimeout)
-        {
+        public override object Remove(int _millisecondsTimeout) {
             object returnValue = null;
-            lock (monitor)
-            {
-                if (count > 0)
-                {
-                    if (highestPrioritySublist != null)
-                    {
+            lock (monitor) {
+                if (count > 0) {
+                    if (highestPrioritySublist != null) {
                         returnValue = highestPrioritySublist.RemoveFirst();
-                        if (highestPrioritySublist.count == 0)
-                        {
+                        if (highestPrioritySublist.count == 0) {
                             highestPrioritySublist = null;
                         }
                         count--;
                         return returnValue;
                     }
-                    else
-                    {
+                    else {
                         Sublist sublist;
-                        for (int x = (sublistCount - 1); x >= 0; x--)
-                        {
+                        for (int x = (sublistCount - 1); x >= 0; x--) {
                             sublist = sublistArray[x];
-                            if (sublist.count > 0)
-                            {
+                            if (sublist.count > 0) {
                                 returnValue = sublist.RemoveFirst();
-                                if (sublist.count > 0)
-                                {
+                                if (sublist.count > 0) {
                                     highestPrioritySublist = sublist;
                                 }
                                 count--;
@@ -548,27 +456,22 @@ namespace System.Collections
                     }
                 }
 
-                if ((_millisecondsTimeout <= 0) || (!isOpen))
-                {
+                if ((_millisecondsTimeout <= 0) || (!isOpen)) {
                     return null;
                 }
             }
 
             WaitingThreadNode node;
 
-            lock (removeWaitHeader)
-            {
+            lock (removeWaitHeader) {
                 peekWaitCount++;
 
-
-                if (waitNodeCacheCount > 0)
-                {
+                if (waitNodeCacheCount > 0) {
                     node = waitNodeCacheHeader.next;
                     waitNodeCacheHeader.next = node.next;
                     waitNodeCacheCount--;
                 }
-                else
-                {
+                else {
                     node = new WaitingThreadNode();
                 }
 
@@ -576,31 +479,24 @@ namespace System.Collections
                 node.previous = removeWaitHeader.previous;
                 removeWaitHeader.previous = node;
                 node.next = removeWaitHeader;
-
             }
 
-            lock (node)
-            {
-                if (!node.valueReturned)
-                {
-                    try
-                    {
+            lock (node) {
+                if (!node.valueReturned) {
+                    try {
                         Monitor.Wait(node, _millisecondsTimeout);
                     }
                     catch { }
                 }
             }
 
-            lock (removeWaitHeader)
-            {
-                if (node.valueReturned)
-                {
+            lock (removeWaitHeader) {
+                if (node.valueReturned) {
                     returnValue = node.returnValue;
                     node.returnValue = null;
                     node.valueReturned = false;
                 }
-                else
-                {
+                else {
                     node.previous.next = node.next;
                     node.next.previous = node.previous;
                     node.previous = null;
@@ -610,36 +506,27 @@ namespace System.Collections
                 node.next = waitNodeCacheHeader.next;
                 waitNodeCacheHeader.next = node;
                 waitNodeCacheCount++;
-
             }
 
             return returnValue;
-
         }
 
         /// <summary>
         /// Renders this Queue incapable of accepting further input, and immediately
         /// returns null to any waiting threads
         /// </summary>
-        public override void Close()
-        {
-            lock (monitor)
-            {
-                if (!isOpen)
-                {
+        public override void Close() {
+            lock (monitor) {
+                if (!isOpen) {
                     return;
                 }
                 WaitingThreadNode node;
 
-                if (peekWaitCount > 0)
-                {
-                    lock (peekWaitHeader)
-                    {
-                        if (peekWaitCount > 0)
-                        {
+                if (peekWaitCount > 0) {
+                    lock (peekWaitHeader) {
+                        if (peekWaitCount > 0) {
                             node = peekWaitHeader.next;
-                            while (node != peekWaitHeader)
-                            {
+                            while (node != peekWaitHeader) {
                                 node.valueReturned = true;
                                 node.returnValue = null;
                                 node.previous = null;
@@ -653,16 +540,12 @@ namespace System.Collections
                     }
                 }
 
-                if (removeWaitCount > 0)
-                {
-                    lock (removeWaitHeader)
-                    {
-                        if (removeWaitCount > 0)
-                        {
+                if (removeWaitCount > 0) {
+                    lock (removeWaitHeader) {
+                        if (removeWaitCount > 0) {
                             node = removeWaitHeader.next;
                             WaitingThreadNode[] nodes = new WaitingThreadNode[removeWaitCount];
-                            for (int x = 0; x < removeWaitCount; x++)
-                            {
+                            for (int x = 0; x < removeWaitCount; x++) {
                                 nodes[x] = node;
                                 node.valueReturned = true;
                                 node.returnValue = null;
@@ -670,10 +553,8 @@ namespace System.Collections
                                 node = node.next;
                                 node.previous.next = null;
                             }
-                            for (int x = 0; x < removeWaitCount; x++)
-                            {
-                                lock (nodes[x])
-                                {
+                            for (int x = 0; x < removeWaitCount; x++) {
+                                lock (nodes[x]) {
                                     Monitor.Pulse(nodes[x]);
                                 }
                             }
@@ -683,12 +564,10 @@ namespace System.Collections
                         }
                     }
                 }
-
             }
         }
 
-        private sealed class WaitingThreadNode
-        {
+        private sealed class WaitingThreadNode {
             public object returnValue = null;
             public bool valueReturned = false;
             public WaitingThreadNode next;
@@ -697,8 +576,7 @@ namespace System.Collections
             public WaitingThreadNode() { }
         }
 
-        private sealed class Sublist : IComparable
-        {
+        private sealed class Sublist : IComparable {
             private const int INITIAL_CAPACITY = 50;
             public int priority;
             public int count = 0;
@@ -709,10 +587,8 @@ namespace System.Collections
 
             public Sublist() { }
 
-            public void Clear()
-            {
-                if (count > 0)
-                {
+            public void Clear() {
+                if (count > 0) {
                     Array.Clear(elements, 0, capacity);
                     count = 0;
                     startIndex = 0;
@@ -720,22 +596,17 @@ namespace System.Collections
                 }
             }
 
-            public void AddLast(object _object)
-            {
-                if (count == capacity)
-                {
-                    if (capacity == INITIAL_CAPACITY)
-                    {
+            public void AddLast(object _object) {
+                if (count == capacity) {
+                    if (capacity == INITIAL_CAPACITY) {
                         capacity *= 5;
                     }
-                    else
-                    {
+                    else {
                         capacity *= 2;
                     }
                     object[] newElements = new object[capacity];
                     Array.Copy(elements, startIndex, newElements, 0, (elements.Length - startIndex));
-                    if (startIndex > 0)
-                    {
+                    if (startIndex > 0) {
                         Array.Copy(elements, 0, newElements, (elements.Length - startIndex), startIndex);
                     }
 
@@ -744,11 +615,9 @@ namespace System.Collections
                     endIndex = count - 1;
                 }
 
-                if (count > 0)
-                {
+                if (count > 0) {
                     endIndex++;
-                    if (endIndex == capacity)
-                    {
+                    if (endIndex == capacity) {
                         endIndex = 0;
                     }
                 }
@@ -756,11 +625,9 @@ namespace System.Collections
                 count++;
             }
 
-            public object RemoveFirst()
-            {
+            public object RemoveFirst() {
                 object element = elements[startIndex++];
-                if (startIndex == capacity)
-                {
+                if (startIndex == capacity) {
                     startIndex = 0;
                 }
                 count--;
@@ -773,9 +640,8 @@ namespace System.Collections
             }
             */
 
-            public int CompareTo(object _object)
-            {
-                return (priority - ((Sublist)_object).priority);
+            public int CompareTo(object _object) {
+                return (priority - ((Sublist) _object).priority);
             }
         }
     }

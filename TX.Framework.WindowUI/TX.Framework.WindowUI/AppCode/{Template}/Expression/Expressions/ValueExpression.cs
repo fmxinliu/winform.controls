@@ -13,70 +13,52 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class ValueExpression<T> : ValueExpression
-    {
-        public ValueExpression(T value)
-            : base(value, typeof(T))
-        {
-        }
+namespace System.Text.Template {
+    public class ValueExpression<T> : ValueExpression {
+        public ValueExpression(T value) : base(value, typeof(T)) { }
 
-        public new T Value
-        {
-            get { return (T)base.Value; }
+        public new T Value {
+            get { return (T) base.Value; }
         }
     }
 
-    public class ValueExpression : Expression, IValueType
-    {
+    public class ValueExpression : Expression, IValueType {
         private Type _Type;
         private object _Value;
 
-        public ValueExpression(IValueType valueType)
-            : this(valueType.Value, valueType.Type)
-        {
-        }
+        public ValueExpression(IValueType valueType) : this(valueType.Value, valueType.Type) { }
 
-        public ValueExpression(object value, Type type)
-        {
+        public ValueExpression(object value, Type type) {
             _Value = value;
             _Type = type;
-            if (_Type == typeof(object) && _Value != null)
-            {
+            if (_Type == typeof(object) && _Value != null) {
                 _Type = _Value.GetType();
             }
         }
 
         #region ITypeValue Members
 
-        public Type Type
-        {
+        public Type Type {
             get { return _Type; }
             set { _Type = value; }
         }
 
-        public object Value
-        {
-            get
-            {
+        public object Value {
+            get {
                 return _Value;
             }
-            set
-            {
+            set {
                 _Value = value;
             }
         }
 
         #endregion
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             return this;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return Value.ToString();
         }
     }

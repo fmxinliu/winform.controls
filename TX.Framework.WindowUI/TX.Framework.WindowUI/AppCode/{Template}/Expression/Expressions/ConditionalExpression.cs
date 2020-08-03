@@ -13,23 +13,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class ConditionalExpression : Expression
-    {
+namespace System.Text.Template {
+    public class ConditionalExpression : Expression {
         private readonly Expression _condition;
         private readonly Expression _trueValue;
         private readonly Expression _falseValue;
 
-        public ConditionalExpression(Expression condition, Expression trueValue, Expression falseValue)
-        {
+        public ConditionalExpression(Expression condition, Expression trueValue, Expression falseValue) {
             _condition = condition;
             _trueValue = trueValue;
             _falseValue = falseValue;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             bool result = context.ToBoolean(_condition.Evaluate(context).Value);
 
             if (result)
@@ -38,10 +34,8 @@ namespace System.Text.Template
                 return _falseValue.Evaluate(context);
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return "(" + _condition + " ? " + _trueValue + " : " + _falseValue + ")";
-
         }
     }
 }

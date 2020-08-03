@@ -13,34 +13,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    internal class TextNode : TokenNode
-    {
+namespace System.Text.Template {
+    internal class TextNode : TokenNode {
         private string _Text;
 
-        public TextNode(string text)
-        {
+        public TextNode(string text) {
             _Text = text;
         }
 
-        public override void Evaluate(IExpressionParser parser, ITemplateContext context, StringBuilder output)
-        {
+        public override void Evaluate(IExpressionParser parser, ITemplateContext context, StringBuilder output) {
             output.Append(this._Text);
         }
 
-        public static implicit operator TextNode(string text)
-        {
+        public static implicit operator TextNode(string text) {
             return new TextNode(text);
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return this.GetType().Name + ": \"" + this.Text + "\"";
         }
 
-        public string Text
-        {
+        public string Text {
             get { return this._Text; }
             set { this._Text = value; }
         }

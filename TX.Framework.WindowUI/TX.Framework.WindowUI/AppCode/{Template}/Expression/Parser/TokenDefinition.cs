@@ -13,10 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    internal class TokenDefinition
-    {
+namespace System.Text.Template {
+    internal class TokenDefinition {
         private readonly TokenType _tokenType = TokenType.Term;
         private readonly OperatorAssociativity _associativity = OperatorAssociativity.Left;
         private readonly string _pattern;
@@ -26,93 +24,74 @@ namespace System.Text.Template
         private TokenDefinition _alternate = null;
         private TokenDefinition _root = null;
 
-        public TokenDefinition(TokenType tokenType)
-        {
+        public TokenDefinition(TokenType tokenType) {
             _tokenType = tokenType;
             _isPartial = (tokenType == TokenType.TernaryOperator1 || tokenType == TokenType.TernaryOperator2);
         }
 
-        public TokenDefinition(TokenType tokenType, string pattern)
-            : this(tokenType)
-        {
+        public TokenDefinition(TokenType tokenType, string pattern) : this(tokenType) {
             _pattern = pattern;
         }
 
-        public TokenDefinition(TokenType tokenType, int precedence, string pattern)
-            : this(tokenType)
-        {
+        public TokenDefinition(TokenType tokenType, int precedence, string pattern) : this(tokenType) {
             _precedence = precedence;
             _pattern = pattern;
         }
 
-        public TokenDefinition(TokenType tokenType, int precedence, OperatorAssociativity associativity, string pattern)
-            : this(tokenType)
-        {
+        public TokenDefinition(TokenType tokenType, int precedence, OperatorAssociativity associativity, string pattern) : this(tokenType) {
             _precedence = precedence;
             _pattern = pattern;
             _associativity = associativity;
         }
 
-        public TokenDefinition(TokenType tokenType, TokenEvaluator evaluator)
-            : this(tokenType, (string)null)
-        {
+        public TokenDefinition(TokenType tokenType, TokenEvaluator evaluator) : this(tokenType, (string) null) {
             _evaluator = evaluator;
         }
 
-        public TokenDefinition(TokenType tokenType, int precedence, TokenEvaluator evaluator)
-            : this(tokenType, precedence, (string)null)
-        {
+        public TokenDefinition(TokenType tokenType, int precedence, TokenEvaluator evaluator) : this(tokenType, precedence, (string) null) {
             _evaluator = evaluator;
         }
 
         /// <summary>
-        /// ªÒ»°±Íº«¿‡–Õ
+        /// Ëé∑ÂèñÊ†áËÆ∞Á±ªÂûã
         /// </summary>
-        public TokenType Type
-        {
+        public TokenType Type {
             get { return _tokenType; }
         }
 
         /// <summary>
-        /// ªÒ»°±Íº«µƒƒ£ Ω
+        /// Ëé∑ÂèñÊ†áËÆ∞ÁöÑÊ®°Âºè
         /// </summary>
-        public string Pattern
-        {
+        public string Pattern {
             get { return _pattern; }
         }
 
         /// <summary>
-        /// ªÒ»°±Íº«µƒ”≈œ»º∂
+        /// Ëé∑ÂèñÊ†áËÆ∞ÁöÑ‰ºòÂÖàÁ∫ß
         /// </summary>
-        public int Precedence
-        {
+        public int Precedence {
             get { return _precedence; }
         }
 
-        public OperatorAssociativity Associativity
-        {
+        public OperatorAssociativity Associativity {
             get { return _associativity; }
         }
 
-        public TokenEvaluator Evaluator
-        {
+        public TokenEvaluator Evaluator {
             get { return _evaluator; }
             set { _evaluator = value; }
         }
 
-        public bool IsPartial
-        {
+        public bool IsPartial {
             get { return _isPartial; }
         }
 
-        public TokenDefinition Alternate
-        {
+        public TokenDefinition Alternate {
             get { return _alternate; }
             set { _alternate = value; }
         }
 
-        public TokenDefinition Root
-        {
+        public TokenDefinition Root {
             get { return _root; }
             set { _root = value; }
         }

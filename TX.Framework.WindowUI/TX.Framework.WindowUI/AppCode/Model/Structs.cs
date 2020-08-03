@@ -1,21 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     #region CornerRadius
 
     /// <summary>
     /// 矩形的圆角半径
     /// </summary>
     /// User:Ryan  CreateTime:2011-07-19 10:17.
-    public struct CornerRadius
-    {
+    public struct CornerRadius {
         #region Initializes
 
         /// <summary>
@@ -24,10 +22,7 @@ namespace TX.Framework.WindowUI
         /// </summary>
         /// <param name="radius">The radius.</param>
         /// User:Ryan  CreateTime:2011-07-19 11:32.
-        public CornerRadius(int radius)
-            : this(radius, radius, radius, radius)
-        {
-        }
+        public CornerRadius(int radius) : this(radius, radius, radius, radius) { }
 
         /// <summary>
         /// (构造函数).Initializes a new instance of the <see cref="CornerRadius"/> struct.
@@ -38,8 +33,7 @@ namespace TX.Framework.WindowUI
         /// <param name="bottomLeft">The bottom left.</param>
         /// <param name="bottomRight">The bottom right.</param>
         /// User:Ryan  CreateTime:2011-07-19 11:35.
-        public CornerRadius(int topLeft, int topRight, int bottomLeft, int bottomRight)
-        {
+        public CornerRadius(int topLeft, int topRight, int bottomLeft, int bottomRight) {
             this.TopLeft = topLeft;
             this.TopRight = topRight;
             this.BottomLeft = bottomLeft;
@@ -76,8 +70,7 @@ namespace TX.Framework.WindowUI
     #region MINMAXINFO
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct MINMAXINFO
-    {
+    internal struct MINMAXINFO {
         public Point reserved;
         public Size maxSize;
         public Point maxPosition;
@@ -93,8 +86,7 @@ namespace TX.Framework.WindowUI
     /// 窗体位置信息结构
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    internal struct WINDOWPOS
-    {
+    internal struct WINDOWPOS {
         public IntPtr hwnd;
         public IntPtr hWndInsertAfter;
         public int x;
@@ -112,44 +104,37 @@ namespace TX.Framework.WindowUI
     /// Win32中的矩形结构，及与.net中的Rectangle的处理
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    internal struct RECT
-    {
+    internal struct RECT {
         public int left;
         public int top;
         public int right;
         public int bottom;
 
-        public RECT(int left, int top, int right, int bottom)
-        {
+        public RECT(int left, int top, int right, int bottom) {
             this.left = left;
             this.top = top;
             this.right = right;
             this.bottom = bottom;
         }
 
-        public RECT(Rectangle rect)
-        {
+        public RECT(Rectangle rect) {
             this.left = rect.Left;
             this.right = rect.Right;
             this.top = rect.Top;
             this.bottom = rect.Bottom;
         }
 
-        public Rectangle Rect
-        {
-            get
-            {
+        public Rectangle Rect {
+            get {
                 return new Rectangle(this.left, this.top, this.right - this.left, this.bottom - this.top);
             }
         }
 
-        public static RECT FromXYWH(int x, int y, int width, int height)
-        {
+        public static RECT FromXYWH(int x, int y, int width, int height) {
             return new RECT(x, y, x + width, y + height);
         }
 
-        public static RECT FromRectangle(Rectangle rect)
-        {
+        public static RECT FromRectangle(Rectangle rect) {
             return new RECT(rect.Left, rect.Top, rect.Right, rect.Bottom);
         }
     }
@@ -163,8 +148,7 @@ namespace TX.Framework.WindowUI
     /// </summary>
     /// User:Ryan  CreateTime:2011-07-26 15:57.
     [StructLayout(LayoutKind.Sequential)]
-    internal struct NCCALCSIZE_PARAMS
-    {
+    internal struct NCCALCSIZE_PARAMS {
         /// <summary>
         /// 窗口在移动或改变大小后的新坐标，也就是说，它是建议的新窗口坐标。
         /// </summary>
@@ -191,8 +175,7 @@ namespace TX.Framework.WindowUI
     /// ComboBox的Windows信息结构
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    internal struct ComboBoxInfo
-    {
+    internal struct ComboBoxInfo {
         public int cbSize;
         public RECT rcItem;
         public RECT rcButton;
@@ -207,8 +190,7 @@ namespace TX.Framework.WindowUI
     #region PAINTSTRUCT
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct PAINTSTRUCT
-    {
+    internal struct PAINTSTRUCT {
         public IntPtr hdc;
         public int fErase;
         public RECT rcPaint;
@@ -229,8 +211,7 @@ namespace TX.Framework.WindowUI
     #region HDITEM
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct HDITEM
-    {
+    internal struct HDITEM {
         internal int mask;
         internal int cxy;
         internal IntPtr pszText;
@@ -248,8 +229,7 @@ namespace TX.Framework.WindowUI
     #region LVHITTESTINFO
 
     [StructLayoutAttribute(LayoutKind.Sequential)]
-    internal struct LVHITTESTINFO
-    {
+    internal struct LVHITTESTINFO {
         public POINTAPI pt;
         public int flags;
         public Int32 iItem;
@@ -260,19 +240,16 @@ namespace TX.Framework.WindowUI
     #region POINTAPI
 
     [StructLayoutAttribute(LayoutKind.Sequential)]
-    internal struct POINTAPI
-    {
+    internal struct POINTAPI {
         public Int32 X;
         public Int32 Y;
 
-        public POINTAPI(Point p)
-        {
+        public POINTAPI(Point p) {
             X = p.X;
             Y = p.Y;
         }
 
-        public POINTAPI(Int32 x, Int32 y)
-        {
+        public POINTAPI(Int32 x, Int32 y) {
             X = x;
             Y = y;
         }

@@ -1,7 +1,5 @@
-﻿namespace WindowsTest
-{
-    partial class frmList
-    {
+namespace WindowsTest {
+    partial class FrmList {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,9 +22,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmList));
+        private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmList));
             System.Text.Template.TemplateContext templateContext1 = new System.Text.Template.TemplateContext();
             this.txStatusStrip1 = new TX.Framework.WindowUI.Controls.TXStatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -91,9 +86,10 @@
             this.txStatusStrip1.BeginBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.txStatusStrip1.EndBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.txStatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
-            this.toolStripDropDownButton1});
+                this.toolStripStatusLabel1,
+                    this.toolStripProgressBar1,
+                    this.toolStripDropDownButton1
+            });
             this.txStatusStrip1.Location = new System.Drawing.Point(0, 6);
             this.txStatusStrip1.Name = "txStatusStrip1";
             this.txStatusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
@@ -127,16 +123,17 @@
             this.txToolStrip1.BeginBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txToolStrip1.EndBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.txToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.新建NToolStripButton,
-            this.打开OToolStripButton,
-            this.保存SToolStripButton,
-            this.打印PToolStripButton,
-            this.toolStripSeparator,
-            this.剪切UToolStripButton,
-            this.复制CToolStripButton,
-            this.粘贴PToolStripButton,
-            this.toolStripSeparator1,
-            this.帮助LToolStripButton});
+                this.新建NToolStripButton,
+                    this.打开OToolStripButton,
+                    this.保存SToolStripButton,
+                    this.打印PToolStripButton,
+                    this.toolStripSeparator,
+                    this.剪切UToolStripButton,
+                    this.复制CToolStripButton,
+                    this.粘贴PToolStripButton,
+                    this.toolStripSeparator1,
+                    this.帮助LToolStripButton
+            });
             this.txToolStrip1.Location = new System.Drawing.Point(0, 0);
             this.txToolStrip1.Name = "txToolStrip1";
             this.txToolStrip1.Size = new System.Drawing.Size(961, 25);

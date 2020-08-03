@@ -13,26 +13,19 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace System.Text.Template
-{
-    internal class InstanceMethod : MethodDefinition
-    {
+namespace System.Text.Template {
+    internal class InstanceMethod : MethodDefinition {
         private readonly object _object;
 
-        public InstanceMethod(MethodInfo methodInfo, object @object)
-            : base(methodInfo)
-        {
+        public InstanceMethod(MethodInfo methodInfo, object @object) : base(methodInfo) {
             _object = @object;
         }
 
-        public InstanceMethod(Type type, string methodName, object @object)
-            : base(type, methodName)
-        {
+        public InstanceMethod(Type type, string methodName, object @object) : base(type, methodName) {
             _object = @object;
         }
 
-        public override object Invoke(Type[] types, object[] parameters, out Type returnType)
-        {
+        public override object Invoke(Type[] types, object[] parameters, out Type returnType) {
             MethodInfo methodInfo = GetMethodInfo(types);
 
             returnType = methodInfo.ReturnType;

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provide Office 2007 Blue Theme colors
     /// </summary>
@@ -16,8 +15,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public class PanelColorsOffice2007Blue : PanelColorsOffice
-    {
+    public class PanelColorsOffice2007Blue : PanelColorsOffice {
         #region FieldsPrivate
         #endregion
 
@@ -28,18 +26,12 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Initialize a new instance of the Office2007Colors class.
         /// </summary>
-        public PanelColorsOffice2007Blue()
-            : base()
-        {
-        }
+        public PanelColorsOffice2007Blue() : base() { }
         /// <summary>
         /// Initialize a new instance of the Office2007Colors class.
         /// </summary>
         /// <param name="basePanel">Base class for the panel or xpanderpanel control.</param>
-        public PanelColorsOffice2007Blue(BasePanel basePanel)
-            : base(basePanel)
-        {
-        }
+        public PanelColorsOffice2007Blue(BasePanel basePanel) : base(basePanel) { }
 
         #endregion
 
@@ -48,8 +40,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Initialize a color Dictionary with defined colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<PanelColors.KnownColors, Color> rgbTable)
-        {
+        protected override void InitColors(Dictionary<PanelColors.KnownColors, Color> rgbTable) {
             base.InitColors(rgbTable);
             rgbTable[KnownColors.BorderColor] = Color.FromArgb(101, 147, 207);
             rgbTable[KnownColors.InnerBorderColor] = Color.White;

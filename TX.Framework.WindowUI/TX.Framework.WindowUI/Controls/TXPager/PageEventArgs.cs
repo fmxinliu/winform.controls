@@ -1,17 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// 分页事件源参数（用于分页按钮、查询按钮事件）
     /// </summary>
-    public class PagerEventArgs : EventArgs
-    {
-        public PagerEventArgs(int pageIndex, int pageSize)
-        {
+    public class PagerEventArgs : EventArgs {
+        public PagerEventArgs(int pageIndex, int pageSize) {
             this.PageIndex = pageIndex;
             this.PageSize = pageSize;
         }

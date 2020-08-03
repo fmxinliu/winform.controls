@@ -11,28 +11,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
-namespace System.Text.Template
-{
-    public class AssignmentExpression : BinaryExpression
-    {
-        public AssignmentExpression(Expression left, Expression right)
-            : base(left, right)
-        {
-        }
+namespace System.Text.Template {
+    public class AssignmentExpression : BinaryExpression {
+        public AssignmentExpression(Expression left, Expression right) : base(left, right) { }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ValueExpression valueRight = Right.Evaluate(context);
 
-            if (Left is VariableExpression)
-            {
+            if (Left is VariableExpression) {
                 if ((context.AssignmentPermissions & AssignmentPermissions.Variable) == AssignmentPermissions.None)
                     throw new IllegalAssignmentException("Assignment to variable not allowed");
 
-                VariableExpression varExpr = (VariableExpression)Left;
+                VariableExpression varExpr = (VariableExpression) Left;
 
                 bool exists = context.ContainsKey(varExpr.Variable);
 
@@ -47,37 +40,24 @@ namespace System.Text.Template
                 return valueRight;
             }
 
-            if (Left is FieldExpression)
-            {
+            if (Left is FieldExpression) {
                 if ((context.AssignmentPermissions & AssignmentPermissions.Property) == AssignmentPermissions.None)
                     throw new IllegalAssignmentException("Assignment to property not allowed");
 
-                return ((FieldExpression)Left).Assign(context, valueRight.Value);
+                return ((FieldExpression) Left).Assign(context, valueRight.Value);
             }
 
             throw new IllegalAssignmentException();
         }
     }
 
-    public class IllegalAssignmentException : Exception
-    {
-        public IllegalAssignmentException(string message)
-            : base(message)
-        {
-        }
+    public class IllegalAssignmentException : Exception {
+        public IllegalAssignmentException(string message) : base(message) { }
 
-        public IllegalAssignmentException()
-        {
-        }
+        public IllegalAssignmentException() { }
 
-        public IllegalAssignmentException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        public IllegalAssignmentException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
-        public IllegalAssignmentException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+        public IllegalAssignmentException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

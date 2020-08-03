@@ -13,38 +13,34 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class UnaryMinusExpression : Expression
-    {
+namespace System.Text.Template {
+    public class UnaryMinusExpression : Expression {
         private readonly Expression _value;
 
-        public UnaryMinusExpression(Expression value)
-        {
+        public UnaryMinusExpression(Expression value) {
             _value = value;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ValueExpression value = _value.Evaluate(context);
 
             if (value.Type == typeof(decimal))
-                return Expression.Value(-(decimal)value.Value);
+                return Expression.Value(-(decimal) value.Value);
 
             if (value.Type == typeof(double))
-                return Expression.Value(-(double)value.Value);
+                return Expression.Value(-(double) value.Value);
 
             if (value.Type == typeof(float))
-                return Expression.Value(-(float)value.Value);
+                return Expression.Value(-(float) value.Value);
 
             if (value.Type == typeof(uint))
-                return Expression.Value(-(uint)value.Value);
+                return Expression.Value(-(uint) value.Value);
 
             if (value.Type == typeof(int))
-                return Expression.Value(-(int)value.Value);
+                return Expression.Value(-(int) value.Value);
 
             if (value.Type == typeof(long))
-                return Expression.Value(-(long)value.Value);
+                return Expression.Value(-(long) value.Value);
 
             throw new OverflowException();
         }

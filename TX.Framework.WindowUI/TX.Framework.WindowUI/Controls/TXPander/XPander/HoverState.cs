@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Specifies constants that define the hoverstate at the captionbar or a part of it on a Panel or XPanderPanel.
     /// </summary>
@@ -14,8 +13,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public enum HoverState
-    {
+    public enum HoverState {
         /// <summary>
         /// The hoverstate in its normal state (none of the other states apply).
         /// </summary>

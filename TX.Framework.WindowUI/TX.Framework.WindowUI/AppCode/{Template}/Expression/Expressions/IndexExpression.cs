@@ -12,21 +12,17 @@
 using System;
 using System.Reflection;
 
-namespace System.Text.Template
-{
-    public class IndexExpression : Expression
-    {
+namespace System.Text.Template {
+    public class IndexExpression : Expression {
         private readonly Expression _target;
         private readonly Expression[] _parameters;
 
-        public IndexExpression(Expression target, Expression[] parameters)
-        {
+        public IndexExpression(Expression target, Expression[] parameters) {
             _target = target;
             _parameters = parameters;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ValueExpression targetValue = _target.Evaluate(context);
             Type targetType = targetValue.Type;
             object targetObject = targetValue.Value;
@@ -35,58 +31,47 @@ namespace System.Text.Template
             Type[] parameterTypes = Array.ConvertAll<ValueExpression, Type>(parameters, expr => expr.Type);
             object[] parameterValues = Array.ConvertAll<ValueExpression, object>(parameters, expr => expr.Value);
 
-            if (targetType.IsArray)
-            {
-                if (targetType.GetArrayRank() != parameters.Length)
-                {
+            if (targetType.IsArray) {
+                if (targetType.GetArrayRank() != parameters.Length) {
                     throw new Exception("Array has a different rank. Number of arguments is incorrect");
                 }
 
                 Type returnType = targetType.GetElementType();
 
                 bool useLong = false;
-                foreach (Type t in parameterTypes)
-                {
-                    if (t == typeof(long) || t == typeof(long?))
-                    {
+                foreach (Type t in parameterTypes) {
+                    if (t == typeof(long) || t == typeof(long?)) {
                         useLong = true;
                     }
-                    else if (t != typeof(int) & t != typeof(int?) && t != typeof(short) && t != typeof(short?) && t != typeof(ushort) && t != typeof(ushort?))
-                    {
+                    else if (t != typeof(int) & t != typeof(int?) && t != typeof(short) && t != typeof(short?) && t != typeof(ushort) && t != typeof(ushort?)) {
                         throw new ArgumentException();
                     }
                 }
 
-                if (useLong)
-                {
+                if (useLong) {
                     long[] indexes = new long[parameters.Length];
-                    for (int i = 0; i < parameters.Length; i++)
-                    {
+                    for (int i = 0; i < parameters.Length; i++) {
                         indexes[i] = Convert.ToInt64(parameterValues[i]);
                     }
-                    return Expression.Value(((Array)targetObject).GetValue(indexes), returnType);
+                    return Expression.Value(((Array) targetObject).GetValue(indexes), returnType);
                 }
-                else
-                {
+                else {
                     int[] indexes = new int[parameters.Length];
-                    for (int i = 0; i < parameters.Length; i++)
-                    {
+                    for (int i = 0; i < parameters.Length; i++) {
                         indexes[i] = Convert.ToInt32(parameterValues[i]);
                     }
-                    return Expression.Value(((Array)targetObject).GetValue(indexes), returnType);
+                    return Expression.Value(((Array) targetObject).GetValue(indexes), returnType);
                 }
             }
-            else
-            {
-                DefaultMemberAttribute[] att = (DefaultMemberAttribute[])targetType.GetCustomAttributes(typeof(DefaultMemberAttribute), true);
+            else {
+                DefaultMemberAttribute[] att = (DefaultMemberAttribute[]) targetType.GetCustomAttributes(typeof(DefaultMemberAttribute), true);
                 MethodInfo methodInfo = targetType.GetMethod("get_" + att[0].MemberName, parameterTypes);
                 object value = methodInfo.Invoke(targetObject, parameterValues);
                 return new ValueExpression(value, methodInfo.ReturnType);
             }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             string[] parameters = Array.ConvertAll<Expression, string>(_parameters,
                 delegate(Expression expr) { return expr.ToString(); });
             return "(" + _target + "[" + String.Join(",", parameters) + "])";

@@ -1,8 +1,6 @@
-﻿using TX.Framework.WindowUI.Controls;
-namespace TX.Framework.WindowUI.Forms
-{
-    partial class frmSkinManager
-    {
+using TX.Framework.WindowUI.Controls;
+namespace TX.Framework.WindowUI.Forms {
+    partial class FrmSkinManager {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -12,10 +10,8 @@ namespace TX.Framework.WindowUI.Forms
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -27,8 +23,7 @@ namespace TX.Framework.WindowUI.Forms
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.panelWorkArea = new TX.Framework.WindowUI.Controls.TXPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.rbn0 = new TX.Framework.WindowUI.Controls.TXRadioButton();
@@ -104,7 +99,7 @@ namespace TX.Framework.WindowUI.Forms
             this.rbn0.Tag = "0";
             this.rbn0.Text = "默认皮肤";
             this.rbn0.UseVisualStyleBackColor = true;
-            this.rbn0.CheckedChanged += new System.EventHandler(this.rbn_CheckedChanged);
+            this.rbn0.CheckedChanged += new System.EventHandler(this.Rbn_CheckedChanged);
             // 
             // rbn1
             // 
@@ -213,7 +208,7 @@ namespace TX.Framework.WindowUI.Forms
             this.picBoxBg.Size = new System.Drawing.Size(68, 50);
             this.picBoxBg.TabIndex = 0;
             this.picBoxBg.TabStop = false;
-            this.picBoxBg.Click += new System.EventHandler(this.picBoxBg_Click);
+            this.picBoxBg.Click += new System.EventHandler(this.PicBoxBg_Click);
             // 
             // panelControlArea
             // 
@@ -237,7 +232,7 @@ namespace TX.Framework.WindowUI.Forms
             this.btnApply.TabIndex = 2;
             this.btnApply.Text = "应 用";
             this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // btnCancel
             // 
@@ -262,7 +257,7 @@ namespace TX.Framework.WindowUI.Forms
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.OnBtnOkClick);
             // 
-            // frmSkinManager
+            // FrmSkinManager
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -276,11 +271,11 @@ namespace TX.Framework.WindowUI.Forms
             this.Location = new System.Drawing.Point(0, 0);
             this.LogoSize = new System.Drawing.Size(26, 26);
             this.MaximizeBox = false;
-            this.Name = "frmSkinManager";
+            this.Name = "FrmSkinManager";
             this.Padding = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.ResizeEnable = false;
             this.Text = "皮肤管理中心";
-            this.Load += new System.EventHandler(this.frmSkinManager_Load);
+            this.Load += new System.EventHandler(this.FrmSkinManager_Load);
             this.panelWorkArea.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

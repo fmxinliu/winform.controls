@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
@@ -17,8 +17,7 @@ namespace TX.Framework.WindowUI.Controls {
         /// <summary>
         /// 初始化 TXFolderBrowserDialog 的新实例
         /// </summary>
-        public TXFolderBrowserDialog() {
-        }
+        public TXFolderBrowserDialog() { }
 
         #region Property
         /// <summary>
@@ -36,7 +35,7 @@ namespace TX.Framework.WindowUI.Controls {
         /// <param name="owner">任何实现 System.Windows.Forms.IWin32Window（表示将拥有模式对话框的顶级窗口）的对象。</param>
         public DialogResult ShowDialog(IWin32Window owner) {
             IntPtr hwndOwner = owner != null ? owner.Handle : GetActiveWindow();
-            IFileOpenDialog dialog = (IFileOpenDialog)new FileOpenDialog();
+            IFileOpenDialog dialog = (IFileOpenDialog) new FileOpenDialog();
             try {
                 IShellItem item;
                 if (!string.IsNullOrEmpty(SelectedPath)) {
@@ -61,8 +60,7 @@ namespace TX.Framework.WindowUI.Controls {
                 item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, out path);
                 SelectedPath = path;
                 return DialogResult.OK;
-            }
-            finally {
+            } finally {
                 Marshal.ReleaseComObject(dialog);
             }
         }
@@ -78,15 +76,15 @@ namespace TX.Framework.WindowUI.Controls {
         private const uint ERROR_CANCELLED = 0x800704C7;
         [ComImport]
         [Guid("DC1C5A9C-E88A-4dde-A5A1-60F82A20AEF7")]
-        private class FileOpenDialog {
-        }
+        private class FileOpenDialog { }
+
         [ComImport]
         [Guid("42f85136-db7e-439c-85f1-e4075d135fc8")]
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         private interface IFileOpenDialog {
             [PreserveSig]
             uint Show([In] IntPtr parent); // IModalWindow
-            void SetFileTypes();  // not fully defined
+            void SetFileTypes(); // not fully defined
             void SetFileTypeIndex([In] uint iFileType);
             void GetFileTypeIndex(out uint piFileType);
             void Advise(); // not fully defined
@@ -106,12 +104,13 @@ namespace TX.Framework.WindowUI.Controls {
             void AddPlace(IShellItem psi, int alignment);
             void SetDefaultExtension([In, MarshalAs(UnmanagedType.LPWStr)] string pszDefaultExtension);
             void Close(int hr);
-            void SetClientGuid();  // not fully defined
+            void SetClientGuid(); // not fully defined
             void ClearClientData();
             void SetFilter([MarshalAs(UnmanagedType.Interface)] IntPtr pFilter);
             void GetResults([MarshalAs(UnmanagedType.Interface)] out IntPtr ppenum); // not fully defined
             void GetSelectedItems([MarshalAs(UnmanagedType.Interface)] out IntPtr ppsai); // not fully defined
         }
+
         [ComImport]
         [Guid("43826D1E-E718-42EE-BC55-A1E261C37BFE")]
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -119,8 +118,8 @@ namespace TX.Framework.WindowUI.Controls {
             void BindToHandler(); // not fully defined
             void GetParent(); // not fully defined
             void GetDisplayName([In] SIGDN sigdnName, [MarshalAs(UnmanagedType.LPWStr)] out string ppszName);
-            void GetAttributes();  // not fully defined
-            void Compare();  // not fully defined
+            void GetAttributes(); // not fully defined
+            void Compare(); // not fully defined
         }
         private enum SIGDN : uint {
             SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000,
@@ -133,6 +132,7 @@ namespace TX.Framework.WindowUI.Controls {
             SIGDN_PARENTRELATIVEPARSING = 0x80018001,
             SIGDN_URL = 0x80068000
         }
+
         [Flags]
         private enum FOS {
             FOS_ALLNONSTORAGEITEMS = 0x80,

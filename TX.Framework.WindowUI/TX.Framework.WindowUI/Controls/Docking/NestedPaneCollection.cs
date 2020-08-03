@@ -3,42 +3,33 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    public sealed class NestedPaneCollection : ReadOnlyCollection<DockPane>
-    {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    public sealed class NestedPaneCollection : ReadOnlyCollection<DockPane> {
         private INestedPanesContainer m_container;
         private VisibleNestedPaneCollection m_visibleNestedPanes;
 
-        internal NestedPaneCollection(INestedPanesContainer container)
-            : base(new List<DockPane>())
-        {
+        internal NestedPaneCollection(INestedPanesContainer container) : base(new List<DockPane>()) {
             m_container = container;
             m_visibleNestedPanes = new VisibleNestedPaneCollection(this);
         }
 
-        public INestedPanesContainer Container
-        {
-            get    {    return m_container;    }
-        }
-        
-        public VisibleNestedPaneCollection VisibleNestedPanes
-        {
-            get    {    return m_visibleNestedPanes;    }
+        public INestedPanesContainer Container {
+            get { return m_container; }
         }
 
-        public DockState DockState
-        {
-            get    {    return Container.DockState;    }
+        public VisibleNestedPaneCollection VisibleNestedPanes {
+            get { return m_visibleNestedPanes; }
         }
 
-        public bool IsFloat
-        {
-            get    {    return DockState == DockState.Float;    }
+        public DockState DockState {
+            get { return Container.DockState; }
         }
 
-        internal void Add(DockPane pane)
-        {
+        public bool IsFloat {
+            get { return DockState == DockState.Float; }
+        }
+
+        internal void Add(DockPane pane) {
             if (pane == null)
                 return;
 
@@ -50,47 +41,39 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 oldNestedPanes.CheckFloatWindowDispose();
         }
 
-        private void CheckFloatWindowDispose()
-        {
-            if (Count == 0 && Container.DockState == DockState.Float)
-            {
-                FloatWindow floatWindow = (FloatWindow)Container;
+        private void CheckFloatWindowDispose() {
+            if (Count == 0 && Container.DockState == DockState.Float) {
+                FloatWindow floatWindow = (FloatWindow) Container;
                 if (!floatWindow.Disposing && !floatWindow.IsDisposed)
-                    NativeMethods.PostMessage(((FloatWindow)Container).Handle, FloatWindow.WM_CHECKDISPOSE, 0, 0);
+                    NativeMethods.PostMessage(((FloatWindow) Container).Handle, FloatWindow.WM_CHECKDISPOSE, 0, 0);
             }
         }
 
-        internal void Remove(DockPane pane)
-        {
+        internal void Remove(DockPane pane) {
             InternalRemove(pane);
             CheckFloatWindowDispose();
         }
 
-        private void InternalRemove(DockPane pane)
-        {
+        private void InternalRemove(DockPane pane) {
             if (!Contains(pane))
                 return;
 
             NestedDockingStatus statusPane = pane.NestedDockingStatus;
             DockPane lastNestedPane = null;
-            for (int i=Count - 1; i> IndexOf(pane); i--)
-            {
-                if (this[i].NestedDockingStatus.PreviousPane == pane)
-                {
+            for (int i = Count - 1; i > IndexOf(pane); i--) {
+                if (this[i].NestedDockingStatus.PreviousPane == pane) {
                     lastNestedPane = this[i];
                     break;
                 }
             }
 
-            if (lastNestedPane != null)
-            {
+            if (lastNestedPane != null) {
                 int indexLastNestedPane = IndexOf(lastNestedPane);
                 Items.Remove(lastNestedPane);
                 Items[IndexOf(pane)] = lastNestedPane;
                 NestedDockingStatus lastNestedDock = lastNestedPane.NestedDockingStatus;
                 lastNestedDock.SetStatus(this, statusPane.PreviousPane, statusPane.Alignment, statusPane.Proportion);
-                for (int i=indexLastNestedPane - 1; i>IndexOf(lastNestedPane); i--)
-                {
+                for (int i = indexLastNestedPane - 1; i > IndexOf(lastNestedPane); i--) {
                     NestedDockingStatus status = this[i].NestedDockingStatus;
                     if (status.PreviousPane == pane)
                         status.SetStatus(this, lastNestedPane, status.Alignment, status.Proportion);
@@ -104,9 +87,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
             statusPane.SetDisplayingBounds(Rectangle.Empty, Rectangle.Empty, Rectangle.Empty);
         }
 
-        public DockPane GetDefaultPreviousPane(DockPane pane)
-        {
-            for (int i=Count-1; i>=0; i--)
+        public DockPane GetDefaultPreviousPane(DockPane pane) {
+            for (int i = Count - 1; i >= 0; i--)
                 if (this[i] != pane)
                     return this[i];
 

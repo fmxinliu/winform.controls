@@ -13,19 +13,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    internal class ClassName
-    {
+namespace System.Text.Template {
+    internal class ClassName {
         private readonly Type _type;
 
-        public ClassName(Type type)
-        {
+        public ClassName(Type type) {
             _type = type;
         }
 
-        public Type Type
-        {
+        public Type Type {
             get { return _type; }
         }
     }

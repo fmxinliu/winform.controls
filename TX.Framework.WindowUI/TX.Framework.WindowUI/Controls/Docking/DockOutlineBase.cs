@@ -2,49 +2,39 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    internal abstract class DockOutlineBase
-    {
-        public DockOutlineBase()
-        {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    internal abstract class DockOutlineBase {
+        public DockOutlineBase() {
             Init();
         }
 
-        private void Init()
-        {
+        private void Init() {
             SetValues(Rectangle.Empty, null, DockStyle.None, -1);
             SaveOldValues();
         }
 
         private Rectangle m_oldFloatWindowBounds;
-        protected Rectangle OldFloatWindowBounds
-        {
+        protected Rectangle OldFloatWindowBounds {
             get { return m_oldFloatWindowBounds; }
         }
 
         private Control m_oldDockTo;
-        protected Control OldDockTo
-        {
+        protected Control OldDockTo {
             get { return m_oldDockTo; }
         }
 
         private DockStyle m_oldDock;
-        protected DockStyle OldDock
-        {
+        protected DockStyle OldDock {
             get { return m_oldDock; }
         }
 
         private int m_oldContentIndex;
-        protected int OldContentIndex
-        {
+        protected int OldContentIndex {
             get { return m_oldContentIndex; }
         }
 
-        protected bool SameAsOldValue
-        {
-            get
-            {
+        protected bool SameAsOldValue {
+            get {
                 return FloatWindowBounds == OldFloatWindowBounds &&
                     DockTo == OldDockTo &&
                     Dock == OldDock &&
@@ -53,43 +43,36 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private Rectangle m_floatWindowBounds;
-        public Rectangle FloatWindowBounds
-        {
+        public Rectangle FloatWindowBounds {
             get { return m_floatWindowBounds; }
         }
 
         private Control m_dockTo;
-        public Control DockTo
-        {
+        public Control DockTo {
             get { return m_dockTo; }
         }
 
         private DockStyle m_dock;
-        public DockStyle Dock
-        {
+        public DockStyle Dock {
             get { return m_dock; }
         }
 
         private int m_contentIndex;
-        public int ContentIndex
-        {
+        public int ContentIndex {
             get { return m_contentIndex; }
         }
 
-        public bool FlagFullEdge
-        {
+        public bool FlagFullEdge {
             get { return m_contentIndex != 0; }
         }
 
         private bool m_flagTestDrop = false;
-        public bool FlagTestDrop
-        {
+        public bool FlagTestDrop {
             get { return m_flagTestDrop; }
             set { m_flagTestDrop = value; }
         }
 
-        private void SaveOldValues()
-        {
+        private void SaveOldValues() {
             m_oldDockTo = m_dockTo;
             m_oldDock = m_dock;
             m_oldContentIndex = m_contentIndex;
@@ -100,8 +83,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
 
         protected abstract void OnClose();
 
-        private void SetValues(Rectangle floatWindowBounds, Control dockTo, DockStyle dock, int contentIndex)
-        {
+        private void SetValues(Rectangle floatWindowBounds, Control dockTo, DockStyle dock, int contentIndex) {
             m_floatWindowBounds = floatWindowBounds;
             m_dockTo = dockTo;
             m_dock = dock;
@@ -109,8 +91,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             FlagTestDrop = true;
         }
 
-        private void TestChange()
-        {
+        private void TestChange() {
             if (m_floatWindowBounds != m_oldFloatWindowBounds ||
                 m_dockTo != m_oldDockTo ||
                 m_dock != m_oldDock ||
@@ -118,43 +99,37 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 OnShow();
         }
 
-        public void Show()
-        {
+        public void Show() {
             SaveOldValues();
             SetValues(Rectangle.Empty, null, DockStyle.None, -1);
             TestChange();
         }
 
-        public void Show(DockPane pane, DockStyle dock)
-        {
+        public void Show(DockPane pane, DockStyle dock) {
             SaveOldValues();
             SetValues(Rectangle.Empty, pane, dock, -1);
             TestChange();
         }
 
-        public void Show(DockPane pane, int contentIndex)
-        {
+        public void Show(DockPane pane, int contentIndex) {
             SaveOldValues();
             SetValues(Rectangle.Empty, pane, DockStyle.Fill, contentIndex);
             TestChange();
         }
 
-        public void Show(DockPanel dockPanel, DockStyle dock, bool fullPanelEdge)
-        {
+        public void Show(DockPanel dockPanel, DockStyle dock, bool fullPanelEdge) {
             SaveOldValues();
             SetValues(Rectangle.Empty, dockPanel, dock, fullPanelEdge ? -1 : 0);
             TestChange();
         }
 
-        public void Show(Rectangle floatWindowBounds)
-        {
+        public void Show(Rectangle floatWindowBounds) {
             SaveOldValues();
             SetValues(floatWindowBounds, null, DockStyle.None, -1);
             TestChange();
         }
 
-        public void Close()
-        {
+        public void Close() {
             OnClose();
         }
     }

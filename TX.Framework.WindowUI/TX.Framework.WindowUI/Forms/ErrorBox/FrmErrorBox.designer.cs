@@ -1,7 +1,5 @@
-﻿namespace TX.Framework.WindowUI.Forms
-{
-    partial class frmErrorBox
-    {
+namespace TX.Framework.WindowUI.Forms {
+    partial class FrmErrorBox {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lbError = new System.Windows.Forms.Label();
@@ -47,7 +42,7 @@
             // btnOK
             // 
             this.btnOK.Location = new System.Drawing.Point(183, 1);
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click_1);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click_1);
             // 
             // panelWorkArea
             // 
@@ -184,7 +179,7 @@
             this.txtErrorDetail.Size = new System.Drawing.Size(481, 250);
             this.txtErrorDetail.TabIndex = 10;
             // 
-            // frmErrorBox
+            // FrmErrorBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,9 +190,9 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimizeBox = false;
-            this.Name = "frmErrorBox";
+            this.Name = "FrmErrorBox";
             this.Text = " 呃，出现异常了！";
-            this.Load += new System.EventHandler(this.frmErrorBox_Load);
+            this.Load += new System.EventHandler(this.FrmErrorBox_Load);
             this.panelWorkArea.ResumeLayout(false);
             this.panelControlArea.ResumeLayout(false);
             this.txTableLayoutPanel1.ResumeLayout(false);
@@ -215,7 +210,5 @@
         private TX.Framework.WindowUI.Controls.TXTextBox textBox1;
         private TX.Framework.WindowUI.Controls.TXTextBox txtError;
         private TX.Framework.WindowUI.Controls.TXTextBox txtErrorDetail;
-
-
     }
 }

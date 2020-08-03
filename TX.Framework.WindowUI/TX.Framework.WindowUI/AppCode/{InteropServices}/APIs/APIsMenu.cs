@@ -1,10 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Runtime.InteropServices.APIs
-{
-    public class APIsMenu
-    {
+namespace System.Runtime.InteropServices.APIs {
+    public class APIsMenu {
         [DllImport("user32.dll")]
         public static extern APIsEnums.MenuItemFlags GetMenuState(
             IntPtr hMenu, int itemID, APIsEnums.MenuItemFlags uFlag);
@@ -31,7 +29,7 @@ namespace System.Runtime.InteropServices.APIs
             IntPtr hMenu,
             int index,
             APIsEnums.MenuItemFlags uFlag);
-        [DllImport("user32.dll", SetLastError=true)]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern int TrackPopupMenu(
             IntPtr hmenu,
             APIsEnums.TrackPopupMenuFlags fuFlags,

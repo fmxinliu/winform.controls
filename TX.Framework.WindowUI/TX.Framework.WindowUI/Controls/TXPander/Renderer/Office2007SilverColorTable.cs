@@ -1,14 +1,12 @@
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provides colors used for Microsoft Office 2007 silver display elements.
     /// </summary>
-    public class Office2007SilverColorTable : TX.Framework.WindowUI.Controls.OfficeColorTable
-    {
+    public class Office2007SilverColorTable : TX.Framework.WindowUI.Controls.OfficeColorTable {
         #region FieldsPrivate
         private PanelColors m_panelColorTable;
         #endregion
@@ -17,12 +15,9 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets the associated ColorTable for the XPanderControls
         /// </summary>
-        public override PanelColors PanelColorTable
-        {
-            get
-            {
-                if (this.m_panelColorTable == null)
-                {
+        public override PanelColors PanelColorTable {
+            get {
+                if (this.m_panelColorTable == null) {
                     this.m_panelColorTable = new PanelColorsOffice2007Silver();
                 }
                 return this.m_panelColorTable;
@@ -34,8 +29,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Initializes a color dictionary with defined colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<ProfessionalColorTable.KnownColors, Color> rgbTable)
-        {
+        protected override void InitColors(Dictionary<ProfessionalColorTable.KnownColors, Color> rgbTable) {
             rgbTable[KnownColors.ButtonPressedBorder] = Color.FromArgb(255, 189, 105);
             rgbTable[KnownColors.ButtonPressedGradientBegin] = Color.FromArgb(248, 181, 106);
             rgbTable[KnownColors.ButtonPressedGradientEnd] = Color.FromArgb(255, 208, 134);

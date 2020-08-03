@@ -1,10 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Runtime.InteropServices.APIs
-{
-    public class APIsWndProc
-    {
+namespace System.Runtime.InteropServices.APIs {
+    public class APIsWndProc {
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLong(
             IntPtr window,

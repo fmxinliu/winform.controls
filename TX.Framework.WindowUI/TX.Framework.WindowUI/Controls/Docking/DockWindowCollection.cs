@@ -2,13 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    public class DockWindowCollection : ReadOnlyCollection<DockWindow>
-    {
-        internal DockWindowCollection(DockPanel dockPanel)
-            : base(new List<DockWindow>())
-        {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    public class DockWindowCollection : ReadOnlyCollection<DockWindow> {
+        internal DockWindowCollection(DockPanel dockPanel) : base(new List<DockWindow>()) {
             Items.Add(new DockWindow(dockPanel, DockState.Document));
             Items.Add(new DockWindow(dockPanel, DockState.DockLeft));
             Items.Add(new DockWindow(dockPanel, DockState.DockRight));
@@ -16,10 +12,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
             Items.Add(new DockWindow(dockPanel, DockState.DockBottom));
         }
 
-        public DockWindow this [DockState dockState]
-        {
-            get
-            {
+        public DockWindow this[DockState dockState] {
+            get {
                 if (dockState == DockState.Document)
                     return Items[0];
                 else if (dockState == DockState.DockLeft || dockState == DockState.DockLeftAutoHide)

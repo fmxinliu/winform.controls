@@ -1,7 +1,5 @@
-﻿namespace TX.Framework.WindowUI.Forms
-{
-    partial class TXWaitingBox
-    {
+namespace TX.Framework.WindowUI.Forms {
+    partial class TXWaitingBox {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.txPanel1 = new TX.Framework.WindowUI.Controls.TXPanel();
             this.loadImage = new System.Windows.Forms.PictureBox();
             this.labWaitMessage = new System.Windows.Forms.Label();

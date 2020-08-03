@@ -14,20 +14,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    internal class ForeachNode : ExpressionNode
-    {
+namespace System.Text.Template {
+    internal class ForeachNode : ExpressionNode {
         private string _Iterator;
 
-        public ForeachNode(TokenMatch tokenMatch)
-            : base(tokenMatch)
-        {
+        public ForeachNode(TokenMatch tokenMatch) : base(tokenMatch) {
             _Iterator = tokenMatch.SubMatches["iterator"];
         }
 
-        private void EvaluateIterator(ITemplateContext context, int rowIndex)
-        {
+        private void EvaluateIterator(ITemplateContext context, int rowIndex) {
             context.AddLocal(this.Iterator + "@row", rowIndex);
             context.AddLocal(this.Iterator + "@odd", rowIndex % 2 == 1);
             context.AddLocal(this.Iterator + "@even", rowIndex % 2 == 0);
@@ -36,19 +31,15 @@ namespace System.Text.Template
             context.AddLocal(this.Iterator + "@OddEven", rowIndex % 2 == 0 ? "Even" : "Odd");
         }
 
-        public override void Evaluate(IExpressionParser parser, ITemplateContext context, StringBuilder output)
-        {
+        public override void Evaluate(IExpressionParser parser, ITemplateContext context, StringBuilder output) {
             IEnumerable list = parser.Parse(this.Expression).Evaluate(context).Value as IEnumerable;
-            if (list != null)
-            {
+            if (list != null) {
                 int rowIndex = 1;
                 ITemplateContext local = context.CreateLocal();
-                foreach (object item in list)
-                {
+                foreach (object item in list) {
                     local.Add(this.Iterator, item, item.GetType());
                     this.EvaluateIterator(local, rowIndex);
-                    foreach (TokenNode node in this.ChildNodes)
-                    {
+                    foreach (TokenNode node in this.ChildNodes) {
                         node.Evaluate(parser, local, output);
                     }
                     rowIndex++;
@@ -56,16 +47,13 @@ namespace System.Text.Template
             }
         }
 
-        public static explicit operator ForeachNode(TokenMatch tokenMatch)
-        {
+        public static explicit operator ForeachNode(TokenMatch tokenMatch) {
             return new ForeachNode(tokenMatch);
         }
 
-        public string Iterator
-        {
+        public string Iterator {
             get { return this._Iterator; }
             set { this._Iterator = value; }
         }
-
     }
 }

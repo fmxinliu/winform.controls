@@ -13,21 +13,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class CoalesceExpression : Expression
-    {
+namespace System.Text.Template {
+    public class CoalesceExpression : Expression {
         private readonly Expression _value;
         private readonly Expression _valueIfNull;
 
-        public CoalesceExpression(Expression value, Expression valueIfNull)
-        {
+        public CoalesceExpression(Expression value, Expression valueIfNull) {
             _value = value;
             _valueIfNull = valueIfNull;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ValueExpression result = _value.Evaluate(context);
 
             if (result.Value == null)
@@ -36,8 +32,7 @@ namespace System.Text.Template
             return result;
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return "(" + _value + " ?? " + _valueIfNull + ")";
         }
     }

@@ -4,25 +4,19 @@ using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    internal static class ResourceHelper
-    {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    internal static class ResourceHelper {
         private static ResourceManager _resourceManager = null;
 
-        private static ResourceManager ResourceManager
-        {
-            get
-            {
+        private static ResourceManager ResourceManager {
+            get {
                 if (_resourceManager == null)
                     _resourceManager = new ResourceManager("TX.Framework.WindowUI.Controls.Docking.Strings", typeof(ResourceHelper).Assembly);
                 return _resourceManager;
             }
-
         }
 
-        public static string GetString(string name)
-        {
+        public static string GetString(string name) {
             return ResourceManager.GetString(name);
         }
     }

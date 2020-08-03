@@ -1,19 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Windows;
+using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [ToolboxBitmap(typeof(RadioButton))]
-    public class TXRadioButton : RadioButton
-    {
+    public class TXRadioButton : RadioButton {
         #region fileds
 
         /// <summary>
@@ -40,9 +38,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Initializes
 
-        public TXRadioButton()
-            : base()
-        {
+        public TXRadioButton() : base() {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.DoubleBuffer, true);
@@ -60,22 +56,19 @@ namespace TX.Framework.WindowUI.Controls
         #region Properties
 
         [Browsable(false)]
-        public new RightToLeft RightToLeft
-        {
+        public new RightToLeft RightToLeft {
             get { return RightToLeft.No; }
             set { base.RightToLeft = RightToLeft.No; }
         }
 
         [Browsable(false)]
-        public new ContentAlignment TextAlign
-        {
+        public new ContentAlignment TextAlign {
             get { return ContentAlignment.MiddleLeft; }
             set { base.TextAlign = ContentAlignment.MiddleLeft; }
         }
 
         [Browsable(false)]
-        public new Size MinimumSize
-        {
+        public new Size MinimumSize {
             get { return new Size(22, 22); }
             set { base.MinimumSize = new Size(22, 22); }
         }
@@ -83,11 +76,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DefaultValue("8")]
         [Description("外圆半径值")]
-        public int MaxRadius
-        {
+        public int MaxRadius {
             get { return this._MaxRadius; }
-            set
-            {
+            set {
                 this._MaxRadius = value >= 3 ? value : 3;
                 this.Invalidate();
             }
@@ -96,11 +87,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DefaultValue("4")]
         [Description("内圆半径值")]
-        public int MinRadius
-        {
+        public int MinRadius {
             get { return this._MinRadius; }
-            set
-            {
+            set {
                 this._MinRadius = value >= 1 ? value : 1;
                 this.Invalidate();
             }
@@ -110,45 +99,36 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Override methods
 
-        protected override void OnMouseEnter(EventArgs e)
-        {
+        protected override void OnMouseEnter(EventArgs e) {
             base.OnMouseEnter(e);
             this._ControlState = EnumControlState.HeightLight;
         }
 
-        protected override void OnMouseLeave(EventArgs e)
-        {
+        protected override void OnMouseLeave(EventArgs e) {
             base.OnMouseLeave(e);
             this._ControlState = EnumControlState.Default;
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
+        protected override void OnMouseDown(MouseEventArgs e) {
             base.OnMouseDown(e);
-            if (e.Button == MouseButtons.Left && e.Clicks == 1)
-            {
+            if (e.Button == MouseButtons.Left && e.Clicks == 1) {
                 this._ControlState = EnumControlState.Focused;
             }
         }
 
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
+        protected override void OnMouseUp(MouseEventArgs e) {
             base.OnMouseUp(e);
-            if (e.Button == MouseButtons.Left && e.Clicks == 1)
-            {
-                if (ClientRectangle.Contains(e.Location))
-                {
+            if (e.Button == MouseButtons.Left && e.Clicks == 1) {
+                if (ClientRectangle.Contains(e.Location)) {
                     this._ControlState = EnumControlState.HeightLight;
                 }
-                else
-                {
+                else {
                     this._ControlState = EnumControlState.Default;
                 }
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             base.OnPaintBackground(e);
             this.DrawContent(e.Graphics);
@@ -165,8 +145,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="g">The Graphics.</param>
         /// User:Ryan  CreateTime:2011-07-29 15:44.
-        private void DrawContent(Graphics g)
-        {
+        private void DrawContent(Graphics g) {
             GDIHelper.InitializeGraphics(g);
             int w = this.Width;
             int h = this.Height;
@@ -182,8 +161,7 @@ namespace TX.Framework.WindowUI.Controls
             //GDIHelper.DrawEllipseBorder(g, minRect, SkinManager.CurrentSkin.BorderColor, 2);
             GDIHelper.FillEllipse(g, minRect, SkinManager.CurrentSkin.DefaultControlColor.First);
             GDIHelper.DrawEllipseBorder(g, minRect, SkinManager.CurrentSkin.BorderColor, 1);
-            switch (this._ControlState)
-            {
+            switch (this._ControlState) {
                 case EnumControlState.HeightLight:
                 case EnumControlState.Focused:
                     maxRect.Inflate(1, 1);
@@ -195,8 +173,7 @@ namespace TX.Framework.WindowUI.Controls
 
             Color c = this.Enabled ? this.ForeColor : SkinManager.CurrentSkin.UselessColor;
             TextRenderer.DrawText(g, this.Text, this.Font, textRect, c, TextFormatFlags.Default);
-            if (this.Checked)
-            {
+            if (this.Checked) {
                 GDIHelper.FillEllipse(g, minRect, Color.FromArgb(15, 216, 32), Color.Green);
                 c = SkinManager.CurrentSkin.BorderColor;
                 GDIHelper.DrawEllipseBorder(g, minRect, c, 1);

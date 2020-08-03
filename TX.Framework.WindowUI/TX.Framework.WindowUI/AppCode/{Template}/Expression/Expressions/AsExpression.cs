@@ -13,24 +13,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class AsExpression : Expression
-    {
+namespace System.Text.Template {
+    public class AsExpression : Expression {
         private readonly Expression _ObjectExpression;
         private readonly Expression _TypeExpression;
 
-        public AsExpression(Expression objectExpression, Expression typeExpression)
-        {
+        public AsExpression(Expression objectExpression, Expression typeExpression) {
             _ObjectExpression = objectExpression;
             _TypeExpression = typeExpression;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ClassName className = _TypeExpression.Evaluate(context).Value as ClassName;
-            if (className == null)
-            {
+            if (className == null) {
                 throw new Exception("as operator requires type");
             }
 
@@ -38,19 +33,16 @@ namespace System.Text.Template
             ValueExpression objectValue = _ObjectExpression.Evaluate(context);
             Type objectType = objectValue.Type;
 
-            if (objectValue.Value == null)
-            {
+            if (objectValue.Value == null) {
                 return Expression.Value(null, checkType);
             }
 
             objectType = Nullable.GetUnderlyingType(objectType) ?? objectType;
-            if (!objectType.IsValueType)
-            {
+            if (!objectType.IsValueType) {
                 return Expression.Value(objectValue.Value, checkType);
             }
 
-            if ((Nullable.GetUnderlyingType(checkType) ?? checkType) == objectType)
-            {
+            if ((Nullable.GetUnderlyingType(checkType) ?? checkType) == objectType) {
                 return Expression.Value(objectValue.Value, checkType);
             }
 

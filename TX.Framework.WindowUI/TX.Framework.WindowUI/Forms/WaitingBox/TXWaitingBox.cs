@@ -1,18 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
-namespace TX.Framework.WindowUI.Forms
-{
-    public partial class TXWaitingBox : BaseForm
-    {
+namespace TX.Framework.WindowUI.Forms {
+    public partial class TXWaitingBox : BaseForm {
         #region fileds
 
         private delegate T FunctionInvoker<T>();
@@ -25,8 +23,7 @@ namespace TX.Framework.WindowUI.Forms
 
         #region Initailizes
 
-        public TXWaitingBox(WaitWindow parent)
-        {
+        public TXWaitingBox(WaitWindow parent) {
             InitializeComponent();
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -34,9 +31,9 @@ namespace TX.Framework.WindowUI.Forms
             this.ShowInTaskbar = false;
             _Parent = parent;
             this.Opacity = 0.95f;
-            this.labWaitMessage.Text = "正在处理，请稍候..."
-                + "\n"
-                + "Dear,Please wait a moment !";
+            this.labWaitMessage.Text = "正在处理，请稍候..." +
+                "\n" +
+                "Dear,Please wait a moment !";
             this.txPanel1.BackEndColor = this.GetRandomColor();
             ControlHelper.BindMouseMoveEvent(this.labWaitMessage);
             //加载的图片
@@ -46,12 +43,9 @@ namespace TX.Framework.WindowUI.Forms
 
         #region override
 
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == (int)WindowMessages.WM_SYSCOMMAND)
-            {
-                if (m.WParam.ToInt32() == 61539 || m.WParam.ToInt32() == 61587)
-                {
+        protected override void WndProc(ref Message m) {
+            if (m.Msg == (int) WindowMessages.WM_SYSCOMMAND) {
+                if (m.WParam.ToInt32() == 61539 || m.WParam.ToInt32() == 61587) {
                     return;
                 }
             }
@@ -59,8 +53,7 @@ namespace TX.Framework.WindowUI.Forms
             base.WndProc(ref m);
         }
 
-        protected override void OnShown(EventArgs e)
-        {
+        protected override void OnShown(EventArgs e) {
             base.OnShown(e);
             FunctionInvoker<object> threadController = new FunctionInvoker<object>(this.DoWork);
             this._ThreadResult = threadController.BeginInvoke(this.WorkComplete, threadController);
@@ -70,32 +63,24 @@ namespace TX.Framework.WindowUI.Forms
 
         #region private methods
 
-        internal object DoWork()
-        {
+        internal object DoWork() {
             WaitWindowEventArgs e = new WaitWindowEventArgs(_Parent, _Parent.Args);
-            if ((this._Parent.WorkerMethod != null))
-            {
+            if ((this._Parent.WorkerMethod != null)) {
                 this._Parent.WorkerMethod(this, e);
             }
             return e.Result;
         }
 
-        private void WorkComplete(IAsyncResult results)
-        {
-            if (!this.IsDisposed)
-            {
-                if (this.InvokeRequired)
-                {
+        private void WorkComplete(IAsyncResult results) {
+            if (!this.IsDisposed) {
+                if (this.InvokeRequired) {
                     this.Invoke(new WaitWindow.MethodInvoker<IAsyncResult>(this.WorkComplete), results);
                 }
-                else
-                {
-                    try
-                    {
-                        this.Result = ((FunctionInvoker<object>)results.AsyncState).EndInvoke(results);
+                else {
+                    try {
+                        this.Result = ((FunctionInvoker<object>) results.AsyncState).EndInvoke(results);
                     }
-                    catch (Exception ex)
-                    {
+                    catch (Exception ex) {
                         this.Error = ex;
                     }
                     this.Close();
@@ -103,23 +88,19 @@ namespace TX.Framework.WindowUI.Forms
             }
         }
 
-        internal void SetMessage(string message)
-        {
-            if (!string.IsNullOrEmpty(message))
-            {
+        internal void SetMessage(string message) {
+            if (!string.IsNullOrEmpty(message)) {
                 this.labWaitMessage.Text = message;
             }
         }
 
-        internal void Cancel()
-        {
+        internal void Cancel() {
             this.Invoke(new MethodInvoker(this.Close), null);
         }
 
         #region GetRandomColor
 
-        private Color GetRandomColor()
-        {
+        private Color GetRandomColor() {
             int rMax = 248;
             int rMin = 204;
             int gMax = 250;

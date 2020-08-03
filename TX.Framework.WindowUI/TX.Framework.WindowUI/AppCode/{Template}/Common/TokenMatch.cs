@@ -14,18 +14,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace System.Text.Template
-{
-    public class TokenMatch
-    {
+namespace System.Text.Template {
+    public class TokenMatch {
         private readonly Dictionary<string, string> _SubMatches = new Dictionary<string, string>();
         private readonly string _TokenId;
         private readonly TemplateTokenType _TokenType;
         private readonly bool _RemoveEmptyLine;
         private readonly Match _Match;
 
-        public TokenMatch(Regex regex, Match match, TemplateTokenType tokenType, bool removeEmptyLine, string tokenId)
-        {
+        public TokenMatch(Regex regex, Match match, TemplateTokenType tokenType, bool removeEmptyLine, string tokenId) {
             _TokenType = tokenType;
             _TokenId = tokenId;
             _Match = match;
@@ -33,11 +30,9 @@ namespace System.Text.Template
             #region _SubMatches = { ... }
 
             Group group = null;
-            foreach (string groupName in regex.GetGroupNames())
-            {
+            foreach (string groupName in regex.GetGroupNames()) {
                 group = match.Groups[groupName];
-                if (group.Success)
-                {
+                if (group.Success) {
                     _SubMatches[groupName] = group.Value;
                 }
             }
@@ -45,33 +40,27 @@ namespace System.Text.Template
             #endregion
         }
 
-        public Match Match
-        {
+        public Match Match {
             get { return this._Match; }
         }
 
-        public string Value
-        {
+        public string Value {
             get { return this.Match.Value; }
         }
 
-        public string TokenId
-        {
+        public string TokenId {
             get { return _TokenId; }
         }
 
-        public TemplateTokenType TokenType
-        {
+        public TemplateTokenType TokenType {
             get { return _TokenType; }
         }
 
-        public Dictionary<string, string> SubMatches
-        {
+        public Dictionary<string, string> SubMatches {
             get { return _SubMatches; }
         }
 
-        public bool RemoveEmptyLine
-        {
+        public bool RemoveEmptyLine {
             get { return _RemoveEmptyLine; }
         }
     }

@@ -25,34 +25,32 @@
  */
 
 using System;
-using System.Runtime.InteropServices;  
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using TX.Framework.WindowUI.Controls.TXMonthCalendar;  
 
-namespace TX.Framework.WindowUI.Controls
-{
-    
+using TX.Framework.WindowUI.Controls.TXMonthCalendar;
+
+namespace TX.Framework.WindowUI.Controls {
+
     #region Delegates
 
     internal delegate int HookProc(int nCode, Int32 wParam, IntPtr lParam);
 
     #endregion
-    
+
     /// <summary>
     /// Summary description for GlobalHook.
     /// </summary>
-    internal class GlobalHook : IDisposable
-    {
-                
+    internal class GlobalHook : IDisposable {
 
         #region class members
 
         private bool disposed;
         private int m_keyboardHook;
- 
+
         private HookProc m_keyboardHookProcedure;
-        
+
         #endregion
 
         #region Events
@@ -62,131 +60,102 @@ namespace TX.Framework.WindowUI.Controls
         public event KeyPressEventHandler KeyPress;
 
         #endregion
-        
+
         #region Constructor
 
-        public GlobalHook()
-        {
-
-        }
+        public GlobalHook() { }
 
         #endregion
 
         #region IDisposable Members
-        
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    RemoveKeyboardHook();        
+
+        protected virtual void Dispose(bool disposing) {
+            if (!disposed) {
+                if (disposing) {
+                    RemoveKeyboardHook();
                 }
                 // shared cleanup logic
                 disposed = true;
             }
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         #endregion
-    
 
         #region public methods
-        
-        public void InstallKeyboardHook()
-        {
-            try
-            {
+
+        public void InstallKeyboardHook() {
+            try {
                 // install Keyboard hook 
-                if(m_keyboardHook == 0)
-                {
+                if (m_keyboardHook == 0) {
                     m_keyboardHookProcedure = new HookProc(KeyboardHookProc);
                     m_keyboardHook = TXMonthCalendar.NativeMethods.SetWindowsHookEx(TXMonthCalendar.NativeMethods.WH_KEYBOARD_LL,
-                        m_keyboardHookProcedure, 
+                        m_keyboardHookProcedure,
                         Marshal.GetHINSTANCE(
-                        Assembly.GetExecutingAssembly().GetModules()[0]),
+                            Assembly.GetExecutingAssembly().GetModules()[0]),
                         0);
                 }
             }
-            catch(Exception)
-            {
-
-            }
+            catch (Exception) { }
         }
 
-        public void RemoveKeyboardHook()
-        {
+        public void RemoveKeyboardHook() {
             bool retKeyboard = true;
-            
-            try
-            {
 
-                if(m_keyboardHook != 0)
-                {
+            try {
+
+                if (m_keyboardHook != 0) {
                     retKeyboard = NativeMethods.UnhookWindowsHookEx(m_keyboardHook);
                     m_keyboardHook = 0;
                 }
             }
-            catch(Exception)
-            {
-
-            }
+            catch (Exception) { }
         }
 
-
         #endregion
-        
+
         #region private methods
 
-        private int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam)
-        {
+        private int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam) {
             // it was ok and someone listens to events
-            if ((nCode >= 0) && (KeyDown!=null || KeyUp!=null || KeyPress!=null))
-            {
-                TXMonthCalendar.NativeMethods.KeyboardHookStruct MyKeyboardHookStruct = (TXMonthCalendar.NativeMethods.KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(TXMonthCalendar.NativeMethods.KeyboardHookStruct));
+            if ((nCode >= 0) && (KeyDown != null || KeyUp != null || KeyPress != null)) {
+                TXMonthCalendar.NativeMethods.KeyboardHookStruct MyKeyboardHookStruct = (TXMonthCalendar.NativeMethods.KeyboardHookStruct) Marshal.PtrToStructure(lParam, typeof(TXMonthCalendar.NativeMethods.KeyboardHookStruct));
                 // KeyDown
-                if ((KeyDown != null) && (wParam == TXMonthCalendar.NativeMethods.WM_KEYDOWN || wParam == TXMonthCalendar.NativeMethods.WM_SYSKEYDOWN))
-                {
-                    Keys keyData=(Keys)MyKeyboardHookStruct.vkCode;
+                if ((KeyDown != null) && (wParam == TXMonthCalendar.NativeMethods.WM_KEYDOWN || wParam == TXMonthCalendar.NativeMethods.WM_SYSKEYDOWN)) {
+                    Keys keyData = (Keys) MyKeyboardHookStruct.vkCode;
                     KeyEventArgs e = new KeyEventArgs(keyData);
                     this.KeyDown(this, e);
                 }
-                
+
                 // KeyPress
-                if ((KeyPress != null) && (wParam == TXMonthCalendar.NativeMethods.WM_KEYDOWN))
-                {
+                if ((KeyPress != null) && (wParam == TXMonthCalendar.NativeMethods.WM_KEYDOWN)) {
                     byte[] keyState = new byte[256];
                     TXMonthCalendar.NativeMethods.GetKeyboardState(keyState);
 
-                    byte[] inBuffer= new byte[2];
+                    byte[] inBuffer = new byte[2];
                     if (TXMonthCalendar.NativeMethods.ToAscii(MyKeyboardHookStruct.vkCode,
-                        MyKeyboardHookStruct.scanCode,
-                        keyState,
-                        inBuffer,
-                        MyKeyboardHookStruct.flags)==1) 
-                    {
-                        KeyPressEventArgs e = new KeyPressEventArgs((char)inBuffer[0]);
+                            MyKeyboardHookStruct.scanCode,
+                            keyState,
+                            inBuffer,
+                            MyKeyboardHookStruct.flags) == 1) {
+                        KeyPressEventArgs e = new KeyPressEventArgs((char) inBuffer[0]);
                         KeyPress(this, e);
                     }
                 }
-                
+
                 // KeyUp
-                if ((KeyUp != null) && (wParam == TXMonthCalendar.NativeMethods.WM_KEYUP || wParam == TXMonthCalendar.NativeMethods.WM_SYSKEYUP))
-                {
-                    Keys keyData=(Keys)MyKeyboardHookStruct.vkCode;
+                if ((KeyUp != null) && (wParam == TXMonthCalendar.NativeMethods.WM_KEYUP || wParam == TXMonthCalendar.NativeMethods.WM_SYSKEYUP)) {
+                    Keys keyData = (Keys) MyKeyboardHookStruct.vkCode;
                     KeyEventArgs e = new KeyEventArgs(keyData);
                     KeyUp(this, e);
                 }
-
             }
-            return TXMonthCalendar.NativeMethods.CallNextHookEx(m_keyboardHook, nCode, wParam, lParam); 
-        }    
-
+            return TXMonthCalendar.NativeMethods.CallNextHookEx(m_keyboardHook, nCode, wParam, lParam);
+        }
 
         #endregion
     }

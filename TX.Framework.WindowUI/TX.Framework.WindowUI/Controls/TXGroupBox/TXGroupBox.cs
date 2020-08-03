@@ -1,18 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [ToolboxBitmap(typeof(GroupBox))]
-    public class TXGroupBox : GroupBox
-    {
+    public class TXGroupBox : GroupBox {
         #region fileds
 
         /// <summary>
@@ -48,9 +46,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Initializes
 
-        public TXGroupBox()
-            : base()
-        {
+        public TXGroupBox() : base() {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.DoubleBuffer, true);
@@ -70,11 +66,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DefaultValue(6)]
         [Description("圆角值")]
-        public int CornerRadius
-        {
+        public int CornerRadius {
             get { return this._CornerRadius; }
-            set
-            {
+            set {
                 this._CornerRadius = value > 0 ? value : 0;
                 base.Invalidate();
             }
@@ -82,11 +76,9 @@ namespace TX.Framework.WindowUI.Controls
 
         [Category("TXProperties")]
         [Description("标题字体")]
-        public Font CaptionFont
-        {
+        public Font CaptionFont {
             get { return this._CaptionFont; }
-            set
-            {
+            set {
                 this._CaptionFont = value;
                 base.Invalidate(true);
             }
@@ -94,11 +86,9 @@ namespace TX.Framework.WindowUI.Controls
 
         [Category("TXProperties")]
         [Description("标题颜色")]
-        public Color CaptionColor
-        {
+        public Color CaptionColor {
             get { return this._CaptionColor; }
-            set
-            {
+            set {
                 this._CaptionColor = value;
                 base.Invalidate(true);
             }
@@ -107,11 +97,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DefaultValue(1)]
         [Description("边框宽度")]
-        public int BorderWidth
-        {
+        public int BorderWidth {
             get { return this._BorderWidth; }
-            set
-            {
+            set {
                 this._BorderWidth = value > 1 ? value : 1;
                 this.Invalidate();
             }
@@ -119,11 +107,9 @@ namespace TX.Framework.WindowUI.Controls
 
         [Category("TXProperties")]
         [Description("边框颜色")]
-        public Color BorderColor
-        {
+        public Color BorderColor {
             get { return this._BorderColor; }
-            set
-            {
+            set {
                 this._BorderColor = value;
                 this.Invalidate();
             }
@@ -132,11 +118,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DefaultValue(3)]
         [Description("文本的边距")]
-        public int TextMargin
-        {
+        public int TextMargin {
             get { return this._TextMargin; }
-            set
-            {
+            set {
                 this._TextMargin = value > this._CornerRadius ? value : this._CornerRadius;
                 this.Invalidate();
             }
@@ -145,11 +129,9 @@ namespace TX.Framework.WindowUI.Controls
         [Category("TXProperties")]
         [DefaultValue(typeof(EnumBorderStyle), "Default")]
         [Description("边框样式")]
-        public EnumBorderStyle BorderStyle
-        {
+        public EnumBorderStyle BorderStyle {
             get { return this._BorderStyle; }
-            set
-            {
+            set {
                 this._BorderStyle = value;
                 this.Invalidate();
             }
@@ -159,16 +141,14 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Override methods
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             base.OnPaint(e);
             base.OnPaintBackground(e);
             Graphics g = e.Graphics;
             GDIHelper.InitializeGraphics(g);
             Rectangle textRect = this.GetTextRect(g);
             Color textColor = this.Enabled ? this._CaptionColor : SkinManager.CurrentSkin.UselessColor;
-            switch (this._BorderStyle)
-            {
+            switch (this._BorderStyle) {
                 case EnumBorderStyle.QQStyle:
                     this.DrawQQStyleBorder(g, textRect);
                     break;
@@ -190,14 +170,11 @@ namespace TX.Framework.WindowUI.Controls
         /// 计算文本区域
         /// </summary>
         /// <param name="g">The Graphics.</param>
-        /// <returns></returns>
         /// User:K.Anding  CreateTime:2011-7-30 22:30.
-        private Rectangle GetTextRect(Graphics g)
-        {
+        private Rectangle GetTextRect(Graphics g) {
             Rectangle textRect = new Rectangle();
             Size textSize = g.MeasureString(this.Text, this._CaptionFont).ToSize();
-            switch (this._BorderStyle)
-            {
+            switch (this._BorderStyle) {
                 case EnumBorderStyle.Default:
                 case EnumBorderStyle.None:
                     textRect.X = this.ClientRectangle.X + this._TextMargin;
@@ -220,8 +197,7 @@ namespace TX.Framework.WindowUI.Controls
         /// 绘制默认边框
         /// </summary>
         /// User:K.Anding  CreateTime:2011-7-30 22:30.
-        private void DrawDefaultBorder(Graphics g, Rectangle textRect)
-        {
+        private void DrawDefaultBorder(Graphics g, Rectangle textRect) {
             Rectangle rect = new Rectangle();
             rect.X = 0;
             rect.Y = textRect.Height / 2;
@@ -237,22 +213,19 @@ namespace TX.Framework.WindowUI.Controls
         /// 绘制qq风格的边框
         /// </summary>
         /// User:K.Anding  CreateTime:2011-7-30 22:30.
-        private void DrawQQStyleBorder(Graphics g, Rectangle textRect)
-        {
+        private void DrawQQStyleBorder(Graphics g, Rectangle textRect) {
             Color c1 = this._BorderColor;
             Color c2 = Color.FromArgb(20, c1);
             Rectangle rect = new Rectangle(textRect.Right + this._TextMargin,
                 textRect.Height / 2,
                 this.Width - textRect.Right - this._TextMargin,
                 this._BorderWidth);
-            using (LinearGradientBrush brush = new LinearGradientBrush(rect, c1, c2, 180))
-            {
+            using (LinearGradientBrush brush = new LinearGradientBrush(rect, c1, c2, 180)) {
                 Blend blend = new Blend();
                 blend.Positions = new float[] { 0f, .2f, 1f };
                 blend.Factors = new float[] { 1f, .6f, 0.2f };
                 brush.Blend = blend;
-                using (Pen pen = new Pen(brush, this._BorderWidth))
-                {
+                using (Pen pen = new Pen(brush, this._BorderWidth)) {
                     g.DrawLine(pen, rect.X, rect.Y, rect.Right, rect.Y);
                 }
             }

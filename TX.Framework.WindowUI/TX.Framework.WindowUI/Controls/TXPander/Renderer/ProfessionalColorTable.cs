@@ -1,26 +1,24 @@
-using System.Drawing;
-using System.Windows.Forms;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using System;
-using Microsoft.Win32;
-using System.IO;
 
-namespace TX.Framework.WindowUI.Controls
-{
+using Microsoft.Win32;
+
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provides colors used for Microsoft Office display elements.
     /// </summary>
-    public class ProfessionalColorTable : System.Windows.Forms.ProfessionalColorTable
-    {
+    public class ProfessionalColorTable : System.Windows.Forms.ProfessionalColorTable {
         #region Enums
         /// <summary>
         /// Gets or sets the KnownColors appearance of the ProfessionalColorTable.
         /// </summary>
-        public enum KnownColors
-        {
+        public enum KnownColors {
             /// <summary>
             /// The border color to use with the <see cref="ButtonPressedGradientBegin"/>, <see cref="ButtonPressedGradientMiddle"/>, and <see cref="ButtonPressedGradientEnd"/> colors.
             /// </summary>
@@ -228,9 +226,6 @@ namespace TX.Framework.WindowUI.Controls
             /// The text color used on the ToolStrip.
             /// </summary>
             ToolStripText,
-            /// <summary>
-            /// 
-            /// </summary>
             LastKnownColor = SeparatorLight
         }
 
@@ -250,211 +245,169 @@ namespace TX.Framework.WindowUI.Controls
         /// <value>
         /// A <see cref="System.Drawing.Color"/> that is the border color to use with the <see cref="ButtonPressedGradientBegin"/>, <see cref="ButtonPressedGradientMiddle"/>, and <see cref="ButtonPressedGradientEnd"/> colors.
         /// </value>
-        public override Color ButtonPressedBorder
-        {
-            get
-            {
+        public override Color ButtonPressedBorder {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonPressedBorder);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used when the button is pressed down.
         /// </summary>
-        public override Color ButtonPressedGradientBegin
-        {
-            get
-            {
+        public override Color ButtonPressedGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonPressedGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used when the button is pressed down.
         /// </summary>
-        public override Color ButtonPressedGradientEnd
-        {
-            get
-            {
+        public override Color ButtonPressedGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonPressedGradientEnd);
             }
         }
         /// <summary>
         /// Gets the middle color of the gradient used when the button is pressed down.
         /// </summary>
-        public override Color ButtonPressedGradientMiddle
-        {
-            get
-            {
+        public override Color ButtonPressedGradientMiddle {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonPressedGradientMiddle);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used when the button is selected.
         /// </summary>
-        public override Color ButtonSelectedBorder
-        {
-            get
-            {
+        public override Color ButtonSelectedBorder {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonSelectedBorder);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used when the button is selected.
         /// </summary>
-        public override Color ButtonSelectedGradientBegin
-        {
-            get
-            {
+        public override Color ButtonSelectedGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonSelectedGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used when the button is selected.
         /// </summary>
-        public override Color ButtonSelectedGradientEnd
-        {
-            get
-            {
+        public override Color ButtonSelectedGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonSelectedGradientEnd);
             }
         }
         /// <summary>
         /// Gets the middle color of the gradient used when the button is selected.
         /// </summary>
-        public override Color ButtonSelectedGradientMiddle
-        {
-            get
-            {
+        public override Color ButtonSelectedGradientMiddle {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonSelectedGradientMiddle);
             }
         }
-        
+
         /// <summary>
         /// Gets the border color to use with ButtonSelectedHighlight.
         /// </summary>
-        public override Color ButtonSelectedHighlightBorder
-        {
-            get
-            {
+        public override Color ButtonSelectedHighlightBorder {
+            get {
                 return this.FromKnownColor(KnownColors.ButtonSelectedHighlightBorder);
             }
         }
         /// <summary>
         /// Gets the solid color to use when the check box is selected and gradients are being used.
         /// </summary>
-        public override Color CheckBackground
-        {
-            get
-            {
+        public override Color CheckBackground {
+            get {
                 return this.FromKnownColor(KnownColors.CheckBackground);
             }
         }
         /// <summary>
         /// Gets the solid color to use when the check box is selected and gradients are being used.
         /// </summary>
-        public override Color CheckSelectedBackground
-        {
-            get
-            {
+        public override Color CheckSelectedBackground {
+            get {
                 return this.FromKnownColor(KnownColors.CheckSelectedBackground);
             }
         }
         /// <summary>
         /// Gets the color to use for shadow effects on the grip or move handle.
         /// </summary>
-        public override Color GripDark
-        {
-            get
-            {
+        public override Color GripDark {
+            get {
                 return this.FromKnownColor(KnownColors.GripDark);
             }
         }
         /// <summary>
         /// Gets the color to use for highlight effects on the grip or move handle.
         /// </summary>
-        public override Color GripLight
-        {
-            get
-            {
+        public override Color GripLight {
+            get {
                 return this.FromKnownColor(KnownColors.GripLight);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used in the image margin of a ToolStripDropDownMenu.
         /// </summary>
-        public override Color ImageMarginGradientBegin
-        {
-            get
-            {
+        public override Color ImageMarginGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.ImageMarginGradientBegin);
             }
         }
         /// <summary>
         /// Gets the border color or a MenuStrip.
         /// </summary>
-        public override Color MenuBorder
-        {
-            get
-            {
+        public override Color MenuBorder {
+            get {
                 return this.FromKnownColor(KnownColors.MenuBorder);
             }
         }
         /// <summary>
         /// Gets the border color to use with a ToolStripMenuItem.
         /// </summary>
-        public override Color MenuItemBorder
-        {
-            get
-            {
+        public override Color MenuItemBorder {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemBorder);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used when a top-level ToolStripMenuItem is pressed down.
         /// </summary>
-        public override Color MenuItemPressedGradientBegin
-        {
-            get
-            {
+        public override Color MenuItemPressedGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemPressedGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used when a top-level ToolStripMenuItem is pressed down.
         /// </summary>
-        public override Color MenuItemPressedGradientEnd
-        {
-            get
-            {
+        public override Color MenuItemPressedGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemPressedGradientEnd);
             }
         }
         /// <summary>
         /// Gets the middle color of the gradient used when a top-level ToolStripMenuItem is pressed down.
         /// </summary>
-        public override Color MenuItemPressedGradientMiddle
-        {
-            get
-            {
+        public override Color MenuItemPressedGradientMiddle {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemPressedGradientMiddle);
             }
         }
         /// <summary>
         /// Gets the solid color to use when a ToolStripMenuItem other than the top-level ToolStripMenuItem is selected.
         /// </summary>
-        public override Color MenuItemSelected
-        {
-            get
-            {
+        public override Color MenuItemSelected {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemSelected);
             }
         }
         /// <summary>
         /// Gets the text color of a top-level ToolStripMenuItem.
         /// </summary>
-        public virtual Color MenuItemText
-        {
-            get
-            {
+        public virtual Color MenuItemText {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemText);
             }
         }
@@ -462,10 +415,8 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the border color used when a top-level
         /// ToolStripMenuItem is selected.
         /// </summary>
-        public virtual Color MenuItemTopLevelSelectedBorder
-        {
-            get
-            {
+        public virtual Color MenuItemTopLevelSelectedBorder {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemTopLevelSelectedBorder);
             }
         }
@@ -473,10 +424,8 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the starting color of the gradient used when a top-level
         /// ToolStripMenuItem is selected.
         /// </summary>
-        public virtual Color MenuItemTopLevelSelectedGradientBegin
-        {
-            get
-            {
+        public virtual Color MenuItemTopLevelSelectedGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemTopLevelSelectedGradientBegin);
             }
         }
@@ -484,10 +433,8 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the end color of the gradient used when a top-level
         /// ToolStripMenuItem is selected.
         /// </summary>
-        public virtual Color MenuItemTopLevelSelectedGradientEnd
-        {
-            get
-            {
+        public virtual Color MenuItemTopLevelSelectedGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemTopLevelSelectedGradientEnd);
             }
         }
@@ -495,262 +442,209 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the middle color of the gradient used when a top-level
         /// ToolStripMenuItem is selected.
         /// </summary>
-        public virtual Color MenuItemTopLevelSelectedGradientMiddle
-        {
-            get
-            {
+        public virtual Color MenuItemTopLevelSelectedGradientMiddle {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemTopLevelSelectedGradientMiddle);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used when the ToolStripMenuItem is selected.
         /// </summary>
-        public override Color MenuItemSelectedGradientBegin
-        {
-            get
-            {
+        public override Color MenuItemSelectedGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemSelectedGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used when the ToolStripMenuItem is selected.
         /// </summary>
-        public override Color MenuItemSelectedGradientEnd
-        {
-            get
-            {
+        public override Color MenuItemSelectedGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.MenuItemSelectedGradientEnd);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used in the MenuStrip.
         /// </summary>
-        public override Color MenuStripGradientBegin
-        {
-            get
-            {
+        public override Color MenuStripGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.MenuStripGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used in the MenuStrip.
         /// </summary>
-        public override Color MenuStripGradientEnd
-        {
-            get
-            {
+        public override Color MenuStripGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.MenuStripGradientEnd);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used in the ToolStripOverflowButton.
         /// </summary>
-        public override Color OverflowButtonGradientBegin
-        {
-            get
-            {
+        public override Color OverflowButtonGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.OverflowButtonGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used in the ToolStripOverflowButton.
         /// </summary>
-        public override Color OverflowButtonGradientEnd
-        {
-            get
-            {
+        public override Color OverflowButtonGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.OverflowButtonGradientEnd);
             }
         }
         /// <summary>
         /// Gets the middle color of the gradient used in the ToolStripOverflowButton.
         /// </summary>
-        public override Color OverflowButtonGradientMiddle
-        {
-            get
-            {
+        public override Color OverflowButtonGradientMiddle {
+            get {
                 return this.FromKnownColor(KnownColors.OverflowButtonGradientMiddle);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used in the ToolStripContainer.
         /// </summary>
-        public override Color RaftingContainerGradientBegin
-        {
-            get
-            {
+        public override Color RaftingContainerGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.RaftingContainerGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used in the ToolStripContainer.
         /// </summary>
-        public override Color RaftingContainerGradientEnd
-        {
-            get
-            {
+        public override Color RaftingContainerGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.RaftingContainerGradientEnd);
             }
         }
         /// <summary>
         /// Gets the color to use to for shadow effects on the ToolStripSeparator.
         /// </summary>
-        public override Color SeparatorDark
-        {
-            get
-            {
+        public override Color SeparatorDark {
+            get {
                 return this.FromKnownColor(KnownColors.SeparatorDark);
             }
         }
         /// <summary>
         /// Gets the color to use to for highlight effects on the ToolStripSeparator.
         /// </summary>
-        public override Color SeparatorLight
-        {
-            get
-            {
+        public override Color SeparatorLight {
+            get {
                 return this.FromKnownColor(KnownColors.SeparatorLight);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used on the StatusStrip.
         /// </summary>
-        public override Color StatusStripGradientBegin
-        {
-            get
-            {
+        public override Color StatusStripGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.StatusStripGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used on the StatusStrip.
         /// </summary>
-        public override Color StatusStripGradientEnd
-        {
-            get
-            {
+        public override Color StatusStripGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.StatusStripGradientEnd);
             }
         }
         /// <summary>
         /// Gets the text color used on the StatusStrip.
         /// </summary>
-        public virtual Color StatusStripText
-        {
-            get
-            {
+        public virtual Color StatusStripText {
+            get {
                 return this.FromKnownColor(KnownColors.StatusStripText);
             }
         }
         /// <summary>
         /// Gets the border color to use on the bottom edge of the ToolStrip.
         /// </summary>
-        public override Color ToolStripBorder
-        {
-            get
-            {
+        public override Color ToolStripBorder {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripBorder);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used in the ToolStripContentPanel.
         /// </summary>
-        public override Color ToolStripContentPanelGradientBegin
-        {
-            get
-            {
+        public override Color ToolStripContentPanelGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripContentPanelGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used in the ToolStripContentPanel.
         /// </summary>
-        public override Color ToolStripContentPanelGradientEnd
-        {
-            get
-            {
+        public override Color ToolStripContentPanelGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripContentPanelGradientEnd);
             }
         }
         /// <summary>
         /// Gets the solid background color of the ToolStripDropDown.
         /// </summary>
-        public override Color ToolStripDropDownBackground
-        {
-            get
-            {
+        public override Color ToolStripDropDownBackground {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripDropDownBackground);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used in the ToolStrip background.
         /// </summary>
-        public override Color ToolStripGradientBegin
-        {
-            get
-            {
+        public override Color ToolStripGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used in the ToolStrip background.
         /// </summary>
-        public override Color ToolStripGradientEnd
-        {
-            get
-            {
+        public override Color ToolStripGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripGradientEnd);
             }
         }
         /// <summary>
         /// Gets the middle color of the gradient used in the ToolStrip background.
         /// </summary>
-        public override Color ToolStripGradientMiddle
-        {
-            get
-            {
+        public override Color ToolStripGradientMiddle {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripGradientMiddle);
             }
         }
         /// <summary>
         /// Gets the starting color of the gradient used in the ToolStripPanel.
         /// </summary>
-        public override Color ToolStripPanelGradientBegin
-        {
-            get
-            {
+        public override Color ToolStripPanelGradientBegin {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripPanelGradientBegin);
             }
         }
         /// <summary>
         /// Gets the end color of the gradient used in the ToolStripPanel.
         /// </summary>
-        public override Color ToolStripPanelGradientEnd
-        {
-            get
-            {
+        public override Color ToolStripPanelGradientEnd {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripPanelGradientEnd);
             }
         }
         /// <summary>
         /// Gets the text color used on the ToolStrip.
         /// </summary>
-        public virtual Color ToolStripText
-        {
-            get
-            {
+        public virtual Color ToolStripText {
+            get {
                 return this.FromKnownColor(KnownColors.ToolStripText);
             }
         }
         /// <summary>
         /// Gets the associated ColorTable for the XPanderControls
         /// </summary>
-        public virtual PanelColors PanelColorTable
-        {
-            get
-            {
-                if (this.m_panelColorTable == null)
-                {
+        public virtual PanelColors PanelColorTable {
+            get {
+                if (this.m_panelColorTable == null) {
                     this.m_panelColorTable = new PanelColors();
                 }
                 return this.m_panelColorTable;
@@ -759,40 +653,30 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets or sets a value indicating whether to use System.Drawing.SystemColors rather than colors that match the current visual style.
         /// </summary>
-        public new bool UseSystemColors
-        {
+        public new bool UseSystemColors {
             get { return base.UseSystemColors; }
-            set
-            {
-                if (value.Equals(base.UseSystemColors) == false)
-                {
+            set {
+                if (value.Equals(base.UseSystemColors) == false) {
                     base.UseSystemColors = value;
-                    if (this.m_dictionaryRGBTable != null)
-                    {
+                    if (this.m_dictionaryRGBTable != null) {
                         this.m_dictionaryRGBTable.Clear();
                         this.m_dictionaryRGBTable = null;
                     }
                 }
             }
         }
-        internal Color FromKnownColor(KnownColors color)
-        {
-            return (Color)this.ColorTable[color];
+        internal Color FromKnownColor(KnownColors color) {
+            return (Color) this.ColorTable[color];
         }
-        
-        private Dictionary<KnownColors, Color> ColorTable
-        {
-            get
-            {
-                if (this.m_dictionaryRGBTable == null)
-                {
+
+        private Dictionary<KnownColors, Color> ColorTable {
+            get {
+                if (this.m_dictionaryRGBTable == null) {
                     this.m_dictionaryRGBTable = new Dictionary<KnownColors, Color>(0xd4);
-                    if ((this.UseSystemColors == true) || (ToolStripManager.VisualStylesEnabled == false))
-                    {
+                    if ((this.UseSystemColors == true) || (ToolStripManager.VisualStylesEnabled == false)) {
                         InitBaseColors(this.m_dictionaryRGBTable);
                     }
-                    else
-                    {
+                    else {
                         InitColors(this.m_dictionaryRGBTable);
                     }
                 }
@@ -806,9 +690,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Initializes a new instance of the ProfessionalColorTable class.
         /// </summary>
-        public ProfessionalColorTable()
-        {
-        }
+        public ProfessionalColorTable() { }
 
         #endregion
 
@@ -817,16 +699,14 @@ namespace TX.Framework.WindowUI.Controls
         /// Initialize a color Dictionary with defined colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected virtual void InitColors(Dictionary<KnownColors, Color> rgbTable)
-        {
+        protected virtual void InitColors(Dictionary<KnownColors, Color> rgbTable) {
             InitBaseColors(rgbTable);
         }
         #endregion
 
         #region MethodsPrivate
 
-        private void InitBaseColors(Dictionary<KnownColors, Color> rgbTable)
-        {
+        private void InitBaseColors(Dictionary<KnownColors, Color> rgbTable) {
             rgbTable[KnownColors.ButtonPressedBorder] = base.ButtonPressedBorder;
             rgbTable[KnownColors.ButtonPressedGradientBegin] = base.ButtonPressedGradientBegin;
             rgbTable[KnownColors.ButtonPressedGradientEnd] = base.ButtonPressedGradientEnd;

@@ -1,7 +1,5 @@
-﻿namespace TX.Framework.WindowUI.Controls
-{
-    partial class frmPreview
-    {
+namespace TX.Framework.WindowUI.Controls {
+    partial class FrmPreview {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panelWorkArea.SuspendLayout();
             this.panelControlArea.SuspendLayout();
@@ -64,7 +59,7 @@
             this.webBrowser1.Size = new System.Drawing.Size(694, 369);
             this.webBrowser1.TabIndex = 0;
             // 
-            // frmPreview
+            // FrmPreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -72,10 +67,10 @@
             this.ClientSize = new System.Drawing.Size(712, 439);
             this.ControlMargin = 25;
             this.MaximizeBox = true;
-            this.Name = "frmPreview";
+            this.Name = "FrmPreview";
             this.ResizeEnable = true;
             this.ShowBtnCancel = false;
-            this.Text = "frmPreview";
+            this.Text = "FrmPreview";
             this.panelWorkArea.ResumeLayout(false);
             this.panelControlArea.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -85,6 +80,5 @@
         #endregion
 
         private System.Windows.Forms.WebBrowser webBrowser1;
-
     }
 }

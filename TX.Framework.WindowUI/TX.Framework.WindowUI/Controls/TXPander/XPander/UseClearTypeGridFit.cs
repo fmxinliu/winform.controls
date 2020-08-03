@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Set the TextRenderingHint.ClearTypeGridFit until instance disposed.
     /// </summary>
-    public class UseClearTypeGridFit : IDisposable
-    {
+    public class UseClearTypeGridFit : IDisposable {
         #region FieldsPrivate
         private Graphics m_graphics;
         private TextRenderingHint m_textRenderingHint;
@@ -21,14 +19,12 @@ namespace TX.Framework.WindowUI.Controls
         /// Initialize a new instance of the UseClearTypeGridFit class.
         /// </summary>
         /// <param name="graphics">Graphics instance.</param>
-        public UseClearTypeGridFit(Graphics graphics)
-        {
-            if (graphics == null)
-            {
+        public UseClearTypeGridFit(Graphics graphics) {
+            if (graphics == null) {
                 throw new ArgumentNullException("graphics",
                     string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    Properties.Resources.IDS_ArgumentException,
-                    "graphics"));
+                        Properties.Resources.IDS_ArgumentException,
+                        "graphics"));
             }
 
             this.m_graphics = graphics;
@@ -36,17 +32,15 @@ namespace TX.Framework.WindowUI.Controls
             this.m_graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
         }
         /// <summary>
-        /// destructor of the UseClearTypeGridFit class.
+        /// Finalizes an instance of the UseClearTypeGridFit class.
         /// </summary>
-        ~UseClearTypeGridFit()
-        {
+        ~UseClearTypeGridFit() {
             Dispose(false);
         }
         /// <summary>
         /// Releases all resources used by the class. 
         /// </summary>
-        public void Dispose()
-        {
+        public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -57,10 +51,8 @@ namespace TX.Framework.WindowUI.Controls
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
+        protected virtual void Dispose(bool disposing) {
+            if (disposing == true) {
                 //Revert the TextRenderingHint back to original setting.
                 this.m_graphics.TextRenderingHint = this.m_textRenderingHint;
             }

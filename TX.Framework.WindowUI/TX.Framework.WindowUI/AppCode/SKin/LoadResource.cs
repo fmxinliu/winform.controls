@@ -1,16 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TX.Framework.WindowUI
-{
-    public static class LoadResource
-    {
+namespace TX.Framework.WindowUI {
+    public static class LoadResource {
         private static System.Drawing.Bitmap[] loadImages;
 
-        static LoadResource()
-        {
+        static LoadResource() {
             loadImages = new System.Drawing.Bitmap[15];
             loadImages[0] = Properties.Resources.loader;
             loadImages[1] = Properties.Resources.loader1;
@@ -28,8 +25,7 @@ namespace TX.Framework.WindowUI
             loadImages[13] = Properties.Resources.loader13;
         }
 
-        public static System.Drawing.Bitmap GetRandomLoadImage()
-        {
+        public static System.Drawing.Bitmap GetRandomLoadImage() {
             Random random = new Random(DateTime.Now.Millisecond);
             int n = random.Next(0, loadImages.Length);
             var img = loadImages[n];

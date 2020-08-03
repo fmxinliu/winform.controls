@@ -11,48 +11,40 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
+using System.Text;
 
-namespace System.Text.Template
-{
-    internal abstract class MethodDefinition
-    {
+namespace System.Text.Template {
+    internal abstract class MethodDefinition {
         protected readonly Type _type;
         protected readonly string _methodName;
         protected readonly MethodInfo _methodInfo;
 
-        protected MethodDefinition(MethodInfo methodInfo)
-        {
+        protected MethodDefinition(MethodInfo methodInfo) {
             _methodInfo = methodInfo;
         }
 
-        protected MethodDefinition(Type type, string methodName)
-        {
+        protected MethodDefinition(Type type, string methodName) {
             _type = type;
             _methodName = methodName;
         }
 
         public abstract object Invoke(Type[] types, object[] parameters, out Type returnType);
-        
-        public MethodInfo GetMethodInfo(Type[] parameterTypes)
-        {
-            return _methodInfo ?? _type.GetMethod(_methodName, 
-                BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance, 
-                new LazyBinder(), 
-                parameterTypes, 
+
+        public MethodInfo GetMethodInfo(Type[] parameterTypes) {
+            return _methodInfo ?? _type.GetMethod(_methodName,
+                BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance,
+                new LazyBinder(),
+                parameterTypes,
                 null);
         }
 
-        public string MethodName
-        {
+        public string MethodName {
             get { return _methodName; }
         }
 
-        public Type Type
-        {
+        public Type Type {
             get { return _type; }
         }
-
     }
 }

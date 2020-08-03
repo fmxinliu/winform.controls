@@ -11,17 +11,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
+using System.Text;
 
-namespace System.Text.Template
-{
-    public interface ITemplateContext
-    {
+namespace System.Text.Template {
+    public interface ITemplateContext {
         ITemplateContext CreateLocal();
 
         void Clear();
-        
+
         void Add(string key, object value, Type type);
         void Add<T>(string key, T value);
         void AddLocal(string key, object value, Type type);
@@ -36,7 +34,7 @@ namespace System.Text.Template
         bool TryGetValue(string key, out IValueType valueType);
 
         bool ContainsKey(string key);
-        IValueType this[string key] { get;set;}
+        IValueType this[string key] { get; set; }
 
         bool ToBoolean(object value);
         bool ReturnNullWhenNullReference { get; set; }

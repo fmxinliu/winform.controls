@@ -13,298 +13,372 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    internal class BinaryExpressionHelper
-    {
-        public static object CalcUInt32_Int32(string op, object p1, object p2)
-        {
-            uint? v1 = (uint?)p1;
-            int? v2 = (int?)p2;
+namespace System.Text.Template {
+    internal class BinaryExpressionHelper {
+        public static object CalcUInt32_Int32(string op, object p1, object p2) {
+            uint? v1 = (uint?) p1;
+            int? v2 = (int?) p2;
 
-            switch (op)
-            {
-                case ">>": return v1 >> v2;
-                case "<<": return v1 << v2;
+            switch (op) {
+                case ">>":
+                    return v1 >> v2;
+                case "<<":
+                    return v1 << v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcInt64_Int32(string op, object p1, object p2)
-        {
-            long? v1 = (long?)p1;
-            int? v2 = (int?)p2;
+        public static object CalcInt64_Int32(string op, object p1, object p2) {
+            long? v1 = (long?) p1;
+            int? v2 = (int?) p2;
 
-            switch (op)
-            {
-                case ">>": return v1 >> v2;
-                case "<<": return v1 << v2;
+            switch (op) {
+                case ">>":
+                    return v1 >> v2;
+                case "<<":
+                    return v1 << v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcUInt64_Int32(string op, object p1, object p2)
-        {
-            ulong? v1 = (ulong?)p1;
-            int? v2 = (int?)p2;
+        public static object CalcUInt64_Int32(string op, object p1, object p2) {
+            ulong? v1 = (ulong?) p1;
+            int? v2 = (int?) p2;
 
-            switch (op)
-            {
-                case ">>": return v1 >> v2;
-                case "<<": return v1 << v2;
+            switch (op) {
+                case ">>":
+                    return v1 >> v2;
+                case "<<":
+                    return v1 << v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcBool(string op, object p1, object p2)
-        {
-            bool? v1 = (bool?)p1;
-            bool? v2 = (bool?)p2;
+        public static object CalcBool(string op, object p1, object p2) {
+            bool? v1 = (bool?) p1;
+            bool? v2 = (bool?) p2;
 
-            switch (op)
-            {
-                case "^": return v1 ^ v2;
-                case "&": return v1 & v2;
-                case "|": return v1 | v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
+            switch (op) {
+                case "^":
+                    return v1 ^ v2;
+                case "&":
+                    return v1 & v2;
+                case "|":
+                    return v1 | v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcInt32(string op, object p1, object p2)
-        {
-            int? v1 = (int?)p1;
-            int? v2 = (int?)p2;
+        public static object CalcInt32(string op, object p1, object p2) {
+            int? v1 = (int?) p1;
+            int? v2 = (int?) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "-": return v1 - v2;
-                case "/": return v1 / v2;
-                case "*": return v1 * v2;
-                case "%": return v1 % v2;
-                case "^": return v1 ^ v2;
-                case "&": return v1 & v2;
-                case "|": return v1 | v2;
-                case ">>": return v1 >> v2;
-                case "<<": return v1 << v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
-                case "<=": return v1 <= v2;
-                case ">=": return v1 >= v2;
-                case "<": return v1 < v2;
-                case ">": return v1 > v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "-":
+                    return v1 - v2;
+                case "/":
+                    return v1 / v2;
+                case "*":
+                    return v1 * v2;
+                case "%":
+                    return v1 % v2;
+                case "^":
+                    return v1 ^ v2;
+                case "&":
+                    return v1 & v2;
+                case "|":
+                    return v1 | v2;
+                case ">>":
+                    return v1 >> v2;
+                case "<<":
+                    return v1 << v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
+                case "<=":
+                    return v1 <= v2;
+                case ">=":
+                    return v1 >= v2;
+                case "<":
+                    return v1 < v2;
+                case ">":
+                    return v1 > v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcUInt32(string op, object p1, object p2)
-        {
-            uint? v1 = (uint?)p1;
-            uint? v2 = (uint?)p2;
+        public static object CalcUInt32(string op, object p1, object p2) {
+            uint? v1 = (uint?) p1;
+            uint? v2 = (uint?) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "-": return v1 - v2;
-                case "/": return v1 / v2;
-                case "*": return v1 * v2;
-                case "%": return v1 % v2;
-                case "^": return v1 ^ v2;
-                case "&": return v1 & v2;
-                case "|": return v1 | v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
-                case "<=": return v1 <= v2;
-                case ">=": return v1 >= v2;
-                case "<": return v1 < v2;
-                case ">": return v1 > v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "-":
+                    return v1 - v2;
+                case "/":
+                    return v1 / v2;
+                case "*":
+                    return v1 * v2;
+                case "%":
+                    return v1 % v2;
+                case "^":
+                    return v1 ^ v2;
+                case "&":
+                    return v1 & v2;
+                case "|":
+                    return v1 | v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
+                case "<=":
+                    return v1 <= v2;
+                case ">=":
+                    return v1 >= v2;
+                case "<":
+                    return v1 < v2;
+                case ">":
+                    return v1 > v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcInt64(string op, object p1, object p2)
-        {
-            long? v1 = (long?)p1;
-            long? v2 = (long?)p2;
+        public static object CalcInt64(string op, object p1, object p2) {
+            long? v1 = (long?) p1;
+            long? v2 = (long?) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "-": return v1 - v2;
-                case "/": return v1 / v2;
-                case "*": return v1 * v2;
-                case "%": return v1 % v2;
-                case "^": return v1 ^ v2;
-                case "&": return v1 & v2;
-                case "|": return v1 | v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
-                case "<=": return v1 <= v2;
-                case ">=": return v1 >= v2;
-                case "<": return v1 < v2;
-                case ">": return v1 > v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "-":
+                    return v1 - v2;
+                case "/":
+                    return v1 / v2;
+                case "*":
+                    return v1 * v2;
+                case "%":
+                    return v1 % v2;
+                case "^":
+                    return v1 ^ v2;
+                case "&":
+                    return v1 & v2;
+                case "|":
+                    return v1 | v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
+                case "<=":
+                    return v1 <= v2;
+                case ">=":
+                    return v1 >= v2;
+                case "<":
+                    return v1 < v2;
+                case ">":
+                    return v1 > v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcUInt64(string op, object p1, object p2)
-        {
-            ulong? v1 = (ulong?)p1;
-            ulong? v2 = (ulong?)p2;
+        public static object CalcUInt64(string op, object p1, object p2) {
+            ulong? v1 = (ulong?) p1;
+            ulong? v2 = (ulong?) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "-": return v1 - v2;
-                case "/": return v1 / v2;
-                case "*": return v1 * v2;
-                case "%": return v1 % v2;
-                case "^": return v1 ^ v2;
-                case "&": return v1 & v2;
-                case "|": return v1 | v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
-                case "<=": return v1 <= v2;
-                case ">=": return v1 >= v2;
-                case "<": return v1 < v2;
-                case ">": return v1 > v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "-":
+                    return v1 - v2;
+                case "/":
+                    return v1 / v2;
+                case "*":
+                    return v1 * v2;
+                case "%":
+                    return v1 % v2;
+                case "^":
+                    return v1 ^ v2;
+                case "&":
+                    return v1 & v2;
+                case "|":
+                    return v1 | v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
+                case "<=":
+                    return v1 <= v2;
+                case ">=":
+                    return v1 >= v2;
+                case "<":
+                    return v1 < v2;
+                case ">":
+                    return v1 > v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcFloat(string op, object p1, object p2)
-        {
-            float? v1 = (float?)p1;
-            float? v2 = (float?)p2;
+        public static object CalcFloat(string op, object p1, object p2) {
+            float? v1 = (float?) p1;
+            float? v2 = (float?) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "-": return v1 - v2;
-                case "/": return v1 / v2;
-                case "*": return v1 * v2;
-                case "%": return v1 % v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
-                case "<=": return v1 <= v2;
-                case ">=": return v1 >= v2;
-                case "<": return v1 < v2;
-                case ">": return v1 > v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "-":
+                    return v1 - v2;
+                case "/":
+                    return v1 / v2;
+                case "*":
+                    return v1 * v2;
+                case "%":
+                    return v1 % v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
+                case "<=":
+                    return v1 <= v2;
+                case ">=":
+                    return v1 >= v2;
+                case "<":
+                    return v1 < v2;
+                case ">":
+                    return v1 > v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcDouble(string op, object p1, object p2)
-        {
-            double? v1 = (double?)p1;
-            double? v2 = (double?)p2;
+        public static object CalcDouble(string op, object p1, object p2) {
+            double? v1 = (double?) p1;
+            double? v2 = (double?) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "-": return v1 - v2;
-                case "/": return v1 / v2;
-                case "*": return v1 * v2;
-                case "%": return v1 % v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
-                case "<=": return v1 <= v2;
-                case ">=": return v1 >= v2;
-                case "<": return v1 < v2;
-                case ">": return v1 > v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "-":
+                    return v1 - v2;
+                case "/":
+                    return v1 / v2;
+                case "*":
+                    return v1 * v2;
+                case "%":
+                    return v1 % v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
+                case "<=":
+                    return v1 <= v2;
+                case ">=":
+                    return v1 >= v2;
+                case "<":
+                    return v1 < v2;
+                case ">":
+                    return v1 > v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcDecimal(string op, object p1, object p2)
-        {
-            decimal? v1 = (decimal?)p1;
-            decimal? v2 = (decimal?)p2;
+        public static object CalcDecimal(string op, object p1, object p2) {
+            decimal? v1 = (decimal?) p1;
+            decimal? v2 = (decimal?) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "-": return v1 - v2;
-                case "/": return v1 / v2;
-                case "*": return v1 * v2;
-                case "%": return v1 % v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
-                case "<=": return v1 <= v2;
-                case ">=": return v1 >= v2;
-                case "<": return v1 < v2;
-                case ">": return v1 > v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "-":
+                    return v1 - v2;
+                case "/":
+                    return v1 / v2;
+                case "*":
+                    return v1 * v2;
+                case "%":
+                    return v1 % v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
+                case "<=":
+                    return v1 <= v2;
+                case ">=":
+                    return v1 >= v2;
+                case "<":
+                    return v1 < v2;
+                case ">":
+                    return v1 > v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcString(string op, object p1, object p2)
-        {
-            string v1 = (string)p1;
-            string v2 = (string)p2;
+        public static object CalcString(string op, object p1, object p2) {
+            string v1 = (string) p1;
+            string v2 = (string) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
-                case "==": return v1 == v2;
-                case "!=": return v1 != v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
+                case "==":
+                    return v1 == v2;
+                case "!=":
+                    return v1 != v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcStringObject(string op, object p1, object p2)
-        {
-            string v1 = (string)p1;
+        public static object CalcStringObject(string op, object p1, object p2) {
+            string v1 = (string) p1;
             object v2 = p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcObjectString(string op, object p1, object p2)
-        {
+        public static object CalcObjectString(string op, object p1, object p2) {
             object v1 = p1;
-            string v2 = (string)p2;
+            string v2 = (string) p2;
 
-            switch (op)
-            {
-                case "+": return v1 + v2;
+            switch (op) {
+                case "+":
+                    return v1 + v2;
             }
 
             throw new ArithmeticException();
         }
 
-        public static object CalcObject(string op, object p1, object p2)
-        {
+        public static object CalcObject(string op, object p1, object p2) {
             if (op != "==" && op != "!=")
                 throw new ArithmeticException();
 
             bool isEqual;
 
-            if (p1 != null && p1.GetType().IsEnum)
-            {
+            if (p1 != null && p1.GetType().IsEnum) {
                 p1 = p1.ToString();
             }
-            if (p2 != null && p2.GetType().IsEnum)
-            {
+            if (p2 != null && p2.GetType().IsEnum) {
                 p2 = p2.ToString();
             }
 

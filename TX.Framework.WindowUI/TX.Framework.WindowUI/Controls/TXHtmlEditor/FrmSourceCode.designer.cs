@@ -1,7 +1,5 @@
-﻿namespace TX.Framework.WindowUI.Controls
-{
-    partial class frmSourceCode
-    {
+namespace TX.Framework.WindowUI.Controls {
+    partial class FrmSourceCode {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.txt_SourceCode = new TX.Framework.WindowUI.Controls.TXTextBox();
             this.panelWorkArea.SuspendLayout();
             this.panelControlArea.SuspendLayout();
@@ -70,16 +65,16 @@
             this.txt_SourceCode.Size = new System.Drawing.Size(680, 361);
             this.txt_SourceCode.TabIndex = 0;
             // 
-            // frmSourceCode
+            // FrmSourceCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CaptionHeight = 25;
             this.ClientSize = new System.Drawing.Size(692, 425);
             this.MaximizeBox = true;
-            this.Name = "frmSourceCode";
+            this.Name = "FrmSourceCode";
             this.ResizeEnable = true;
-            this.Text = "frmSourceCode";
+            this.Text = "FrmSourceCode";
             this.panelWorkArea.ResumeLayout(false);
             this.panelControlArea.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -89,6 +84,5 @@
         #endregion
 
         private TXTextBox txt_SourceCode;
-
     }
 }

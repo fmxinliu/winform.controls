@@ -1,23 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     /// <summary>
     /// 皮肤管理中心:皮肤的编辑，设置，保存等等
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-3 14:16.
-    internal class SkinManager
-    {
+    internal class SkinManager {
         #region private attributes
-
-        private static SkinTheme _CurrentSkin;
 
         private static readonly string SkinFilePath = System.Windows.Forms.Application.StartupPath + @"\Config\Skin.ini";
 
@@ -25,13 +21,13 @@ namespace TX.Framework.WindowUI
 
         private static readonly string CurrentSkinName = "CurrentSkin";
 
+        private static SkinTheme _CurrentSkin;
+
         #endregion
 
         #region Initialize
 
-        public SkinManager()
-        {
-        }
+        public SkinManager() { }
 
         #endregion
 
@@ -43,12 +39,9 @@ namespace TX.Framework.WindowUI
         /// </summary>
         /// <value>The current skin.</value>
         /// User:Ryan  CreateTime:2012-8-3 14:16.
-        public static SkinTheme CurrentSkin
-        {
-            get
-            {
-                if (_CurrentSkin == null)
-                {
+        public static SkinTheme CurrentSkin {
+            get {
+                if (_CurrentSkin == null) {
                     _CurrentSkin = GetSkinTeme();
                 }
 
@@ -66,16 +59,13 @@ namespace TX.Framework.WindowUI
         /// </summary>
         /// <returns>Return a data(or instance) of SkinTheme.</returns>
         /// User:Ryan  CreateTime:2012-8-3 14:14.
-        private static SkinTheme GetSkinTeme()
-        {
-            try
-            {
+        private static SkinTheme GetSkinTeme() {
+            try {
                 IniConfig ini = new IniConfig(SkinFilePath);
                 int value;
                 value = int.TryParse(ini.IniReadValue(SkinSectionName, CurrentSkinName, "0"), out value) ? value : 0;
                 EnumTheme theme = value.ToEnumByValue<EnumTheme>();
-                switch (theme)
-                {
+                switch (theme) {
                     case EnumTheme.BlueSea:
                         return new SkinThemeBlueSea();
                     case EnumTheme.KissOfAngel:
@@ -89,8 +79,7 @@ namespace TX.Framework.WindowUI
                         return new SkinThemeDefault();
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 return new SkinThemeDefault();
             }
         }
@@ -100,10 +89,8 @@ namespace TX.Framework.WindowUI
         /// </summary>
         /// <param name="theme">The theme.</param>
         /// User:Ryan  CreateTime:2012-8-7 22:57.
-        public static void SettingSkinTeme(EnumTheme theme)
-        {
-            switch (theme)
-            {
+        public static void SettingSkinTeme(EnumTheme theme) {
+            switch (theme) {
                 case EnumTheme.BlueSea:
                     _CurrentSkin = new SkinThemeBlueSea();
                     break;
@@ -129,16 +116,12 @@ namespace TX.Framework.WindowUI
         /// 保存配置文件
         /// </summary>
         /// User:Ryan  CreateTime:2012-8-7 22:45.
-        public static void Save()
-        {
-            try
-            {
+        public static void Save() {
+            try {
                 IniConfig ini = new IniConfig(SkinFilePath);
-                ini.IniWriteValue(SkinSectionName, CurrentSkinName, ((int)CurrentSkin.ThemeStyle).ToString());
-                
+                ini.IniWriteValue(SkinSectionName, CurrentSkinName, ((int) CurrentSkin.ThemeStyle).ToString());
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 TX.Framework.WindowUI.Forms.TXMessageBoxExtensions.Error(
                     string.Format("保存主题信息出现异常：{0}\n", ex.Message));
             }

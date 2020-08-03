@@ -25,20 +25,18 @@
  */
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using System.Collections;   
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
 
     /// <summary>
     /// Represents a collection of DateItem objects
     /// </summary>
-    public class SelectedDatesCollection : ReadOnlyCollectionBase 
-    {
+    public class SelectedDatesCollection : ReadOnlyCollectionBase {
         #region Class Data
 
         /// <summary>
@@ -47,38 +45,33 @@ namespace TX.Framework.WindowUI.Controls
         private MonthCalendar owner;
 
         #endregion
-        
 
         #region Constructor
-                
-        public SelectedDatesCollection(MonthCalendar owner) : base()
-        {
+
+        public SelectedDatesCollection(MonthCalendar owner) : base() {
             if (owner == null)
                 throw new ArgumentNullException("owner");
-                            
+
             this.owner = owner;
         }
-            
-        public SelectedDatesCollection(MonthCalendar owner, SelectedDatesCollection dates) : this(owner)
-        {
-            
+
+        public SelectedDatesCollection(MonthCalendar owner, SelectedDatesCollection dates) : this(owner) {
+
             if (owner == null)
                 throw new ArgumentNullException("owner");
-        
+
             this.owner = owner;
-            
+
             this.Add(dates);
         }
 
         #endregion
 
         #region Methods
-        
 
-        public void Add(DateTime value)
-        {
+        public void Add(DateTime value) {
             int index;
-    
+
             index = this.IndexOf(value);
             if (index == -1)
                 this.InnerList.Add(value);
@@ -86,104 +79,80 @@ namespace TX.Framework.WindowUI.Controls
                 this.InnerList[index] = value;
         }
 
-        public void AddRange(DateTime[] dates)
-        {
+        public void AddRange(DateTime[] dates) {
             if (dates == null)
                 throw new ArgumentNullException("dates");
-            
-            for (int i=0; i<dates.Length; i++)
-            {                
+
+            for (int i = 0; i < dates.Length; i++) {
                 this.Add(dates[i]);
             }
         }
 
-        public void Add(SelectedDatesCollection dates)
-        {
+        public void Add(SelectedDatesCollection dates) {
             if (dates == null)
                 throw new ArgumentNullException("dates");
-            
-            for (int i=0; i<dates.Count; i++)
-            {
+
+            for (int i = 0; i < dates.Count; i++) {
                 this.Add(dates[i]);
             }
         }
-            
-        public void Clear()
-        {
-            while (this.Count > 0)
-            {
+
+        public void Clear() {
+            while (this.Count > 0) {
                 this.RemoveAt(0);
             }
         }
 
-        public bool Contains(DateTime date)
-        {
+        public bool Contains(DateTime date) {
             return (this.IndexOf(date) != -1);
         }
 
-        public int IndexOf(DateTime date)
-        {
-                            
-            for (int i=0; i<this.Count; i++)
-            {
-                if (this[i] == date)
-                {
+        public int IndexOf(DateTime date) {
+
+            for (int i = 0; i < this.Count; i++) {
+                if (this[i] == date) {
                     return i;
                 }
             }
 
             return -1;
         }
-            
-        public void Remove(DateTime value)
-        {
-            
+
+        public void Remove(DateTime value) {
             this.InnerList.Remove(value);
-        
         }
-            
-        public void RemoveAt(int index)
-        {
+
+        public void RemoveAt(int index) {
             this.Remove(this[index]);
         }
 
-        public void Move(DateTime value, int index)
-        {
-            if (index < 0)
-            {
+        public void Move(DateTime value, int index) {
+            if (index < 0) {
                 index = 0;
             }
-            else if (index > this.Count)
-            {
+            else if (index > this.Count) {
                 index = this.Count;
             }
 
-            if (!this.Contains(value) || this.IndexOf(value) == index)
-            {
+            if (!this.Contains(value) || this.IndexOf(value) == index) {
                 return;
             }
 
             this.InnerList.Remove(value);
 
-            if (index > this.Count)
-            {
+            if (index > this.Count) {
                 this.InnerList.Add(value);
             }
-            else
-            {
+            else {
                 this.InnerList.Insert(index, value);
             }
-
         }
 
-        public void MoveToTop(DateTime value)
-        {
+        public void MoveToTop(DateTime value) {
             this.Move(value, 0);
         }
 
-
-        public void MoveToBottom(DateTime value)
-        {
+        public void MoveToBottom(DateTime value) {
             this.Move(value, this.Count);
         }
 
@@ -191,17 +160,13 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Properties
 
-        public virtual DateTime this[int index]
-        {
-            get
-            {
-                DateTime d = (DateTime)this.InnerList[index];
+        public virtual DateTime this[int index] {
+            get {
+                DateTime d = (DateTime) this.InnerList[index];
                 return d;
             }
         }
 
         #endregion
-
     }
-
 }

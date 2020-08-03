@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Specifies constants that define the style of the caption in a XPanderPanel.
     /// </summary>
@@ -14,8 +13,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public enum CaptionStyle
-    {
+    public enum CaptionStyle {
         /// <summary>
         ///  The normal style of a caption.
         /// </summary>

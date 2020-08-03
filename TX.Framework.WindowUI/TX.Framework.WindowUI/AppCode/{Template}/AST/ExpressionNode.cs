@@ -13,29 +13,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    internal class ExpressionNode : TokenNode
-    {
+namespace System.Text.Template {
+    internal class ExpressionNode : TokenNode {
         private readonly TokenMatch _TokenMatch;
         private readonly string _Expression;
-        
-        public ExpressionNode(TokenMatch tokenMatch)
-        {
+
+        public ExpressionNode(TokenMatch tokenMatch) {
             _TokenMatch = tokenMatch;
             _Expression = _TokenMatch.SubMatches["expression"];
         }
 
-        public override void Evaluate(IExpressionParser parser, ITemplateContext context, StringBuilder output)
-        {
-            IValueType type = parser.Parse( _Expression ).Evaluate( context );
-            if ( type == null )
-            {
+        public override void Evaluate(IExpressionParser parser, ITemplateContext context, StringBuilder output) {
+            IValueType type = parser.Parse(_Expression).Evaluate(context);
+            if (type == null) {
                 return;
             }
             object value = type.Value;
-            if (value != null)
-            {
+            if (value != null) {
                 if (_TokenMatch.SubMatches.ContainsKey("fmt"))
                     output.AppendFormat("{0:" + _TokenMatch.SubMatches["fmt"] + "}", value);
                 else
@@ -43,23 +37,19 @@ namespace System.Text.Template
             }
         }
 
-        public static explicit operator ExpressionNode(TokenMatch tokenMatch)
-        {
+        public static explicit operator ExpressionNode(TokenMatch tokenMatch) {
             return new ExpressionNode(tokenMatch);
         }
 
-        public TokenMatch TokenMatch
-        {
+        public TokenMatch TokenMatch {
             get { return _TokenMatch; }
         }
 
-        public string Expression
-        {
+        public string Expression {
             get { return this._Expression; }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return this.GetType().Name + ": \"" + this.TokenMatch.Value + "\"";
         }
     }

@@ -13,13 +13,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
+namespace System.Text.Template {
     /// <summary>
-    /// (Reverse Polish Notation)Äæ²¨À¼±í´ïÊ½
+    /// (Reverse Polish Notation)ï¿½æ²¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     /// </summary>
-    internal class RPNExpression
-    {
+    internal class RPNExpression {
         private readonly Stack<Token> _OperatorStack = new Stack<Token>();
         private readonly TokenQueue _TokenQueue = new TokenQueue();
         private readonly Stack<Token> _FunctionStack = new Stack<Token>();
@@ -29,28 +27,21 @@ namespace System.Text.Template
         private bool _LastWasOperator = true;
         private Token[] _TokenList = null;
 
-
-        public RPNExpression(TokenEvaluator functionEvaluator, int functionCallPrecedence)
-        {
+        public RPNExpression(TokenEvaluator functionEvaluator, int functionCallPrecedence) {
             _FunctionEvaluator = functionEvaluator;
             _FunctionCallPrecedence = functionCallPrecedence;
         }
 
-        internal void DoWork(CallbackVoidHandler callBack)
-        {
-            try
-            {
+        internal void DoWork(CallbackVoidHandler callBack) {
+            try {
                 _OperatorStack.Clear();
                 _TokenQueue.Clear();
                 _FunctionStack.Clear();
                 _LastWasFunction = false;
 
                 callBack();
-            }
-            finally
-            {
-                while (_OperatorStack.Count > 0)
-                {
+            } finally {
+                while (_OperatorStack.Count > 0) {
                     _TokenQueue.Enqueue(_OperatorStack.Pop());
                 }
                 _TokenList = _TokenQueue.ToArray();
@@ -58,26 +49,21 @@ namespace System.Text.Template
             }
         }
 
-        internal void ApplyToken(Token token)
-        {
-            if (token.IsRightParen && _LastWasFunction)
-            {
+        internal void ApplyToken(Token token) {
+            if (token.IsRightParen && _LastWasFunction) {
                 _FunctionStack.Peek().NumTerms = 0;
             }
 
             _LastWasFunction = false;
 
-            if (token.IsFunction)
-            {
+            if (token.IsFunction) {
                 _FunctionStack.Push(token);
                 _LastWasFunction = true;
                 token.NumTerms = 1;
             }
 
-            if (token.IsLeftParen)
-            {
-                if (!_LastWasOperator)
-                {
+            if (token.IsLeftParen) {
+                if (!_LastWasOperator) {
                     Token callToken = new Token(new TokenDefinition(TokenType.FunctionCall, _FunctionCallPrecedence, _FunctionEvaluator), token.Text);
                     ApplyToken(callToken);
                 }
@@ -86,17 +72,14 @@ namespace System.Text.Template
                 return;
             }
 
-            if (token.IsTerm)
-            {
+            if (token.IsTerm) {
                 _TokenQueue.Enqueue(token);
                 _LastWasOperator = false;
                 return;
             }
 
-            if (token.IsArgumentSeparator)
-            {
-                while (_OperatorStack.Count > 0 && !_OperatorStack.Peek().IsLeftParen)
-                {
+            if (token.IsArgumentSeparator) {
+                while (_OperatorStack.Count > 0 && !_OperatorStack.Peek().IsLeftParen) {
                     _TokenQueue.Enqueue(_OperatorStack.Pop());
                 }
                 _FunctionStack.Peek().NumTerms++;
@@ -104,15 +87,11 @@ namespace System.Text.Template
                 return;
             }
 
-            if (token.IsRightParen)
-            {
-                while (_OperatorStack.Count > 0)
-                {
+            if (token.IsRightParen) {
+                while (_OperatorStack.Count > 0) {
                     Token stackOperator = _OperatorStack.Pop();
-                    if (stackOperator.IsLeftParen)
-                    {
-                        if (_OperatorStack.Count > 0 && _OperatorStack.Peek().IsFunction)
-                        {
+                    if (stackOperator.IsLeftParen) {
+                        if (_OperatorStack.Count > 0 && _OperatorStack.Peek().IsFunction) {
                             _TokenQueue.Enqueue(_OperatorStack.Pop());
                             _FunctionStack.Pop();
                         }
@@ -124,10 +103,8 @@ namespace System.Text.Template
                 return;
             }
 
-            if (_LastWasOperator != token.IsUnary)
-            {
-                if (token.Alternate != null)
-                {
+            if (_LastWasOperator != token.IsUnary) {
+                if (token.Alternate != null) {
                     ApplyToken(token.Alternate);
                     return;
                 }
@@ -135,17 +112,14 @@ namespace System.Text.Template
             }
 
             // When we get here, it certainly is an operator or function call
-            while (_OperatorStack.Count > 0)
-            {
+            while (_OperatorStack.Count > 0) {
                 Token stackOperator = _OperatorStack.Peek();
 
                 if ((token.Associativity == OperatorAssociativity.Right && token.Precedence < stackOperator.Precedence) ||
-                    (token.Associativity == OperatorAssociativity.Left && token.Precedence <= stackOperator.Precedence))
-                {
+                    (token.Associativity == OperatorAssociativity.Left && token.Precedence <= stackOperator.Precedence)) {
                     _TokenQueue.Enqueue(_OperatorStack.Pop());
                 }
-                else
-                {
+                else {
                     break;
                 }
             }
@@ -153,23 +127,19 @@ namespace System.Text.Template
             _LastWasOperator = true;
         }
 
-        public Expression Compile()
-        {
+        public Expression Compile() {
             Stack<Expression> tempStack = new Stack<Expression>();
             Expression currentExpression = null;
 
-            foreach (Token token in _TokenList)
-            {
+            foreach (Token token in _TokenList) {
                 Expression[] parameters = null;
-                if (!token.IsTerm)
-                {
+                if (!token.IsTerm) {
                     int numTerms = token.NumTerms;
                     if (token.IsFunction)
                         numTerms++;
 
                     parameters = new Expression[numTerms];
-                    for (int i = 0; i < numTerms; i++)
-                    {
+                    for (int i = 0; i < numTerms; i++) {
                         parameters[i] = tempStack.Pop();
                     }
                     Array.Reverse(parameters);
@@ -181,16 +151,12 @@ namespace System.Text.Template
             return currentExpression;
         }
 
-        private class TokenQueue : Queue<Token>
-        {
+        private class TokenQueue : Queue<Token> {
             private Token _waiting;
 
-            public new void Enqueue(Token token)
-            {
-                if (token.IsPartial)
-                {
-                    if (_waiting != null)
-                    {
+            public new void Enqueue(Token token) {
+                if (token.IsPartial) {
+                    if (_waiting != null) {
                         if (_waiting.Root == token.Root)
                             base.Enqueue(new Token(token.Root, _waiting.Text + token.Text));
                         else
@@ -198,8 +164,7 @@ namespace System.Text.Template
 
                         _waiting = null;
                     }
-                    else
-                    {
+                    else {
                         _waiting = token;
                     }
 

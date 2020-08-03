@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provides data for the PanelStyleChange event.
     /// </summary>
@@ -14,8 +13,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED. 
     /// </copyright>
-    public class PanelStyleChangeEventArgs : EventArgs
-    {
+    public class PanelStyleChangeEventArgs : EventArgs {
         #region FieldsPrivate
 
         private PanelStyle m_ePanelStyle;
@@ -26,8 +24,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets the style of the panel.
         /// </summary>
-        public PanelStyle PanelStyle
-        {
+        public PanelStyle PanelStyle {
             get { return this.m_ePanelStyle; }
         }
 
@@ -38,8 +35,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Arguments used when a PanelStyleChange event occurs.
         /// </summary>
         /// <param name="ePanelStyle">the style of the panel.</param>
-        public PanelStyleChangeEventArgs(PanelStyle ePanelStyle)
-        {
+        public PanelStyleChangeEventArgs(PanelStyle ePanelStyle) {
             this.m_ePanelStyle = ePanelStyle;
         }
 

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
+using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Used to group collections of controls. 
     /// </summary>
@@ -15,28 +14,27 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public interface IPanel
-    {
+    public interface IPanel {
         /// <summary>
         /// Gets or sets the style of the panel.
         /// </summary>
-        TX.Framework.WindowUI.Controls.PanelStyle PanelStyle { get; set;}
+        TX.Framework.WindowUI.Controls.PanelStyle PanelStyle { get; set; }
         /// <summary>
         /// Gets or sets the color schema which is used for the panel.
         /// </summary>
-        TX.Framework.WindowUI.Controls.ColorScheme ColorScheme { get; set;}
+        TX.Framework.WindowUI.Controls.ColorScheme ColorScheme { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether the control shows a border
         /// </summary>
-        bool ShowBorder { get; set;}
+        bool ShowBorder { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether the expand icon in the caption bar is visible.
         /// </summary>
-        bool ShowExpandIcon { get; set;}
+        bool ShowExpandIcon { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether the close icon in the caption bar is visible.
         /// </summary>
-        bool ShowCloseIcon  { get; set;}
+        bool ShowCloseIcon { get; set; }
         /// <summary>
         /// Expands the panel or xpanderpanel.
         /// </summary>

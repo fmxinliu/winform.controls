@@ -1,34 +1,33 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Diagnostics.CodeAnalysis;
+
 using TX.Framework.WindowUI.Controls.Docking.Win32;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    internal static class NativeMethods
-    {
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
-        [return: MarshalAs(UnmanagedType.Bool)]
+namespace TX.Framework.WindowUI.Controls.Docking {
+    internal static class NativeMethods {
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [return : MarshalAs(UnmanagedType.Bool)]
         public static extern bool DragDetect(IntPtr hWnd, Point pt);
 
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetFocus();
 
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SetFocus(IntPtr hWnd);
 
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
-        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [return : MarshalAs(UnmanagedType.Bool)]
         public static extern bool PostMessage(IntPtr hWnd, int Msg, uint wParam, uint lParam);
 
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern uint SendMessage(IntPtr hWnd, int Msg, uint wParam, uint lParam);
 
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern int ShowWindow(IntPtr hWnd, short cmdShow);
 
-        [DllImport("User32.dll", CharSet=CharSet.Auto)]
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern int SetWindowPos(IntPtr hWnd, IntPtr hWndAfter, int X, int Y, int Width, int Height, FlagsSetWindowPos flags);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -37,10 +36,10 @@ namespace TX.Framework.WindowUI.Controls.Docking
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SetWindowLong(IntPtr hWnd, int Index, int Value);
 
-        [DllImport("user32.dll", CharSet=CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int ShowScrollBar(IntPtr hWnd, int wBar, int bShow);
 
-        [DllImport("user32.dll", CharSet=CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         //*********************************
         // FxCop bug, suppress the message
         //*********************************

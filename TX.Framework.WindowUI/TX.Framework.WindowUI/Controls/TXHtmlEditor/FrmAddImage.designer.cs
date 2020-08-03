@@ -1,7 +1,5 @@
-﻿namespace TX.Framework.WindowUI.Controls
-{
-    partial class frmAddImage
-    {
+namespace TX.Framework.WindowUI.Controls {
+    partial class FrmAddImage {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.rBtn_URL = new TX.Framework.WindowUI.Controls.TXRadioButton();
             this.rBtn_Local = new TX.Framework.WindowUI.Controls.TXRadioButton();
             this.txt_URL = new TX.Framework.WindowUI.Controls.TXTextBox();
@@ -73,7 +68,7 @@
             this.rBtn_URL.TabStop = true;
             this.rBtn_URL.Text = "URL地址（网络图片）";
             this.rBtn_URL.UseVisualStyleBackColor = true;
-            this.rBtn_URL.CheckedChanged += new System.EventHandler(this.rBtn_URL_CheckedChanged);
+            this.rBtn_URL.CheckedChanged += new System.EventHandler(this.Rbtn_URL_CheckedChanged);
             // 
             // rBtn_Local
             // 
@@ -115,7 +110,7 @@
             this.btn_LocalImageUpdate.TabIndex = 1;
             this.btn_LocalImageUpdate.Text = "上传本地图片...";
             this.btn_LocalImageUpdate.UseVisualStyleBackColor = true;
-            this.btn_LocalImageUpdate.Click += new System.EventHandler(this.btn_LocalImageUpdate_Click);
+            this.btn_LocalImageUpdate.Click += new System.EventHandler(this.Btn_LocalImageUpdate_Click);
             // 
             // txtFileName
             // 
@@ -135,14 +130,14 @@
             this.txtFileName.Size = new System.Drawing.Size(297, 25);
             this.txtFileName.TabIndex = 2;
             // 
-            // frmAddImage
+            // FrmAddImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CaptionHeight = 25;
             this.ClientSize = new System.Drawing.Size(471, 194);
-            this.Name = "frmAddImage";
-            this.Text = "frmAddImage";
+            this.Name = "FrmAddImage";
+            this.Text = "FrmAddImage";
             this.panelWorkArea.ResumeLayout(false);
             this.panelWorkArea.PerformLayout();
             this.panelControlArea.ResumeLayout(false);

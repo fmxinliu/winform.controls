@@ -13,12 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class CSharpContext : TemplateContext
-    {
-        public CSharpContext()
-        {
+namespace System.Text.Template {
+    public class CSharpContext : TemplateContext {
+        public CSharpContext() {
             AddType("int", typeof(int));
             AddType("uint", typeof(uint));
             AddType("long", typeof(long));
@@ -37,13 +34,9 @@ namespace System.Text.Template
             Add("false", false);
         }
 
-        public CSharpContext(CSharpContext parent)
-            : base(parent)
-        {
-        }
+        public CSharpContext(CSharpContext parent) : base(parent) { }
 
-        public override ITemplateContext CreateLocal()
-        {
+        public override ITemplateContext CreateLocal() {
             return new CSharpContext(this);
         }
     }

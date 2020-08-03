@@ -9,8 +9,7 @@
 //
 #endregion
 
-namespace System.Collections
-{
+namespace System.Collections {
     /// <summary>
     /// <para>
     /// A data structure commonly used for routing and buffering work (or any objects) between different
@@ -46,8 +45,7 @@ namespace System.Collections
     /// unnecessary method calls.
     /// </para>
     /// </summary>
-    public abstract class Queue
-    {
+    public abstract class Queue {
         private static object[] EMPTY_OBJECT_ARRAY = { };
 
         protected bool isOpen = true;
@@ -94,20 +92,14 @@ namespace System.Collections
         /// Removes all objects from the queue and returns them in ascending order, with 
         /// the element at index zero being the one "next in line"
         /// </summary>
-        /// <returns></returns>
-        public virtual object[] RemoveAll()
-        {
-            lock (monitor)
-            {
-                if (count == 0)
-                {
+        public virtual object[] RemoveAll() {
+            lock (monitor) {
+                if (count == 0) {
                     return EMPTY_OBJECT_ARRAY;
                 }
-                else
-                {
+                else {
                     object[] elements = new object[count];
-                    for (int x = 0; x < elements.Length; x++)
-                    {
+                    for (int x = 0; x < elements.Length; x++) {
                         elements[x] = Remove();
                     }
                     return elements;
@@ -119,10 +111,8 @@ namespace System.Collections
         /// Releases waiting threads, immediately returning null values to them, but
         /// leaves the queue open
         /// </summary>
-        public void ReleaseWaitingThreads()
-        {
-            lock (monitor)
-            {
+        public void ReleaseWaitingThreads() {
+            lock (monitor) {
                 bool open = isOpen;
                 Close();
                 isOpen = open;
@@ -133,10 +123,8 @@ namespace System.Collections
         /// Allows the queue to accept input.  Each Queue instance is open when
         /// it is created.
         /// </summary>
-        public virtual void Open()
-        {
-            lock (monitor)
-            {
+        public virtual void Open() {
+            lock (monitor) {
                 isOpen = true;
             }
         }
@@ -150,12 +138,9 @@ namespace System.Collections
         /// <summary>
         /// Indicates whether the queue can accept further input
         /// </summary>
-        public bool IsOpen
-        {
-            get
-            {
-                lock (monitor)
-                {
+        public bool IsOpen {
+            get {
+                lock (monitor) {
                     return isOpen;
                 }
             }
@@ -164,12 +149,9 @@ namespace System.Collections
         /// <summary>
         /// Indicates the number of elements currently held in the queue
         /// </summary>
-        public int Count
-        {
-            get
-            {
-                lock (monitor)
-                {
+        public int Count {
+            get {
+                lock (monitor) {
                     return count;
                 }
             }
@@ -183,19 +165,14 @@ namespace System.Collections
         /// <summary>
         /// Gets and sets whether null values can be added to the queue
         /// </summary>
-        public bool IsNullAllowed
-        {
-            get
-            {
-                lock (monitor)
-                {
+        public bool IsNullAllowed {
+            get {
+                lock (monitor) {
                     return isNullAllowed;
                 }
             }
-            set
-            {
-                lock (monitor)
-                {
+            set {
+                lock (monitor) {
                     isNullAllowed = value;
                 }
             }

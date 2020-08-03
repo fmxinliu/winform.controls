@@ -1,21 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Text;
+using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    partial class DockPanel
-    {
-        private sealed class SplitterDragHandler : DragHandler
-        {
-            private class SplitterOutline
-            {
-                public SplitterOutline()
-                {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    public partial class DockPanel {
+        private sealed class SplitterDragHandler : DragHandler {
+            private class SplitterOutline {
+                public SplitterOutline() {
                     m_dragForm = new DragForm();
                     SetDragForm(Rectangle.Empty);
                     DragForm.BackColor = Color.Black;
@@ -23,24 +18,20 @@ namespace TX.Framework.WindowUI.Controls.Docking
                     DragForm.Show(false);
                 }
 
-                DragForm m_dragForm;
-                private DragForm DragForm
-                {
+                private DragForm m_dragForm;
+                private DragForm DragForm {
                     get { return m_dragForm; }
                 }
 
-                public void Show(Rectangle rect)
-                {
+                public void Show(Rectangle rect) {
                     SetDragForm(rect);
                 }
 
-                public void Close()
-                {
+                public void Close() {
                     DragForm.Close();
                 }
 
-                private void SetDragForm(Rectangle rect)
-                {
+                private void SetDragForm(Rectangle rect) {
                     DragForm.Bounds = rect;
                     if (rect == Rectangle.Empty)
                         DragForm.Region = new Region(Rectangle.Empty);
@@ -49,38 +40,30 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 }
             }
 
-            public SplitterDragHandler(DockPanel dockPanel)
-                : base(dockPanel)
-            {
-            }
+            public SplitterDragHandler(DockPanel dockPanel) : base(dockPanel) { }
 
-            public new ISplitterDragSource DragSource
-            {
+            public new ISplitterDragSource DragSource {
                 get { return base.DragSource as ISplitterDragSource; }
                 private set { base.DragSource = value; }
             }
 
             private SplitterOutline m_outline;
-            private SplitterOutline Outline
-            {
+            private SplitterOutline Outline {
                 get { return m_outline; }
                 set { m_outline = value; }
             }
 
             private Rectangle m_rectSplitter;
-            private Rectangle RectSplitter
-            {
+            private Rectangle RectSplitter {
                 get { return m_rectSplitter; }
                 set { m_rectSplitter = value; }
             }
 
-            public void BeginDrag(ISplitterDragSource dragSource, Rectangle rectSplitter)
-            {
+            public void BeginDrag(ISplitterDragSource dragSource, Rectangle rectSplitter) {
                 DragSource = dragSource;
                 RectSplitter = rectSplitter;
 
-                if (!BeginDrag())
-                {
+                if (!BeginDrag()) {
                     DragSource = null;
                     return;
                 }
@@ -90,13 +73,11 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 DragSource.BeginDrag(rectSplitter);
             }
 
-            protected override void OnDragging()
-            {
+            protected override void OnDragging() {
                 Outline.Show(GetSplitterOutlineBounds(Control.MousePosition));
             }
 
-            protected override void OnEndDrag(bool abort)
-            {
+            protected override void OnEndDrag(bool abort) {
                 DockPanel.SuspendLayout(true);
 
                 Outline.Close();
@@ -108,8 +89,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 DockPanel.ResumeLayout(true, true);
             }
 
-            private int GetMovingOffset(Point ptMouse)
-            {
+            private int GetMovingOffset(Point ptMouse) {
                 Rectangle rect = GetSplitterOutlineBounds(ptMouse);
                 if (DragSource.IsVertical)
                     return rect.X - RectSplitter.X;
@@ -117,21 +97,18 @@ namespace TX.Framework.WindowUI.Controls.Docking
                     return rect.Y - RectSplitter.Y;
             }
 
-            private Rectangle GetSplitterOutlineBounds(Point ptMouse)
-            {
+            private Rectangle GetSplitterOutlineBounds(Point ptMouse) {
                 Rectangle rectLimit = DragSource.DragLimitBounds;
 
                 Rectangle rect = RectSplitter;
                 if (rectLimit.Width <= 0 || rectLimit.Height <= 0)
                     return rect;
 
-                if (DragSource.IsVertical)
-                {
+                if (DragSource.IsVertical) {
                     rect.X += ptMouse.X - StartMousePosition.X;
                     rect.Height = rectLimit.Height;
                 }
-                else
-                {
+                else {
                     rect.Y += ptMouse.Y - StartMousePosition.Y;
                     rect.Width = rectLimit.Width;
                 }
@@ -150,15 +127,13 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private SplitterDragHandler m_splitterDragHandler = null;
-        private SplitterDragHandler GetSplitterDragHandler()
-        {
+        private SplitterDragHandler GetSplitterDragHandler() {
             if (m_splitterDragHandler == null)
                 m_splitterDragHandler = new SplitterDragHandler(this);
             return m_splitterDragHandler;
         }
 
-        internal void BeginDrag(ISplitterDragSource dragSource, Rectangle rectSplitter)
-        {
+        internal void BeginDrag(ISplitterDragSource dragSource, Rectangle rectSplitter) {
             GetSplitterDragHandler().BeginDrag(dragSource, rectSplitter);
         }
     }

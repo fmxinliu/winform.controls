@@ -13,21 +13,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class IsExpression : Expression
-    {
+namespace System.Text.Template {
+    public class IsExpression : Expression {
         private readonly Expression _objectExpression;
         private readonly Expression _typeExpression;
 
-        public IsExpression(Expression objectExpression, Expression typeExpression)
-        {
+        public IsExpression(Expression objectExpression, Expression typeExpression) {
             _objectExpression = objectExpression;
             _typeExpression = typeExpression;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ClassName className = _typeExpression.Evaluate(context).Value as ClassName;
             ValueExpression objectValue = _objectExpression.Evaluate(context);
             Type objectType = objectValue.Type;

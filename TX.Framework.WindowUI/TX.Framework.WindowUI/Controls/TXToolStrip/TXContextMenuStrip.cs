@@ -1,30 +1,25 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [ToolboxBitmap(typeof(ContextMenuStrip))]
-    public class TXContextMenuStrip : ContextMenuStrip
-    {
+    public class TXContextMenuStrip : ContextMenuStrip {
         //TXToolStripRenderer renderer;
 
         #region Initializes
 
-        public TXContextMenuStrip()
-            : base()
-        {
+        public TXContextMenuStrip() : base() {
             base.BackColor = SkinManager.CurrentSkin.BaseColor;
             //renderer = new TXToolStripRenderer();
             //this.Renderer = renderer;
             base.RenderMode = ToolStripRenderMode.ManagerRenderMode;
-
         }
 
         #endregion
@@ -33,11 +28,9 @@ namespace TX.Framework.WindowUI.Controls
 
         [Category("TXProperties")]
         [DefaultValue(typeof(ToolStripRenderMode), "ManagerRenderMode")]
-        public new ToolStripRenderMode RenderMode
-        {
+        public new ToolStripRenderMode RenderMode {
             get { return base.RenderMode; }
-            set
-            {
+            set {
 
                 base.RenderMode = value;
                 base.Invalidate();

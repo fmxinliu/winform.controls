@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provide Office 2007 silver theme colors
     /// </summary>
@@ -16,24 +15,17 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public class PanelColorsOffice2007Silver : PanelColorsOffice
-    {
+    public class PanelColorsOffice2007Silver : PanelColorsOffice {
         #region MethodsPublic
         /// <summary>
         /// Initialize a new instance of the PanelColorsOffice2007Silver class.
         /// </summary>
-        public PanelColorsOffice2007Silver()
-            : base()
-        {
-        }
+        public PanelColorsOffice2007Silver() : base() { }
         /// <summary>
         /// Initialize a new instance of the PanelColorsOffice2007Silver class.
         /// </summary>
         /// <param name="basePanel">Base class for the panel or xpanderpanel control.</param>
-        public PanelColorsOffice2007Silver(BasePanel basePanel)
-            : base(basePanel)
-        {
-        }
+        public PanelColorsOffice2007Silver(BasePanel basePanel) : base(basePanel) { }
 
         #endregion
 
@@ -42,8 +34,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Initialize a color Dictionary with defined colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<PanelColors.KnownColors, Color> rgbTable)
-        {
+        protected override void InitColors(Dictionary<PanelColors.KnownColors, Color> rgbTable) {
             base.InitColors(rgbTable);
             rgbTable[KnownColors.BorderColor] = Color.FromArgb(111, 112, 116);
             rgbTable[KnownColors.InnerBorderColor] = Color.White;

@@ -1,29 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     /// <summary>
     /// 主题色彩：夕阳西下，明月天涯
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-7 22:22.
-    internal class SkinThemeSunsetRed : SkinTheme
-    {
-        public SkinThemeSunsetRed()
-            : base()
-        {
-        }
+    internal class SkinThemeSunsetRed : SkinTheme {
+        public SkinThemeSunsetRed() : base() { }
 
         /// <summary>
         /// 初始化主题色彩方案
         /// </summary>
         /// User:Ryan  CreateTime:2012-8-7 22:11.
         /// User:Ryan  CreateTime:2012-8-7 22:19.
-        public override void IniSkinTheme()
-        {
+        public override void IniSkinTheme() {
             this.ThemeStyle = EnumTheme.SunsetRed;
             this.ThemeName = "夕阳西下，明月天涯";
             this.BackGroundImage = Properties.Resources.bg05;

@@ -1,15 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [TypeConverter(typeof(ExpandableObjectConverter))]
     [Description("Header")]
-    public class RangeValueHeader
-    {
+    public class RangeValueHeader {
         private string _LowerValueTitle;
 
         private string _UpperValueTitle;
@@ -18,8 +16,7 @@ namespace TX.Framework.WindowUI.Controls
 
         public EventHandler OnTitleChanged;
 
-        public RangeValueHeader()
-        {
+        public RangeValueHeader() {
             this._LowerValueTitle = "范围下限";
             this._UpperValueTitle = "范围上限";
             this._ValueTitle = "金额数值";
@@ -30,19 +27,14 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <value></value>
         /// User:Ryan  CreateTime:2012-11-19 15:37.
-        public string LowerValueTitle
-        {
-            get
-            {
+        public string LowerValueTitle {
+            get {
                 return this._LowerValueTitle;
             }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
+            set {
+                if (!string.IsNullOrEmpty(value)) {
                     this._LowerValueTitle = value;
-                    if (this.OnTitleChanged != null)
-                    {
+                    if (this.OnTitleChanged != null) {
                         this.OnTitleChanged(null, null);
                     }
                 }
@@ -54,19 +46,14 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <value></value>
         /// User:Ryan  CreateTime:2012-11-19 15:38.
-        public string UpperValueTitle
-        {
-            get
-            {
-                return  this._UpperValueTitle;
+        public string UpperValueTitle {
+            get {
+                return this._UpperValueTitle;
             }
-            set
-            {
-                if(!string.IsNullOrEmpty(value))
-                {
+            set {
+                if (!string.IsNullOrEmpty(value)) {
                     this._UpperValueTitle = value;
-                    if (this.OnTitleChanged != null)
-                    {
+                    if (this.OnTitleChanged != null) {
                         this.OnTitleChanged(null, null);
                     }
                 }
@@ -78,19 +65,14 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <value></value>
         /// User:Ryan  CreateTime:2012-11-19 15:38.
-        public string ValueTitle
-        {
-            get
-            {
+        public string ValueTitle {
+            get {
                 return this._ValueTitle;
             }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
+            set {
+                if (!string.IsNullOrEmpty(value)) {
                     this._ValueTitle = value;
-                    if (this.OnTitleChanged != null)
-                    {
+                    if (this.OnTitleChanged != null) {
                         this.OnTitleChanged(null, null);
                     }
                 }

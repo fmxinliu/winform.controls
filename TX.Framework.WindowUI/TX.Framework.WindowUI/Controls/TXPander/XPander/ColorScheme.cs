@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Contains information for the drawing of panels or xpanderpanels in a xpanderpanellist. 
     /// </summary>
@@ -14,8 +13,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public enum ColorScheme
-    {
+    public enum ColorScheme {
         /// <summary>
         /// Draws the panels caption with <see cref="System.Windows.Forms.ProfessionalColors">ProfessionalColors</see>
         /// </summary>

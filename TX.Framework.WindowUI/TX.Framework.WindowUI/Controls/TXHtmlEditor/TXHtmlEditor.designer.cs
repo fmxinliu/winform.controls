@@ -1,13 +1,11 @@
 //#####################################################################################
 //Ryan-2010-9-19
-//Àµ√˜£∫HTML±‡º≠∆˜œ¬‘ÿ◊‘Õ¯¬Áø™‘¥¥˙¬Î£®http://www.cnpopsoft.com £©,‘⁄∆‰ª˘¥°÷Æ…œ¿©’πµƒ–¬µƒπ¶
-//ƒ‹£¨Ω¯“ª≤ΩÕÍ…∆¡À‘≠”–µƒπ¶ƒ‹°£
+//ËØ¥ÊòéÔºöHTMLÁºñËæëÂô®‰∏ãËΩΩËá™ÁΩëÁªúÂºÄÊ∫ê‰ª£Á†ÅÔºàhttp://www.cnpopsoft.comÔºâ,Âú®ÂÖ∂Âü∫Á°Ä‰πã‰∏äÊâ©Â±ïÁöÑÊñ∞ÁöÑÂäü
+//ËÉΩÔºåËøõ‰∏ÄÊ≠•ÂÆåÂñÑ‰∫ÜÂéüÊúâÁöÑÂäüËÉΩ„ÄÇ
 //#####################################################################################
 
-namespace TX.Framework.WindowUI.Controls
-{
-    partial class TXHtmlEditor
-    {
+namespace TX.Framework.WindowUI.Controls {
+    partial class TXHtmlEditor {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -17,10 +15,8 @@ namespace TX.Framework.WindowUI.Controls
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -32,8 +28,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TXHtmlEditor));
             this.webBrowserBody = new System.Windows.Forms.WebBrowser();
             this.toolStripToolBar = new System.Windows.Forms.ToolStrip();
@@ -72,8 +67,8 @@ namespace TX.Framework.WindowUI.Controls
             this.webBrowserBody.Name = "webBrowserBody";
             this.webBrowserBody.Size = new System.Drawing.Size(558, 115);
             this.webBrowserBody.TabIndex = 0;
-            this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserBody_DocumentCompleted);
-            this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowserBody_PreviewKeyDown);
+            this.webBrowserBody.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowserBody_DocumentCompleted);
+            this.webBrowserBody.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.WebBrowserBody_PreviewKeyDown);
             // 
             // toolStripToolBar
             // 
@@ -114,14 +109,14 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripComboBoxName.MaxDropDownItems = 30;
             this.toolStripComboBoxName.Name = "toolStripComboBoxName";
             this.toolStripComboBoxName.Size = new System.Drawing.Size(100, 25);
-            this.toolStripComboBoxName.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxName_SelectedIndexChanged);
+            this.toolStripComboBoxName.SelectedIndexChanged += new System.EventHandler(this.ToolStripComboBoxName_SelectedIndexChanged);
             // 
             // toolStripComboBoxSize
             // 
             this.toolStripComboBoxSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBoxSize.Name = "toolStripComboBoxSize";
             this.toolStripComboBoxSize.Size = new System.Drawing.Size(40, 25);
-            this.toolStripComboBoxSize.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxSize_SelectedIndexChanged);
+            this.toolStripComboBoxSize.SelectedIndexChanged += new System.EventHandler(this.ToolStripComboBoxSize_SelectedIndexChanged);
             // 
             // toolStripButtonBold
             // 
@@ -130,8 +125,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBold.Name = "toolStripButtonBold";
             this.toolStripButtonBold.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonBold.Text = "º”¥÷";
-            this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
+            this.toolStripButtonBold.Text = "Âä†Á≤ó";
+            this.toolStripButtonBold.Click += new System.EventHandler(this.ToolStripButtonBold_Click);
             // 
             // toolStripButtonItalic
             // 
@@ -140,8 +135,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonItalic.Name = "toolStripButtonItalic";
             this.toolStripButtonItalic.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonItalic.Text = "–±ÃÂ";
-            this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
+            this.toolStripButtonItalic.Text = "Êñú‰Ωì";
+            this.toolStripButtonItalic.Click += new System.EventHandler(this.ToolStripButtonItalic_Click);
             // 
             // toolStripButtonUnderline
             // 
@@ -150,8 +145,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
             this.toolStripButtonUnderline.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonUnderline.Text = "œ¬ªÆœﬂ";
-            this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
+            this.toolStripButtonUnderline.Text = "‰∏ãÂàíÁ∫ø";
+            this.toolStripButtonUnderline.Click += new System.EventHandler(this.ToolStripButtonUnderline_Click);
             // 
             // toolStripButtonColor
             // 
@@ -160,8 +155,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonColor.Name = "toolStripButtonColor";
             this.toolStripButtonColor.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonColor.Text = "◊÷ÃÂ—’…´";
-            this.toolStripButtonColor.Click += new System.EventHandler(this.toolStripButtonColor_Click);
+            this.toolStripButtonColor.Text = "Â≠ó‰ΩìÈ¢úËâ≤";
+            this.toolStripButtonColor.Click += new System.EventHandler(this.ToolStripButtonColor_Click);
             // 
             // toolStripSeparatorFont
             // 
@@ -175,8 +170,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonNumbers.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonNumbers.Name = "toolStripButtonNumbers";
             this.toolStripButtonNumbers.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonNumbers.Text = " ˝◊÷±‡∫≈";
-            this.toolStripButtonNumbers.Click += new System.EventHandler(this.toolStripButtonNumbers_Click);
+            this.toolStripButtonNumbers.Text = "Êï∞Â≠óÁºñÂè∑";
+            this.toolStripButtonNumbers.Click += new System.EventHandler(this.ToolStripButtonNumbers_Click);
             // 
             // toolStripButtonBullets
             // 
@@ -185,8 +180,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonBullets.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBullets.Name = "toolStripButtonBullets";
             this.toolStripButtonBullets.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonBullets.Text = "œÓƒø∑˚∫≈";
-            this.toolStripButtonBullets.Click += new System.EventHandler(this.toolStripButtonBullets_Click);
+            this.toolStripButtonBullets.Text = "È°πÁõÆÁ¨¶Âè∑";
+            this.toolStripButtonBullets.Click += new System.EventHandler(this.ToolStripButtonBullets_Click);
             // 
             // toolStripButtonOutdent
             // 
@@ -195,8 +190,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonOutdent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOutdent.Name = "toolStripButtonOutdent";
             this.toolStripButtonOutdent.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonOutdent.Text = "ºı…ŸÀıΩ¯¡ø";
-            this.toolStripButtonOutdent.Click += new System.EventHandler(this.toolStripButtonOutdent_Click);
+            this.toolStripButtonOutdent.Text = "ÂáèÂ∞ëÁº©ËøõÈáè";
+            this.toolStripButtonOutdent.Click += new System.EventHandler(this.ToolStripButtonOutdent_Click);
             // 
             // toolStripButtonIndent
             // 
@@ -205,8 +200,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonIndent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonIndent.Name = "toolStripButtonIndent";
             this.toolStripButtonIndent.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonIndent.Text = "‘ˆº”ÀıΩ¯¡ø";
-            this.toolStripButtonIndent.Click += new System.EventHandler(this.toolStripButtonIndent_Click);
+            this.toolStripButtonIndent.Text = "Â¢ûÂä†Áº©ËøõÈáè";
+            this.toolStripButtonIndent.Click += new System.EventHandler(this.ToolStripButtonIndent_Click);
             // 
             // toolStripSeparatorFormat
             // 
@@ -220,8 +215,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLeft.Name = "toolStripButtonLeft";
             this.toolStripButtonLeft.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonLeft.Text = "◊Û∂‘∆Î";
-            this.toolStripButtonLeft.Click += new System.EventHandler(this.toolStripButtonLeft_Click);
+            this.toolStripButtonLeft.Text = "Â∑¶ÂØπÈΩê";
+            this.toolStripButtonLeft.Click += new System.EventHandler(this.ToolStripButtonLeft_Click);
             // 
             // toolStripButtonCenter
             // 
@@ -230,8 +225,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonCenter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonCenter.Name = "toolStripButtonCenter";
             this.toolStripButtonCenter.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonCenter.Text = "æ”÷–";
-            this.toolStripButtonCenter.Click += new System.EventHandler(this.toolStripButtonCenter_Click);
+            this.toolStripButtonCenter.Text = "Â±Ö‰∏≠";
+            this.toolStripButtonCenter.Click += new System.EventHandler(this.ToolStripButtonCenter_Click);
             // 
             // toolStripButtonRight
             // 
@@ -240,8 +235,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRight.Name = "toolStripButtonRight";
             this.toolStripButtonRight.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonRight.Text = "”“∂‘∆Î";
-            this.toolStripButtonRight.Click += new System.EventHandler(this.toolStripButtonRight_Click);
+            this.toolStripButtonRight.Text = "Âè≥ÂØπÈΩê";
+            this.toolStripButtonRight.Click += new System.EventHandler(this.ToolStripButtonRight_Click);
             // 
             // toolStripButtonFull
             // 
@@ -250,8 +245,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonFull.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFull.Name = "toolStripButtonFull";
             this.toolStripButtonFull.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonFull.Text = "¡Ω±ﬂ∂‘∆‰";
-            this.toolStripButtonFull.Click += new System.EventHandler(this.toolStripButtonFull_Click);
+            this.toolStripButtonFull.Text = "‰∏§ËæπÂØπÈΩê";
+            this.toolStripButtonFull.Click += new System.EventHandler(this.ToolStripButtonFull_Click);
             // 
             // toolStripSeparatorAlign
             // 
@@ -265,8 +260,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonLine.Name = "toolStripButtonLine";
             this.toolStripButtonLine.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonLine.Text = "ÃÌº”ÀÆ∆Ωœﬂ";
-            this.toolStripButtonLine.Click += new System.EventHandler(this.toolStripButtonLine_Click);
+            this.toolStripButtonLine.Text = "Ê∑ªÂä†Ê∞¥Âπ≥Á∫ø";
+            this.toolStripButtonLine.Click += new System.EventHandler(this.ToolStripButtonLine_Click);
             // 
             // toolStripButtonHyperlink
             // 
@@ -275,8 +270,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonHyperlink.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonHyperlink.Name = "toolStripButtonHyperlink";
             this.toolStripButtonHyperlink.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonHyperlink.Text = "¥¥Ω®¡¥Ω”";
-            this.toolStripButtonHyperlink.Click += new System.EventHandler(this.toolStripButtonHyperlink_Click);
+            this.toolStripButtonHyperlink.Text = "ÂàõÂª∫ÈìæÊé•";
+            this.toolStripButtonHyperlink.Click += new System.EventHandler(this.ToolStripButtonHyperlink_Click);
             // 
             // toolStripButtonPicture
             // 
@@ -285,8 +280,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonPicture.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonPicture.Name = "toolStripButtonPicture";
             this.toolStripButtonPicture.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonPicture.Text = "≤Â»ÎÕº∆¨";
-            this.toolStripButtonPicture.Click += new System.EventHandler(this.toolStripButtonPicture_Click);
+            this.toolStripButtonPicture.Text = "ÊèíÂÖ•ÂõæÁâá";
+            this.toolStripButtonPicture.Click += new System.EventHandler(this.ToolStripButtonPicture_Click);
             // 
             // toolStripButtonSourceCode
             // 
@@ -295,8 +290,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripButtonSourceCode.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSourceCode.Name = "toolStripButtonSourceCode";
             this.toolStripButtonSourceCode.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonSourceCode.Text = "‘¥¬Î(ø…“‘±‡º≠)";
-            this.toolStripButtonSourceCode.Click += new System.EventHandler(this.toolStripButtonSourceCode_Click);
+            this.toolStripButtonSourceCode.Text = "Ê∫êÁ†Å(ÂèØ‰ª•ÁºñËæë)";
+            this.toolStripButtonSourceCode.Click += new System.EventHandler(this.ToolStripButtonSourceCode_Click);
             // 
             // toolStripSplitButtonPreview
             // 
@@ -305,8 +300,8 @@ namespace TX.Framework.WindowUI.Controls
             this.toolStripSplitButtonPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButtonPreview.Name = "toolStripSplitButtonPreview";
             this.toolStripSplitButtonPreview.Size = new System.Drawing.Size(23, 22);
-            this.toolStripSplitButtonPreview.Text = "–ßπ˚‘§¿¿";
-            this.toolStripSplitButtonPreview.Click += new System.EventHandler(this.toolStripSplitButtonPreview_Click);
+            this.toolStripSplitButtonPreview.Text = "ÊïàÊûúÈ¢ÑËßà";
+            this.toolStripSplitButtonPreview.Click += new System.EventHandler(this.ToolStripSplitButtonPreview_Click);
             // 
             // TXHtmlEditor
             // 

@@ -2,12 +2,9 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    internal static class DockHelper
-    {
-        public static bool IsDockStateAutoHide(DockState dockState)
-        {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    internal static class DockHelper {
+        public static bool IsDockStateAutoHide(DockState dockState) {
             if (dockState == DockState.DockLeftAutoHide ||
                 dockState == DockState.DockRightAutoHide ||
                 dockState == DockState.DockTopAutoHide ||
@@ -17,8 +14,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 return false;
         }
 
-        public static bool IsDockStateValid(DockState dockState, DockAreas dockableAreas)
-        {
+        public static bool IsDockStateValid(DockState dockState, DockAreas dockableAreas) {
             if (((dockableAreas & DockAreas.Float) == 0) &&
                 (dockState == DockState.Float))
                 return false;
@@ -41,8 +37,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 return true;
         }
 
-        public static bool IsDockWindowState(DockState state)
-        {
+        public static bool IsDockWindowState(DockState state) {
             if (state == DockState.DockTop || state == DockState.DockBottom || state == DockState.DockLeft ||
                 state == DockState.DockRight || state == DockState.Document)
                 return true;
@@ -50,8 +45,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 return false;
         }
 
-        public static DockState ToggleAutoHideState(DockState state)
-        {
+        public static DockState ToggleAutoHideState(DockState state) {
             if (state == DockState.DockLeft)
                 return DockState.DockLeftAutoHide;
             else if (state == DockState.DockRight)
@@ -72,10 +66,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 return state;
         }
 
-        public static DockPane PaneAtPoint(Point pt, DockPanel dockPanel)
-        {
-            for (Control control = Win32Helper.ControlAtPoint(pt); control != null; control = control.Parent)
-            {
+        public static DockPane PaneAtPoint(Point pt, DockPanel dockPanel) {
+            for (Control control = Win32Helper.ControlAtPoint(pt); control != null; control = control.Parent) {
                 IDockContent content = control as IDockContent;
                 if (content != null && content.DockHandler.DockPanel == dockPanel)
                     return content.DockHandler.Pane;
@@ -88,10 +80,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
             return null;
         }
 
-        public static FloatWindow FloatWindowAtPoint(Point pt, DockPanel dockPanel)
-        {
-            for (Control control = Win32Helper.ControlAtPoint(pt); control != null; control = control.Parent)
-            {
+        public static FloatWindow FloatWindowAtPoint(Point pt, DockPanel dockPanel) {
+            for (Control control = Win32Helper.ControlAtPoint(pt); control != null; control = control.Parent) {
                 FloatWindow floatWindow = control as FloatWindow;
                 if (floatWindow != null && floatWindow.DockPanel == dockPanel)
                     return floatWindow;

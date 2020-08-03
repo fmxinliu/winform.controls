@@ -1,24 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// 常用操作工具条的按钮事件
     /// </summary>
     /// User:Ryan  CreateTime:2011-08-19 11:31.
-    public class TXToolBarEventArgs : EventArgs
-    {
+    public class TXToolBarEventArgs : EventArgs {
         private ListViewItem _Item;
 
         private List<ListViewItem> _Items;
 
-        public TXToolBarEventArgs()
-            : base()
-        {
+        public TXToolBarEventArgs() : base() {
             this._Item = null;
             this._Items = null;
         }
@@ -28,8 +24,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <value>The selected item.</value>
         /// User:Ryan  CreateTime:2011-08-19 11:28.
-        public ListViewItem SelectedItem
-        {
+        public ListViewItem SelectedItem {
             get { return this._Item; }
             set { this._Item = value; }
         }
@@ -39,8 +34,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <value>The selected items.</value>
         /// User:Ryan  CreateTime:2011-08-19 11:28.
-        public List<ListViewItem> SelectedItems
-        {
+        public List<ListViewItem> SelectedItems {
             get { return this._Items; }
             set { this._Items = value; }
         }

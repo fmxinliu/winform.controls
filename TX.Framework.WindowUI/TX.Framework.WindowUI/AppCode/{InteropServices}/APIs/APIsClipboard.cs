@@ -1,15 +1,12 @@
 using System;
 
-namespace System.Runtime.InteropServices.APIs
-{
+namespace System.Runtime.InteropServices.APIs {
     /// <summary>
     /// Summary description for Clipboard.
     /// </summary>
-    public class APIsClipboard
-    {
-        public static bool ClearClipboard(IntPtr hWnd)
-        {
-            if(!OpenClipboard(hWnd)) return false;
+    public class APIsClipboard {
+        public static bool ClearClipboard(IntPtr hWnd) {
+            if (!OpenClipboard(hWnd)) return false;
             bool res = EmptyClipboard();
             CloseClipboard();
             return res;

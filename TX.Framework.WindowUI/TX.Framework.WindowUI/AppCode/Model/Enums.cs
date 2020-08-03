@@ -1,17 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     #region EnumControlState
 
     /// <summary>
     /// 控件的基本状态
     /// </summary>
-    internal enum EnumControlState
-    {
+    internal enum EnumControlState {
         None,
 
         /// <summary>
@@ -38,8 +36,7 @@ namespace TX.Framework.WindowUI
     /// 控件的样式控制方式。
     /// （暂时都使用全局的）
     /// </summary>
-    internal enum EnumControlStyelMode
-    {
+    internal enum EnumControlStyelMode {
         /// <summary>
         /// 自定义样式控制
         /// </summary>
@@ -57,8 +54,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// GroupBox的边框样式
     /// </summary>
-    public enum EnumBorderStyle : int
-    {
+    public enum EnumBorderStyle : int {
         /// <summary>
         /// 无
         /// </summary>
@@ -82,8 +78,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// EnumMessageBox的信息类型
     /// </summary>
-    internal enum EnumMessageBox
-    {
+    internal enum EnumMessageBox {
         /// <summary>
         /// 信息
         /// </summary>
@@ -112,8 +107,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// Tabcontrol的边框样式
     /// </summary>
-    public enum EnumTabStyle
-    {
+    public enum EnumTabStyle {
         Default,
 
         AnglesWing,
@@ -126,8 +120,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// 分页大小
     /// </summary>
-    internal enum EnumPageSize
-    {
+    internal enum EnumPageSize {
         Size_10 = 10,
 
         Size_20 = 20,
@@ -148,8 +141,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// 窗口显示动画模式
     /// </summary>
-    internal enum EnumShowWindowMode
-    {
+    internal enum EnumShowWindowMode {
         None = 0,
 
         /// <summary>
@@ -161,7 +153,6 @@ namespace TX.Framework.WindowUI
         /// 从右到左显示
         /// </summary>
         RightToLeft = 0x00000002,
-
 
         /// <summary>
         /// 从上到下显示
@@ -186,8 +177,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// 窗体动画标识
     /// </summary>
-    internal enum AnimateWindowFlag
-    {
+    internal enum AnimateWindowFlag {
         /// <summary>
         /// 从左到右显示
         /// </summary>
@@ -197,7 +187,6 @@ namespace TX.Framework.WindowUI
         /// 从右到左显示
         /// </summary>
         AW_HOR_NEGATIVE = 0x00000002,
-
 
         /// <summary>
         /// 从上到下显示
@@ -244,8 +233,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// Windows常量消息参数
     /// </summary>
-    internal enum WindowMessages : int
-    {
+    internal enum WindowMessages : int {
         WM_NULL = 0x0000,
 
         WM_CREATE = 0x0001,
@@ -598,7 +586,6 @@ namespace TX.Framework.WindowUI
         SHNOTIFY = 0x0401,
         UNICHAR = 0x0109,
         THEMECHANGED = 0x031A
-
     }
     #endregion
 
@@ -607,8 +594,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// 系统窗口管理的命令
     /// </summary>
-    internal enum SystemCommands
-    {
+    internal enum SystemCommands {
         SC_SIZE = 0xF000,
         SC_MOVE = 0xF010,
         SC_MINIMIZE = 0xF020,
@@ -641,8 +627,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// 鼠标在窗体上的位置枚举
     /// </summary>
-    internal enum NCHITTEST
-    {
+    internal enum NCHITTEST {
         /// <summary>
         /// On the screen background or on a dividing line between windows 
         /// (same as HTNOWHERE, except that the DefWindowProc function produces a system beep to indicate an error).
@@ -716,8 +701,7 @@ namespace TX.Framework.WindowUI
     /// 窗体样式的参数枚举
     /// </summary>
     [Flags]
-    internal enum WindowStyle : uint
-    {
+    internal enum WindowStyle : uint {
         WS_OVERLAPPED = 0x00000000,
         WS_POPUP = 0x80000000,
         WS_CHILD = 0x40000000,
@@ -742,8 +726,7 @@ namespace TX.Framework.WindowUI
         WS_ICONIC = WS_MINIMIZE,
         WS_SIZEBOX = WS_THICKFRAME,
         WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW,
-        WS_OVERLAPPEDWINDOW = (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU |
-                                WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX),
+        WS_OVERLAPPEDWINDOW = (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX),
         WS_POPUPWINDOW = (WS_POPUP | WS_BORDER | WS_SYSMENU),
         WS_CHILDWINDOW = (WS_CHILD)
     }
@@ -756,8 +739,7 @@ namespace TX.Framework.WindowUI
     /// 扩展窗体样式
     /// </summary>
     [Flags]
-    internal enum WindowStyleEx
-    {
+    internal enum WindowStyleEx {
         WS_EX_DLGMODALFRAME = 0x00000001,
         WS_EX_NOPARENTNOTIFY = 0x00000004,
         WS_EX_TOPMOST = 0x00000008,
@@ -792,8 +774,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// 虚拟键码常数
     /// </summary>
-    internal enum KeyStatesMasks
-    {
+    internal enum KeyStatesMasks {
         VK_LBUTTON = 0x0001,
         VK_RBUTTON = 0x0002,
         VK_SHIFT = 0x0004,
@@ -817,8 +798,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// ComboBoxButton状态
     /// </summary>
-    internal enum ComboBoxButtonState
-    {
+    internal enum ComboBoxButtonState {
         STATE_SYSTEM_NONE = 0,
 
         STATE_SYSTEM_INVISIBLE = 0x00008000,
@@ -833,8 +813,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// ListView Messages / LVM
     /// </summary>
-    internal enum ListViewMessages : int
-    {
+    internal enum ListViewMessages : int {
         FIRST = 0x1000,
         SCROLL = FIRST + 20,
         GETITEM = FIRST + 75,
@@ -873,8 +852,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// HeaderItem flags / HDI
     /// </summary>
-    internal enum HeaderItemFlags
-    {
+    internal enum HeaderItemFlags {
         WIDTH = 0x0001,
         HEIGHT = WIDTH,
         TEXT = 0x0002,
@@ -891,8 +869,7 @@ namespace TX.Framework.WindowUI
     /// <summary>
     /// Header Control Messages / HDM
     /// </summary>
-    internal enum HeaderControlMessages : int
-    {
+    internal enum HeaderControlMessages : int {
         FIRST = 0x1200,
         GETITEMRECT = (FIRST + 7),
         HITTEST = (FIRST + 6),
@@ -903,7 +880,6 @@ namespace TX.Framework.WindowUI
         SETORDERARRAY = (FIRST + 18),
         GETITEMCOUNT = (FIRST + 0),
         GETITEMA = (FIRST + 3),
-
     }
     #endregion
 }

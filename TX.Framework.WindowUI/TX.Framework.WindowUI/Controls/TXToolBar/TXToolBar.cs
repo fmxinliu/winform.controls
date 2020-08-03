@@ -1,23 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using TX.Framework.WindowUI.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// 常用操作工具条（主要针对基本信息的操作处理）
     /// </summary>
     /// User:Ryan  CreateTime:2011-08-19 11:31.
     [ToolboxBitmap(typeof(UserControl))]
     [DesignTimeVisibleAttribute(false)]
-    public partial class TXToolBar : UserControl
-    {
+    public partial class TXToolBar : UserControl {
         #region fileds
 
         private ToolStripItemDisplayStyle _DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
@@ -33,8 +32,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #endregion
 
-        public TXToolBar()
-        {
+        public TXToolBar() {
             InitializeComponent();
             this.BackColor = SkinManager.CurrentSkin.BaseColor;
         }
@@ -85,11 +83,9 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否显示全选、反选项")]
         [DefaultValue(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool CheckItemVisible
-        {
+        public bool CheckItemVisible {
             get { return this._CheckItemVisible; }
-            set
-            {
+            set {
                 this._CheckItemVisible = value;
                 this.panelCheckItem.Visible = value;
             }
@@ -99,11 +95,9 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否显示添加")]
         [DefaultValue(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool AddVisible
-        {
+        public bool AddVisible {
             get { return this._AddVisible; }
-            set
-            {
+            set {
                 this._AddVisible = value;
                 this.tsbAdd.Visible = value;
             }
@@ -113,11 +107,9 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否显示修改")]
         [DefaultValue(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool EditVisible
-        {
+        public bool EditVisible {
             get { return this._EditVisible; }
-            set
-            {
+            set {
                 this._EditVisible = value;
                 this.tsbEdit.Visible = value;
             }
@@ -127,11 +119,9 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否显示查看详情")]
         [DefaultValue(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool DetailVisible
-        {
+        public bool DetailVisible {
             get { return this._DetailVisible; }
-            set
-            {
+            set {
                 this._DetailVisible = value;
                 this.tsbDetails.Visible = value;
             }
@@ -141,11 +131,9 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否显示删除")]
         [DefaultValue(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool DeleteVisible
-        {
+        public bool DeleteVisible {
             get { return this._DeleteVisible; }
-            set
-            {
+            set {
                 this._DeleteVisible = value;
                 this.tsbDelete.Visible = value;
             }
@@ -155,11 +143,9 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否显示导出")]
         [DefaultValue(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool ExportVisible
-        {
+        public bool ExportVisible {
             get { return this._ExportVisible; }
-            set
-            {
+            set {
                 this._ExportVisible = value;
                 this.tsbExport.Visible = value;
             }
@@ -169,11 +155,9 @@ namespace TX.Framework.WindowUI.Controls
         [Description("是否显示帮助")]
         [DefaultValue(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool HelpVisible
-        {
+        public bool HelpVisible {
             get { return this._HelpVisible; }
-            set
-            {
+            set {
                 this._HelpVisible = value;
                 this.tsbHelp.Visible = value;
             }
@@ -188,16 +172,12 @@ namespace TX.Framework.WindowUI.Controls
         [Description("控制按钮的显示样式")]
         [DefaultValue(typeof(ToolStripItemDisplayStyle), "ImageAndText")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public ToolStripItemDisplayStyle DisPlayStyle
-        {
+        public ToolStripItemDisplayStyle DisPlayStyle {
             get { return this._DisplayStyle; }
-            set
-            {
-                if (this._DisplayStyle != value)
-                {
+            set {
+                if (this._DisplayStyle != value) {
                     this._DisplayStyle = value;
-                    foreach (ToolStripItem item in this.txToolStrip1.Items)
-                    {
+                    foreach (ToolStripItem item in this.txToolStrip1.Items) {
                         item.DisplayStyle = value;
                     }
                 }
@@ -208,110 +188,83 @@ namespace TX.Framework.WindowUI.Controls
 
         #region private methods
 
-        private void linkAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (this.CheckAll != null)
-            {
+        private void LinkAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            if (this.CheckAll != null) {
                 this.CheckAll(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
 
-        private void linkInvert_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (this.CheckInvert != null)
-            {
+        private void LinkInvert_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            if (this.CheckInvert != null) {
                 this.CheckInvert(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
 
-        private void tsbAdd_Click(object sender, EventArgs e)
-        {
-            if (this.Add != null)
-            {
+        private void TsbAdd_Click(object sender, EventArgs e) {
+            if (this.Add != null) {
                 this.Add(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("Error Information", "Oh!,I'm really awfully sorry,\n\nThe functions cannot be used!");
             }
         }
 
-        private void tsbEdit_Click(object sender, EventArgs e)
-        {
-            if (this.Edit != null)
-            {
+        private void TsbEdit_Click(object sender, EventArgs e) {
+            if (this.Edit != null) {
                 this.Edit(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
 
-        private void tsbDetails_Click(object sender, EventArgs e)
-        {
-            if (this.Detail != null)
-            {
-                this.Detail(sender,e);
+        private void TsbDetails_Click(object sender, EventArgs e) {
+            if (this.Detail != null) {
+                this.Detail(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
 
-        private void tsbDelete_Click(object sender, EventArgs e)
-        {
-            if (this.Delete != null)
-            {
+        private void TsbDelete_Click(object sender, EventArgs e) {
+            if (this.Delete != null) {
                 this.Delete(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
 
-        private void tsbRefresh_Click(object sender, EventArgs e)
-        {
-            if (this.Refresh != null)
-            {
+        private void TsbRefresh_Click(object sender, EventArgs e) {
+            if (this.Refresh != null) {
                 this.Refresh(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
 
-        private void tsbExport_Click(object sender, EventArgs e)
-        {
-            if (this.Export != null)
-            {
+        private void TsbExport_Click(object sender, EventArgs e) {
+            if (this.Export != null) {
                 this.Export(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
 
-        private void tsbHelp_Click(object sender, EventArgs e)
-        {
-            if (this.Help != null)
-            {
+        private void TsbHelp_Click(object sender, EventArgs e) {
+            if (this.Help != null) {
                 this.Help(sender, e);
             }
-            else
-            {
+            else {
                 TXMessageBoxExtensions.Error("非常遗憾，该功能还未实现！开发人员和凤姐一起私奔了！");
             }
         }
@@ -322,12 +275,10 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// 添加按钮
         /// </summary>
-        /// <param name="button"></param>
-        public void AddButton( ToolStripItem button )
-        {
-            this.txToolStrip1.Items.Add( button );
+        public void AddButton(ToolStripItem button) {
+            this.txToolStrip1.Items.Add(button);
             this.txToolStrip1.Width += button.Width;
-        } 
+        }
         #endregion
     }
 }

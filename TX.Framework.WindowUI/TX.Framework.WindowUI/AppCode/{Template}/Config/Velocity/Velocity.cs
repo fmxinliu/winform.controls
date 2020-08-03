@@ -13,12 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
+namespace System.Text.Template {
     /// <summary>
-    /// Velocity·ç¸ñµÄÄ£°æÒýÇæ
+    /// Velocityï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    public class Velocity : TemplateEngine<VelocityConfig, CSharpParser>
-    {
-    }
+    public class Velocity : TemplateEngine<VelocityConfig, CSharpParser> { }
 }

@@ -1,7 +1,5 @@
-﻿namespace TX.Framework.WindowUI.Controls
-{
-    partial class TXDataGridView
-    {
+namespace TX.Framework.WindowUI.Controls {
+    partial class TXDataGridView {
         /// <summary>
         /// 必需的设计器变量。
         /// </summary>
@@ -11,10 +9,8 @@
         /// 清理所有正在使用的资源。
         /// </summary>
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// 设计器支持所需的方法 - 不要
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.headRedrawTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -36,7 +31,7 @@
             // headRedrawTimer
             // 
             this.headRedrawTimer.Interval = 10;
-            this.headRedrawTimer.Tick += new System.EventHandler(this.headRedrawTimer_Tick);
+            this.headRedrawTimer.Tick += new System.EventHandler(this.HeadRedrawTimer_Tick);
             // 
             // TXDataGridView
             // 

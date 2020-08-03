@@ -3,33 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    public class DockContentCollection : ReadOnlyCollection<IDockContent>
-    {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    public class DockContentCollection : ReadOnlyCollection<IDockContent> {
         private static List<IDockContent> _emptyList = new List<IDockContent>(0);
 
-        internal DockContentCollection()
-            : base(new List<IDockContent>())
-        {
-        }
+        internal DockContentCollection() : base(new List<IDockContent>()) { }
 
-        internal DockContentCollection(DockPane pane)
-            : base(_emptyList)
-        {
+        internal DockContentCollection(DockPane pane) : base(_emptyList) {
             m_dockPane = pane;
         }
 
         private DockPane m_dockPane = null;
-        private DockPane DockPane
-        {
+        private DockPane DockPane {
             get { return m_dockPane; }
         }
 
-        public new IDockContent this[int index]
-        {
-            get
-            {
+        public new IDockContent this[int index] {
+            get {
                 if (DockPane == null)
                     return Items[index] as IDockContent;
                 else
@@ -37,8 +27,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        internal int Add(IDockContent content)
-        {
+        internal int Add(IDockContent content) {
 #if DEBUG
             if (DockPane != null)
                 throw new InvalidOperationException();
@@ -51,8 +40,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             return Count - 1;
         }
 
-        internal void AddAt(IDockContent content, int index)
-        {
+        internal void AddAt(IDockContent content, int index) {
 #if DEBUG
             if (DockPane != null)
                 throw new InvalidOperationException();
@@ -67,18 +55,15 @@ namespace TX.Framework.WindowUI.Controls.Docking
             Items.Insert(index, content);
         }
 
-        public new bool Contains(IDockContent content)
-        {
+        public new bool Contains(IDockContent content) {
             if (DockPane == null)
                 return Items.Contains(content);
             else
                 return (GetIndexOfVisibleContents(content) != -1);
         }
 
-        public new int Count
-        {
-            get
-            {
+        public new int Count {
+            get {
                 if (DockPane == null)
                     return base.Count;
                 else
@@ -86,10 +71,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        public new int IndexOf(IDockContent content)
-        {
-            if (DockPane == null)
-            {
+        public new int IndexOf(IDockContent content) {
+            if (DockPane == null) {
                 if (!Contains(content))
                     return -1;
                 else
@@ -99,8 +82,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 return GetIndexOfVisibleContents(content);
         }
 
-        internal void Remove(IDockContent content)
-        {
+        internal void Remove(IDockContent content) {
             if (DockPane != null)
                 throw new InvalidOperationException();
 
@@ -110,18 +92,15 @@ namespace TX.Framework.WindowUI.Controls.Docking
             Items.Remove(content);
         }
 
-        private int CountOfVisibleContents
-        {
-            get
-            {
+        private int CountOfVisibleContents {
+            get {
 #if DEBUG
                 if (DockPane == null)
                     throw new InvalidOperationException();
 #endif
 
                 int count = 0;
-                foreach (IDockContent content in DockPane.Contents)
-                {
+                foreach (IDockContent content in DockPane.Contents) {
                     if (content.DockHandler.DockState == DockPane.DockState)
                         count++;
                 }
@@ -129,16 +108,14 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        private IDockContent GetVisibleContent(int index)
-        {
+        private IDockContent GetVisibleContent(int index) {
 #if DEBUG
             if (DockPane == null)
                 throw new InvalidOperationException();
 #endif
 
             int currentIndex = -1;
-            foreach (IDockContent content in DockPane.Contents)
-            {
+            foreach (IDockContent content in DockPane.Contents) {
                 if (content.DockHandler.DockState == DockPane.DockState)
                     currentIndex++;
 
@@ -148,8 +125,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             throw (new ArgumentOutOfRangeException());
         }
 
-        private int GetIndexOfVisibleContents(IDockContent content)
-        {
+        private int GetIndexOfVisibleContents(IDockContent content) {
 #if DEBUG
             if (DockPane == null)
                 throw new InvalidOperationException();
@@ -159,10 +135,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 return -1;
 
             int index = -1;
-            foreach (IDockContent c in DockPane.Contents)
-            {
-                if (c.DockHandler.DockState == DockPane.DockState)
-                {
+            foreach (IDockContent c in DockPane.Contents) {
+                if (c.DockHandler.DockState == DockPane.DockState) {
                     index++;
 
                     if (c == content)

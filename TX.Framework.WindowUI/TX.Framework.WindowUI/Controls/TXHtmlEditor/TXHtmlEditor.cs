@@ -1,31 +1,29 @@
 //#####################################################################################
 //Ryan-2010-9-19
-//Àµ√˜£∫HTML±‡º≠∆˜œ¬‘ÿ◊‘Õ¯¬Áø™‘¥¥˙¬Î£®http://www.cnpopsoft.com £©,‘⁄∆‰ª˘¥°÷Æ…œ¿©’πµƒ–¬µƒπ¶
-//ƒ‹£¨Ω¯“ª≤ΩÕÍ…∆¡À‘≠”–µƒπ¶ƒ‹°£
+//ËØ¥ÊòéÔºöHTMLÁºñËæëÂô®‰∏ãËΩΩËá™ÁΩëÁªúÂºÄÊ∫ê‰ª£Á†ÅÔºàhttp://www.cnpopsoft.comÔºâ,Âú®ÂÖ∂Âü∫Á°Ä‰πã‰∏äÊâ©Â±ïÁöÑÊñ∞ÁöÑÂäü
+//ËÉΩÔºåËøõ‰∏ÄÊ≠•ÂÆåÂñÑ‰∫ÜÂéüÊúâÁöÑÂäüËÉΩ„ÄÇ
 //#####################################################################################
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
-    /// Html±‡º≠∆˜
+    /// HTMLÁºñËæëÂô®
     /// </summary>
-    [Description( "Html±‡º≠∆˜" ), ClassInterface( ClassInterfaceType.AutoDispatch )]
-    [ToolboxBitmap( typeof( WebBrowser ) )]
-    public partial class TXHtmlEditor : UserControl
-    {
+    [Description("HTMLÁºñËæëÂô®"), ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [ToolboxBitmap(typeof(WebBrowser))]
+    public partial class TXHtmlEditor : UserControl {
         #region fileds
 
         /// <summary>
-        /// ‘≤Ω«÷µ
+        /// ÂúÜËßíÂÄº
         /// </summary>
         private int _CornerRadius = 2;
 
@@ -34,146 +32,118 @@ namespace TX.Framework.WindowUI.Controls
         private Color _HeightLightBolorColor = SkinManager.CurrentSkin.HeightLightControlColor.First;
 
         /// <summary>
-        /// µ±«∞øÿº˛◊¥Ã¨
+        /// ÂΩìÂâçÊéß‰ª∂Áä∂ÊÄÅ
         /// </summary>
         private EnumControlState _ControlState = EnumControlState.Default;
 
         public Func<string, string> OnLocalImageUpdate;
 
-        
         #endregion
 
         #region Initializes
 
-        public TXHtmlEditor()
-        {
+        public TXHtmlEditor() {
             dataUpdate = 0;
             InitializeComponent();
             InitializeControls();
-            this.webBrowserBody.GotFocus += new EventHandler( webBrowserBody_GotFocus );
-            this.webBrowserBody.LostFocus += new EventHandler( webBrowserBody_LostFocus );
-            this.webBrowserBody.Navigating += new WebBrowserNavigatingEventHandler( webBrowserBody_Navigating );
+            this.webBrowserBody.GotFocus += new EventHandler(WebBrowserBody_GotFocus);
+            this.webBrowserBody.LostFocus += new EventHandler(WebBrowserBody_LostFocus);
+            this.webBrowserBody.Navigating += new WebBrowserNavigatingEventHandler(WebBrowserBody_Navigating);
         }
-
 
         #endregion
 
-        #region ¿©’π Ù–‘
+        #region Êâ©Â±ïÂ±ûÊÄß
 
-        [Category( "TXProperties" )]
-        [Browsable( true )]
-        [Description( "‘≤Ω«µƒ∞Îæ∂÷µ" )]
-        [DefaultValue( 2 )]
-        public int CornerRadius
-        {
-            get
-            {
+        [Category("TXProperties")]
+        [Browsable(true)]
+        [Description("ÂúÜËßíÁöÑÂçäÂæÑÂÄº")]
+        [DefaultValue(2)]
+        public int CornerRadius {
+            get {
                 return this._CornerRadius;
             }
-            set
-            {
+            set {
                 this._CornerRadius = value;
                 this.Invalidate();
             }
         }
 
-        [Browsable( false )]
-        public new BorderStyle BorderStyle
-        {
-            get
-            {
+        [Browsable(false)]
+        public new BorderStyle BorderStyle {
+            get {
                 return BorderStyle.None;
             }
         }
 
-        [Category( "TXProperties" )]
-        [Browsable( true )]
-        [Description( "±ﬂøÚ—’…´" )]
-        public Color BorderColor
-        {
-            get
-            {
+        [Category("TXProperties")]
+        [Browsable(true)]
+        [Description("ËæπÊ°ÜÈ¢úËâ≤")]
+        public Color BorderColor {
+            get {
                 return this._BorderColor;
             }
-            set
-            {
+            set {
                 this._BorderColor = value;
                 base.Invalidate();
             }
         }
 
-        [Category( "TXProperties" )]
-        [Browsable( true )]
-        [Description( "±ﬂøÚµƒ∏ﬂ¡¡…´" )]
-        public Color HeightLightBolorColor
-        {
-            get
-            {
+        [Category("TXProperties")]
+        [Browsable(true)]
+        [Description("ËæπÊ°ÜÁöÑÈ´ò‰∫ÆËâ≤")]
+        public Color HeightLightBolorColor {
+            get {
                 return this._HeightLightBolorColor;
             }
-            set
-            {
+            set {
                 this._HeightLightBolorColor = value;
             }
-
         }
         /// <summary>
-        /// ªÒ»°»´≤øHtmlŒƒ±æ
+        /// Ëé∑ÂèñÂÖ®ÈÉ®HTMLÊñáÊú¨
         /// </summary>
-        public string Html
-        {
-            get
-            {
+        public string Html {
+            get {
                 return webBrowserBody.DocumentText;
             }
         }
-
 
         /// <summary>
         /// Gets  the inner HTML text
         /// </summary>
         /// <value>The inner HTML text.</value>
         /// User:Ryan  CreateTime:2011-08-09 17:45.
-        public string InnerHtml
-        {
-            get
-            {
+        public string InnerHtml {
+            get {
                 return this.webBrowserBody.Document.Body.InnerHtml;
             }
         }
 
         /// <summary>
-        /// ªÒ»°∫Õ…Ë÷√µ±«∞µƒText÷µ
+        /// Ëé∑ÂèñÂíåËÆæÁΩÆÂΩìÂâçÁöÑTextÂÄº
         /// </summary>
-        public override string Text
-        {
-            get
-            {
+        public override string Text {
+            get {
                 string str = webBrowserBody.Document.Body == null ? string.Empty : webBrowserBody.Document.Body.InnerText;
-                return string.IsNullOrEmpty( str ) ? string.Empty : str;
+                return string.IsNullOrEmpty(str) ? string.Empty : str;
             }
-            set
-            {
-                webBrowserBody.DocumentText = value.Replace( "\r\n", "<br>" );
+            set {
+                webBrowserBody.DocumentText = value.Replace("\r\n", "<br>");
             }
         }
 
-
         /// <summary>
-        /// ªÒ»°≤Â»ÎµƒÕº∆¨√˚≥∆ºØ∫œ
+        /// Ëé∑ÂèñÊèíÂÖ•ÁöÑÂõæÁâáÂêçÁß∞ÈõÜÂêà
         /// </summary>
-        public string[ ] Images
-        {
-            get
-            {
+        public string[] Images {
+            get {
                 List<string> images = new List<string>();
 
-                foreach( HtmlElement element in webBrowserBody.Document.Images )
-                {
-                    string image = element.GetAttribute( "src" );
-                    if( !images.Contains( image ) )
-                    {
-                        images.Add( image );
+                foreach (HtmlElement element in webBrowserBody.Document.Images) {
+                    string image = element.GetAttribute("src");
+                    if (!images.Contains(image)) {
+                        images.Add(image);
                     }
                 }
 
@@ -185,469 +155,388 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Override methods
 
-        protected override void OnPaint( PaintEventArgs e )
-        {
-            base.OnPaint( e );
+        protected override void OnPaint(PaintEventArgs e) {
+            base.OnPaint(e);
             Graphics g = e.Graphics;
-            Rectangle rect = new Rectangle( 0, 0, this.Width - 1, this.Height - 1 );
-            rect.Inflate( -1, -1 );
-            GDIHelper.InitializeGraphics( g );
-            GDIHelper.DrawPathBorder( g, new RoundRectangle( rect, this._CornerRadius ), this._BorderColor );
-            if( this._ControlState == EnumControlState.HeightLight )
-            {
-                GDIHelper.DrawPathOuterBorder( g, new RoundRectangle( rect, this._CornerRadius ), this._HeightLightBolorColor );
+            Rectangle rect = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
+            rect.Inflate(-1, -1);
+            GDIHelper.InitializeGraphics(g);
+            GDIHelper.DrawPathBorder(g, new RoundRectangle(rect, this._CornerRadius), this._BorderColor);
+            if (this._ControlState == EnumControlState.HeightLight) {
+                GDIHelper.DrawPathOuterBorder(g, new RoundRectangle(rect, this._CornerRadius), this._HeightLightBolorColor);
             }
         }
 
-        void webBrowserBody_LostFocus( object sender, EventArgs e )
-        {
+        private void WebBrowserBody_LostFocus(object sender, EventArgs e) {
             this._ControlState = EnumControlState.Default;
             this.Invalidate();
         }
 
-        void webBrowserBody_Navigating( object sender, WebBrowserNavigatingEventArgs e )
-        {
-            this.webBrowserBody.Document.Write( "<script>functionshowModalDialog{return;}" );
+        private void WebBrowserBody_Navigating(object sender, WebBrowserNavigatingEventArgs e) {
+            this.webBrowserBody.Document.Write("<script>functionshowModalDialog{return;}");
         }
 
-        void webBrowserBody_GotFocus( object sender, EventArgs e )
-        {
+        private void WebBrowserBody_GotFocus(object sender, EventArgs e) {
             this._ControlState = EnumControlState.HeightLight;
             this.Invalidate();
         }
 
         #endregion
 
-        #region ∑Ω∑®
+        #region ÊñπÊ≥ï
 
         /// <summary>
-        /// øÿº˛≥ı ºªØ
+        /// Êéß‰ª∂ÂàùÂßãÂåñ
         /// </summary>
-        private void InitializeControls()
-        {
+        private void InitializeControls() {
             BeginUpdate();
-            //π§æﬂ¿∏
-            foreach( FontFamily family in FontFamily.Families )
-            {
-                toolStripComboBoxName.Items.Add( family.Name );
+            //Â∑•ÂÖ∑Ê†è
+            foreach (FontFamily family in FontFamily.Families) {
+                toolStripComboBoxName.Items.Add(family.Name);
             }
 
-            toolStripComboBoxSize.Items.AddRange( FontSize.All.ToArray() );
+            toolStripComboBoxSize.Items.AddRange(FontSize.All.ToArray());
             toolStripComboBoxSize.SelectedIndex = 1;
-            toolStripComboBoxName.SelectedText = "ÀŒÃÂ";
+            toolStripComboBoxName.SelectedText = "ÂÆã‰Ωì";
 
-            //‰Ø¿¿∆˜            
+            //ÊµèËßàÂô®            
             webBrowserBody.DocumentText = string.Empty;
-            webBrowserBody.Document.Click += new HtmlElementEventHandler( webBrowserBody_DocumentClick );
-            webBrowserBody.Document.Focusing += new HtmlElementEventHandler( webBrowserBody_DocumentFocusing );
-            webBrowserBody.Document.ExecCommand( "EditMode", false, null );
-            webBrowserBody.Document.ExecCommand( "LiveResize", false, null );
+            webBrowserBody.Document.Click += new HtmlElementEventHandler(WebBrowserBody_DocumentClick);
+            webBrowserBody.Document.Focusing += new HtmlElementEventHandler(WebBrowserBody_DocumentFocusing);
+            webBrowserBody.Document.ExecCommand("EditMode", false, null);
+            webBrowserBody.Document.ExecCommand("LiveResize", false, null);
             EndUpdate();
         }
 
         /// <summary>
-        /// À¢–¬∞¥≈•◊¥Ã¨
+        /// Âà∑Êñ∞ÊåâÈíÆÁä∂ÊÄÅ
         /// </summary>
-        private void RefreshToolBar()
-        {
+        private void RefreshToolBar() {
             BeginUpdate();
-            try
-            {
-                mshtml.IHTMLDocument2 document = ( mshtml.IHTMLDocument2 )webBrowserBody.Document.DomDocument;
+            try {
+                mshtml.IHTMLDocument2 document = (mshtml.IHTMLDocument2)webBrowserBody.Document.DomDocument;
 
-                toolStripComboBoxName.Text = document.queryCommandValue( "FontName" ).ToString();
-                toolStripComboBoxSize.SelectedItem = FontSize.Find( ( int )document.queryCommandValue( "FontSize" ) );
-                toolStripButtonBold.Checked = document.queryCommandState( "Bold" );
-                toolStripButtonItalic.Checked = document.queryCommandState( "Italic" );
-                toolStripButtonUnderline.Checked = document.queryCommandState( "Underline" );
+                toolStripComboBoxName.Text = document.queryCommandValue("FontName").ToString();
+                toolStripComboBoxSize.SelectedItem = FontSize.Find((int)document.queryCommandValue("FontSize"));
+                toolStripButtonBold.Checked = document.queryCommandState("Bold");
+                toolStripButtonItalic.Checked = document.queryCommandState("Italic");
+                toolStripButtonUnderline.Checked = document.queryCommandState("Underline");
 
-                toolStripButtonNumbers.Checked = document.queryCommandState( "InsertOrderedList" );
-                toolStripButtonBullets.Checked = document.queryCommandState( "InsertUnorderedList" );
+                toolStripButtonNumbers.Checked = document.queryCommandState("InsertOrderedList");
+                toolStripButtonBullets.Checked = document.queryCommandState("InsertUnorderedList");
 
-                toolStripButtonLeft.Checked = document.queryCommandState( "JustifyLeft" );
-                toolStripButtonCenter.Checked = document.queryCommandState( "JustifyCenter" );
-                toolStripButtonRight.Checked = document.queryCommandState( "JustifyRight" );
-                toolStripButtonFull.Checked = document.queryCommandState( "JustifyFull" );
+                toolStripButtonLeft.Checked = document.queryCommandState("JustifyLeft");
+                toolStripButtonCenter.Checked = document.queryCommandState("JustifyCenter");
+                toolStripButtonRight.Checked = document.queryCommandState("JustifyRight");
+                toolStripButtonFull.Checked = document.queryCommandState("JustifyFull");
             }
-            catch( Exception e )
-            {
-                System.Diagnostics.Debug.WriteLine( e );
+            catch (Exception e) {
+                System.Diagnostics.Debug.WriteLine(e);
             }
-            finally
-            {
+            finally {
                 EndUpdate();
             }
         }
 
         #endregion
 
-        #region ∏¸–¬œ‡πÿ
+        #region Êõ¥Êñ∞Áõ∏ÂÖ≥
 
         private int dataUpdate;
-        private bool Updating
-        {
-            get
-            {
+        private bool Updating {
+            get {
                 return dataUpdate != 0;
             }
         }
 
-        private void BeginUpdate()
-        {
+        private void BeginUpdate() {
             ++dataUpdate;
         }
-        private void EndUpdate()
-        {
+        private void EndUpdate() {
             --dataUpdate;
         }
 
         #endregion
 
-        #region π§æﬂ¿∏
+        #region Â∑•ÂÖ∑Ê†è
 
-        private void toolStripComboBoxName_SelectedIndexChanged( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripComboBoxName_SelectedIndexChanged(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "FontName", false, toolStripComboBoxName.Text );
+            webBrowserBody.Document.ExecCommand("FontName", false, toolStripComboBoxName.Text);
         }
-        private void toolStripComboBoxSize_SelectedIndexChanged( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripComboBoxSize_SelectedIndexChanged(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            int size = ( toolStripComboBoxSize.SelectedItem == null ) ? 1 : ( toolStripComboBoxSize.SelectedItem as FontSize ).Value;
-            webBrowserBody.Document.ExecCommand( "FontSize", false, size );
+            int size = (toolStripComboBoxSize.SelectedItem == null) ? 1 : (toolStripComboBoxSize.SelectedItem as FontSize).Value;
+            webBrowserBody.Document.ExecCommand("FontSize", false, size);
         }
-        private void toolStripButtonBold_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonBold_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "Bold", false, null );
+            webBrowserBody.Document.ExecCommand("Bold", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonItalic_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonItalic_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "Italic", false, null );
+            webBrowserBody.Document.ExecCommand("Italic", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonUnderline_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonUnderline_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "Underline", false, null );
+            webBrowserBody.Document.ExecCommand("Underline", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonColor_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonColor_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
             ColorDialog dialog = new ColorDialog();
-            try
-            {
-                int fontcolor = ( int )( ( mshtml.IHTMLDocument2 )webBrowserBody.Document.DomDocument ).queryCommandValue( "ForeColor" );
-                dialog.Color = Color.FromArgb( 0xff, fontcolor & 0xff, ( fontcolor >> 8 ) & 0xff, ( fontcolor >> 16 ) & 0xff );
+            try {
+                int fontcolor = (int)((mshtml.IHTMLDocument2)webBrowserBody.Document.DomDocument).queryCommandValue("ForeColor");
+                dialog.Color = Color.FromArgb(0xff, fontcolor & 0xff, (fontcolor >> 8) & 0xff, (fontcolor >> 16) & 0xff);
             }
-            catch
-            {
+            catch {
                 dialog.Color = Color.Black;
             }
 
             DialogResult result = dialog.ShowDialog();
-            if( result == DialogResult.OK )
-            {
+            if (result == DialogResult.OK) {
                 string color = dialog.Color.Name;
-                if( !dialog.Color.IsNamedColor )
-                {
-                    color = "#" + color.Remove( 0, 2 );
+                if (!dialog.Color.IsNamedColor) {
+                    color = "#" + color.Remove(0, 2);
                 }
 
-                webBrowserBody.Document.ExecCommand( "ForeColor", false, color );
+                webBrowserBody.Document.ExecCommand("ForeColor", false, color);
             }
             RefreshToolBar();
         }
 
-        private void toolStripButtonNumbers_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonNumbers_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "InsertOrderedList", false, null );
+            webBrowserBody.Document.ExecCommand("InsertOrderedList", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonBullets_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonBullets_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "InsertUnorderedList", false, null );
+            webBrowserBody.Document.ExecCommand("InsertUnorderedList", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonOutdent_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonOutdent_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "Outdent", false, null );
+            webBrowserBody.Document.ExecCommand("Outdent", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonIndent_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonIndent_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "Indent", false, null );
+            webBrowserBody.Document.ExecCommand("Indent", false, null);
             RefreshToolBar();
         }
 
-        private void toolStripButtonLeft_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonLeft_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "JustifyLeft", false, null );
+            webBrowserBody.Document.ExecCommand("JustifyLeft", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonCenter_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonCenter_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "JustifyCenter", false, null );
+            webBrowserBody.Document.ExecCommand("JustifyCenter", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonRight_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonRight_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "JustifyRight", false, null );
+            webBrowserBody.Document.ExecCommand("JustifyRight", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonFull_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonFull_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "JustifyFull", false, null );
+            webBrowserBody.Document.ExecCommand("JustifyFull", false, null);
             RefreshToolBar();
         }
 
-        private void toolStripButtonLine_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonLine_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "InsertHorizontalRule", false, null );
+            webBrowserBody.Document.ExecCommand("InsertHorizontalRule", false, null);
             RefreshToolBar();
         }
-        private void toolStripButtonHyperlink_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonHyperlink_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
 
-            webBrowserBody.Document.ExecCommand( "CreateLink", true, null );
+            webBrowserBody.Document.ExecCommand("CreateLink", true, null);
             RefreshToolBar();
         }
-        private void toolStripButtonPicture_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonPicture_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
-            frmAddImage f = new frmAddImage();
+            FrmAddImage f = new FrmAddImage();
             f.OnImageUpdate = this.OnLocalImageUpdate;
-            f._ReturnValue = insertImage;
+            f._ReturnValue = InsertImage;
             f.ShowDialog();
             f.Dispose();
         }
-        private void insertImage( string imageUrl )
-        {
-            webBrowserBody.Document.ExecCommand( "InsertImage", false, imageUrl );
+        private void InsertImage(string imageUrl) {
+            webBrowserBody.Document.ExecCommand("InsertImage", false, imageUrl);
             RefreshToolBar();
         }
-        private void toolStripButtonSourceCode_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripButtonSourceCode_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
-            frmSourceCode f = new frmSourceCode( webBrowserBody.DocumentText );
+            FrmSourceCode f = new FrmSourceCode(webBrowserBody.DocumentText);
             f._ReturnValue = UpdateDocumentText;
             f.ShowDialog();
             f.Dispose();
         }
-        private void UpdateDocumentText( string DocumentText )
-        {
-            webBrowserBody.Document.OpenNew( true );//Ω‚æˆ∏˙–¬∆‰documentText∫ÛµØ≥ˆ–ﬁ∏ƒÃ· æøÚ°£÷’”⁄’“µΩƒ„¡À£°–°—˘
+        private void UpdateDocumentText(string DocumentText) {
+            webBrowserBody.Document.OpenNew(true); //Ëß£ÂÜ≥Ë∑üÊñ∞ÂÖ∂documentTextÂêéÂºπÂá∫‰øÆÊîπÊèêÁ§∫Ê°Ü„ÄÇÁªà‰∫éÊâæÂà∞‰Ω†‰∫ÜÔºÅÂ∞èÊ†∑
             this.Text = DocumentText;
-            webBrowserBody.Document.OpenNew( true );
+            webBrowserBody.Document.OpenNew(true);
             RefreshToolBar();
         }
-        private void toolStripSplitButtonPreview_Click( object sender, EventArgs e )
-        {
-            if( Updating )
-            {
+        private void ToolStripSplitButtonPreview_Click(object sender, EventArgs e) {
+            if (Updating) {
                 return;
             }
-            frmPreview f = new frmPreview( webBrowserBody.DocumentText );
+            FrmPreview f = new FrmPreview(webBrowserBody.DocumentText);
             f.ShowDialog();
             f.Dispose();
         }
 
         #endregion
 
-        #region ‰Ø¿¿∆˜
+        #region ÊµèËßàÂô®
 
-        private void webBrowserBody_DocumentCompleted( object sender, WebBrowserDocumentCompletedEventArgs e )
-        {
+        private void WebBrowserBody_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) {
         }
 
-        private void webBrowserBody_PreviewKeyDown( object sender, PreviewKeyDownEventArgs e )
-        {
-            if( e.IsInputKey )
-            {
+        private void WebBrowserBody_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
+            if (e.IsInputKey) {
                 return;
             }
             RefreshToolBar();
         }
 
-        private void webBrowserBody_DocumentClick( object sender, HtmlElementEventArgs e )
-        {
+        private void WebBrowserBody_DocumentClick(object sender, HtmlElementEventArgs e) {
             RefreshToolBar();
         }
 
-        private void webBrowserBody_DocumentFocusing( object sender, HtmlElementEventArgs e )
-        {
+        private void WebBrowserBody_DocumentFocusing(object sender, HtmlElementEventArgs e) {
             RefreshToolBar();
         }
 
         #endregion
 
-        #region ◊÷ÃÂ¥Û–°◊™ªª
+        #region Â≠ó‰ΩìÂ§ßÂ∞èËΩ¨Êç¢
 
-        private class FontSize
-        {
+        private class FontSize {
             private static List<FontSize> allFontSize = null;
-            public static List<FontSize> All
-            {
-                get
-                {
-                    if( allFontSize == null )
-                    {
+            public static List<FontSize> All {
+                get {
+                    if (allFontSize == null) {
                         allFontSize = new List<FontSize>();
-                        allFontSize.Add( new FontSize( 8, 1 ) );
-                        allFontSize.Add( new FontSize( 10, 2 ) );
-                        allFontSize.Add( new FontSize( 12, 3 ) );
-                        allFontSize.Add( new FontSize( 14, 4 ) );
-                        allFontSize.Add( new FontSize( 18, 5 ) );
-                        allFontSize.Add( new FontSize( 24, 6 ) );
-                        allFontSize.Add( new FontSize( 36, 7 ) );
+                        allFontSize.Add(new FontSize(8, 1));
+                        allFontSize.Add(new FontSize(10, 2));
+                        allFontSize.Add(new FontSize(12, 3));
+                        allFontSize.Add(new FontSize(14, 4));
+                        allFontSize.Add(new FontSize(18, 5));
+                        allFontSize.Add(new FontSize(24, 6));
+                        allFontSize.Add(new FontSize(36, 7));
                     }
 
                     return allFontSize;
                 }
             }
 
-            public static FontSize Find( int value )
-            {
-                if( value < 1 )
-                {
+            public static FontSize Find(int value) {
+                if (value < 1) {
                     return All[0];
                 }
 
-                if( value > 7 )
-                {
+                if (value > 7) {
                     return All[6];
                 }
 
                 return All[value - 1];
             }
 
-            private FontSize( int display, int value )
-            {
+            private FontSize(int display, int value) {
                 displaySize = display;
                 valueSize = value;
             }
 
             private int valueSize;
-            public int Value
-            {
-                get
-                {
+            public int Value {
+                get {
                     return valueSize;
                 }
             }
 
             private int displaySize;
-            public int Display
-            {
-                get
-                {
+            public int Display {
+                get {
                     return displaySize;
                 }
             }
 
-            public override string ToString()
-            {
+            public override string ToString() {
                 return displaySize.ToString();
             }
         }
 
         #endregion
 
-        #region œ¬¿≠øÚ
+        #region ‰∏ãÊãâÊ°Ü
 
-        private class ToolStripComboBoxEx : ToolStripComboBox
-        {
-            public override Size GetPreferredSize( Size constrainingSize )
-            {
-                Size size = base.GetPreferredSize( constrainingSize );
-                size.Width = Math.Max( Width, 0x20 );
+        private class ToolStripComboBoxEx : ToolStripComboBox {
+            public override Size GetPreferredSize(Size constrainingSize) {
+                Size size = base.GetPreferredSize(constrainingSize);
+                size.Width = Math.Max(Width, 0x20);
                 return size;
             }
         }
 
         #endregion
-
-
     }
 }

@@ -5,12 +5,9 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{    
-    internal class DockAreasEditor : UITypeEditor
-    {
-        private class DockAreasEditorControl : System.Windows.Forms.UserControl
-        {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    internal class DockAreasEditor : UITypeEditor {
+        private class DockAreasEditorControl : System.Windows.Forms.UserControl {
             private CheckBox checkBoxFloat;
             private CheckBox checkBoxDockLeft;
             private CheckBox checkBoxDockRight;
@@ -19,10 +16,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
             private CheckBox checkBoxDockFill;
             private DockAreas m_oldDockAreas;
 
-            public DockAreas DockAreas
-            {
-                get
-                {
+            public DockAreas DockAreas {
+                get {
                     DockAreas dockAreas = 0;
                     if (checkBoxFloat.Checked)
                         dockAreas |= DockAreas.Float;
@@ -44,8 +39,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 }
             }
 
-            public DockAreasEditorControl()
-            {
+            public DockAreasEditorControl() {
                 checkBoxFloat = new CheckBox();
                 checkBoxDockLeft = new CheckBox();
                 checkBoxDockRight = new CheckBox();
@@ -61,7 +55,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 checkBoxFloat.Text = Strings.DockAreaEditor_FloatCheckBoxText;
                 checkBoxFloat.TextAlign = ContentAlignment.MiddleCenter;
                 checkBoxFloat.FlatStyle = FlatStyle.System;
-            
+
                 checkBoxDockLeft.Appearance = System.Windows.Forms.Appearance.Button;
                 checkBoxDockLeft.Dock = System.Windows.Forms.DockStyle.Left;
                 checkBoxDockLeft.Width = 24;
@@ -81,26 +75,26 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 checkBoxDockBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
                 checkBoxDockBottom.Height = 24;
                 checkBoxDockBottom.FlatStyle = FlatStyle.System;
-            
+
                 checkBoxDockFill.Appearance = System.Windows.Forms.Appearance.Button;
                 checkBoxDockFill.Dock = System.Windows.Forms.DockStyle.Fill;
                 checkBoxDockFill.FlatStyle = FlatStyle.System;
 
                 this.Controls.AddRange(new Control[] {
-                                                         checkBoxDockFill,
-                                                         checkBoxDockBottom,
-                                                         checkBoxDockTop,
-                                                         checkBoxDockRight,
-                                                         checkBoxDockLeft,
-                                                         checkBoxFloat});
+                    checkBoxDockFill,
+                    checkBoxDockBottom,
+                    checkBoxDockTop,
+                    checkBoxDockRight,
+                    checkBoxDockLeft,
+                    checkBoxFloat
+                });
 
                 Size = new System.Drawing.Size(160, 144);
                 BackColor = SystemColors.Control;
                 ResumeLayout();
             }
 
-            public void SetStates(DockAreas dockAreas)
-            {
+            public void SetStates(DockAreas dockAreas) {
                 m_oldDockAreas = dockAreas;
                 if ((dockAreas & DockAreas.DockLeft) != 0)
                     checkBoxDockLeft.Checked = true;
@@ -121,19 +115,17 @@ namespace TX.Framework.WindowUI.Controls.Docking
 
         private DockAreasEditor.DockAreasEditorControl m_ui = null;
 
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
-        {
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
             return UITypeEditorEditStyle.DropDown;
         }
 
-        public override object EditValue(ITypeDescriptorContext context, IServiceProvider sp, object value)
-        {
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider sp, object value) {
             if (m_ui == null)
                 m_ui = new DockAreasEditor.DockAreasEditorControl();
 
-            m_ui.SetStates((DockAreas)value);
+            m_ui.SetStates((DockAreas) value);
 
-            IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService)sp.GetService(typeof(IWindowsFormsEditorService));
+            IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService) sp.GetService(typeof(IWindowsFormsEditorService));
             edSvc.DropDownControl(m_ui);
 
             return m_ui.DockAreas;

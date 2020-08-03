@@ -13,10 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public enum TemplateTokenType
-    {
+namespace System.Text.Template {
+    public enum TemplateTokenType {
         Expression,
         Statement,
         ForEach,

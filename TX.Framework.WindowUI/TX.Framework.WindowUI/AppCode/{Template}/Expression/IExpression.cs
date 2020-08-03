@@ -13,10 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public interface IExpression
-    {
+namespace System.Text.Template {
+    public interface IExpression {
         IValueType Evaluate(ITemplateContext context);
 
         T Evaluate<T>(ITemplateContext context);

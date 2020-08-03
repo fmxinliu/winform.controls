@@ -1,8 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
+namespace TX.Framework.WindowUI.Controls.Docking {
     // Inspired by Chris Sano's article:
     // http://msdn.microsoft.com/smartclient/default.aspx?pull=/library/en-us/dnwinforms/html/colorpicker.asp
     // In Sano's article, the DragForm needs to meet the following criteria:
@@ -22,43 +21,36 @@ namespace TX.Framework.WindowUI.Controls.Docking
     // achieve this (don't know why, spent hours to try it out :( ):
     //  1. Enabled = false;
     //  2. WM_NCHITTEST returns HTTRANSPARENT
-    internal class DragForm : Form
-    {
-        public DragForm()
-        {
+    internal class DragForm : Form {
+        public DragForm() {
             FormBorderStyle = FormBorderStyle.None;
             ShowInTaskbar = false;
             SetStyle(ControlStyles.Selectable, false);
             Enabled = false;
         }
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
+        protected override CreateParams CreateParams {
+            get {
                 CreateParams createParams = base.CreateParams;
-                createParams.ExStyle |= (int)Win32.WindowExStyles.WS_EX_TOOLWINDOW;
+                createParams.ExStyle |= (int) Win32.WindowExStyles.WS_EX_TOOLWINDOW;
                 return createParams;
             }
         }
 
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == (int)Win32.Msgs.WM_NCHITTEST)
-            {
-                m.Result = (IntPtr)Win32.HitTest.HTTRANSPARENT;
+        protected override void WndProc(ref Message m) {
+            if (m.Msg == (int) Win32.Msgs.WM_NCHITTEST) {
+                m.Result = (IntPtr) Win32.HitTest.HTTRANSPARENT;
                 return;
             }
 
-            base.WndProc (ref m);
+            base.WndProc(ref m);
         }
 
-        public virtual void Show(bool bActivate)
-        {
+        public virtual void Show(bool bActivate) {
             if (bActivate)
                 Show();
             else
-                NativeMethods.ShowWindow(Handle, (int)Win32.ShowWindowStyles.SW_SHOWNOACTIVATE);
+                NativeMethods.ShowWindow(Handle, (int) Win32.ShowWindowStyles.SW_SHOWNOACTIVATE);
         }
     }
 }

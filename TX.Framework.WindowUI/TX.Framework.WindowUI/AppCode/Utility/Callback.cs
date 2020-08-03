@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 
-namespace System
-{
+namespace System {
     public delegate void CallbackVoidHandler();
 
     public delegate void CallbackObjectHandler<T>(T obj);

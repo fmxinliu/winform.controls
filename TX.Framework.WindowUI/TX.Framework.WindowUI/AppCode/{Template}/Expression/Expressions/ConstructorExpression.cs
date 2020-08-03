@@ -13,21 +13,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class ConstructorExpression : Expression
-    {
+namespace System.Text.Template {
+    public class ConstructorExpression : Expression {
         private readonly VariableExpression _className;
         private readonly Expression[] _parameters;
 
-        public ConstructorExpression(VariableExpression className, Expression[] parameters)
-        {
+        public ConstructorExpression(VariableExpression className, Expression[] parameters) {
             _className = className;
             _parameters = parameters;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ClassName className = _className.Evaluate(context).Value as ClassName;
 
             if (className == null)
@@ -36,12 +32,10 @@ namespace System.Text.Template
             return Expression.Value(className.Type.GetConstructors());
         }
 
-        public override string ToString()
-        {
-            string[] parameters = Array.ConvertAll<Expression, string>(_parameters, 
+        public override string ToString() {
+            string[] parameters = Array.ConvertAll<Expression, string>(_parameters,
                 delegate(Expression expr) { return expr.ToString(); });
             return "(new " + _className + "(" + String.Join(",", parameters) + "))";
         }
     }
 }
-

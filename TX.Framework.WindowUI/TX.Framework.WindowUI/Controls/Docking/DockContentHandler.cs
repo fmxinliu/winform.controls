@@ -1,21 +1,16 @@
 using System;
-using System.Windows.Forms;
-using System.Drawing;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
+namespace TX.Framework.WindowUI.Controls.Docking {
     public delegate string GetPersistStringCallback();
 
-    public class DockContentHandler : IDisposable, IDockDragSource
-    {
-        public DockContentHandler(Form form) : this(form, null)
-        {
-        }
+    public class DockContentHandler : IDisposable, IDockDragSource {
+        public DockContentHandler(Form form) : this(form, null) { }
 
-        public DockContentHandler(Form form, GetPersistStringCallback getPersistStringCallback)
-        {
+        public DockContentHandler(Form form, GetPersistStringCallback getPersistStringCallback) {
             if (!(form is IDockContent))
                 throw new ArgumentException(Strings.DockContent_Constructor_InvalidForm, "form");
 
@@ -23,22 +18,18 @@ namespace TX.Framework.WindowUI.Controls.Docking
             m_getPersistStringCallback = getPersistStringCallback;
 
             m_events = new EventHandlerList();
-            Form.Disposed +=new EventHandler(Form_Disposed);
+            Form.Disposed += new EventHandler(Form_Disposed);
             Form.TextChanged += new EventHandler(Form_TextChanged);
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if(disposing)
-            {
-                lock(this)
-                {
+        protected virtual void Dispose(bool disposing) {
+            if (disposing) {
+                lock (this) {
                     DockPanel = null;
                     if (m_autoHideTab != null)
                         m_autoHideTab.Dispose();
@@ -53,51 +44,43 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private Form m_form;
-        public Form Form
-        {
-            get    {    return m_form;    }
+        public Form Form {
+            get { return m_form; }
         }
 
-        public IDockContent Content
-        {
-            get    {    return Form as IDockContent;    }
+        public IDockContent Content {
+            get { return Form as IDockContent; }
         }
 
         private IDockContent m_previousActive = null;
-        public IDockContent PreviousActive
-        {
+        public IDockContent PreviousActive {
             get { return m_previousActive; }
             internal set { m_previousActive = value; }
         }
 
         private IDockContent m_nextActive = null;
-        public IDockContent NextActive
-        {
+        public IDockContent NextActive {
             get { return m_nextActive; }
             internal set { m_nextActive = value; }
         }
 
         private EventHandlerList m_events;
-        private EventHandlerList Events
-        {
-            get    {    return m_events;    }
+        private EventHandlerList Events {
+            get { return m_events; }
         }
 
         private bool m_allowEndUserDocking = true;
-        public bool AllowEndUserDocking
-        {
-            get    {    return m_allowEndUserDocking;    }
-            set    {    m_allowEndUserDocking = value;    }
+        public bool AllowEndUserDocking {
+            get { return m_allowEndUserDocking; }
+            set { m_allowEndUserDocking = value; }
         }
 
         private double m_autoHidePortion = 0.25;
-        public double AutoHidePortion
-        {
-            get    {    return m_autoHidePortion;    }
-            set
-            {
+        public double AutoHidePortion {
+            get { return m_autoHidePortion; }
+            set {
                 if (value <= 0)
-                    throw(new ArgumentOutOfRangeException(Strings.DockContentHandler_AutoHidePortion_OutOfRange));
+                    throw (new ArgumentOutOfRangeException(Strings.DockContentHandler_AutoHidePortion_OutOfRange));
 
                 if (m_autoHidePortion == value)
                     return;
@@ -113,11 +96,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private bool m_closeButton = true;
-        public bool CloseButton
-        {
-            get    {    return m_closeButton;    }
-            set
-            {
+        public bool CloseButton {
+            get { return m_closeButton; }
+            set {
                 if (m_closeButton == value)
                     return;
 
@@ -132,16 +113,13 @@ namespace TX.Framework.WindowUI.Controls.Docking
         /// <summary>
         /// Determines whether the close button is visible on the content
         /// </summary>
-        public bool CloseButtonVisible
-        {
+        public bool CloseButtonVisible {
             get { return m_closeButtonVisible; }
             set { m_closeButtonVisible = value; }
         }
-        
-        private DockState DefaultDockState
-        {
-            get
-            {
+
+        private DockState DefaultDockState {
+            get {
                 if (ShowHint != DockState.Unknown && ShowHint != DockState.Hidden)
                     return ShowHint;
 
@@ -160,10 +138,8 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        private DockState DefaultShowState
-        {
-            get
-            {
+        private DockState DefaultShowState {
+            get {
                 if (ShowHint != DockState.Unknown)
                     return ShowHint;
 
@@ -185,16 +161,14 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private DockAreas m_allowedAreas = DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom | DockAreas.Document | DockAreas.Float;
-        public DockAreas DockAreas
-        {
-            get    {    return m_allowedAreas;    }
-            set
-            {
+        public DockAreas DockAreas {
+            get { return m_allowedAreas; }
+            set {
                 if (m_allowedAreas == value)
                     return;
 
                 if (!DockHelper.IsDockStateValid(DockState, value))
-                    throw(new InvalidOperationException(Strings.DockContentHandler_DockAreas_InvalidValue));
+                    throw (new InvalidOperationException(Strings.DockContentHandler_DockAreas_InvalidValue));
 
                 m_allowedAreas = value;
 
@@ -204,11 +178,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private DockState m_dockState = DockState.Unknown;
-        public DockState DockState
-        {
-            get    {    return m_dockState;    }
-            set
-            {
+        public DockState DockState {
+            get { return m_dockState; }
+            set {
                 if (m_dockState == value)
                     return;
 
@@ -224,11 +196,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private DockPanel m_dockPanel = null;
-        public DockPanel DockPanel
-        {
+        public DockPanel DockPanel {
             get { return m_dockPanel; }
-            set
-            {
+            set {
                 if (m_dockPanel == value)
                     return;
 
@@ -237,22 +207,19 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 if (m_dockPanel != null)
                     m_dockPanel.RemoveContent(Content);
 
-                if (m_tab != null)
-                {
+                if (m_tab != null) {
                     m_tab.Dispose();
                     m_tab = null;
                 }
 
-                if (m_autoHideTab != null)
-                {
+                if (m_autoHideTab != null) {
                     m_autoHideTab.Dispose();
                     m_autoHideTab = null;
                 }
 
                 m_dockPanel = value;
 
-                if (m_dockPanel != null)
-                {
+                if (m_dockPanel != null) {
                     m_dockPanel.AddContent(Content);
                     Form.TopLevel = false;
                     Form.FormBorderStyle = FormBorderStyle.None;
@@ -269,16 +236,13 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        public Icon Icon
-        {
-            get    {    return Form.Icon;    }
+        public Icon Icon {
+            get { return Form.Icon; }
         }
 
-        public DockPane Pane
-        {
-            get {    return IsFloat ? FloatPane : PanelPane; }
-            set
-            {
+        public DockPane Pane {
+            get { return IsFloat ? FloatPane : PanelPane; }
+            set {
                 if (Pane == value)
                     return;
 
@@ -296,11 +260,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private bool m_isHidden = true;
-        public bool IsHidden
-        {
-            get    {    return m_isHidden;    }
-            set
-            {
+        public bool IsHidden {
+            get { return m_isHidden; }
+            set {
                 if (m_isHidden == value)
                     return;
 
@@ -309,11 +271,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private string m_tabText = null;
-        public string TabText
-        {
+        public string TabText {
             get { return m_tabText == null || m_tabText == "" ? Form.Text : m_tabText; }
-            set
-            {
+            set {
                 if (m_tabText == value)
                     return;
 
@@ -324,11 +284,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private DockState m_visibleState = DockState.Unknown;
-        public DockState VisibleState
-        {
-            get    {    return m_visibleState;    }
-            set
-            {
+        public DockState VisibleState {
+            get { return m_visibleState; }
+            set {
                 if (m_visibleState == value)
                     return;
 
@@ -337,11 +295,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private bool m_isFloat = false;
-        public bool IsFloat
-        {
-            get    {    return m_isFloat;    }
-            set
-            {
+        public bool IsFloat {
+            get { return m_isFloat; }
+            set {
                 if (m_isFloat == value)
                     return;
 
@@ -355,19 +311,16 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters")]
-        public DockState CheckDockState(bool isFloat)
-        {
+        public DockState CheckDockState(bool isFloat) {
             DockState dockState;
 
-            if (isFloat)
-            {
+            if (isFloat) {
                 if (!IsDockStateValid(DockState.Float))
                     dockState = DockState.Unknown;
                 else
                     dockState = DockState.Float;
             }
-            else
-            {
+            else {
                 dockState = (PanelPane != null) ? PanelPane.DockState : DefaultDockState;
                 if (dockState != DockState.Unknown && !IsDockStateValid(dockState))
                     dockState = DockState.Unknown;
@@ -377,16 +330,13 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private DockPane m_panelPane = null;
-        public DockPane PanelPane
-        {
-            get    {    return m_panelPane;    }
-            set
-            {
+        public DockPane PanelPane {
+            get { return m_panelPane; }
+            set {
                 if (m_panelPane == value)
                     return;
 
-                if (value != null)
-                {
+                if (value != null) {
                     if (value.IsFloat || value.DockPanel != DockPanel)
                         throw new InvalidOperationException(Strings.DockContentHandler_DockPane_InvalidValue);
                 }
@@ -396,8 +346,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 if (m_panelPane != null)
                     RemoveFromPane(m_panelPane);
                 m_panelPane = value;
-                if (m_panelPane != null)
-                {
+                if (m_panelPane != null) {
                     m_panelPane.AddContent(Content);
                     SetDockState(IsHidden, IsFloat ? DockState.Float : m_panelPane.DockState, oldPane);
                 }
@@ -406,8 +355,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        private void RemoveFromPane(DockPane pane)
-        {
+        private void RemoveFromPane(DockPane pane) {
             pane.RemoveContent(Content);
             SetPane(null);
             if (pane.Contents.Count == 0)
@@ -415,16 +363,13 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private DockPane m_floatPane = null;
-        public DockPane FloatPane
-        {
-            get    {    return m_floatPane;    }
-            set
-            {
+        public DockPane FloatPane {
+            get { return m_floatPane; }
+            set {
                 if (m_floatPane == value)
                     return;
 
-                if (value != null)
-                {
+                if (value != null) {
                     if (!value.IsFloat || value.DockPanel != DockPanel)
                         throw new InvalidOperationException(Strings.DockContentHandler_FloatPane_InvalidValue);
                 }
@@ -434,8 +379,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 if (m_floatPane != null)
                     RemoveFromPane(m_floatPane);
                 m_floatPane = value;
-                if (m_floatPane != null)
-                {
+                if (m_floatPane != null) {
                     m_floatPane.AddContent(Content);
                     SetDockState(IsHidden, IsFloat ? DockState.Float : VisibleState, oldPane);
                 }
@@ -445,31 +389,26 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private int m_countSetDockState = 0;
-        private void SuspendSetDockState()
-        {
-            m_countSetDockState ++;
+        private void SuspendSetDockState() {
+            m_countSetDockState++;
         }
 
-        private void ResumeSetDockState()
-        {
-            m_countSetDockState --;
+        private void ResumeSetDockState() {
+            m_countSetDockState--;
             if (m_countSetDockState < 0)
                 m_countSetDockState = 0;
         }
 
-        internal bool IsSuspendSetDockState
-        {
-            get    {    return m_countSetDockState != 0;    }
+        internal bool IsSuspendSetDockState {
+            get { return m_countSetDockState != 0; }
         }
 
-        private void ResumeSetDockState(bool isHidden, DockState visibleState, DockPane oldPane)
-        {
+        private void ResumeSetDockState(bool isHidden, DockState visibleState, DockPane oldPane) {
             ResumeSetDockState();
             SetDockState(isHidden, visibleState, oldPane);
         }
 
-        internal void SetDockState(bool isHidden, DockState visibleState, DockPane oldPane)
-        {
+        internal void SetDockState(bool isHidden, DockState visibleState, DockPane oldPane) {
             if (IsSuspendSetDockState)
                 return;
 
@@ -487,8 +426,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
 
             DockState oldDockState = DockState;
 
-            if (m_isHidden != isHidden || oldDockState == DockState.Unknown)
-            {
+            if (m_isHidden != isHidden || oldDockState == DockState.Unknown) {
                 m_isHidden = isHidden;
             }
             m_visibleState = visibleState;
@@ -496,14 +434,12 @@ namespace TX.Framework.WindowUI.Controls.Docking
 
             if (visibleState == DockState.Unknown)
                 Pane = null;
-            else
-            {
+            else {
                 m_isFloat = (m_visibleState == DockState.Float);
 
                 if (Pane == null)
                     Pane = DockPanel.DockPaneFactory.CreateDockPane(Content, visibleState, true);
-                else if (Pane.DockState != visibleState)
-                {
+                else if (Pane.DockState != visibleState) {
                     if (Pane.Contents.Count == 1)
                         Pane.SetDockState(visibleState);
                     else
@@ -520,17 +456,15 @@ namespace TX.Framework.WindowUI.Controls.Docking
             if (oldPane != null && !oldPane.IsDisposed && oldDockState == oldPane.DockState)
                 RefreshDockPane(oldPane);
 
-            if (Pane != null && DockState == Pane.DockState)
-            {
+            if (Pane != null && DockState == Pane.DockState) {
                 if ((Pane != oldPane) ||
                     (Pane == oldPane && oldDockState != oldPane.DockState))
                     // Avoid early refresh of hidden AutoHide panes
                     if ((Pane.DockWindow == null || Pane.DockWindow.Visible || Pane.IsHidden) && !Pane.IsAutoHide)
-                        RefreshDockPane(Pane);            
+                        RefreshDockPane(Pane);
             }
 
-            if (oldDockState != DockState)
-            {
+            if (oldDockState != DockState) {
                 if (DockState == DockState.Hidden || DockState == DockState.Unknown ||
                     DockHelper.IsDockStateAutoHide(DockState))
                     DockPanel.ContentFocusManager.RemoveFromList(Content);
@@ -545,38 +479,31 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 dockPanel.ResumeLayout(true, true);
         }
 
-        private static void RefreshDockPane(DockPane pane)
-        {
+        private static void RefreshDockPane(DockPane pane) {
             pane.RefreshChanges();
             pane.ValidateActiveContent();
         }
 
-        internal string PersistString
-        {
-            get    {    return GetPersistStringCallback == null ? Form.GetType().ToString() : GetPersistStringCallback();    }
+        internal string PersistString {
+            get { return GetPersistStringCallback == null ? Form.GetType().ToString() : GetPersistStringCallback(); }
         }
 
         private GetPersistStringCallback m_getPersistStringCallback = null;
-        public GetPersistStringCallback GetPersistStringCallback
-        {
-            get    {    return m_getPersistStringCallback;    }
-            set    {    m_getPersistStringCallback = value;    }
+        public GetPersistStringCallback GetPersistStringCallback {
+            get { return m_getPersistStringCallback; }
+            set { m_getPersistStringCallback = value; }
         }
 
-
         private bool m_hideOnClose = false;
-        public bool HideOnClose
-        {
-            get    {    return m_hideOnClose;    }
-            set    {    m_hideOnClose = value;    }
+        public bool HideOnClose {
+            get { return m_hideOnClose; }
+            set { m_hideOnClose = value; }
         }
 
         private DockState m_showHint = DockState.Unknown;
-        public DockState ShowHint
-        {
-            get    {    return m_showHint;    }
-            set
-            {    
+        public DockState ShowHint {
+            get { return m_showHint; }
+            set {
                 if (!DockHelper.IsDockStateValid(value, DockAreas))
                     throw (new InvalidOperationException(Strings.DockContentHandler_ShowHint_InvalidValue));
 
@@ -588,11 +515,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private bool m_isActivated = false;
-        public bool IsActivated
-        {
-            get    {    return m_isActivated;    }
-            internal set
-            {
+        public bool IsActivated {
+            get { return m_isActivated; }
+            internal set {
                 if (m_isActivated == value)
                     return;
 
@@ -600,8 +525,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        public bool IsDockStateValid(DockState dockState)
-        {
+        public bool IsDockStateValid(DockState dockState) {
             if (DockPanel != null && dockState == DockState.Document && DockPanel.DocumentStyle == DocumentStyle.SystemMdi)
                 return false;
             else
@@ -609,31 +533,26 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private ContextMenu m_tabPageContextMenu = null;
-        public ContextMenu TabPageContextMenu
-        {
-            get    {    return m_tabPageContextMenu;    }
-            set    {    m_tabPageContextMenu = value;    }
+        public ContextMenu TabPageContextMenu {
+            get { return m_tabPageContextMenu; }
+            set { m_tabPageContextMenu = value; }
         }
 
         private string m_toolTipText = null;
-        public string ToolTipText
-        {
-            get    {    return m_toolTipText;    }
-            set {    m_toolTipText = value;    }
+        public string ToolTipText {
+            get { return m_toolTipText; }
+            set { m_toolTipText = value; }
         }
 
-        public void Activate()
-        {
+        public void Activate() {
             if (DockPanel == null)
                 Form.Activate();
             else if (Pane == null)
                 Show(DockPanel);
-            else
-            {
+            else {
                 IsHidden = false;
                 Pane.ActiveContent = Content;
-                if (DockState == DockState.Document && DockPanel.DocumentStyle == DocumentStyle.SystemMdi)
-                {
+                if (DockState == DockState.Document && DockPanel.DocumentStyle == DocumentStyle.SystemMdi) {
                     Form.Activate();
                     return;
                 }
@@ -645,43 +564,35 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        public void GiveUpFocus()
-        {
+        public void GiveUpFocus() {
             DockPanel.ContentFocusManager.GiveUpFocus(Content);
         }
 
         private IntPtr m_activeWindowHandle = IntPtr.Zero;
-        internal IntPtr ActiveWindowHandle
-        {
-            get    {    return m_activeWindowHandle;    }
-            set    {    m_activeWindowHandle = value;    }
+        internal IntPtr ActiveWindowHandle {
+            get { return m_activeWindowHandle; }
+            set { m_activeWindowHandle = value; }
         }
 
-        public void Hide()
-        {
+        public void Hide() {
             IsHidden = true;
         }
 
-        internal void SetPaneAndVisible(DockPane pane)
-        {
+        internal void SetPaneAndVisible(DockPane pane) {
             SetPane(pane);
             SetVisible();
         }
 
-        private void SetPane(DockPane pane)
-        {
-            if (pane != null && pane.DockState == DockState.Document && DockPanel.DocumentStyle == DocumentStyle.DockingMdi)
-            {
+        private void SetPane(DockPane pane) {
+            if (pane != null && pane.DockState == DockState.Document && DockPanel.DocumentStyle == DocumentStyle.DockingMdi) {
                 if (Form.Parent is DockPane)
                     SetParent(null);
-                if (Form.MdiParent != DockPanel.ParentForm)
-                {
+                if (Form.MdiParent != DockPanel.ParentForm) {
                     FlagClipWindow = true;
                     Form.MdiParent = DockPanel.ParentForm;
                 }
             }
-            else
-            {
+            else {
                 FlagClipWindow = true;
                 if (Form.MdiParent != null)
                     Form.MdiParent = null;
@@ -691,8 +602,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        internal void SetVisible()
-        {
+        internal void SetVisible() {
             bool visible;
 
             if (IsHidden)
@@ -710,8 +620,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 Form.Visible = visible;
         }
 
-        private void SetParent(Control value)
-        {
+        private void SetParent(Control value) {
             if (Form.Parent == value)
                 return;
 
@@ -721,13 +630,11 @@ namespace TX.Framework.WindowUI.Controls.Docking
             // MDI child form get activated. 
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             bool bRestoreFocus = false;
-            if (Form.ContainsFocus)
-            {
+            if (Form.ContainsFocus) {
                 //Suggested as a fix for a memory leak by bugreports
                 if (value == null && !IsFloat)
                     DockPanel.ContentFocusManager.GiveUpFocus(this.Content);
-                else
-                {
+                else {
                     DockPanel.SaveFocus();
                     bRestoreFocus = true;
                 }
@@ -746,32 +653,29 @@ namespace TX.Framework.WindowUI.Controls.Docking
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
 
-        public void Show()
-        {
+        public void Show() {
             if (DockPanel == null)
                 Form.Show();
             else
                 Show(DockPanel);
         }
 
-        public void Show(DockPanel dockPanel)
-        {
+        public void Show(DockPanel dockPanel) {
             if (dockPanel == null)
-                throw(new ArgumentNullException(Strings.DockContentHandler_Show_NullDockPanel));
+                throw (new ArgumentNullException(Strings.DockContentHandler_Show_NullDockPanel));
 
             if (DockState == DockState.Unknown)
                 Show(dockPanel, DefaultShowState);
-            else            
+            else
                 Activate();
         }
 
-        public void Show(DockPanel dockPanel, DockState dockState)
-        {
+        public void Show(DockPanel dockPanel, DockState dockState) {
             if (dockPanel == null)
-                throw(new ArgumentNullException(Strings.DockContentHandler_Show_NullDockPanel));
+                throw (new ArgumentNullException(Strings.DockContentHandler_Show_NullDockPanel));
 
             if (dockState == DockState.Unknown || dockState == DockState.Hidden)
-                throw(new ArgumentException(Strings.DockContentHandler_Show_InvalidDockState));
+                throw (new ArgumentException(Strings.DockContentHandler_Show_InvalidDockState));
 
             dockPanel.SuspendLayout(true);
 
@@ -779,12 +683,10 @@ namespace TX.Framework.WindowUI.Controls.Docking
 
             if (dockState == DockState.Float && FloatPane == null)
                 Pane = DockPanel.DockPaneFactory.CreateDockPane(Content, DockState.Float, true);
-            else if (PanelPane == null)
-            {
+            else if (PanelPane == null) {
                 DockPane paneExisting = null;
                 foreach (DockPane pane in DockPanel.Panes)
-                    if (pane.DockState == dockState)
-                    {
+                    if (pane.DockState == dockState) {
                         paneExisting = pane;
                         break;
                     }
@@ -797,40 +699,37 @@ namespace TX.Framework.WindowUI.Controls.Docking
 
             DockState = dockState;
             dockPanel.ResumeLayout(true, true); //we'll resume the layout before activating to ensure that the position
-            Activate();                         //and size of the form are finally processed before the form is shown
+            Activate(); //and size of the form are finally processed before the form is shown
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters")]
-        public void Show(DockPanel dockPanel, Rectangle floatWindowBounds)
-        {
+        public void Show(DockPanel dockPanel, Rectangle floatWindowBounds) {
             if (dockPanel == null)
-                throw(new ArgumentNullException(Strings.DockContentHandler_Show_NullDockPanel));
+                throw (new ArgumentNullException(Strings.DockContentHandler_Show_NullDockPanel));
 
             dockPanel.SuspendLayout(true);
 
             DockPanel = dockPanel;
-            if (FloatPane == null)
-            {
-                IsHidden = true;    // to reduce the screen flicker
+            if (FloatPane == null) {
+                IsHidden = true; // to reduce the screen flicker
                 FloatPane = DockPanel.DockPaneFactory.CreateDockPane(Content, DockState.Float, false);
                 FloatPane.FloatWindow.StartPosition = FormStartPosition.Manual;
             }
 
             FloatPane.FloatWindow.Bounds = floatWindowBounds;
-            
+
             Show(dockPanel, DockState.Float);
             Activate();
 
             dockPanel.ResumeLayout(true, true);
         }
 
-        public void Show(DockPane pane, IDockContent beforeContent)
-        {
+        public void Show(DockPane pane, IDockContent beforeContent) {
             if (pane == null)
-                throw(new ArgumentNullException(Strings.DockContentHandler_Show_NullPane));
+                throw (new ArgumentNullException(Strings.DockContentHandler_Show_NullPane));
 
             if (beforeContent != null && pane.Contents.IndexOf(beforeContent) == -1)
-                throw(new ArgumentException(Strings.DockContentHandler_Show_InvalidBeforeContent));
+                throw (new ArgumentException(Strings.DockContentHandler_Show_InvalidBeforeContent));
 
             pane.DockPanel.SuspendLayout(true);
 
@@ -842,13 +741,12 @@ namespace TX.Framework.WindowUI.Controls.Docking
             pane.DockPanel.ResumeLayout(true, true);
         }
 
-        public void Show(DockPane previousPane, DockAlignment alignment, double proportion)
-        {
+        public void Show(DockPane previousPane, DockAlignment alignment, double proportion) {
             if (previousPane == null)
-                throw(new ArgumentException(Strings.DockContentHandler_Show_InvalidPrevPane));
+                throw (new ArgumentException(Strings.DockContentHandler_Show_InvalidPrevPane));
 
             if (DockHelper.IsDockStateAutoHide(previousPane.DockState))
-                throw(new ArgumentException(Strings.DockContentHandler_Show_InvalidPrevPane));
+                throw (new ArgumentException(Strings.DockContentHandler_Show_InvalidPrevPane));
 
             previousPane.DockPanel.SuspendLayout(true);
 
@@ -859,20 +757,17 @@ namespace TX.Framework.WindowUI.Controls.Docking
             previousPane.DockPanel.ResumeLayout(true, true);
         }
 
-        public void Close()
-        {
+        public void Close() {
             DockPanel dockPanel = DockPanel;
             if (dockPanel != null)
                 dockPanel.SuspendLayout(true);
             Form.Close();
             if (dockPanel != null)
                 dockPanel.ResumeLayout(true, true);
-
         }
 
         private DockPaneStripBase.Tab m_tab = null;
-        internal DockPaneStripBase.Tab GetTab(DockPaneStripBase dockPaneStrip)
-        {
+        internal DockPaneStripBase.Tab GetTab(DockPaneStripBase dockPaneStrip) {
             if (m_tab == null)
                 m_tab = dockPaneStrip.CreateTab(Content);
 
@@ -880,38 +775,32 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private IDisposable m_autoHideTab = null;
-        internal IDisposable AutoHideTab
-        {
+        internal IDisposable AutoHideTab {
             get { return m_autoHideTab; }
             set { m_autoHideTab = value; }
         }
 
         #region Events
         private static readonly object DockStateChangedEvent = new object();
-        public event EventHandler DockStateChanged
-        {
-            add    {    Events.AddHandler(DockStateChangedEvent, value);    }
-            remove    {    Events.RemoveHandler(DockStateChangedEvent, value);    }
+        public event EventHandler DockStateChanged {
+            add { Events.AddHandler(DockStateChangedEvent, value); }
+            remove { Events.RemoveHandler(DockStateChangedEvent, value); }
         }
-        protected virtual void OnDockStateChanged(EventArgs e)
-        {
-            EventHandler handler = (EventHandler)Events[DockStateChangedEvent];
+        protected virtual void OnDockStateChanged(EventArgs e) {
+            EventHandler handler = (EventHandler) Events[DockStateChangedEvent];
             if (handler != null)
                 handler(this, e);
         }
         #endregion
 
-        private void Form_Disposed(object sender, EventArgs e)
-        {
+        private void Form_Disposed(object sender, EventArgs e) {
             Dispose();
         }
 
-        private void Form_TextChanged(object sender, EventArgs e)
-        {
+        private void Form_TextChanged(object sender, EventArgs e) {
             if (DockHelper.IsDockStateAutoHide(DockState))
                 DockPanel.RefreshAutoHideStrip();
-            else if (Pane != null)
-            {
+            else if (Pane != null) {
                 if (Pane.FloatWindow != null)
                     Pane.FloatWindow.SetText();
                 Pane.RefreshChanges();
@@ -919,11 +808,9 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private bool m_flagClipWindow = false;
-        internal bool FlagClipWindow
-        {
-            get    {    return m_flagClipWindow;    }
-            set
-            {
+        internal bool FlagClipWindow {
+            get { return m_flagClipWindow; }
+            set {
                 if (m_flagClipWindow == value)
                     return;
 
@@ -936,21 +823,18 @@ namespace TX.Framework.WindowUI.Controls.Docking
         }
 
         private ContextMenuStrip m_tabPageContextMenuStrip = null;
-        public ContextMenuStrip TabPageContextMenuStrip
-        {
+        public ContextMenuStrip TabPageContextMenuStrip {
             get { return m_tabPageContextMenuStrip; }
             set { m_tabPageContextMenuStrip = value; }
         }
 
         #region IDockDragSource Members
 
-        Control IDragSource.DragControl
-        {
+        Control IDragSource.DragControl {
             get { return Form; }
         }
 
-        bool IDockDragSource.CanDockTo(DockPane pane)
-        {
+        bool IDockDragSource.CanDockTo(DockPane pane) {
             if (!IsDockStateValid(pane.DockState))
                 return false;
 
@@ -960,8 +844,7 @@ namespace TX.Framework.WindowUI.Controls.Docking
             return true;
         }
 
-        Rectangle IDockDragSource.BeginDrag(Point ptMouse)
-        {
+        Rectangle IDockDragSource.BeginDrag(Point ptMouse) {
             Size size;
             DockPane floatPane = this.FloatPane;
             if (DockState == DockState.Float || floatPane == null || floatPane.FloatWindow.NestedPanes.Count != 1)
@@ -971,15 +854,13 @@ namespace TX.Framework.WindowUI.Controls.Docking
 
             Point location;
             Rectangle rectPane = Pane.ClientRectangle;
-            if (DockState == DockState.Document)
-            {
+            if (DockState == DockState.Document) {
                 if (Pane.DockPanel.DocumentTabStripLocation == DocumentTabStripLocation.Bottom)
                     location = new Point(rectPane.Left, rectPane.Bottom - size.Height);
                 else
                     location = new Point(rectPane.Left, rectPane.Top);
             }
-            else
-            {
+            else {
                 location = new Point(rectPane.Left, rectPane.Bottom);
                 location.Y -= size.Height;
             }
@@ -991,54 +872,47 @@ namespace TX.Framework.WindowUI.Controls.Docking
             return new Rectangle(location, size);
         }
 
-        public void FloatAt(Rectangle floatWindowBounds)
-        {
+        public void FloatAt(Rectangle floatWindowBounds) {
             DockPane pane = DockPanel.DockPaneFactory.CreateDockPane(Content, floatWindowBounds, true);
         }
 
-        public void DockTo(DockPane pane, DockStyle dockStyle, int contentIndex)
-        {
-            if (dockStyle == DockStyle.Fill)
-            {
+        public void DockTo(DockPane pane, DockStyle dockStyle, int contentIndex) {
+            if (dockStyle == DockStyle.Fill) {
                 bool samePane = (Pane == pane);
                 if (!samePane)
                     Pane = pane;
 
                 if (contentIndex == -1 || !samePane)
                     pane.SetContentIndex(Content, contentIndex);
-                else
-                {
+                else {
                     DockContentCollection contents = pane.Contents;
                     int oldIndex = contents.IndexOf(Content);
                     int newIndex = contentIndex;
-                    if (oldIndex < newIndex)
-                    {
+                    if (oldIndex < newIndex) {
                         newIndex += 1;
-                        if (newIndex > contents.Count -1)
+                        if (newIndex > contents.Count - 1)
                             newIndex = -1;
                     }
                     pane.SetContentIndex(Content, newIndex);
                 }
             }
-            else
-            {
+            else {
                 DockPane paneFrom = DockPanel.DockPaneFactory.CreateDockPane(Content, pane.DockState, true);
                 INestedPanesContainer container = pane.NestedPanesContainer;
                 if (dockStyle == DockStyle.Left)
                     paneFrom.DockTo(container, pane, DockAlignment.Left, 0.5);
-                else if (dockStyle == DockStyle.Right) 
+                else if (dockStyle == DockStyle.Right)
                     paneFrom.DockTo(container, pane, DockAlignment.Right, 0.5);
                 else if (dockStyle == DockStyle.Top)
                     paneFrom.DockTo(container, pane, DockAlignment.Top, 0.5);
-                else if (dockStyle == DockStyle.Bottom) 
+                else if (dockStyle == DockStyle.Bottom)
                     paneFrom.DockTo(container, pane, DockAlignment.Bottom, 0.5);
 
                 paneFrom.DockState = pane.DockState;
             }
         }
 
-        public void DockTo(DockPanel panel, DockStyle dockStyle)
-        {
+        public void DockTo(DockPanel panel, DockStyle dockStyle) {
             if (panel != DockPanel)
                 throw new ArgumentException(Strings.IDockDragSource_DockTo_InvalidPanel, "panel");
 

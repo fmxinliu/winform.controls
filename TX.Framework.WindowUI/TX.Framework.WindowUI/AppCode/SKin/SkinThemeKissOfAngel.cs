@@ -1,29 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Drawing;
 
-namespace TX.Framework.WindowUI
-{
+namespace TX.Framework.WindowUI {
     /// <summary>
     /// 主题色彩：天使之吻
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-7 22:21.
-    internal class SkinThemeKissOfAngel:SkinTheme
-    {
-        public SkinThemeKissOfAngel()
-            : base()
-        {
-        }
+    internal class SkinThemeKissOfAngel : SkinTheme {
+        public SkinThemeKissOfAngel() : base() { }
 
         /// <summary>
         /// 初始化主题色彩方案
         /// </summary>
         /// User:Ryan  CreateTime:2012-8-7 22:11.
         /// User:Ryan  CreateTime:2012-8-7 22:21.
-        public override void IniSkinTheme()
-        {
+        public override void IniSkinTheme() {
             this.ThemeStyle = EnumTheme.KissOfAngel;
             this.ThemeName = "天使之吻";
             this.BackGroundImage = Properties.Resources.bg03;

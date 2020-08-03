@@ -1,7 +1,5 @@
-﻿namespace WindowsTest
-{
-    partial class winMain
-    {
+namespace WindowsTest {
+    partial class WinMain {
         /// <summary>
         /// 必需的设计器变量。
         /// </summary>
@@ -11,10 +9,8 @@
         /// 清理所有正在使用的资源。
         /// </summary>
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// 设计器支持所需的方法 - 不要
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             TX.Framework.WindowUI.Controls.RangeValueHeader rangeValueHeader1 = new TX.Framework.WindowUI.Controls.RangeValueHeader();
             TX.Framework.WindowUI.Controls.Docking.DockPanelSkin dockPanelSkin1 = new TX.Framework.WindowUI.Controls.Docking.DockPanelSkin();
             TX.Framework.WindowUI.Controls.Docking.AutoHideStripSkin autoHideStripSkin1 = new TX.Framework.WindowUI.Controls.Docking.AutoHideStripSkin();
@@ -59,6 +54,8 @@
             this.xPanderPanel4 = new TX.Framework.WindowUI.Controls.XPanderPanel();
             this.txTabControl1 = new TX.Framework.WindowUI.Controls.TXTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txGroupBox2 = new TX.Framework.WindowUI.Controls.TXGroupBox();
+            this.txDateTimePicker2 = new TX.Framework.WindowUI.Controls.TXDateTimePicker();
             this.txHtmlEditor1 = new TX.Framework.WindowUI.Controls.TXHtmlEditor();
             this.txGroupBox1 = new TX.Framework.WindowUI.Controls.TXGroupBox();
             this.txDateTimePicker1 = new TX.Framework.WindowUI.Controls.TXDateTimePicker();
@@ -99,8 +96,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.monthCalendar1 = new TX.Framework.WindowUI.Controls.MonthCalendar();
-            this.txGroupBox2 = new TX.Framework.WindowUI.Controls.TXGroupBox();
-            this.txDateTimePicker2 = new TX.Framework.WindowUI.Controls.TXDateTimePicker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -110,6 +105,7 @@
             this.xPanderPanel1.SuspendLayout();
             this.txTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.txGroupBox2.SuspendLayout();
             this.txGroupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -117,7 +113,6 @@
             this.txMenuStrip2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.txGroupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -125,14 +120,16 @@
             this.panel1.Controls.Add(this.splitContainer1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(8, 42);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(962, 552);
+            this.panel1.Size = new System.Drawing.Size(1288, 702);
             this.panel1.TabIndex = 0;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -142,8 +139,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txTabControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(962, 552);
-            this.splitContainer1.SplitterDistance = 237;
+            this.splitContainer1.Size = new System.Drawing.Size(1288, 702);
+            this.splitContainer1.SplitterDistance = 316;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
             // xPanderPanelList1
@@ -156,11 +154,12 @@
             this.xPanderPanelList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xPanderPanelList1.GradientBackground = System.Drawing.Color.Empty;
             this.xPanderPanelList1.Location = new System.Drawing.Point(0, 0);
+            this.xPanderPanelList1.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanelList1.Name = "xPanderPanelList1";
             this.xPanderPanelList1.PanelColors = null;
             this.xPanderPanelList1.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
             this.xPanderPanelList1.ShowExpandIcon = true;
-            this.xPanderPanelList1.Size = new System.Drawing.Size(237, 552);
+            this.xPanderPanelList1.Size = new System.Drawing.Size(316, 702);
             this.xPanderPanelList1.TabIndex = 0;
             this.xPanderPanelList1.Text = "xPanderPanelList1";
             // 
@@ -195,9 +194,10 @@
             this.xPanderPanel1.Expand = true;
             this.xPanderPanel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.xPanderPanel1.Image = null;
+            this.xPanderPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel1.Name = "xPanderPanel1";
             this.xPanderPanel1.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel1.Size = new System.Drawing.Size(237, 477);
+            this.xPanderPanel1.Size = new System.Drawing.Size(316, 627);
             this.xPanderPanel1.TabIndex = 0;
             this.xPanderPanel1.Text = "分组1";
             this.xPanderPanel1.ToolTipTextCloseIcon = null;
@@ -212,14 +212,15 @@
             this.txTreeComboBox2.DoubleSelecteEnable = true;
             this.txTreeComboBox2.FormattingEnabled = true;
             this.txTreeComboBox2.IsInsertDefaultNode = true;
-            this.txTreeComboBox2.Location = new System.Drawing.Point(20, 269);
+            this.txTreeComboBox2.Location = new System.Drawing.Point(27, 336);
+            this.txTreeComboBox2.Margin = new System.Windows.Forms.Padding(4);
             this.txTreeComboBox2.MultiLevelDataSourceMember = "";
             this.txTreeComboBox2.Name = "txTreeComboBox2";
             this.txTreeComboBox2.PathSeparator = " ";
             this.txTreeComboBox2.SelectedNode = null;
             this.txTreeComboBox2.SelectedValue = "";
             this.txTreeComboBox2.ShowFullPathText = true;
-            this.txTreeComboBox2.Size = new System.Drawing.Size(164, 20);
+            this.txTreeComboBox2.Size = new System.Drawing.Size(217, 23);
             this.txTreeComboBox2.TabIndex = 3;
             this.txTreeComboBox2.TreeMaxDegree = 0;
             // 
@@ -233,21 +234,23 @@
             this.txTextBox2.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txTextBox2.Image = null;
             this.txTextBox2.ImageSize = new System.Drawing.Size(0, 0);
-            this.txTextBox2.Location = new System.Drawing.Point(4, 94);
+            this.txTextBox2.Location = new System.Drawing.Point(5, 118);
+            this.txTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.txTextBox2.Name = "txTextBox2";
-            this.txTextBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.txTextBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txTextBox2.PasswordChar = '\0';
             this.txTextBox2.Required = false;
-            this.txTextBox2.Size = new System.Drawing.Size(180, 30);
+            this.txTextBox2.Size = new System.Drawing.Size(240, 38);
             this.txTextBox2.TabIndex = 2;
             this.txTextBox2.Text = "123";
             // 
             // txButton10
             // 
             this.txButton10.Image = null;
-            this.txButton10.Location = new System.Drawing.Point(93, 183);
+            this.txButton10.Location = new System.Drawing.Point(124, 229);
+            this.txButton10.Margin = new System.Windows.Forms.Padding(4);
             this.txButton10.Name = "txButton10";
-            this.txButton10.Size = new System.Drawing.Size(82, 28);
+            this.txButton10.Size = new System.Drawing.Size(109, 35);
             this.txButton10.TabIndex = 1;
             this.txButton10.Text = "txButton10";
             this.txButton10.UseVisualStyleBackColor = true;
@@ -261,12 +264,13 @@
             this.txTextBox1.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txTextBox1.Image = null;
             this.txTextBox1.ImageSize = new System.Drawing.Size(0, 0);
-            this.txTextBox1.Location = new System.Drawing.Point(4, 51);
+            this.txTextBox1.Location = new System.Drawing.Point(5, 64);
+            this.txTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.txTextBox1.Name = "txTextBox1";
-            this.txTextBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.txTextBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txTextBox1.PasswordChar = '\0';
             this.txTextBox1.Required = false;
-            this.txTextBox1.Size = new System.Drawing.Size(180, 22);
+            this.txTextBox1.Size = new System.Drawing.Size(240, 28);
             this.txTextBox1.TabIndex = 0;
             this.txTextBox1.Text = "123";
             // 
@@ -296,9 +300,10 @@
             this.xPanderPanel2.CustomColors.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(218)))), ((int)(((byte)(222)))));
             this.xPanderPanel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.xPanderPanel2.Image = null;
+            this.xPanderPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel2.Name = "xPanderPanel2";
             this.xPanderPanel2.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel2.Size = new System.Drawing.Size(237, 25);
+            this.xPanderPanel2.Size = new System.Drawing.Size(316, 25);
             this.xPanderPanel2.TabIndex = 1;
             this.xPanderPanel2.Text = "xPanderPanel2";
             this.xPanderPanel2.ToolTipTextCloseIcon = null;
@@ -331,9 +336,10 @@
             this.xPanderPanel3.CustomColors.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(218)))), ((int)(((byte)(222)))));
             this.xPanderPanel3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.xPanderPanel3.Image = null;
+            this.xPanderPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel3.Name = "xPanderPanel3";
             this.xPanderPanel3.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel3.Size = new System.Drawing.Size(237, 25);
+            this.xPanderPanel3.Size = new System.Drawing.Size(316, 25);
             this.xPanderPanel3.TabIndex = 2;
             this.xPanderPanel3.Text = "xPanderPanel3";
             this.xPanderPanel3.ToolTipTextCloseIcon = null;
@@ -366,9 +372,10 @@
             this.xPanderPanel4.CustomColors.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(218)))), ((int)(((byte)(222)))));
             this.xPanderPanel4.ForeColor = System.Drawing.SystemColors.ControlText;
             this.xPanderPanel4.Image = null;
+            this.xPanderPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.xPanderPanel4.Name = "xPanderPanel4";
             this.xPanderPanel4.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
-            this.xPanderPanel4.Size = new System.Drawing.Size(237, 25);
+            this.xPanderPanel4.Size = new System.Drawing.Size(316, 25);
             this.xPanderPanel4.TabIndex = 3;
             this.xPanderPanel4.Text = "xPanderPanel4";
             this.xPanderPanel4.ToolTipTextCloseIcon = null;
@@ -389,9 +396,10 @@
             this.txTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txTabControl1.HeightLightTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.txTabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.txTabControl1.Name = "txTabControl1";
             this.txTabControl1.SelectedIndex = 0;
-            this.txTabControl1.Size = new System.Drawing.Size(721, 552);
+            this.txTabControl1.Size = new System.Drawing.Size(967, 702);
             this.txTabControl1.TabCornerRadius = 3;
             this.txTabControl1.TabIndex = 0;
             // 
@@ -414,22 +422,56 @@
             this.tabPage1.Controls.Add(this.txButton3);
             this.tabPage1.Controls.Add(this.txButton2);
             this.tabPage1.Controls.Add(this.txButton1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 33);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(713, 519);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(959, 665);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "窗体组件测试";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txGroupBox2
+            // 
+            this.txGroupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.txGroupBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.txGroupBox2.CaptionColor = System.Drawing.Color.Black;
+            this.txGroupBox2.CaptionFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
+            this.txGroupBox2.Controls.Add(this.txDateTimePicker2);
+            this.txGroupBox2.CornerRadius = 0;
+            this.txGroupBox2.Location = new System.Drawing.Point(445, 300);
+            this.txGroupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.txGroupBox2.Name = "txGroupBox2";
+            this.txGroupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.txGroupBox2.Size = new System.Drawing.Size(360, 88);
+            this.txGroupBox2.TabIndex = 16;
+            this.txGroupBox2.TabStop = false;
+            this.txGroupBox2.Text = "分组1";
+            this.txGroupBox2.TextMargin = 6;
+            // 
+            // txDateTimePicker2
+            // 
+            this.txDateTimePicker2.CalendarForeColor = System.Drawing.Color.Blue;
+            this.txDateTimePicker2.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.txDateTimePicker2.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(74)))), ((int)(((byte)(181)))), ((int)(((byte)(237)))));
+            this.txDateTimePicker2.CalendarTrailingForeColor = System.Drawing.Color.CadetBlue;
+            this.txDateTimePicker2.Location = new System.Drawing.Point(9, 25);
+            this.txDateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
+            this.txDateTimePicker2.Name = "txDateTimePicker2";
+            this.txDateTimePicker2.ShowCheckBox = true;
+            this.txDateTimePicker2.Size = new System.Drawing.Size(175, 25);
+            this.txDateTimePicker2.TabIndex = 0;
+            this.txDateTimePicker2.Value = new System.DateTime(2015, 8, 9, 16, 8, 2, 250);
             // 
             // txHtmlEditor1
             // 
             this.txHtmlEditor1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(182)))), ((int)(((byte)(168)))), ((int)(((byte)(192)))));
             this.txHtmlEditor1.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
-            this.txHtmlEditor1.Location = new System.Drawing.Point(35, 342);
+            this.txHtmlEditor1.Location = new System.Drawing.Point(47, 428);
+            this.txHtmlEditor1.Margin = new System.Windows.Forms.Padding(4);
             this.txHtmlEditor1.Name = "txHtmlEditor1";
-            this.txHtmlEditor1.Padding = new System.Windows.Forms.Padding(3);
-            this.txHtmlEditor1.Size = new System.Drawing.Size(596, 131);
+            this.txHtmlEditor1.Padding = new System.Windows.Forms.Padding(4);
+            this.txHtmlEditor1.Size = new System.Drawing.Size(795, 164);
             this.txHtmlEditor1.TabIndex = 15;
             // 
             // txGroupBox1
@@ -440,9 +482,11 @@
             this.txGroupBox1.CaptionColor = System.Drawing.Color.Black;
             this.txGroupBox1.CaptionFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.txGroupBox1.Controls.Add(this.txDateTimePicker1);
-            this.txGroupBox1.Location = new System.Drawing.Point(35, 240);
+            this.txGroupBox1.Location = new System.Drawing.Point(47, 300);
+            this.txGroupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.txGroupBox1.Name = "txGroupBox1";
-            this.txGroupBox1.Size = new System.Drawing.Size(270, 70);
+            this.txGroupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.txGroupBox1.Size = new System.Drawing.Size(360, 88);
             this.txGroupBox1.TabIndex = 14;
             this.txGroupBox1.TabStop = false;
             this.txGroupBox1.Text = "分组1";
@@ -454,22 +498,24 @@
             this.txDateTimePicker1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.txDateTimePicker1.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(74)))), ((int)(((byte)(181)))), ((int)(((byte)(237)))));
             this.txDateTimePicker1.CalendarTrailingForeColor = System.Drawing.Color.CadetBlue;
-            this.txDateTimePicker1.Location = new System.Drawing.Point(7, 20);
+            this.txDateTimePicker1.Location = new System.Drawing.Point(9, 25);
+            this.txDateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.txDateTimePicker1.Name = "txDateTimePicker1";
             this.txDateTimePicker1.ShowCheckBox = true;
-            this.txDateTimePicker1.Size = new System.Drawing.Size(132, 21);
+            this.txDateTimePicker1.Size = new System.Drawing.Size(175, 25);
             this.txDateTimePicker1.TabIndex = 0;
             this.txDateTimePicker1.Value = new System.DateTime(2015, 8, 9, 16, 8, 2, 250);
             // 
             // txRadioButton2
             // 
             this.txRadioButton2.AutoSize = true;
-            this.txRadioButton2.Location = new System.Drawing.Point(196, 198);
+            this.txRadioButton2.Location = new System.Drawing.Point(261, 248);
+            this.txRadioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.txRadioButton2.MaxRadius = 8;
             this.txRadioButton2.MinimumSize = new System.Drawing.Size(22, 22);
             this.txRadioButton2.MinRadius = 4;
             this.txRadioButton2.Name = "txRadioButton2";
-            this.txRadioButton2.Size = new System.Drawing.Size(35, 22);
+            this.txRadioButton2.Size = new System.Drawing.Size(43, 22);
             this.txRadioButton2.TabIndex = 13;
             this.txRadioButton2.TabStop = true;
             this.txRadioButton2.Text = "女";
@@ -478,12 +524,13 @@
             // txRadioButton1
             // 
             this.txRadioButton1.AutoSize = true;
-            this.txRadioButton1.Location = new System.Drawing.Point(153, 199);
+            this.txRadioButton1.Location = new System.Drawing.Point(204, 249);
+            this.txRadioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.txRadioButton1.MaxRadius = 8;
             this.txRadioButton1.MinimumSize = new System.Drawing.Size(22, 22);
             this.txRadioButton1.MinRadius = 4;
             this.txRadioButton1.Name = "txRadioButton1";
-            this.txRadioButton1.Size = new System.Drawing.Size(35, 22);
+            this.txRadioButton1.Size = new System.Drawing.Size(43, 22);
             this.txRadioButton1.TabIndex = 12;
             this.txRadioButton1.TabStop = true;
             this.txRadioButton1.Text = "男";
@@ -492,10 +539,11 @@
             // txCheckBox2
             // 
             this.txCheckBox2.AutoSize = true;
-            this.txCheckBox2.Location = new System.Drawing.Point(84, 200);
+            this.txCheckBox2.Location = new System.Drawing.Point(112, 250);
+            this.txCheckBox2.Margin = new System.Windows.Forms.Padding(4);
             this.txCheckBox2.MinimumSize = new System.Drawing.Size(20, 20);
             this.txCheckBox2.Name = "txCheckBox2";
-            this.txCheckBox2.Size = new System.Drawing.Size(36, 20);
+            this.txCheckBox2.Size = new System.Drawing.Size(44, 20);
             this.txCheckBox2.TabIndex = 11;
             this.txCheckBox2.Text = "女";
             this.txCheckBox2.UseVisualStyleBackColor = true;
@@ -506,18 +554,20 @@
             this.txComboBox1.Items.AddRange(new object[] {
             "男",
             "女"});
-            this.txComboBox1.Location = new System.Drawing.Point(245, 200);
+            this.txComboBox1.Location = new System.Drawing.Point(327, 250);
+            this.txComboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.txComboBox1.Name = "txComboBox1";
-            this.txComboBox1.Size = new System.Drawing.Size(150, 20);
+            this.txComboBox1.Size = new System.Drawing.Size(199, 23);
             this.txComboBox1.TabIndex = 10;
             // 
             // txCheckBox1
             // 
             this.txCheckBox1.AutoSize = true;
-            this.txCheckBox1.Location = new System.Drawing.Point(42, 200);
+            this.txCheckBox1.Location = new System.Drawing.Point(56, 250);
+            this.txCheckBox1.Margin = new System.Windows.Forms.Padding(4);
             this.txCheckBox1.MinimumSize = new System.Drawing.Size(20, 20);
             this.txCheckBox1.Name = "txCheckBox1";
-            this.txCheckBox1.Size = new System.Drawing.Size(36, 20);
+            this.txCheckBox1.Size = new System.Drawing.Size(44, 20);
             this.txCheckBox1.TabIndex = 9;
             this.txCheckBox1.Text = "男";
             this.txCheckBox1.UseVisualStyleBackColor = true;
@@ -525,9 +575,10 @@
             // txButton9
             // 
             this.txButton9.Image = null;
-            this.txButton9.Location = new System.Drawing.Point(555, 65);
+            this.txButton9.Location = new System.Drawing.Point(740, 81);
+            this.txButton9.Margin = new System.Windows.Forms.Padding(4);
             this.txButton9.Name = "txButton9";
-            this.txButton9.Size = new System.Drawing.Size(106, 37);
+            this.txButton9.Size = new System.Drawing.Size(141, 46);
             this.txButton9.TabIndex = 8;
             this.txButton9.Text = "List";
             this.txButton9.UseVisualStyleBackColor = true;
@@ -536,9 +587,10 @@
             // txButton8
             // 
             this.txButton8.Image = null;
-            this.txButton8.Location = new System.Drawing.Point(399, 127);
+            this.txButton8.Location = new System.Drawing.Point(532, 159);
+            this.txButton8.Margin = new System.Windows.Forms.Padding(4);
             this.txButton8.Name = "txButton8";
-            this.txButton8.Size = new System.Drawing.Size(106, 37);
+            this.txButton8.Size = new System.Drawing.Size(141, 46);
             this.txButton8.TabIndex = 7;
             this.txButton8.Text = "MessageBox-询问";
             this.txButton8.UseVisualStyleBackColor = true;
@@ -547,9 +599,10 @@
             // txButton7
             // 
             this.txButton7.Image = null;
-            this.txButton7.Location = new System.Drawing.Point(427, 65);
+            this.txButton7.Location = new System.Drawing.Point(569, 81);
+            this.txButton7.Margin = new System.Windows.Forms.Padding(4);
             this.txButton7.Name = "txButton7";
-            this.txButton7.Size = new System.Drawing.Size(106, 37);
+            this.txButton7.Size = new System.Drawing.Size(141, 46);
             this.txButton7.TabIndex = 6;
             this.txButton7.Text = "WaitingBox";
             this.txButton7.UseVisualStyleBackColor = true;
@@ -558,9 +611,10 @@
             // txButton6
             // 
             this.txButton6.Image = null;
-            this.txButton6.Location = new System.Drawing.Point(274, 127);
+            this.txButton6.Location = new System.Drawing.Point(365, 159);
+            this.txButton6.Margin = new System.Windows.Forms.Padding(4);
             this.txButton6.Name = "txButton6";
-            this.txButton6.Size = new System.Drawing.Size(106, 37);
+            this.txButton6.Size = new System.Drawing.Size(141, 46);
             this.txButton6.TabIndex = 5;
             this.txButton6.Text = "MessageBox-错误";
             this.txButton6.UseVisualStyleBackColor = true;
@@ -569,9 +623,10 @@
             // txButton5
             // 
             this.txButton5.Image = null;
-            this.txButton5.Location = new System.Drawing.Point(162, 127);
+            this.txButton5.Location = new System.Drawing.Point(216, 159);
+            this.txButton5.Margin = new System.Windows.Forms.Padding(4);
             this.txButton5.Name = "txButton5";
-            this.txButton5.Size = new System.Drawing.Size(106, 37);
+            this.txButton5.Size = new System.Drawing.Size(141, 46);
             this.txButton5.TabIndex = 4;
             this.txButton5.Text = "MessageBox-警告";
             this.txButton5.UseVisualStyleBackColor = true;
@@ -580,9 +635,10 @@
             // txButton4
             // 
             this.txButton4.Image = null;
-            this.txButton4.Location = new System.Drawing.Point(162, 65);
+            this.txButton4.Location = new System.Drawing.Point(216, 81);
+            this.txButton4.Margin = new System.Windows.Forms.Padding(4);
             this.txButton4.Name = "txButton4";
-            this.txButton4.Size = new System.Drawing.Size(106, 37);
+            this.txButton4.Size = new System.Drawing.Size(141, 46);
             this.txButton4.TabIndex = 3;
             this.txButton4.Text = "ErrorBox";
             this.txButton4.UseVisualStyleBackColor = true;
@@ -591,9 +647,10 @@
             // txButton3
             // 
             this.txButton3.Image = null;
-            this.txButton3.Location = new System.Drawing.Point(35, 127);
+            this.txButton3.Location = new System.Drawing.Point(47, 159);
+            this.txButton3.Margin = new System.Windows.Forms.Padding(4);
             this.txButton3.Name = "txButton3";
-            this.txButton3.Size = new System.Drawing.Size(106, 37);
+            this.txButton3.Size = new System.Drawing.Size(141, 46);
             this.txButton3.TabIndex = 2;
             this.txButton3.Text = "MessageBox-Info";
             this.txButton3.UseVisualStyleBackColor = true;
@@ -602,9 +659,10 @@
             // txButton2
             // 
             this.txButton2.Image = null;
-            this.txButton2.Location = new System.Drawing.Point(289, 65);
+            this.txButton2.Location = new System.Drawing.Point(385, 81);
+            this.txButton2.Margin = new System.Windows.Forms.Padding(4);
             this.txButton2.Name = "txButton2";
-            this.txButton2.Size = new System.Drawing.Size(106, 37);
+            this.txButton2.Size = new System.Drawing.Size(141, 46);
             this.txButton2.TabIndex = 1;
             this.txButton2.Text = "PopBox";
             this.txButton2.UseVisualStyleBackColor = true;
@@ -613,9 +671,10 @@
             // txButton1
             // 
             this.txButton1.Image = null;
-            this.txButton1.Location = new System.Drawing.Point(35, 65);
+            this.txButton1.Location = new System.Drawing.Point(47, 81);
+            this.txButton1.Margin = new System.Windows.Forms.Padding(4);
             this.txButton1.Name = "txButton1";
-            this.txButton1.Size = new System.Drawing.Size(106, 37);
+            this.txButton1.Size = new System.Drawing.Size(141, 46);
             this.txButton1.TabIndex = 0;
             this.txButton1.Text = "BaseForm";
             this.txButton1.UseVisualStyleBackColor = true;
@@ -627,10 +686,11 @@
             this.tabPage2.Controls.Add(this.panel3);
             this.tabPage2.Controls.Add(this.dockPanel1);
             this.tabPage2.Controls.Add(this.panel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 33);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(713, 519);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(954, 653);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -659,10 +719,13 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel4.Image = null;
-            this.panel4.Location = new System.Drawing.Point(203, 147);
+            this.panel4.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            this.panel4.Location = new System.Drawing.Point(271, 184);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.MinimumSize = new System.Drawing.Size(22, 22);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(507, 369);
+            this.panel4.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Default;
+            this.panel4.Size = new System.Drawing.Size(22, 22);
             this.panel4.TabIndex = 4;
             this.panel4.Text = "panel4";
             this.panel4.ToolTipTextCloseIcon = null;
@@ -679,9 +742,10 @@
             rangeValueHeader1.ValueTitle = "金额数值";
             this.txRangeValue1.Header = rangeValueHeader1;
             this.txRangeValue1.Location = new System.Drawing.Point(1, 23);
+            this.txRangeValue1.Margin = new System.Windows.Forms.Padding(5);
             this.txRangeValue1.Name = "txRangeValue1";
             this.txRangeValue1.RangeValues = null;
-            this.txRangeValue1.Size = new System.Drawing.Size(505, 345);
+            this.txRangeValue1.Size = new System.Drawing.Size(20, 0);
             this.txRangeValue1.TabIndex = 0;
             // 
             // panel3
@@ -707,13 +771,15 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel3.Image = null;
-            this.panel3.Location = new System.Drawing.Point(203, 3);
+            this.panel3.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            this.panel3.Location = new System.Drawing.Point(271, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.MinimumSize = new System.Drawing.Size(22, 22);
             this.panel3.Name = "panel3";
             this.panel3.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
             this.panel3.ShowCloseIcon = true;
             this.panel3.ShowExpandIcon = true;
-            this.panel3.Size = new System.Drawing.Size(507, 144);
+            this.panel3.Size = new System.Drawing.Size(22, 180);
             this.panel3.TabIndex = 3;
             this.panel3.Text = "panel3";
             this.panel3.ToolTipTextCloseIcon = null;
@@ -725,9 +791,10 @@
             this.dockPanel1.ActiveAutoHideContent = null;
             this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel1.DockBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.dockPanel1.Location = new System.Drawing.Point(203, 3);
+            this.dockPanel1.Location = new System.Drawing.Point(271, 4);
+            this.dockPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(507, 513);
+            this.dockPanel1.Size = new System.Drawing.Size(0, 55);
             dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
             dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
             autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
@@ -797,12 +864,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Image = null;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            this.panel2.Location = new System.Drawing.Point(4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.MinimumSize = new System.Drawing.Size(22, 22);
             this.panel2.Name = "panel2";
             this.panel2.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
             this.panel2.ShowExpandIcon = true;
-            this.panel2.Size = new System.Drawing.Size(200, 513);
+            this.panel2.Size = new System.Drawing.Size(267, 55);
             this.panel2.TabIndex = 0;
             this.panel2.Text = "panel2";
             this.panel2.ToolTipTextCloseIcon = null;
@@ -815,10 +884,11 @@
             this.tabPage3.Controls.Add(this.txTreeComboBox1);
             this.tabPage3.Controls.Add(this.txMenuStrip1);
             this.tabPage3.Controls.Add(this.txMenuStrip2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 33);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(713, 519);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Size = new System.Drawing.Size(954, 653);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -837,9 +907,10 @@
             "女",
             "其他",
             "..."});
-            this.multiselectComboBox1.Location = new System.Drawing.Point(18, 85);
+            this.multiselectComboBox1.Location = new System.Drawing.Point(24, 106);
+            this.multiselectComboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.multiselectComboBox1.Name = "multiselectComboBox1";
-            this.multiselectComboBox1.Size = new System.Drawing.Size(225, 20);
+            this.multiselectComboBox1.Size = new System.Drawing.Size(299, 23);
             this.multiselectComboBox1.TabIndex = 1;
             // 
             // txTreeComboBox1
@@ -850,14 +921,15 @@
             this.txTreeComboBox1.DoubleSelecteEnable = true;
             this.txTreeComboBox1.FormattingEnabled = true;
             this.txTreeComboBox1.IsInsertDefaultNode = true;
-            this.txTreeComboBox1.Location = new System.Drawing.Point(18, 38);
+            this.txTreeComboBox1.Location = new System.Drawing.Point(24, 48);
+            this.txTreeComboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.txTreeComboBox1.MultiLevelDataSourceMember = "";
             this.txTreeComboBox1.Name = "txTreeComboBox1";
             this.txTreeComboBox1.PathSeparator = " ";
             this.txTreeComboBox1.SelectedNode = null;
             this.txTreeComboBox1.SelectedValue = "";
             this.txTreeComboBox1.ShowFullPathText = true;
-            this.txTreeComboBox1.Size = new System.Drawing.Size(225, 20);
+            this.txTreeComboBox1.Size = new System.Drawing.Size(299, 23);
             this.txTreeComboBox1.TabIndex = 0;
             this.txTreeComboBox1.TreeMaxDegree = 0;
             // 
@@ -866,9 +938,10 @@
             this.txMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(247)))), ((int)(((byte)(252)))));
             this.txMenuStrip1.BeginBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(247)))), ((int)(((byte)(252)))));
             this.txMenuStrip1.EndBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(247)))), ((int)(((byte)(252)))));
-            this.txMenuStrip1.Location = new System.Drawing.Point(3, 28);
+            this.txMenuStrip1.Location = new System.Drawing.Point(4, 32);
             this.txMenuStrip1.Name = "txMenuStrip1";
-            this.txMenuStrip1.Size = new System.Drawing.Size(707, 24);
+            this.txMenuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.txMenuStrip1.Size = new System.Drawing.Size(946, 24);
             this.txMenuStrip1.TabIndex = 2;
             this.txMenuStrip1.Text = "txMenuStrip1";
             // 
@@ -880,9 +953,10 @@
             this.txMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.右键菜单ToolStripMenuItem,
             this.菜单2ToolStripMenuItem});
-            this.txMenuStrip2.Location = new System.Drawing.Point(3, 3);
+            this.txMenuStrip2.Location = new System.Drawing.Point(4, 4);
             this.txMenuStrip2.Name = "txMenuStrip2";
-            this.txMenuStrip2.Size = new System.Drawing.Size(707, 25);
+            this.txMenuStrip2.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.txMenuStrip2.Size = new System.Drawing.Size(946, 28);
             this.txMenuStrip2.TabIndex = 3;
             this.txMenuStrip2.Text = "txMenuStrip2";
             // 
@@ -894,46 +968,47 @@
             this.退出系统ToolStripMenuItem,
             this.关于ToolStripMenuItem});
             this.右键菜单ToolStripMenuItem.Name = "右键菜单ToolStripMenuItem";
-            this.右键菜单ToolStripMenuItem.Size = new System.Drawing.Size(51, 21);
+            this.右键菜单ToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
             this.右键菜单ToolStripMenuItem.Text = "菜单1";
             // 
             // 好好学习ToolStripMenuItem
             // 
             this.好好学习ToolStripMenuItem.Name = "好好学习ToolStripMenuItem";
-            this.好好学习ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.好好学习ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.好好学习ToolStripMenuItem.Text = "好好学习";
             // 
             // 天天向上ToolStripMenuItem
             // 
             this.天天向上ToolStripMenuItem.Name = "天天向上ToolStripMenuItem";
-            this.天天向上ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.天天向上ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.天天向上ToolStripMenuItem.Text = "天天向上";
             // 
             // 退出系统ToolStripMenuItem
             // 
             this.退出系统ToolStripMenuItem.Name = "退出系统ToolStripMenuItem";
-            this.退出系统ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.退出系统ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.退出系统ToolStripMenuItem.Text = "退出系统";
             // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
             // 菜单2ToolStripMenuItem
             // 
             this.菜单2ToolStripMenuItem.Name = "菜单2ToolStripMenuItem";
-            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(51, 21);
+            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
             this.菜单2ToolStripMenuItem.Text = "菜单2";
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.treeListView1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Location = new System.Drawing.Point(4, 33);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(713, 519);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage4.Size = new System.Drawing.Size(954, 653);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "List";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -953,14 +1028,15 @@
             this.treeListView1.Font = new System.Drawing.Font("宋体", 9.6F);
             this.treeListView1.HeaderBeginColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.treeListView1.HeaderEndColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.treeListView1.Location = new System.Drawing.Point(3, 3);
+            this.treeListView1.Location = new System.Drawing.Point(4, 4);
+            this.treeListView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeListView1.Name = "treeListView1";
             this.treeListView1.OwnerDraw = true;
             this.treeListView1.RowBackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(254)))));
             this.treeListView1.RowBackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
             this.treeListView1.SelectedBeginColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
             this.treeListView1.SelectedEndColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(225)))), ((int)(((byte)(253)))));
-            this.treeListView1.Size = new System.Drawing.Size(707, 513);
+            this.treeListView1.Size = new System.Drawing.Size(184, 55);
             this.treeListView1.TabIndex = 0;
             this.treeListView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -975,10 +1051,11 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.monthCalendar1);
-            this.tabPage5.Location = new System.Drawing.Point(4, 29);
+            this.tabPage5.Location = new System.Drawing.Point(4, 33);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(713, 519);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage5.Size = new System.Drawing.Size(954, 653);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -992,7 +1069,8 @@
             this.monthCalendar1.Header.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.monthCalendar1.Header.TextColor = System.Drawing.Color.White;
             this.monthCalendar1.ImageList = null;
-            this.monthCalendar1.Location = new System.Drawing.Point(20, 56);
+            this.monthCalendar1.Location = new System.Drawing.Point(27, 70);
+            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(4);
             this.monthCalendar1.MaxDate = new System.DateTime(2086, 11, 15, 0, 0, 0, 0);
             this.monthCalendar1.MinDate = new System.DateTime(1986, 11, 15, 0, 0, 0, 0);
             this.monthCalendar1.Month.BackgroundImage = null;
@@ -1003,64 +1081,36 @@
             this.monthCalendar1.Month.Colors.Trailing.Date = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.monthCalendar1.Month.Colors.Trailing.Text = System.Drawing.Color.Red;
             this.monthCalendar1.Month.Colors.Weekend.Date = System.Drawing.Color.DarkRed;
-            this.monthCalendar1.Month.DateAlign = TX.Framework.WindowUI.Controls.mcItemAlign.TopCenter;
+            this.monthCalendar1.Month.DateAlign = TX.Framework.WindowUI.Controls.MCItemAlign.TopCenter;
             this.monthCalendar1.Month.DateFont = new System.Drawing.Font("Tahoma", 14.25F);
             this.monthCalendar1.Month.ShowMonthInDay = true;
-            this.monthCalendar1.Month.TextAlign = TX.Framework.WindowUI.Controls.mcItemAlign.BottomCenter;
+            this.monthCalendar1.Month.TextAlign = TX.Framework.WindowUI.Controls.MCItemAlign.BottomCenter;
             this.monthCalendar1.Month.TextFont = new System.Drawing.Font("Tahoma", 9.75F);
             this.monthCalendar1.Month.Transparency.Background = 190;
             this.monthCalendar1.Month.Transparency.Text = 200;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.ShowFooter = false;
-            this.monthCalendar1.Size = new System.Drawing.Size(564, 280);
+            this.monthCalendar1.Size = new System.Drawing.Size(752, 350);
             this.monthCalendar1.TabIndex = 0;
             this.monthCalendar1.Weekdays.BackColor1 = System.Drawing.Color.Transparent;
             this.monthCalendar1.Weekdays.BackColor2 = System.Drawing.Color.SeaShell;
             this.monthCalendar1.Weekdays.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(182)))), ((int)(((byte)(168)))), ((int)(((byte)(192)))));
             this.monthCalendar1.Weekdays.Font = new System.Drawing.Font("Tahoma", 11.5F);
-            this.monthCalendar1.Weekdays.GradientMode = TX.Framework.WindowUI.Controls.mcGradientMode.Vertical;
+            this.monthCalendar1.Weekdays.GradientMode = TX.Framework.WindowUI.Controls.MCGradientMode.Vertical;
             this.monthCalendar1.Weekdays.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(65)))), ((int)(((byte)(0)))));
             this.monthCalendar1.Weeknumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             // 
-            // txGroupBox2
-            // 
-            this.txGroupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.txGroupBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.txGroupBox2.CaptionColor = System.Drawing.Color.Black;
-            this.txGroupBox2.CaptionFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
-            this.txGroupBox2.Controls.Add(this.txDateTimePicker2);
-            this.txGroupBox2.CornerRadius = 0;
-            this.txGroupBox2.Location = new System.Drawing.Point(334, 240);
-            this.txGroupBox2.Name = "txGroupBox2";
-            this.txGroupBox2.Size = new System.Drawing.Size(270, 70);
-            this.txGroupBox2.TabIndex = 16;
-            this.txGroupBox2.TabStop = false;
-            this.txGroupBox2.Text = "分组1";
-            this.txGroupBox2.TextMargin = 6;
-            // 
-            // txDateTimePicker2
-            // 
-            this.txDateTimePicker2.CalendarForeColor = System.Drawing.Color.Blue;
-            this.txDateTimePicker2.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
-            this.txDateTimePicker2.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(74)))), ((int)(((byte)(181)))), ((int)(((byte)(237)))));
-            this.txDateTimePicker2.CalendarTrailingForeColor = System.Drawing.Color.CadetBlue;
-            this.txDateTimePicker2.Location = new System.Drawing.Point(7, 20);
-            this.txDateTimePicker2.Name = "txDateTimePicker2";
-            this.txDateTimePicker2.ShowCheckBox = true;
-            this.txDateTimePicker2.Size = new System.Drawing.Size(132, 21);
-            this.txDateTimePicker2.TabIndex = 0;
-            this.txDateTimePicker2.Value = new System.DateTime(2015, 8, 9, 16, 8, 2, 250);
-            // 
             // winMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CaptionHeight = 34;
-            this.ClientSize = new System.Drawing.Size(978, 602);
+            this.ClientSize = new System.Drawing.Size(1304, 752);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip = this.txMenuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "winMain";
             this.Padding = new System.Windows.Forms.Padding(5, 8, 5, 5);
             this.Text = "主窗体-**ERP系统";
@@ -1075,6 +1125,7 @@
             this.txTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.txGroupBox2.ResumeLayout(false);
             this.txGroupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -1084,7 +1135,6 @@
             this.txMenuStrip2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
-            this.txGroupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1149,4 +1199,3 @@
 
     }
 }
-

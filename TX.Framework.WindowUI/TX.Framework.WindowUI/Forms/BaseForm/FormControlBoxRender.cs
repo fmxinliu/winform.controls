@@ -1,23 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
 
-namespace TX.Framework.WindowUI.Forms
-{
+namespace TX.Framework.WindowUI.Forms {
     /// <summary>
     /// 绘制标题栏的控制按钮
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-3 18:29.
-    internal class FormControlBoxRender
-    {
+    internal class FormControlBoxRender {
         #region ControlBox path
 
         #region CreateCloseFlagPoints
@@ -31,8 +29,7 @@ namespace TX.Framework.WindowUI.Forms
         /// Return a data(or instance) of GraphicsPath.
         /// </returns>
         /// User:Ryan  CreateTime:2012-8-3 22:10.
-        public GraphicsPath CreateCloseFlagPoints(Rectangle rect)
-        {
+        public GraphicsPath CreateCloseFlagPoints(Rectangle rect) {
             PointF centerPoint = new PointF(
                 rect.X + rect.Width / 2.0f,
                 rect.Y + rect.Height / 2.0f);
@@ -73,25 +70,25 @@ namespace TX.Framework.WindowUI.Forms
                 centerPoint.X + 2,
                 centerPoint.Y + 4);
             path.AddLine(
-               centerPoint.X + 2,
-               centerPoint.Y + 4,
-               centerPoint.X + 6,
-               centerPoint.Y + 4);
+                centerPoint.X + 2,
+                centerPoint.Y + 4,
+                centerPoint.X + 6,
+                centerPoint.Y + 4);
             path.AddLine(
-              centerPoint.X + 6,
-              centerPoint.Y + 4,
-              centerPoint.X + 2,
-              centerPoint.Y);
+                centerPoint.X + 6,
+                centerPoint.Y + 4,
+                centerPoint.X + 2,
+                centerPoint.Y);
             path.AddLine(
-             centerPoint.X + 2,
-             centerPoint.Y,
-             centerPoint.X + 6,
-             centerPoint.Y - 4);
+                centerPoint.X + 2,
+                centerPoint.Y,
+                centerPoint.X + 6,
+                centerPoint.Y - 4);
             path.AddLine(
-             centerPoint.X + 6,
-             centerPoint.Y - 4,
-             centerPoint.X + 2,
-             centerPoint.Y - 4);
+                centerPoint.X + 6,
+                centerPoint.Y - 4,
+                centerPoint.X + 2,
+                centerPoint.Y - 4);
             path.CloseFigure();
             return path;
         }
@@ -100,8 +97,7 @@ namespace TX.Framework.WindowUI.Forms
 
         #region CreateMinimizeFlagPath
 
-        public GraphicsPath CreateMinimizeFlagPath(Rectangle rect)
-        {
+        public GraphicsPath CreateMinimizeFlagPath(Rectangle rect) {
             PointF centerPoint = new PointF(
                 rect.X + rect.Width / 2.0f,
                 rect.Y + rect.Height / 2.5f);
@@ -121,16 +117,14 @@ namespace TX.Framework.WindowUI.Forms
         #region CreateMaximizeFlafPath
 
         public GraphicsPath CreateMaximizeFlafPath(
-            Rectangle rect, bool maximize)
-        {
+            Rectangle rect, bool maximize) {
             PointF centerPoint = new PointF(
-               rect.X + rect.Width / 2.0f,
-               rect.Y + rect.Height / 1.9f);
+                rect.X + rect.Width / 2.0f,
+                rect.Y + rect.Height / 1.9f);
 
             GraphicsPath path = new GraphicsPath();
 
-            if (maximize)
-            {
+            if (maximize) {
                 path.AddLine(
                     centerPoint.X - 3,
                     centerPoint.Y - 2,
@@ -201,8 +195,7 @@ namespace TX.Framework.WindowUI.Forms
                     centerPoint.Y - 3);
                 path.CloseFigure();
             }
-            else
-            {
+            else {
                 path.AddRectangle(new RectangleF(
                     centerPoint.X - 6,
                     centerPoint.Y - 4,
@@ -211,7 +204,7 @@ namespace TX.Framework.WindowUI.Forms
                 path.AddRectangle(new RectangleF(
                     centerPoint.X - 5,
                     centerPoint.Y - 1,
-                   10,
+                    10,
                     4));
             }
 
@@ -233,11 +226,9 @@ namespace TX.Framework.WindowUI.Forms
         /// <param name="rect">The rect.</param>
         /// <param name="controlState">State of the control.</param>
         /// User:Ryan  CreateTime:2012-8-3 22:52.
-        public void DrawControlBox(Graphics g, Rectangle rect, EnumControlState controlState)
-        {
+        public void DrawControlBox(Graphics g, Rectangle rect, EnumControlState controlState) {
             GradientColor color;
-            switch (controlState)
-            {
+            switch (controlState) {
                 case EnumControlState.HeightLight:
                     color = SkinManager.CurrentSkin.ControlBoxHeightLightColor;
                     break;
@@ -256,18 +247,16 @@ namespace TX.Framework.WindowUI.Forms
             Color c1, c2;
             c1 = SkinManager.CurrentSkin.BorderColor;
             c2 = Color.FromArgb(10, c1);
-            using (LinearGradientBrush brush = new LinearGradientBrush(rect, c1, c2, 90))
-            {
+            using (LinearGradientBrush brush = new LinearGradientBrush(rect, c1, c2, 90)) {
                 brush.Blend.Positions = color.Positions;
                 brush.Blend.Factors = color.Factors;
-                using (Pen pen = new Pen(brush, 1))
-                {
+                using (Pen pen = new Pen(brush, 1)) {
                     g.DrawLine(pen, rect.X, rect.Y, rect.X, rect.Bottom);
                 }
             }
 
             g.ResetClip();
-        } 
+        }
         #endregion
 
         #region DrawCloseBox
@@ -280,11 +269,9 @@ namespace TX.Framework.WindowUI.Forms
         /// <param name="controlState">State of the control.</param>
         /// <param name="radius">The radius.</param>
         /// User:Ryan  CreateTime:2012-8-3 22:52.
-        public void DrawCloseBox(Graphics g, Rectangle rect, EnumControlState controlState, int radius)
-        {
+        public void DrawCloseBox(Graphics g, Rectangle rect, EnumControlState controlState, int radius) {
             GradientColor color;
-            switch (controlState)
-            {
+            switch (controlState) {
                 case EnumControlState.HeightLight:
                     color = SkinManager.CurrentSkin.CloseBoxHeightLightColor;
                     break;
@@ -303,18 +290,16 @@ namespace TX.Framework.WindowUI.Forms
             Color c1, c2;
             c1 = SkinManager.CurrentSkin.BorderColor;
             c2 = Color.FromArgb(10, c1);
-            using (LinearGradientBrush brush = new LinearGradientBrush(rect, c1, c2, 90))
-            {
+            using (LinearGradientBrush brush = new LinearGradientBrush(rect, c1, c2, 90)) {
                 brush.Blend.Positions = color.Positions;
                 brush.Blend.Factors = color.Factors;
-                using (Pen pen = new Pen(brush, 1))
-                {
+                using (Pen pen = new Pen(brush, 1)) {
                     g.DrawLine(pen, rect.X, rect.Y, rect.X, rect.Bottom);
                 }
             }
 
             g.ResetClip();
-        } 
+        }
         #endregion
 
         #endregion

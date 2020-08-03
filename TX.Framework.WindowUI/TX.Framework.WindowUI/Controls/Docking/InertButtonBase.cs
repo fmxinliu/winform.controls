@@ -1,32 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Text;
+using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace TX.Framework.WindowUI.Controls.Docking
-{
-    internal abstract class InertButtonBase : Control
-    {
-        protected InertButtonBase()
-        {
+namespace TX.Framework.WindowUI.Controls.Docking {
+    internal abstract class InertButtonBase : Control {
+        protected InertButtonBase() {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
         }
 
-        public abstract Bitmap Image
-        {
+        public abstract Bitmap Image {
             get;
         }
 
         private bool m_isMouseOver = false;
-        protected bool IsMouseOver
-        {
+        protected bool IsMouseOver {
             get { return m_isMouseOver; }
-            private set
-            {
+            private set {
                 if (m_isMouseOver == value)
                     return;
 
@@ -35,45 +29,37 @@ namespace TX.Framework.WindowUI.Controls.Docking
             }
         }
 
-        protected override Size DefaultSize
-        {
+        protected override Size DefaultSize {
             get { return Resources.DockPane_Close.Size; }
         }
 
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
+        protected override void OnMouseMove(MouseEventArgs e) {
             base.OnMouseMove(e);
             bool over = ClientRectangle.Contains(e.X, e.Y);
             if (IsMouseOver != over)
                 IsMouseOver = over;
         }
 
-        protected override void OnMouseEnter(EventArgs e)
-        {
+        protected override void OnMouseEnter(EventArgs e) {
             base.OnMouseEnter(e);
             if (!IsMouseOver)
                 IsMouseOver = true;
         }
 
-        protected override void OnMouseLeave(EventArgs e)
-        {
+        protected override void OnMouseLeave(EventArgs e) {
             base.OnMouseLeave(e);
             if (IsMouseOver)
                 IsMouseOver = false;
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            if (IsMouseOver && Enabled)
-            {
-                using (Pen pen = new Pen(ForeColor))
-                {
+        protected override void OnPaint(PaintEventArgs e) {
+            if (IsMouseOver && Enabled) {
+                using (Pen pen = new Pen(ForeColor)) {
                     e.Graphics.DrawRectangle(pen, Rectangle.Inflate(ClientRectangle, -1, -1));
                 }
             }
 
-            using (ImageAttributes imageAttributes = new ImageAttributes())
-            {
+            using (ImageAttributes imageAttributes = new ImageAttributes()) {
                 ColorMap[] colorMap = new ColorMap[2];
                 colorMap[0] = new ColorMap();
                 colorMap[0].OldColor = Color.FromArgb(0, 0, 0);
@@ -85,20 +71,19 @@ namespace TX.Framework.WindowUI.Controls.Docking
                 imageAttributes.SetRemapTable(colorMap);
 
                 e.Graphics.DrawImage(
-                   Image,
-                   new Rectangle(0, 0, Image.Width, Image.Height),
-                   0, 0,
-                   Image.Width,
-                   Image.Height,
-                   GraphicsUnit.Pixel,
-                   imageAttributes);
+                    Image,
+                    new Rectangle(0, 0, Image.Width, Image.Height),
+                    0, 0,
+                    Image.Width,
+                    Image.Height,
+                    GraphicsUnit.Pixel,
+                    imageAttributes);
             }
 
             base.OnPaint(e);
         }
 
-        public void RefreshChanges()
-        {
+        public void RefreshChanges() {
             if (IsDisposed)
                 return;
 
@@ -109,8 +94,6 @@ namespace TX.Framework.WindowUI.Controls.Docking
             OnRefreshChanges();
         }
 
-        protected virtual void OnRefreshChanges()
-        {
-        }
+        protected virtual void OnRefreshChanges() { }
     }
 }

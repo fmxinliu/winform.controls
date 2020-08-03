@@ -1,14 +1,12 @@
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provide Office 2007 black theme colors
     /// </summary>
-    public class ColorTableBlue : TX.Framework.WindowUI.Controls.BseColorTable
-    {
+    public class ColorTableBlue : TX.Framework.WindowUI.Controls.BseColorTable {
         #region FieldsPrivate
         private PanelColors m_panelColorTable;
         #endregion
@@ -17,26 +15,22 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets the associated ColorTable for the XPanderControls
         /// </summary>
-        public override PanelColors PanelColorTable
-        {
-            get
-            {
-                if (this.m_panelColorTable == null)
-                {
+        public override PanelColors PanelColorTable {
+            get {
+                if (this.m_panelColorTable == null) {
                     this.m_panelColorTable = new PanelColorsBlue();
                 }
                 return this.m_panelColorTable;
             }
         }
         #endregion
-        
+
         #region MethodsProtected
         /// <summary>
         /// Initializes a color dictionary with defined colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<ProfessionalColorTable.KnownColors, Color> rgbTable)
-        {
+        protected override void InitColors(Dictionary<ProfessionalColorTable.KnownColors, Color> rgbTable) {
             base.InitColors(rgbTable);
             rgbTable[KnownColors.ButtonPressedBorder] = Color.FromArgb(145, 153, 164);
             rgbTable[KnownColors.ButtonPressedGradientBegin] = Color.FromArgb(141, 170, 253);

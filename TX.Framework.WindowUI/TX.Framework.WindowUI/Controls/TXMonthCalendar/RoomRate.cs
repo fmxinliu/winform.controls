@@ -1,15 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// 房价（房控）信息
     /// </summary>
-    public class RoomRateItem
-    {
+    public class RoomRateItem {
         /// <summary>
         /// 价格标题，默认“预订价”
         /// </summary>
@@ -28,8 +26,7 @@ namespace TX.Framework.WindowUI.Controls
         /// User:Ryan  CreateTime:2012-11-14 22:55.
         private readonly string _serviceFeeTitle;
 
-        public RoomRateItem( DateItem item )
-        {
+        public RoomRateItem(DateItem item) {
             this.Price = 0;
             this._priceTitle = "预订价:";
             this._commissionTitle = "佣金:";
@@ -40,8 +37,7 @@ namespace TX.Framework.WindowUI.Controls
             this.DateItem = item;
         }
 
-        public DateItem DateItem
-        {
+        public DateItem DateItem {
             get;
             private set;
         }
@@ -62,7 +58,7 @@ namespace TX.Framework.WindowUI.Controls
         /// 获取或者设置佣金比例
         /// </summary>
         /// User:Ryan  CreateTime:2012-11-14 22:55.
-        public decimal? CommssionPercent { get; set; } 
+        public decimal? CommssionPercent { get; set; }
 
         /// <summary>
         /// 获取或者设置房控信息
@@ -93,10 +89,8 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <value>The text.</value>
         /// User:Ryan  CreateTime:2012-11-14 22:47.
-        public string Text
-        {
-            get
-            {
+        public string Text {
+            get {
                 return this.ToString();
             }
         }
@@ -119,33 +113,25 @@ namespace TX.Framework.WindowUI.Controls
         /// 返回当前对象的字符串值
         /// </summary>
         /// User:Ryan  CreateTime:2012-11-14 22:47.
-        public override string ToString()
-        {
+        public override string ToString() {
             return string.Concat(
                 this._priceTitle, this.Price.Equals(0) ? ControlHelper.NA : this.Price.ToString("F2"),
                 Environment.NewLine,
                 this._commissionTitle, this.GetCommissionText(), Environment.NewLine,
-                this._serviceFeeTitle, this.ServiceFee.ToString("F2") + "%",Environment.NewLine,
+                this._serviceFeeTitle, this.ServiceFee.ToString("F2") + "%", Environment.NewLine,
                 this.RoomControl.Equals(ControlHelper.NA) ? Environment.NewLine : this.RoomControl
-                    );
+            );
         }
 
         /// <summary>
         /// 获取佣金应该显示的字符
         /// </summary>
         /// User:Ryan  CreateTime:2012-11-14 22:54.
-        private string GetCommissionText()
-        {
-            if (!this.Commssion.Equals(0))
-            {
+        private string GetCommissionText() {
+            if (!this.Commssion.Equals(0)) {
                 return this.Commssion.ToString();
             }
-            //else if (this.CommssionPercent != null && !this.CommssionPercent.Equals(0))
-            //{
-            //    return string.Format("{0}%", ((double)this.CommssionPercent * 100).ToString("F2"));
-            //}
-            else
-            {
+            else {
                 return ControlHelper.NA;
             }
         }

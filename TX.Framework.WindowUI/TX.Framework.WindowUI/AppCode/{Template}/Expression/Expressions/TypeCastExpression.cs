@@ -13,21 +13,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class TypeCastExpression : Expression
-    {
+namespace System.Text.Template {
+    public class TypeCastExpression : Expression {
         private readonly VariableExpression _typeExpression;
         private readonly Expression _targetExpression;
 
-        public TypeCastExpression(VariableExpression typeExpression, Expression targetExpression)
-        {
+        public TypeCastExpression(VariableExpression typeExpression, Expression targetExpression) {
             _typeExpression = typeExpression;
             _targetExpression = targetExpression;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             ClassName className = _typeExpression.Evaluate(context).Value as ClassName;
 
             if (className == null)

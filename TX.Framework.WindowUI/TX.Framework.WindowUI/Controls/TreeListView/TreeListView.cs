@@ -12,20 +12,18 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Windows.Forms;
+using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.APIs;
-using System.Diagnostics;
 using System.Threading;
 using System.Win32;
+using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [ToolboxBitmap(typeof(ListView))]
-    public class TreeListView : TXListView
-    {
+    public class TreeListView : TXListView {
         private delegate TreeListViewItem[] ItemArrayHandler();
 
         private IContainer components;
@@ -97,181 +95,145 @@ namespace TX.Framework.WindowUI.Controls
 
         #endregion
 
-        public TreeListView()
-            : base()
-        {
+        public TreeListView() : base() {
             InitializeComponent();
-            if (!IsHandleCreated)
-            {
+            if (!IsHandleCreated) {
                 CreateHandle();
             }
             _Items = new TreeListViewItemCollection(this);
             _Items.SortOrder = _Sorting;
             _Comctl32Version = NativeMethods.GetMajorVersion();
 
-            int style = NativeMethods.SendMessage(Handle, (int)ListViewMessages.GETEXTENDEDLISTVIEWSTYLE, 0, 0);
+            int style = NativeMethods.SendMessage(Handle, (int) ListViewMessages.GETEXTENDEDLISTVIEWSTYLE, 0, 0);
             style |= (int)(ListViewExtendedStyles.INFOTIP | ListViewExtendedStyles.LABELTIP);
-            NativeMethods.SendMessage(Handle, (int)ListViewMessages.SETEXTENDEDLISTVIEWSTYLE, 0, style);
+            NativeMethods.SendMessage(Handle, (int) ListViewMessages.SETEXTENDEDLISTVIEWSTYLE, 0, style);
         }
 
         #region OnEvents
 
-        protected virtual void OnAfterLabelEdit(TreeListViewLabelEditEventArgs e)
-        {
-            if (AfterLabelEdit != null)
-            {
+        protected virtual void OnAfterLabelEdit(TreeListViewLabelEditEventArgs e) {
+            if (AfterLabelEdit != null) {
                 AfterLabelEdit(this, e);
             }
         }
 
-        protected override void OnAfterLabelEdit(LabelEditEventArgs e)
-        {
+        protected override void OnAfterLabelEdit(LabelEditEventArgs e) {
             throw new Exception("Please use OnAfterLabelEdit(TreeListViewLabelEditEventArgs e)");
         }
 
-        protected virtual void OnBeforeLabelEdit(TreeListViewBeforeLabelEditEventArgs e)
-        {
-            if (BeforeLabelEdit != null)
-            {
+        protected virtual void OnBeforeLabelEdit(TreeListViewBeforeLabelEditEventArgs e) {
+            if (BeforeLabelEdit != null) {
                 BeforeLabelEdit(this, e);
             }
         }
 
-        protected override void OnBeforeLabelEdit(LabelEditEventArgs e)
-        {
+        protected override void OnBeforeLabelEdit(LabelEditEventArgs e) {
             throw new Exception("Please use OnBeforeLabelEdit(TreeListViewLabelEditEventArgs e)");
         }
 
-        protected virtual void OnBeforeExpand(TreeListViewCancelEventArgs e)
-        {
-            if (BeforeExpand != null)
-            {
+        protected virtual void OnBeforeExpand(TreeListViewCancelEventArgs e) {
+            if (BeforeExpand != null) {
                 BeforeExpand(this, e);
             }
         }
 
-        protected virtual void OnAfterExpand(TreeListViewEventArgs e)
-        {
-            if (AfterExpand != null)
-            {
+        protected virtual void OnAfterExpand(TreeListViewEventArgs e) {
+            if (AfterExpand != null) {
                 AfterExpand(this, e);
             }
         }
 
-        protected virtual void OnBeforeCollapse(TreeListViewCancelEventArgs e)
-        {
-            if (BeforeCollapse != null)
-            {
+        protected virtual void OnBeforeCollapse(TreeListViewCancelEventArgs e) {
+            if (BeforeCollapse != null) {
                 BeforeCollapse(this, e);
             }
         }
 
-        protected virtual void OnAfterCollapse(TreeListViewEventArgs e)
-        {
-            if (AfterCollapse != null)
-            {
+        protected virtual void OnAfterCollapse(TreeListViewEventArgs e) {
+            if (AfterCollapse != null) {
                 AfterCollapse(this, e);
             }
         }
 
         #endregion
 
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            if (!_SkipMouseDownEvent)
-            {
+        protected override void OnMouseDown(MouseEventArgs e) {
+            if (!_SkipMouseDownEvent) {
                 base.OnMouseDown(e);
             }
         }
 
-        internal void RaiseBeforeExpand(TreeListViewCancelEventArgs e)
-        {
+        internal void RaiseBeforeExpand(TreeListViewCancelEventArgs e) {
             OnBeforeExpand(e);
         }
 
-        internal void RaiseBeforeCollapse(TreeListViewCancelEventArgs e)
-        {
+        internal void RaiseBeforeCollapse(TreeListViewCancelEventArgs e) {
             OnBeforeCollapse(e);
         }
 
-        internal void RaiseAfterExpand(TreeListViewEventArgs e)
-        {
+        internal void RaiseAfterExpand(TreeListViewEventArgs e) {
             OnAfterExpand(e);
         }
 
-        internal void RaiseAfterCollapse(TreeListViewEventArgs e)
-        {
+        internal void RaiseAfterCollapse(TreeListViewEventArgs e) {
             OnAfterCollapse(e);
         }
 
-        protected override void OnSelectedIndexChanged(EventArgs e)
-        {
+        protected override void OnSelectedIndexChanged(EventArgs e) {
             base.OnSelectedIndexChanged(e);
             this.Invalidate(true);
         }
 
         #region WndProc
 
-        protected override void WndProc(ref Message m)
-        {
+        protected override void WndProc(ref Message m) {
             TreeListViewItem item = null;
             Rectangle rec;
-            switch ((WindowMessages)m.Msg)
-            {
+            switch ((WindowMessages) m.Msg) {
                 #region Notify
 
                 case WindowMessages.NOTIFY:
-                case (WindowMessages)ReflectedMessages.NOTIFY:
-                    NMHDR nmhdr = (NMHDR)m.GetLParam(typeof(NMHDR));
-                    NMHEADER nmheader = (NMHEADER)m.GetLParam(typeof(NMHEADER));
-                    switch ((ListViewNotifications)nmhdr.code)
-                    {
+                case (WindowMessages) ReflectedMessages.NOTIFY:
+                    NMHDR nmhdr = (NMHDR) m.GetLParam(typeof(NMHDR));
+                    NMHEADER nmheader = (NMHEADER) m.GetLParam(typeof(NMHEADER));
+                    switch ((ListViewNotifications) nmhdr.code) {
                         #region ListViewNotifications.MarqueeBegin
 
                         case ListViewNotifications.MARQUEEBEGIN:
                             if ((MouseButtons & MouseButtons.Left) != MouseButtons.Left)
-                                m.Result = (IntPtr)1;
+                                m.Result = (IntPtr) 1;
                             else
                                 _HasMarquee = true;
                             break;
 
-                        #endregion
+                            #endregion
 
-                        #region ListViewNotifications.ItemChanging
+                            #region ListViewNotifications.ItemChanging
 
                         case ListViewNotifications.ITEMCHANGING:
-                            NMLISTVIEW nmlistview = (NMLISTVIEW)m.GetLParam(typeof(NMLISTVIEW));
+                            NMLISTVIEW nmlistview = (NMLISTVIEW) m.GetLParam(typeof(NMLISTVIEW));
                             if (nmlistview.iItem < 0) break;
                             if ((item = GetTreeListViewItemFromIndex(nmlistview.iItem)) == null) break;
                             bool cancel = false;
-                            if (nmlistview.Select)
-                            {
-                                if (_SelectionMark == null)
-                                {
+                            if (nmlistview.Select) {
+                                if (_SelectionMark == null) {
                                     _SelectionMark = item;
                                 }
-                                else if (!_SelectionMark.Visible)
-                                {
+                                else if (!_SelectionMark.Visible) {
                                     _SelectionMark = item;
                                 }
-                                if (HasMarquee)
-                                {
+                                if (HasMarquee) {
                                     item.Focused = true;
                                 }
                             }
-                            else if (nmlistview.UnSelect && HasMarquee)
-                            {
-                                if (item.NextVisibleItem != null)
-                                {
-                                    if (item.NextVisibleItem.Selected)
-                                    {
+                            else if (nmlistview.UnSelect && HasMarquee) {
+                                if (item.NextVisibleItem != null) {
+                                    if (item.NextVisibleItem.Selected) {
                                         item.NextVisibleItem.Focused = true;
                                     }
                                 }
-                                if (item.PrevVisibleItem != null)
-                                {
-                                    if (item.PrevVisibleItem.Selected)
-                                    {
+                                if (item.PrevVisibleItem != null) {
+                                    if (item.PrevVisibleItem.Selected) {
                                         item.PrevVisibleItem.Focused = true;
                                     }
                                 }
@@ -287,7 +249,7 @@ namespace TX.Framework.WindowUI.Controls
                             #endregion
 
                             #region Wrong Level Select
-                            if (((System.Win32.ListViewItemStates)nmlistview.uNewState & System.Win32.ListViewItemStates.SELECTED) == System.Win32.ListViewItemStates.SELECTED && MultiSelect)
+                            if (((System.Win32.ListViewItemStates) nmlistview.uNewState & System.Win32.ListViewItemStates.SELECTED) == System.Win32.ListViewItemStates.SELECTED && MultiSelect)
                                 if (SelectedIndices.Count > 0)
                                     if (GetTreeListViewItemFromIndex(nmlistview.iItem).Parent != SelectedItems[0].Parent)
                                         cancel = true;
@@ -298,12 +260,11 @@ namespace TX.Framework.WindowUI.Controls
                             // Disable check boxes check when :
                             // - the Marquee selection tool is being used
                             // - the Ctrl or Shift keys are down
-                            bool state = (nmlistview.uChanged & (uint)ListViewItemFlags.STATE) == (uint)ListViewItemFlags.STATE;
+                            bool state = (nmlistview.uChanged & (uint) ListViewItemFlags.STATE) == (uint) ListViewItemFlags.STATE;
                             bool ctrlKeyDown = (ModifierKeys & Keys.Control) == Keys.Control;
                             bool shiftKeyDown = (ModifierKeys & Keys.Shift) == Keys.Shift;
                             if ((nmlistview.Check || nmlistview.UnCheck) &&
-                                (HasMarquee || ctrlKeyDown || shiftKeyDown))
-                            {
+                                (HasMarquee || ctrlKeyDown || shiftKeyDown)) {
                                 //                                    MessageBox.Show(this,
                                 //                                        "uChanged = " + nmlistview->uChanged.ToString() + "\n\n" + 
                                 //                                        "uOld = " + nmlistview->uOldState.ToString() + "\n" + 
@@ -314,24 +275,22 @@ namespace TX.Framework.WindowUI.Controls
                             }
                             #endregion
 
-                            if (cancel)
-                            {
-                                m.Result = (IntPtr)1;
+                            if (cancel) {
+                                m.Result = (IntPtr) 1;
                                 return;
                             }
                             break;
 
-                        #endregion
+                            #endregion
 
-                        #region ListViewNotifications.BeginLabelEdit
+                            #region ListViewNotifications.BeginLabelEdit
 
                         case ListViewNotifications.BEGINLABELEDIT:
                             // Cancel label edit if the message is sent just after a double click
-                            if (_LastDoubleClick.AddMilliseconds(450) > DateTime.Now)
-                            {
-                                Message canceledit = Message.Create(Handle, (int)ListViewMessages.CANCELEDITLABEL, IntPtr.Zero, IntPtr.Zero);
+                            if (_LastDoubleClick.AddMilliseconds(450) > DateTime.Now) {
+                                Message canceledit = Message.Create(Handle, (int) ListViewMessages.CANCELEDITLABEL, IntPtr.Zero, IntPtr.Zero);
                                 WndProc(ref canceledit);
-                                m.Result = (IntPtr)1;
+                                m.Result = (IntPtr) 1;
                                 return;
                             }
                             item = _LastItemClicked.Item;
@@ -341,16 +300,15 @@ namespace TX.Framework.WindowUI.Controls
                             TreeListViewBeforeLabelEditEventArgs beforeed = new TreeListViewBeforeLabelEditEventArgs(
                                 FocusedItem, _LastItemClicked.ColumnIndex, item.SubItems[_LastItemClicked.ColumnIndex].Text);
                             OnBeforeLabelEdit(beforeed);
-                            if (beforeed.Cancel)
-                            {
-                                Message canceledit = Message.Create(Handle, (int)ListViewMessages.CANCELEDITLABEL, IntPtr.Zero, IntPtr.Zero);
+                            if (beforeed.Cancel) {
+                                Message canceledit = Message.Create(Handle, (int) ListViewMessages.CANCELEDITLABEL, IntPtr.Zero, IntPtr.Zero);
                                 WndProc(ref canceledit);
-                                m.Result = (IntPtr)1;
+                                m.Result = (IntPtr) 1;
                                 return;
                             }
                             _InEdit = true;
                             // Get edit handle
-                            Message mess = Message.Create(Handle, (int)ListViewMessages.GETEDITCONTROL, IntPtr.Zero, IntPtr.Zero);
+                            Message mess = Message.Create(Handle, (int) ListViewMessages.GETEDITCONTROL, IntPtr.Zero, IntPtr.Zero);
                             WndProc(ref mess);
                             IntPtr edithandle = mess.Result;
                             _CustomEdit = new CustomEdit(edithandle, this, beforeed.Editor);
@@ -358,9 +316,9 @@ namespace TX.Framework.WindowUI.Controls
                             m.Result = IntPtr.Zero;
                             return;
 
-                        #endregion
+                            #endregion
 
-                        #region ListViewNotifications.EndLabelEdit
+                            #region ListViewNotifications.EndLabelEdit
 
                         case ListViewNotifications.ENDLABELEDIT:
                             if (_CustomEdit != null)
@@ -371,26 +329,26 @@ namespace TX.Framework.WindowUI.Controls
                             m.Result = IntPtr.Zero;
                             return;
 
-                        #endregion
+                            #endregion
 
-                        #region CustomDraw
+                            #region CustomDraw
 
-                        case (ListViewNotifications)NotificationMessages.CUSTOMDRAW:
+                        case (ListViewNotifications) NotificationMessages.CUSTOMDRAW:
                             base.WndProc(ref m);
                             //CustomDraw(ref m);
                             return;
 
-                        #endregion
+                            #endregion
 
-                        #region BeginScroll
+                            #region BeginScroll
 
                         case ListViewNotifications.BEGINSCROLL:
                             _Updating = true;
                             break;
 
-                        #endregion
+                            #endregion
 
-                        #region EndScroll
+                            #region EndScroll
 
                         case ListViewNotifications.ENDSCROLL:
                             _Updating = false;
@@ -402,60 +360,58 @@ namespace TX.Framework.WindowUI.Controls
                             //                            }
                             break;
 
-                        #endregion
+                            #endregion
 
-                        #region HeaderControlNotifications.BeginDrag
+                            #region HeaderControlNotifications.BeginDrag
 
-                        case (ListViewNotifications)HeaderControlNotifications.BEGINDRAG:
-                            nmheader = (NMHEADER)m.GetLParam(typeof(NMHEADER));
-                            if (nmheader.iItem == 0)
-                            {
-                                m.Result = (IntPtr)1;
+                        case (ListViewNotifications) HeaderControlNotifications.BEGINDRAG:
+                            nmheader = (NMHEADER) m.GetLParam(typeof(NMHEADER));
+                            if (nmheader.iItem == 0) {
+                                m.Result = (IntPtr) 1;
                                 return;
                             }
                             break;
 
-                        #endregion
+                            #endregion
 
-                        #region HeaderControlNotifications.EndDrag
+                            #region HeaderControlNotifications.EndDrag
 
-                        case (ListViewNotifications)HeaderControlNotifications.ENDDRAG:
-                            nmheader = (NMHEADER)m.GetLParam(typeof(NMHEADER));
+                        case (ListViewNotifications) HeaderControlNotifications.ENDDRAG:
+                            nmheader = (NMHEADER) m.GetLParam(typeof(NMHEADER));
                             // Get mouse position in header coordinates
-                            IntPtr headerHandle = (IntPtr)NativeMethods.SendMessage(Handle, (int)ListViewMessages.GETHEADER, IntPtr.Zero, IntPtr.Zero);
+                            IntPtr headerHandle = (IntPtr) NativeMethods.SendMessage(Handle, (int) ListViewMessages.GETHEADER, IntPtr.Zero, IntPtr.Zero);
                             System.Win32.POINTAPI pointapi = new System.Win32.POINTAPI(MousePosition);
                             NativeMethods.ScreenToClient(headerHandle, ref pointapi);
                             // HeaderItem Rect
                             RECT headerItemRect = new RECT();
-                            SendMessage(headerHandle, (int)HeaderControlMessages.GETITEMRECT, 0, ref headerItemRect);
+                            SendMessage(headerHandle, (int) HeaderControlMessages.GETITEMRECT, 0, ref headerItemRect);
                             int headerItemWidth = headerItemRect.right - headerItemRect.left;
                             // Cancel the drag operation if the first column is moved
                             // or destination is the first column
-                            if (pointapi.X <= headerItemRect.left + headerItemWidth / 2 || nmheader.iItem == 0)
-                            {
-                                m.Result = (IntPtr)1;
+                            if (pointapi.X <= headerItemRect.left + headerItemWidth / 2 || nmheader.iItem == 0) {
+                                m.Result = (IntPtr) 1;
                                 return;
                             }
                             break;
 
-                        #endregion
+                            #endregion
 
-                        #region HeaderControlNotifications.Track / EndTrack
+                            #region HeaderControlNotifications.Track / EndTrack
 
-                        //                        case (ListViewNotifications)HeaderControlNotifications.TRACK:
-                        case (ListViewNotifications)HeaderControlNotifications.ENDTRACK:
+                            //                        case (ListViewNotifications)HeaderControlNotifications.TRACK:
+                        case (ListViewNotifications) HeaderControlNotifications.ENDTRACK:
                             Invalidate();
                             break;
 
-                        #endregion
+                            #endregion
                     }
 
                     break;
-                #endregion
+                    #endregion
 
-                #region LButtonDown
+                    #region LButtonDown
 
-                // Cancel the click on checkboxes if the item is not "checkable"
+                    // Cancel the click on checkboxes if the item is not "checkable"
                 case WindowMessages.LBUTTONDOWN:
                     if (Columns.Count == 0) break;
                     // Set the clickeditem and column
@@ -464,20 +420,19 @@ namespace TX.Framework.WindowUI.Controls
                     item = GetItemAtFullRow(PointToClient(MousePosition));
                     _LastItemClicked = new EditItemInformations(item, colclicked, "");
                     if (_SelectionMark == null || !_SelectionMark.Visible) _SelectionMark = item;
-                    if (((KeyStatesMasks)(int)m.WParam & KeyStatesMasks.SHIFT) != KeyStatesMasks.SHIFT &&
-                        !(((KeyStatesMasks)(int)m.WParam & KeyStatesMasks.CONTROL) == KeyStatesMasks.CONTROL &&
-                        item.Parent != _SelectionMark.Parent))
+                    if (((KeyStatesMasks)(int) m.WParam & KeyStatesMasks.SHIFT) != KeyStatesMasks.SHIFT &&
+                        !(((KeyStatesMasks)(int) m.WParam & KeyStatesMasks.CONTROL) == KeyStatesMasks.CONTROL &&
+                            item.Parent != _SelectionMark.Parent))
                         _SelectionMark = item;
                     // Get where the mouse has clicked
                     LVHITTESTINFO lvhittest = new LVHITTESTINFO();
                     lvhittest.pt = new POINTAPI(PointToClient(MousePosition));
-                    SendMessage(Handle, (Int32)ListViewMessages.HITTEST, 0, ref lvhittest);
+                    SendMessage(Handle, (Int32) ListViewMessages.HITTEST, 0, ref lvhittest);
                     if (item == null) break;
                     // Plus / Minus click
                     if (item.GetBounds(TreeListViewItemBoundsPortion.PlusMinus).Contains(PointToClient(MousePosition)) &&
                         ShowPlusMinus && item.Items.Count > 0 &&
-                        Columns[0].Width > (item.Level + 1) * SystemInformation.SmallIconSize.Width)
-                    {
+                        Columns[0].Width > (item.Level + 1) * SystemInformation.SmallIconSize.Width) {
                         Focus();
                         if (item.IsExpanded) item.Collapse();
                         else item.Expand();
@@ -486,17 +441,15 @@ namespace TX.Framework.WindowUI.Controls
                     }
                     // Cancel mouse click if multiselection on a wrong item
                     if (SelectedIndices.Count > 0 &&
-                        (((KeyStatesMasks)(int)m.WParam & KeyStatesMasks.SHIFT) == KeyStatesMasks.SHIFT ||
-                        ((KeyStatesMasks)(int)m.WParam & KeyStatesMasks.CONTROL) == KeyStatesMasks.CONTROL) &&
-                        MultiSelect)
-                    {
+                        (((KeyStatesMasks)(int) m.WParam & KeyStatesMasks.SHIFT) == KeyStatesMasks.SHIFT ||
+                            ((KeyStatesMasks)(int) m.WParam & KeyStatesMasks.CONTROL) == KeyStatesMasks.CONTROL) &&
+                        MultiSelect) {
                         if (_SelectionMark.Parent == item.Parent &&
-                            ((KeyStatesMasks)(int)m.WParam & KeyStatesMasks.SHIFT) == KeyStatesMasks.SHIFT)
-                        {
+                            ((KeyStatesMasks)(int) m.WParam & KeyStatesMasks.SHIFT) == KeyStatesMasks.SHIFT) {
                             _Updating = true;
                             SetSelectedItemsRange(item, _SelectionMark);
                             // Prevent all item at the wrong level of being selected
-                            m.WParam = (IntPtr)KeyStatesMasks.CONTROL;
+                            m.WParam = (IntPtr) KeyStatesMasks.CONTROL;
                             base.WndProc(ref m);
                             item.Selected = true;
                             _Updating = false;
@@ -506,20 +459,18 @@ namespace TX.Framework.WindowUI.Controls
                     }
                     break;
 
-                #endregion
+                    #endregion
 
-                #region LButtonDoubleClick
+                    #region LButtonDoubleClick
 
-                // Disable this notification to remove the auto-check when
-                // the user double-click on an item and append the expand / collapse function
+                    // Disable this notification to remove the auto-check when
+                    // the user double-click on an item and append the expand / collapse function
                 case WindowMessages.LBUTTONDBLCLK:
                     _LastDoubleClick = DateTime.Now;
-                    if (FocusedItem != null)
-                    {
+                    if (FocusedItem != null) {
                         item = FocusedItem;
                         bool doExpColl = false;
-                        switch (ExpandMethod)
-                        {
+                        switch (ExpandMethod) {
                             case TreeListViewExpandMethod.IconDbleClick:
                                 rec = item.GetBounds(ItemBoundsPortion.Icon);
                                 if (rec.Contains(PointToClient(MousePosition))) doExpColl = true;
@@ -535,8 +486,7 @@ namespace TX.Framework.WindowUI.Controls
                             default:
                                 break;
                         }
-                        if (doExpColl)
-                        {
+                        if (doExpColl) {
                             _DblClickTime = DateTime.Now;
                             Cursor = Cursors.WaitCursor;
                             BeginUpdate();
@@ -549,34 +499,33 @@ namespace TX.Framework.WindowUI.Controls
                     OnDoubleClick(new EventArgs());
                     return;
 
-                #endregion
+                    #endregion
 
-                #region MouseMove
+                    #region MouseMove
 
                 case WindowMessages.MOUSEMOVE:
                     if ((MouseButtons & MouseButtons.Left) != MouseButtons.Left && HasMarquee)
                         _HasMarquee = false;
                     break;
 
-                #endregion
+                    #endregion
 
-                #region UniChar, Char, KeyDown
+                    #region UniChar, Char, KeyDown
 
                 case WindowMessages.UNICHAR:
                 case WindowMessages.CHAR:
-                    CharPressed((char)m.WParam);
+                    CharPressed((char) m.WParam);
                     return;
                 case WindowMessages.KEYDOWN:
-                    OnKeyDown(new KeyEventArgs((Keys)(int)m.WParam));
+                    OnKeyDown(new KeyEventArgs((Keys)(int) m.WParam));
                     return;
 
-                #endregion
+                    #endregion
 
-                #region Paint
+                    #region Paint
 
                 case WindowMessages.PAINT:
-                    if (InEdit && EditedItem.Item != null)
-                    {
+                    if (InEdit && EditedItem.Item != null) {
                         System.Win32.RECT rect = new System.Win32.RECT(EditedItem.Item.GetBounds(ItemBoundsPortion.Entire));
                         NativeMethods.ValidateRect(Handle, ref rect);
                     }
@@ -585,21 +534,20 @@ namespace TX.Framework.WindowUI.Controls
                     //DrawSelectedItemsFocusCues();
                     return;
 
-                #endregion
+                    #endregion
 
-                #region VerticalScroll, HorizontalScroll, EnsureVisible
+                    #region VerticalScroll, HorizontalScroll, EnsureVisible
 
                 case WindowMessages.VSCROLL:
                 case WindowMessages.HSCROLL:
-                case (WindowMessages)ListViewMessages.ENSUREVISIBLE:
-                    if (!Scrollable)
-                    {
-                        m.Result = (IntPtr)0;
+                case (WindowMessages) ListViewMessages.ENSUREVISIBLE:
+                    if (!Scrollable) {
+                        m.Result = (IntPtr) 0;
                         return;
                     }
                     break;
 
-                #endregion
+                    #endregion
             }
             base.WndProc(ref m);
         }
@@ -611,14 +559,10 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Raises the KeyDown event
         /// </summary>
-        /// <param name="e"></param>
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
+        protected override void OnKeyDown(KeyEventArgs e) {
             Keys key = e.KeyCode;
-            if (FocusedItem == null)
-            {
-                if (base.Items.Count > 0 && (key == Keys.Down || key == Keys.Up || key == Keys.Left || key == Keys.Right))
-                {
+            if (FocusedItem == null) {
+                if (base.Items.Count > 0 && (key == Keys.Down || key == Keys.Up || key == Keys.Left || key == Keys.Right)) {
                     base.Items[0].Selected = true;
                     base.Items[0].Focused = true;
                     base.Items[0].EnsureVisible();
@@ -627,36 +571,27 @@ namespace TX.Framework.WindowUI.Controls
                 return;
             }
             TreeListViewItem item = FocusedItem;
-            switch (key)
-            {
+            switch (key) {
                 case Keys.Down:
-                    if (item.NextVisibleItem != null)
-                    {
+                    if (item.NextVisibleItem != null) {
                         TreeListViewItem nextitem = item.NextVisibleItem;
                         if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift &&
-                            MultiSelect)
-                        {
-                            if (item.Parent != nextitem.Parent && item.Selected)
-                            {
-                                while ((nextitem = nextitem.NextVisibleItem) != null)
-                                {
-                                    if (nextitem.Parent == item.Parent)
-                                    {
+                            MultiSelect) {
+                            if (item.Parent != nextitem.Parent && item.Selected) {
+                                while ((nextitem = nextitem.NextVisibleItem) != null) {
+                                    if (nextitem.Parent == item.Parent) {
                                         break;
                                     }
                                 }
                             }
-                            if (nextitem != null)
-                            {
+                            if (nextitem != null) {
                                 SetSelectedItemsRange(_SelectionMark, nextitem);
                             }
-                            else
-                            {
+                            else {
                                 nextitem = item.NextVisibleItem;
                             }
                         }
-                        else if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
-                        {
+                        else if ((Control.ModifierKeys & Keys.Control) != Keys.Control) {
                             SetSelectedItemsRange(nextitem, nextitem);
                             _SelectionMark = nextitem;
                         }
@@ -665,32 +600,24 @@ namespace TX.Framework.WindowUI.Controls
                     }
                     break;
                 case Keys.Up:
-                    if (item.PrevVisibleItem != null)
-                    {
+                    if (item.PrevVisibleItem != null) {
                         TreeListViewItem previtem = item.PrevVisibleItem;
-                        if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && MultiSelect)
-                        {
-                            if (item.Parent != previtem.Parent && item.Selected)
-                            {
-                                while ((previtem = previtem.PrevVisibleItem) != null)
-                                {
-                                    if (previtem.Parent == item.Parent)
-                                    {
+                        if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift && MultiSelect) {
+                            if (item.Parent != previtem.Parent && item.Selected) {
+                                while ((previtem = previtem.PrevVisibleItem) != null) {
+                                    if (previtem.Parent == item.Parent) {
                                         break;
                                     }
                                 }
                             }
-                            if (previtem != null)
-                            {
+                            if (previtem != null) {
                                 SetSelectedItemsRange(_SelectionMark, previtem);
                             }
-                            else
-                            {
+                            else {
                                 previtem = item.PrevVisibleItem;
                             }
                         }
-                        else if ((Control.ModifierKeys & Keys.Control) != Keys.Control)
-                        {
+                        else if ((Control.ModifierKeys & Keys.Control) != Keys.Control) {
                             SetSelectedItemsRange(previtem, previtem);
                             _SelectionMark = previtem;
                         }
@@ -706,15 +633,13 @@ namespace TX.Framework.WindowUI.Controls
                     item.EnsureVisible();
                     break;
                 case Keys.Left:
-                    if (item.IsExpanded)
-                    {
+                    if (item.IsExpanded) {
                         base.SelectedItems.Clear();
                         item.Selected = true;
                         item.Collapse();
                         item.EnsureVisible();
                     }
-                    else if (item.Parent != null)
-                    {
+                    else if (item.Parent != null) {
                         base.SelectedItems.Clear();
                         item.Parent.Selected = true;
                         item.Parent.Focused = true;
@@ -723,15 +648,13 @@ namespace TX.Framework.WindowUI.Controls
                     break;
                 case Keys.Right:
                     if (item.Items.Count == 0) break;
-                    if (!item.IsExpanded)
-                    {
+                    if (!item.IsExpanded) {
                         base.SelectedItems.Clear();
                         item.Selected = true;
                         item.Expand();
                         item.EnsureVisible();
                     }
-                    else
-                    {
+                    else {
                         base.SelectedItems.Clear();
                         item.Items[item.Items.Count - 1].Selected = true;
                         item.Items[item.Items.Count - 1].Focused = true;
@@ -749,27 +672,22 @@ namespace TX.Framework.WindowUI.Controls
 
         #region CharPressed
 
-        private void CharPressed(char character)
-        {
+        private void CharPressed(char character) {
             string begin = character.ToString().ToUpper();
-            if (FocusedItem == null)
-            {
+            if (FocusedItem == null) {
                 return;
             }
             TreeListViewItem item = FocusedItem;
             base.SelectedItems.Clear();
             item.Selected = true;
             // Select an item begining with the specified character
-            if ((begin.CompareTo("A") >= 0 && begin.CompareTo("Z") <= 0) || begin == " ")
-            {
+            if ((begin.CompareTo("A") >= 0 && begin.CompareTo("Z") <= 0) || begin == " ") {
                 // Get the collection in wich the item is
                 TreeListViewItemCollection collection = item.Parent == null ? this.Items : item.Parent.Items;
                 bool founded = false;
                 // Search in the next items
-                for (int i = collection.GetIndexOf(item) + 1; i < collection.Count; i++)
-                {
-                    if (collection[i].Text.ToUpper().StartsWith(begin))
-                    {
+                for (int i = collection.GetIndexOf(item) + 1; i < collection.Count; i++) {
+                    if (collection[i].Text.ToUpper().StartsWith(begin)) {
                         collection[i].Selected = true;
                         collection[i].Focused = true;
                         collection[i].EnsureVisible();
@@ -778,12 +696,9 @@ namespace TX.Framework.WindowUI.Controls
                     }
                 }
                 // Search in the previous items
-                if (!founded)
-                {
-                    for (int i = 0; i < collection.GetIndexOf(item); i++)
-                    {
-                        if (collection[i].Text.ToUpper().StartsWith(begin))
-                        {
+                if (!founded) {
+                    for (int i = 0; i < collection.GetIndexOf(item); i++) {
+                        if (collection[i].Text.ToUpper().StartsWith(begin)) {
                             collection[i].Selected = true;
                             collection[i].Focused = true;
                             collection[i].EnsureVisible();
@@ -805,55 +720,47 @@ namespace TX.Framework.WindowUI.Controls
 
         #region CustomDraw
 
-        private void CustomDraw(ref Message m)
-        {
+        private void CustomDraw(ref Message m) {
             int row, column;
             bool selected;
-            unsafe
-            {
-                NMLVCUSTOMDRAW* nmlvcd = (NMLVCUSTOMDRAW*)m.LParam.ToPointer();
-                switch ((CustomDrawDrawStateFlags)nmlvcd->nmcd.dwDrawStage)
-                {
+            unsafe {
+                NMLVCUSTOMDRAW * nmlvcd = (NMLVCUSTOMDRAW *) m.LParam.ToPointer();
+                switch ((CustomDrawDrawStateFlags) nmlvcd -> nmcd.dwDrawStage) {
                     //PrePaint
                     case CustomDrawDrawStateFlags.PREPAINT:
-                        m.Result = (IntPtr)CustomDrawReturnFlags.NOTIFYITEMDRAW;
+                        m.Result = (IntPtr) CustomDrawReturnFlags.NOTIFYITEMDRAW;
                         break;
 
                     //ItemPrePaint
                     case CustomDrawDrawStateFlags.ITEMPREPAINT:
-                        m.Result = (IntPtr)CustomDrawReturnFlags.NOTIFYSUBITEMDRAW;
+                        m.Result = (IntPtr) CustomDrawReturnFlags.NOTIFYSUBITEMDRAW;
                         break;
 
                     //ItemPrePaint, SubItem
                     case CustomDrawDrawStateFlags.ITEMPREPAINT | CustomDrawDrawStateFlags.SUBITEM:
-                        row = (int)nmlvcd->nmcd.dwItemSpec;
-                        column = (int)nmlvcd->iSubItem;
-                        selected = base.Items[row].Selected;// && this.Focused;
+                        row = (int) nmlvcd -> nmcd.dwItemSpec;
+                        column = (int) nmlvcd -> iSubItem;
+                        selected = base.Items[row].Selected; // && this.Focused;
                         TreeListViewItem item = GetTreeListViewItemFromIndex(row);
-                        if (selected && _UseXPHighLightStyle)
-                        {
+                        if (selected && _UseXPHighLightStyle) {
                             Color color = Focused ? ColorUtil.VSNetSelectionColor : ColorUtil.VSNetSelectionUnfocusedColor;
-                            if (HideSelection && !Focused)
-                            {
+                            if (HideSelection && !Focused) {
                                 color = BackColor;
                             }
-                            if (FullRowSelect || column == 0)
-                            {
-                                nmlvcd->clrTextBk = (int)ColorUtil.RGB(color.R, color.G, color.B);
+                            if (FullRowSelect || column == 0) {
+                                nmlvcd -> clrTextBk = (int) ColorUtil.RGB(color.R, color.G, color.B);
                             }
-                            nmlvcd->nmcd.uItemState &= ~(uint)CustomDrawItemStateFlags.SELECTED;
-                            if (column == 0)
-                            {
+                            nmlvcd -> nmcd.uItemState &= ~(uint) CustomDrawItemStateFlags.SELECTED;
+                            if (column == 0) {
                                 item.DrawFocusCues();
                             }
                         }
-                        if (column == 0)
-                        {
+                        if (column == 0) {
                             item.DrawIntermediateState();
                             item.DrawPlusMinusLines();
                             item.DrawPlusMinus();
                         }
-                        m.Result = (IntPtr)CustomDrawReturnFlags.NEWFONT;
+                        m.Result = (IntPtr) CustomDrawReturnFlags.NEWFONT;
                         break;
                 }
             }
@@ -863,59 +770,47 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Draw Items Parts
 
-        internal void DrawIntermediateStateItems()
-        {
+        internal void DrawIntermediateStateItems() {
             if (CheckBoxes != CheckBoxesTypes.Recursive) return;
             if (_Updating) return;
             TreeListViewItemCollection items = GetVisibleItems();
-            using (Graphics g = Graphics.FromHwnd(Handle))
-            {
-                foreach (TreeListViewItem item in items)
-                {
+            using (Graphics g = Graphics.FromHwnd(Handle)) {
+                foreach (TreeListViewItem item in items) {
                     item.DrawIntermediateState(g);
                 }
             }
         }
 
-        internal void DrawSelectedItemsFocusCues()
-        {
+        internal void DrawSelectedItemsFocusCues() {
             if (_Updating) return;
             if ((HideSelection && !Focused) || !_UseXPHighLightStyle) return;
 
             SelectedTreeListViewItemCollection items = SelectedItems;
-            if (FocusedItem != null && Focused)
-            {
+            if (FocusedItem != null && Focused) {
                 FocusedItem.DrawFocusCues();
             }
-            foreach (TreeListViewItem temp in items)
-            {
+            foreach (TreeListViewItem temp in items) {
                 temp.DrawFocusCues();
             }
         }
 
-        internal void DrawPlusMinusItems()
-        {
+        internal void DrawPlusMinusItems() {
             if (_Updating) return;
 
-            using (Graphics g = Graphics.FromHwnd(Handle))
-            {
+            using (Graphics g = Graphics.FromHwnd(Handle)) {
                 TreeListViewItemCollection items = GetVisibleItems();
-                foreach (TreeListViewItem item in items)
-                {
+                foreach (TreeListViewItem item in items) {
                     item.DrawPlusMinus(g);
                 }
             }
         }
 
-        internal void DrawPlusMinusItemsLines()
-        {
+        internal void DrawPlusMinusItemsLines() {
             if (_Updating) return;
 
-            using (Graphics g = Graphics.FromHwnd(Handle))
-            {
+            using (Graphics g = Graphics.FromHwnd(Handle)) {
                 TreeListViewItemCollection items = GetVisibleItems();
-                foreach (TreeListViewItem item in items)
-                {
+                foreach (TreeListViewItem item in items) {
                     item.DrawPlusMinusLines(g);
                 }
             }
@@ -923,11 +818,9 @@ namespace TX.Framework.WindowUI.Controls
 
         #endregion
 
-        protected override void OnDrawFirstSubItem(DrawListViewSubItemEventArgs e, Graphics g)
-        {
+        protected override void OnDrawFirstSubItem(DrawListViewSubItemEventArgs e, Graphics g) {
             //base.OnDrawFirstSubItem(e, g);
-            if (e.ColumnIndex > 0)
-            {
+            if (e.ColumnIndex > 0) {
                 return;
             }
             GDIHelper.InitializeGraphics(g);
@@ -942,18 +835,16 @@ namespace TX.Framework.WindowUI.Controls
             flagRect = new Rectangle(new Point(offset * 2, rect.Top + (rect.Height - flagSize.Height) / 2), flagSize);
             flagRect.X += (item.Level) * margin;
             Rectangle imgRect = checkBoxRect;
-            Rectangle textRect = rect; textRect.X = flagRect.Right;
-            if (item.Parent != null)
-            {
+            Rectangle textRect = rect;
+            textRect.X = flagRect.Right;
+            if (item.Parent != null) {
                 Point p1, p2, p3;
                 p1 = new Point(flagRect.X + flagSize.Width / 2 - margin, item.Parent.Bounds.Bottom - offset);
                 p2 = new Point(item.Items.Count <= 0 ? flagRect.X + flagSize.Width : flagRect.X - offset, rect.Top + rect.Height / 2);
                 p3 = new Point(p1.X, p2.Y);
                 Color c = Color.FromArgb(46, 117, 35);
-                using (Pen pen = new Pen(this._PlusMinusLineColor, 1))
-                {
-                    if (this._PlusMinusLinePattern > 0)
-                    {
+                using (Pen pen = new Pen(this._PlusMinusLineColor, 1)) {
+                    if (this._PlusMinusLinePattern > 0) {
                         pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
                         pen.DashPattern = new float[] { 3f, this._PlusMinusLinePattern };
                     }
@@ -964,16 +855,14 @@ namespace TX.Framework.WindowUI.Controls
                 textRect.X += margin + offset;
                 textRect.Width -= offset + offset * 2;
             }
-            if (item.Items.Count > 0)
-            {
+            if (item.Items.Count > 0) {
                 GDIHelper.DrawImage(g, flagRect, item.IsExpanded ? Properties.Resources.Collapse1 : Properties.Resources.Expand1, flagSize);
                 imgRect.X += flagRect.Width + offset;
                 textRect.X += flagRect.Width + offset;
                 textRect.Width -= flagRect.Width + offset;
             }
 
-            if (e.Item.ListView.CheckBoxes)
-            {
+            if (e.Item.ListView.CheckBoxes) {
                 checkBoxRect.X += offset * 2 + flagRect.Right;
                 checkBoxRect.Y = rect.Top + (rect.Height - this.CheckBoxSize.Height) / 2;
                 checkBoxRect.Width = this.CheckBoxSize.Width;
@@ -982,8 +871,7 @@ namespace TX.Framework.WindowUI.Controls
                 textRect.X = checkBoxRect.Right;
                 textRect.Width -= this.CheckBoxSize.Width - offset * 2;
                 GDIHelper.DrawCheckBox(g, new RoundRectangle(checkBoxRect, 1));
-                switch (item.CheckStatus)
-                {
+                switch (item.CheckStatus) {
                     case System.Windows.Forms.CheckState.Checked:
                         GDIHelper.DrawCheckedStateByImage(g, checkBoxRect);
                         break;
@@ -995,8 +883,7 @@ namespace TX.Framework.WindowUI.Controls
                         break;
                 }
             }
-            if (e.Item.ImageList != null && e.Item.ImageIndex >= 0)
-            {
+            if (e.Item.ImageList != null && e.Item.ImageIndex >= 0) {
                 img = e.Item.ImageList.Images[e.Item.ImageIndex];
                 imgSize = e.Item.ImageList.ImageSize;
                 imgRect.X += offset * 3;
@@ -1023,10 +910,8 @@ namespace TX.Framework.WindowUI.Controls
 
         #region SetSelectedItemsRange
 
-        private void SetSelectedItemsRange(TreeListViewItem item1, TreeListViewItem item2)
-        {
-            if (InvokeRequired)
-            {
+        private void SetSelectedItemsRange(TreeListViewItem item1, TreeListViewItem item2) {
+            if (InvokeRequired) {
                 throw (new Exception("Invoke required"));
             }
             if (item1 == null || item2 == null) return;
@@ -1037,18 +922,14 @@ namespace TX.Framework.WindowUI.Controls
             int index2 = items.GetIndexOf(item2);
             ListViewItem[] selItems = new ListViewItem[base.SelectedItems.Count];
             base.SelectedItems.CopyTo(selItems, 0);
-            foreach (ListViewItem selItem in selItems)
-            {
-                int selItemIndex = items.GetIndexOf((TreeListViewItem)selItem);
-                if (selItemIndex < Math.Min(index1, index2) || selItemIndex > Math.Max(index1, index2))
-                {
+            foreach (ListViewItem selItem in selItems) {
+                int selItemIndex = items.GetIndexOf((TreeListViewItem) selItem);
+                if (selItemIndex < Math.Min(index1, index2) || selItemIndex > Math.Max(index1, index2)) {
                     selItem.Selected = false;
                 }
             }
-            for (int i = Math.Min(index1, index2); i <= Math.Max(index1, index2); i++)
-            {
-                if (!items[i].Selected)
-                {
+            for (int i = Math.Min(index1, index2); i <= Math.Max(index1, index2); i++) {
+                if (!items[i].Selected) {
                     items[i].Selected = true;
                 }
             }
@@ -1058,29 +939,23 @@ namespace TX.Framework.WindowUI.Controls
 
         #region ExpandAll / CollapseAll
 
-        public void ExpandAll()
-        {
-            if (InvokeRequired)
-            {
+        public void ExpandAll() {
+            if (InvokeRequired) {
                 throw (new Exception("Invoke required"));
             }
             BeginUpdate();
-            foreach (TreeListViewItem item in Items)
-            {
+            foreach (TreeListViewItem item in Items) {
                 item.ExpandAllInternal();
             }
             EndUpdate();
         }
 
-        public void CollapseAll()
-        {
-            if (InvokeRequired)
-            {
+        public void CollapseAll() {
+            if (InvokeRequired) {
                 throw (new Exception("Invoke required"));
             }
             BeginUpdate();
-            foreach (TreeListViewItem item in Items)
-            {
+            foreach (TreeListViewItem item in Items) {
                 item.CollapseAllInternal();
             }
             EndUpdate();
@@ -1090,24 +965,21 @@ namespace TX.Framework.WindowUI.Controls
 
         #region ExitEdit
 
-        internal void ExitEdit(bool cancel, string text)
-        {
+        internal void ExitEdit(bool cancel, string text) {
             if (!InEdit || EditedItem.Item == null) return;
             // Mouse position
             Point point = EditedItem.Item != null ? EditedItem.Item.GetBounds(TreeListViewItemBoundsPortion.Icon).Location : new Point(0, 0);
             point.Offset(1, 1);
             EditItemInformations editedItem = EditedItem;
 
-            Message m = Message.Create(Handle, (int)WindowMessages.LBUTTONDOWN, (IntPtr)1, (IntPtr)((point.Y << 16) + point.X));
+            Message m = Message.Create(Handle, (int) WindowMessages.LBUTTONDOWN, (IntPtr) 1, (IntPtr)((point.Y << 16) + point.X));
             _SkipMouseDownEvent = true;
             base.WndProc(ref m);
             _SkipMouseDownEvent = false;
-            if (!cancel)
-            {
+            if (!cancel) {
                 TreeListViewLabelEditEventArgs e = new TreeListViewLabelEditEventArgs(EditedItem.Item, EditedItem.ColumnIndex, text);
                 OnAfterLabelEdit(e);
-                if (!e.Cancel)
-                {
+                if (!e.Cancel) {
                     editedItem.Item.SubItems[editedItem.ColumnIndex].Text = text;
                 }
             }
@@ -1125,13 +997,11 @@ namespace TX.Framework.WindowUI.Controls
         /// <param name="index">The zero-based index of the item within the ListView.ListViewItemCollection whose bounding rectangle you want to return</param>
         /// <param name="portion">One of the TreeListViewItemBoundsPortion values that represents a portion of the TreeListViewItem for which to retrieve the bounding rectangle</param>
         /// <returns>A Rectangle that represents the bounding rectangle for the specified portion of the specified TreeListViewItem</returns>
-        public Rectangle GetItemRect(int index, TreeListViewItemBoundsPortion portion)
-        {
-            if (index >= base.Items.Count || index < 0)
-            {
+        public Rectangle GetItemRect(int index, TreeListViewItemBoundsPortion portion) {
+            if (index >= base.Items.Count || index < 0) {
                 throw new Exception("Out of range exception");
             }
-            TreeListViewItem item = (TreeListViewItem)base.Items[index];
+            TreeListViewItem item = (TreeListViewItem) base.Items[index];
             return item.GetBounds(portion);
         }
 
@@ -1142,9 +1012,8 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Kill the focus of the control
         /// </summary>
-        public void KillFocus()
-        {
-            NativeMethods.SendMessage(Handle, (int)WindowMessages.KILLFOCUS, IntPtr.Zero, IntPtr.Zero);
+        public void KillFocus() {
+            NativeMethods.SendMessage(Handle, (int) WindowMessages.KILLFOCUS, IntPtr.Zero, IntPtr.Zero);
         }
 
         #endregion
@@ -1155,38 +1024,30 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the ItemCheck event
         /// </summary>
         /// <param name="e">An ItemCheckEventArgs that contains the event data</param>
-        protected override void OnItemCheck(ItemCheckEventArgs e)
-        {
+        protected override void OnItemCheck(ItemCheckEventArgs e) {
             base.OnItemCheck(e);
             ListView.ListViewItemCollection baseItems = base.Items;
             if (e.Index >= base.Items.Count || e.Index < 0)
                 return;
-            TreeListViewItem item = (TreeListViewItem)base.Items[e.Index];
+            TreeListViewItem item = (TreeListViewItem) base.Items[e.Index];
             if (item == null) return;
             if (this.CheckDirection == CheckDirection.None) return;
             CheckDirection oldDirection = CheckDirection;
 
             TreeListViewItem parentItem = item.Parent;
-            if (parentItem != null && (oldDirection & CheckDirection.Upwards) == CheckDirection.Upwards)
-            {
+            if (parentItem != null && (oldDirection & CheckDirection.Upwards) == CheckDirection.Upwards) {
                 CheckDirection = CheckDirection.Upwards;
-                while (parentItem != null)
-                {
-                    if (e.NewValue == CheckState.Checked)
-                    {
-                        if (!parentItem.Checked)
-                        {
+                while (parentItem != null) {
+                    if (e.NewValue == CheckState.Checked) {
+                        if (!parentItem.Checked) {
                             parentItem.Checked = true;
                             break;
                         }
-                        else
-                        {
+                        else {
                             bool allChecked = true;
-                            foreach (TreeListViewItem childItem in parentItem.Items)
-                            {
+                            foreach (TreeListViewItem childItem in parentItem.Items) {
                                 if (childItem == item) continue;
-                                if (!childItem.Checked)
-                                {
+                                if (!childItem.Checked) {
                                     allChecked = false;
                                     break;
                                 }
@@ -1194,20 +1055,16 @@ namespace TX.Framework.WindowUI.Controls
                             if (allChecked) parentItem.Redraw();
                         }
                     }
-                    else
-                    {
+                    else {
                         bool allUnChecked = true;
-                        foreach (TreeListViewItem childItem in parentItem.Items)
-                        {
+                        foreach (TreeListViewItem childItem in parentItem.Items) {
                             if (childItem == item) continue;
-                            if (childItem.Checked)
-                            {
+                            if (childItem.Checked) {
                                 allUnChecked = false;
                                 break;
                             }
                         }
-                        if (allUnChecked && parentItem.Checked)
-                        {
+                        if (allUnChecked && parentItem.Checked) {
                             parentItem.Checked = false;
                             break;
                         }
@@ -1216,8 +1073,7 @@ namespace TX.Framework.WindowUI.Controls
                 }
             }
 
-            if ((oldDirection & CheckDirection.Downwards) == CheckDirection.Downwards)
-            {
+            if ((oldDirection & CheckDirection.Downwards) == CheckDirection.Downwards) {
                 CheckDirection = CheckDirection.Downwards;
                 foreach (TreeListViewItem childItem in item.Items)
                     childItem.Checked = e.NewValue == CheckState.Checked;
@@ -1232,8 +1088,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Raises the ColumnClick event
         /// </summary>
         /// <param name="e">A ColumnClickEventArgs that contains the event data</param>
-        protected override void OnColumnClick(System.Windows.Forms.ColumnClickEventArgs e)
-        {
+        protected override void OnColumnClick(System.Windows.Forms.ColumnClickEventArgs e) {
             base.OnColumnClick(e);
             Cursor = Cursors.WaitCursor;
             ListViewItem[] selItems = new ListViewItem[base.SelectedItems.Count];
@@ -1246,12 +1101,10 @@ namespace TX.Framework.WindowUI.Controls
             BeginUpdate();
             if (Comparer.Column == e.Column)
                 Sorting = (Sorting == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending);
-            else
-            {
+            else {
                 Comparer.Column = e.Column;
                 Items.SortOrderRecursivelyWithoutSort = SortOrder.Ascending;
-                try { Items.Sort(true); }
-                catch { }
+                try { Items.Sort(true); } catch { }
             }
 
             if (FocusedItem != null) FocusedItem.EnsureVisible();
@@ -1264,11 +1117,9 @@ namespace TX.Framework.WindowUI.Controls
             this.Invalidate(new Rectangle(Point.Empty, new Size(this.Width, 20)), true);
         }
 
-        protected override void OnDrawColumnHeader(DrawListViewColumnHeaderEventArgs e)
-        {
+        protected override void OnDrawColumnHeader(DrawListViewColumnHeaderEventArgs e) {
             base.OnDrawColumnHeader(e);
-            if (Comparer.Column == e.ColumnIndex)
-            {
+            if (Comparer.Column == e.ColumnIndex) {
                 Rectangle rect = e.Bounds;
                 int offset = 3;
                 Size arrowSize = new System.Drawing.Size(8, 6);
@@ -1278,8 +1129,7 @@ namespace TX.Framework.WindowUI.Controls
                 Graphics g = e.Graphics;
                 GDIHelper.InitializeGraphics(g);
                 Color c = Color.FromArgb(46, 117, 35);
-                switch (this.Sorting)
-                {
+                switch (this.Sorting) {
                     case SortOrder.Ascending:
                         GDIHelper.DrawArrow(g, ArrowDirection.Up, sortRect, arrowSize, 1.5f, c);
                         break;
@@ -1296,20 +1146,16 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Raises the VisibleChanged event
         /// </summary>
-        /// <param name="e"></param>
-        protected override void OnVisibleChanged(EventArgs e)
-        {
+        protected override void OnVisibleChanged(EventArgs e) {
             base.OnVisibleChanged(e);
             if (base.SmallImageList != _SmallImagList)
                 base.SmallImageList = _SmallImagList;
             VisChanged();
         }
-        internal void VisChanged()
-        {
+        internal void VisChanged() {
             if (!Visible) return;
             BeginUpdate();
-            try
-            {
+            try {
                 foreach (TreeListViewItem item in this.Items)
                     item.RefreshIndentation(true);
             }
@@ -1325,9 +1171,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets an item at the specified coordinates
         /// </summary>
         /// <param name="p">Mouse position</param>
-        /// <returns></returns>
-        public TreeListViewItem GetItemAt(Point p)
-        {
+        public TreeListViewItem GetItemAt(Point p) {
             return GetItemAt(p.X, p.Y);
         }
 
@@ -1335,18 +1179,13 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets an item at the specified coordinates (fullrow)
         /// </summary>
         /// <param name="p">Mouse position</param>
-        /// <returns></returns>
-        public TreeListViewItem GetItemAtFullRow(Point p)
-        {
-            if (FullRowSelect)
-            {
+        public TreeListViewItem GetItemAtFullRow(Point p) {
+            if (FullRowSelect) {
                 return GetItemAt(p);
             }
             TreeListViewItemCollection items = GetVisibleItems();
-            foreach (TreeListViewItem item in items)
-            {
-                if (item.GetBounds(TreeListViewItemBoundsPortion.Entire).Contains(p))
-                {
+            foreach (TreeListViewItem item in items) {
+                if (item.GetBounds(TreeListViewItemBoundsPortion.Entire).Contains(p)) {
                     return item;
                 }
             }
@@ -1356,12 +1195,8 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets an item at the specified coordinates.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public new TreeListViewItem GetItemAt(int x, int y)
-        {
-            return (TreeListViewItem)base.GetItemAt(x, y);
+        public new TreeListViewItem GetItemAt(int x, int y) {
+            return (TreeListViewItem) base.GetItemAt(x, y);
         }
 
         #endregion
@@ -1372,14 +1207,11 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the TreeListViewItem from the ListView index of the item
         /// </summary>
         /// <param name="index">Index of the Item</param>
-        /// <returns></returns>
-        public TreeListViewItem GetTreeListViewItemFromIndex(int index)
-        {
-            if (base.Items.Count < index + 1)
-            {
+        public TreeListViewItem GetTreeListViewItemFromIndex(int index) {
+            if (base.Items.Count < index + 1) {
                 return null;
             }
-            return (TreeListViewItem)base.Items[index];
+            return (TreeListViewItem) base.Items[index];
         }
 
         #endregion
@@ -1389,10 +1221,8 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Not supported (use items.Sort)
         /// </summary>
-        public new void Sort()
-        {
-            if (InvokeRequired)
-            {
+        public new void Sort() {
+            if (InvokeRequired) {
                 throw new Exception("Invoke required");
             }
             Items.Sort(true);
@@ -1402,12 +1232,9 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Dispose
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (components != null)
-                {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
+                if (components != null) {
                     components.Dispose();
                 }
             }
@@ -1421,8 +1248,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Prevents the control from drawing until the EndUpdate method is called
         /// </summary>
-        public new void BeginUpdate()
-        {
+        public new void BeginUpdate() {
             _Updating = true;
             base.BeginUpdate();
         }
@@ -1430,8 +1256,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Resumes drawing of the list view control after drawing is suspended by the BeginUpdate method
         /// </summary>
-        public new void EndUpdate()
-        {
+        public new void EndUpdate() {
             _Updating = false;
             base.EndUpdate();
         }
@@ -1445,53 +1270,40 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Get the index of the specified column from its physical position
         /// </summary>
-        /// <param name="columnorder"></param>
-        /// <returns></returns>
-        public int GetColumnIndex(int columnOrder)
-        {
+        public int GetColumnIndex(int columnOrder) {
             if (columnOrder < 0 || columnOrder > Columns.Count - 1) return (-1);
-            return NativeMethods.SendMessage(Handle, (int)HeaderControlMessages.ORDERTOINDEX, columnOrder, 0);
+            return NativeMethods.SendMessage(Handle, (int) HeaderControlMessages.ORDERTOINDEX, columnOrder, 0);
         }
 
         /// <summary>
         /// Gets the order of a specified column
         /// </summary>
-        /// <param name="columnindex"></param>
-        /// <returns></returns>
-        public int GetColumnOrder(int columnIndex)
-        {
-            if (this.Columns.Count == 0)
-            {
+        public int GetColumnOrder(int columnIndex) {
+            if (this.Columns.Count == 0) {
                 return -1;
             }
-            if (columnIndex < 0 || columnIndex > this.Columns.Count - 1)
-            {
+            if (columnIndex < 0 || columnIndex > this.Columns.Count - 1) {
                 return -1;
             }
             IntPtr[] colorderarray = new IntPtr[this.Columns.Count];
-            SendMessage(this.Handle, (int)ListViewMessages.GETCOLUMNORDERARRAY, (IntPtr)this.Columns.Count, ref colorderarray[0]);
-            return (int)colorderarray[columnIndex];
+            SendMessage(this.Handle, (int) ListViewMessages.GETCOLUMNORDERARRAY, (IntPtr) this.Columns.Count, ref colorderarray[0]);
+            return (int) colorderarray[columnIndex];
         }
 
         /// <summary>
         /// Gets the columns order
         /// </summary>
         /// <returns>Example {3,1,4,2}</returns>
-        public int[] GetColumnsOrder()
-        {
+        public int[] GetColumnsOrder() {
             if (this.Columns.Count == 0) return new int[] { };
             IntPtr[] columnOrderArray = new IntPtr[this.Columns.Count];
-            try
-            {
-                SendMessage(this.Handle, (int)ListViewMessages.GETCOLUMNORDERARRAY, (IntPtr)this.Columns.Count, ref columnOrderArray[0]);
+            try {
+                SendMessage(this.Handle, (int) ListViewMessages.GETCOLUMNORDERARRAY, (IntPtr) this.Columns.Count, ref columnOrderArray[0]);
             }
-            catch
-            {
-            }
+            catch { }
             int[] columnOrderArrayInt = new int[this.Columns.Count];
-            for (int i = 0; i < this.Columns.Count; i++)
-            {
-                columnOrderArrayInt[i] = (int)columnOrderArray[i];
+            for (int i = 0; i < this.Columns.Count; i++) {
+                columnOrderArrayInt[i] = (int) columnOrderArray[i];
             }
             return columnOrderArrayInt;
         }
@@ -1499,38 +1311,29 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Indicates the column order (for example : {0,1,3,2})
         /// </summary>
-        /// <param name="colorderarray"></param>
-        public void SetColumnsOrder(int[] columnOrderArray)
-        {
-            if (this.Columns.Count == 0)
-            {
+        public void SetColumnsOrder(int[] columnOrderArray) {
+            if (this.Columns.Count == 0) {
                 return;
             }
-            if (columnOrderArray.Length != this.Columns.Count)
-            {
+            if (columnOrderArray.Length != this.Columns.Count) {
                 return;
             }
-            if (columnOrderArray[0] != 0)
-            {
+            if (columnOrderArray[0] != 0) {
                 return;
             }
             IntPtr[] columnOrderArrayIntptr = new IntPtr[this.Columns.Count];
-            for (int i = 0; i < this.Columns.Count; i++)
-            {
-                columnOrderArrayIntptr[i] = (IntPtr)columnOrderArray[i];
+            for (int i = 0; i < this.Columns.Count; i++) {
+                columnOrderArrayIntptr[i] = (IntPtr) columnOrderArray[i];
             }
-            try
-            {
-                SendMessage(this.Handle, (int)ListViewMessages.SETCOLUMNORDERARRAY, (IntPtr)this.Columns.Count, ref columnOrderArrayIntptr[0]);
+            try {
+                SendMessage(this.Handle, (int) ListViewMessages.SETCOLUMNORDERARRAY, (IntPtr) this.Columns.Count, ref columnOrderArrayIntptr[0]);
             }
             catch { }
             Refresh();
         }
 
-        private void InnerScroll()
-        {
-            while (MouseButtons == MouseButtons.Middle)
-            {
+        private void InnerScroll() {
+            while (MouseButtons == MouseButtons.Middle) {
                 int dx = MousePosition.Y - _MouseScrollPosition.Y;
                 int dy = MousePosition.Y - _MouseScrollPosition.Y;
                 Scroll(dx, dy);
@@ -1542,23 +1345,17 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Scrolls the control
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void Scroll(int x, int y)
-        {
-            NativeMethods.SendMessage(Handle, (int)ListViewMessages.SCROLL, x, y);
+        public void Scroll(int x, int y) {
+            NativeMethods.SendMessage(Handle, (int) ListViewMessages.SCROLL, x, y);
         }
 
         /// <summary>
         /// Indicates the column order (for example : "3142")
         /// </summary>
-        /// <param name="colorder"></param>
-        public void SetColumnsOrder(string columnsOrder)
-        {
+        public void SetColumnsOrder(string columnsOrder) {
             if (columnsOrder == null) return;
             int[] columnsOrderArray = new int[columnsOrder.Length];
-            for (int i = 0; i < columnsOrder.Length; i++)
-            {
+            for (int i = 0; i < columnsOrder.Length; i++) {
                 columnsOrderArray[i] = int.Parse(new String(columnsOrder[i], 1));
             }
             SetColumnsOrder(columnsOrderArray);
@@ -1572,21 +1369,18 @@ namespace TX.Framework.WindowUI.Controls
         /// Gets the items that are visible in the TreeListView
         /// </summary>
         /// <returns>A collection of items</returns>
-        public TreeListViewItemCollection GetVisibleItems()
-        {
+        public TreeListViewItemCollection GetVisibleItems() {
             TreeListViewItemCollection visibleItems = new TreeListViewItemCollection();
-            if (base.Items.Count == 0)
-            {
+            if (base.Items.Count == 0) {
                 return visibleItems;
             }
 
             int firstItemIndex = TopItem.Index;
-            int itemsPerPageCount = NativeMethods.SendMessage(Handle, (int)ListViewMessages.GETITEMCOUNT, IntPtr.Zero, IntPtr.Zero);
+            int itemsPerPageCount = NativeMethods.SendMessage(Handle, (int) ListViewMessages.GETITEMCOUNT, IntPtr.Zero, IntPtr.Zero);
             int lastVisibleItemIndex = firstItemIndex + itemsPerPageCount > base.Items.Count ?
                 base.Items.Count : firstItemIndex + itemsPerPageCount;
-            for (int i = firstItemIndex; i < lastVisibleItemIndex; i++)
-            {
-                visibleItems.Add((TreeListViewItem)base.Items[i]);
+            for (int i = firstItemIndex; i < lastVisibleItemIndex; i++) {
+                visibleItems.Add((TreeListViewItem) base.Items[i]);
             }
             return visibleItems;
         }
@@ -1596,58 +1390,45 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="p">Point in client coordinates</param>
         /// <returns>The nul zero based index of the column (-1 if failed)</returns>
-        public int GetColumnAt(Point p)
-        {
+        public int GetColumnAt(Point p) {
             LVHITTESTINFO hittest = new LVHITTESTINFO();
             hittest.pt = new POINTAPI(PointToClient(MousePosition));
-            SendMessage(Handle, (Int32)ListViewMessages.SUBITEMHITTEST, 0, ref hittest);
+            SendMessage(Handle, (Int32) ListViewMessages.SUBITEMHITTEST, 0, ref hittest);
             return hittest.iSubItem;
         }
 
         /// <summary>
         /// Get SubItem rectangle
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="column"></param>
-        /// <returns></returns>
-        public Rectangle GetSubItemRect(TreeListViewItem item, int column)
-        {
-            ListViewItem lvitem = (ListViewItem)item;
+        public Rectangle GetSubItemRect(TreeListViewItem item, int column) {
+            ListViewItem lvitem = (ListViewItem) item;
             return GetSubItemRect(lvitem.Index, column);
         }
 
         /// <summary>
         /// Get SubItem rectangle
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <returns></returns>
-        public Rectangle GetSubItemRect(int row, int col)
-        {
+        public Rectangle GetSubItemRect(int row, int col) {
             RECT rc = new RECT();
             rc.top = col;
-            rc.left = (int)ListViewSubItemPortion.BOUNDS;
-            SendMessage(Handle, (int)ListViewMessages.GETSUBITEMRECT, row, ref rc);
-            if (col == 0)
-            {
+            rc.left = (int) ListViewSubItemPortion.BOUNDS;
+            SendMessage(Handle, (int) ListViewMessages.GETSUBITEMRECT, row, ref rc);
+            if (col == 0) {
                 // The LVM_GETSUBITEMRECT message does not give us the rectangle for the first subitem
                 // since it is not considered a subitem
                 // obtain the rectangle for the header control and calculate from there
                 Rectangle headerRect = GetHeaderItemRect(col);
-                return new Rectangle((int)rc.left, (int)rc.top, (int)headerRect.Width, (int)(rc.bottom - rc.top));
+                return new Rectangle((int) rc.left, (int) rc.top, (int) headerRect.Width, (int)(rc.bottom - rc.top));
             }
-            return new Rectangle((int)rc.left, (int)rc.top, (int)(rc.right - rc.left), (int)(rc.bottom - rc.top));
+            return new Rectangle((int) rc.left, (int) rc.top, (int)(rc.right - rc.left), (int)(rc.bottom - rc.top));
         }
 
         /// <summary>
         /// Get HeaderItem text
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public string GetHeaderItemText(int index)
-        {
+        public string GetHeaderItemText(int index) {
             HDITEM hdi = new HDITEM();
-            hdi.mask = (int)HeaderItemFlags.TEXT;
+            hdi.mask = (int) HeaderItemFlags.TEXT;
             hdi.cchTextMax = 255;
             hdi.pszText = Marshal.AllocHGlobal(255);
             SendMessage(Handle, HeaderControlMessages.GETITEMW, index, ref hdi);
@@ -1656,35 +1437,28 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Get HeaderItem rect
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        protected Rectangle GetHeaderItemRect(int index)
-        {
+        protected Rectangle GetHeaderItemRect(int index) {
             RECT rc = new RECT();
             IntPtr header = NativeMethods.GetDlgItem(Handle, 0);
-            SendMessage(header, (int)HeaderControlMessages.GETITEMRECT, index, ref rc);
-            return new Rectangle((int)rc.left, (int)rc.top, (int)(rc.right - rc.left), (int)(rc.bottom - rc.top));
+            SendMessage(header, (int) HeaderControlMessages.GETITEMRECT, index, ref rc);
+            return new Rectangle((int) rc.left, (int) rc.top, (int)(rc.right - rc.left), (int)(rc.bottom - rc.top));
         }
         /// <summary>
         /// Get row rect
         /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        public Rectangle GetRowRect(int row)
-        {
+        public Rectangle GetRowRect(int row) {
             RECT rc = new RECT();
             rc.top = 0;
-            rc.left = (int)ListViewSubItemPortion.BOUNDS;
-            SendMessage(Handle, (int)ListViewMessages.GETSUBITEMRECT, row, ref rc);
-            return new Rectangle((int)rc.left, (int)rc.top, (int)(rc.right - rc.left), (int)(rc.bottom - rc.top));
+            rc.left = (int) ListViewSubItemPortion.BOUNDS;
+            SendMessage(Handle, (int) ListViewMessages.GETSUBITEMRECT, row, ref rc);
+            return new Rectangle((int) rc.left, (int) rc.top, (int)(rc.right - rc.left), (int)(rc.bottom - rc.top));
         }
 
         #endregion
 
         #region Component Designer generated code
 
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TreeListView));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -1714,14 +1488,11 @@ namespace TX.Framework.WindowUI.Controls
 
         #endregion
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue(true),
-        Browsable(true),
-        Description("Gets or sets a value indicating whether a scroll bar is added to the control when there is not enough room to display all items")
-        ]
-        public new bool Scrollable
-        {
+        [Browsable(true),
+         DefaultValue(true),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Gets or sets a value indicating whether a scroll bar is added to the control when there is not enough room to display all items")]
+        public new bool Scrollable {
             get { return _Scrollable; }
             set { _Scrollable = value; }
         }
@@ -1729,98 +1500,76 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets or sets a value indicating whether a check box appears next to each item in the control
         /// </summary>
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue(typeof(CheckBoxesTypes), "None"),
-        Browsable(true),
-        Description("Gets or sets a value indicating whether a check box appears next to each item in the control")
-        ]
-        public new CheckBoxesTypes CheckBoxes
-        {
+        [Browsable(true),
+         DefaultValue(typeof(CheckBoxesTypes), "None"),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Gets or sets a value indicating whether a check box appears next to each item in the control")]
+        public new CheckBoxesTypes CheckBoxes {
             get { return _CheckBoxes; }
-            set
-            {
+            set {
                 if (_CheckBoxes == value) return;
                 _CheckBoxes = value;
                 CheckDirection = value == CheckBoxesTypes.Recursive ? CheckDirection.All : CheckDirection.None;
                 base.CheckBoxes = value == CheckBoxesTypes.None ? false : true;
-                if (Created)
-                {
+                if (Created) {
                     Invalidate();
                 }
             }
         }
 
-        [
-        Browsable(true),
-        Description("Gets or sets a value indicating whether clicking an item selects all its subitems"),
-        DefaultValue(true)
-        ]
-        public new bool FullRowSelect
-        {
+        [Browsable(true),
+         DefaultValue(true),
+         Description("Gets or sets a value indicating whether clicking an item selects all its subitems")]
+        public new bool FullRowSelect {
             get { return base.FullRowSelect; }
             set { base.FullRowSelect = value; }
         }
 
         [Browsable(false)]
-        public new ImageList StateImageList
-        {
+        public new ImageList StateImageList {
             get { return base.StateImageList; }
             set { base.StateImageList = value; }
         }
 
         [Browsable(false)]
-        public new ImageList LargeImageList
-        {
+        public new ImageList LargeImageList {
             get { return base.LargeImageList; }
             set { base.LargeImageList = value; }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue(null),
-        Browsable(true),
-        Description("Gets or sets the ImageList to use when displaying items as small icons in the control")
-        ]
-        public new ImageList SmallImageList
-        {
+        [Browsable(true),
+         DefaultValue(null),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Gets or sets the ImageList to use when displaying items as small icons in the control")]
+        public new ImageList SmallImageList {
             get { return _SmallImagList; }
             set { _SmallImagList = value; }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        Browsable(true),
-        Description("Get or Set the sort order"),
-        DefaultValue(typeof(SortOrder), "Ascending")
-        ]
-        public new SortOrder Sorting
-        {
+        [Browsable(true),
+         DefaultValue(typeof(SortOrder), "Ascending"),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Get or Set the sort order")]  
+        public new SortOrder Sorting {
             get { return _Sorting; }
-            set
-            {
+            set {
                 if (_Sorting == value) return;
                 _Sorting = value;
                 Items.SortOrderRecursively = value;
             }
         }
 
-        [
-        Browsable(true),
-        DefaultValue(typeof(TreeListViewExpandMethod), "EntireItemDbleClick"),
-        Description("Get or Set the expand method")]
-        public TreeListViewExpandMethod ExpandMethod
-        {
+        [Browsable(true),
+         DefaultValue(typeof(TreeListViewExpandMethod), "EntireItemDbleClick"),
+         Description("Get or Set the expand method")]
+        public TreeListViewExpandMethod ExpandMethod {
             get { return _ExpandMethod; }
             set { _ExpandMethod = value; }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        Browsable(false)
-        ]
-        public new View View
-        {
+        [Browsable(false),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new View View {
             get { return base.View; }
             set { base.View = View.Details; }
         }
@@ -1832,66 +1581,54 @@ namespace TX.Framework.WindowUI.Controls
         //        Editor(typeof(TreeListViewItemsEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [Browsable(false)]
         [Description("Items of the TreeListView")]
-        public new TreeListViewItemCollection Items
-        {
+        public new TreeListViewItemCollection Items {
             get { return _Items; }
         }
 
         [Browsable(false)]
-        public new SelectedTreeListViewItemCollection SelectedItems
-        {
+        public new SelectedTreeListViewItemCollection SelectedItems {
             get { return new SelectedTreeListViewItemCollection(this); }
         }
 
         [Browsable(false)]
-        public new TreeListViewItem[] CheckedItems
-        {
-            get { return (TreeListViewItem[])Invoke(new ItemArrayHandler(GetCheckedItems)); }
+        public new TreeListViewItem[] CheckedItems {
+            get { return (TreeListViewItem[]) Invoke(new ItemArrayHandler(GetCheckedItems)); }
         }
 
-        private TreeListViewItem[] GetCheckedItems()
-        {
-            if (InvokeRequired)
-            {
+        private TreeListViewItem[] GetCheckedItems() {
+            if (InvokeRequired) {
                 throw new Exception("Invoke required");
             }
             TreeListViewItemCollection items = new TreeListViewItemCollection();
-            foreach (TreeListViewItem item in Items)
-            {
+            foreach (TreeListViewItem item in Items) {
                 item.GetCheckedItems(ref items);
             }
             return (items.ToArray());
         }
 
         [Browsable(false)]
-        public new TreeListViewItem FocusedItem
-        {
-            get { return (TreeListViewItem)base.FocusedItem; }
+        public new TreeListViewItem FocusedItem {
+            get { return (TreeListViewItem) base.FocusedItem; }
         }
 
         [Browsable(false)]
-        public bool HasMarquee
-        {
+        public bool HasMarquee {
             get { return _HasMarquee; }
         }
 
         [Browsable(false)]
-        public EditItemInformations EditedItem
-        {
+        public EditItemInformations EditedItem {
             get { return _EditedItem; }
         }
 
         [Browsable(false)]
-        public bool InEdit
-        {
+        public bool InEdit {
             get { return _InEdit; }
         }
 
         [Browsable(false)]
-        public int ItemsCount
-        {
-            get
-            {
+        public int ItemsCount {
+            get {
                 TreeListViewItem[] items = _Items.ToArray();
                 int count = items.Length;
                 foreach (TreeListViewItem item in items) count += item.ChildrenCount;
@@ -1900,91 +1637,69 @@ namespace TX.Framework.WindowUI.Controls
         }
 
         [Browsable(false)]
-        public ITreeListViewItemComparer Comparer
-        {
+        public ITreeListViewItemComparer Comparer {
             get { return (Items.Comparer); }
             set { Items.Comparer = value; }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue(true),
-        Browsable(true),
-        Description("Gets or sets a value indicating whether plus-sign (+) and minus-sign (-) buttons are displayed next to TreeListView that contain child TreeListViews")
-        ]
-        public bool ShowPlusMinus
-        {
+        [Browsable(true),
+         DefaultValue(true),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Gets or sets a value indicating whether plus-sign (+) and minus-sign (-) buttons are displayed next to TreeListView that contain child TreeListViews")]
+        public bool ShowPlusMinus {
             get { return _ShowPlusMinus; }
-            set
-            {
+            set {
                 if (_ShowPlusMinus == value) return;
                 _ShowPlusMinus = value;
                 if (Created) Invoke(new MethodInvoker(VisChanged));
             }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue(typeof(Color), "DarkGray"),
-        Browsable(true),
-        Description("Gets or Sets the color of the lines if ShowPlusMinus property is enabled")
-        ]
-        public Color PlusMinusLineColor
-        {
+        [Browsable(true),
+         DefaultValue(typeof(Color), "DarkGray"),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Gets or Sets the color of the lines if ShowPlusMinus property is enabled")]
+        public Color PlusMinusLineColor {
             get { return _PlusMinusLineColor; }
-            set
-            {
+            set {
                 _PlusMinusLineColor = value;
-                if (Created)
-                {
+                if (Created) {
                     Invalidate();
                 }
             }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue(0),
-        Browsable(true),
-        Description("获取或者自定义线的样式，为0表示视线，否则为虚线的空白间隔，以像素为单位")
-        ]
-        public int PlusMinusLinePattern
-        {
+        [Browsable(true),
+         DefaultValue(0),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("获取或者自定义线的样式，为0表示视线，否则为虚线的空白间隔，以像素为单位")]
+        public int PlusMinusLinePattern {
             get { return this._PlusMinusLinePattern; }
-            set
-            {
+            set {
                 this._PlusMinusLinePattern = value > 0 ? value : 0;
-                if (Created)
-                {
+                if (Created) {
                     this.Invalidate();
                 }
             }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue(true),
-        Browsable(true),
-        Description("Gets or Sets whether the control draw XP-Style highlight color")
-        ]
-        public bool UseXPHighlightStyle
-        {
+        [Browsable(true),
+         DefaultValue(true),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Gets or Sets whether the control draw XP-Style highlight color")]
+        public bool UseXPHighlightStyle {
             get { return _UseXPHighLightStyle; }
-            set
-            {
+            set {
                 _UseXPHighLightStyle = value;
                 if (Created) Invalidate();
             }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
-        DefaultValue("\\"),
-        Browsable(true),
-        Description("Gets or sets the delimiter string that the TreeListViewItem path uses")
-        ]
-        public string PathSeparator
-        {
+        [Browsable(true),
+         DefaultValue("\\"),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("Gets or sets the delimiter string that the TreeListViewItem path uses")]
+        public string PathSeparator {
             get { return _PathSeparator; }
             set { _PathSeparator = value; }
         }

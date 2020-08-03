@@ -1,20 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
+
 using TX.Framework.WindowUI.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
-    public partial class frmPreview : FormInfoEntity
-    {
-        public frmPreview(string HTMLContent)
-        {
+namespace TX.Framework.WindowUI.Controls {
+    public partial class FrmPreview : FormInfoEntity {
+        public FrmPreview(string HTMLContent) {
             InitializeComponent();
             this.ShowInTaskbar = false;
             this.Text = "内容预览";

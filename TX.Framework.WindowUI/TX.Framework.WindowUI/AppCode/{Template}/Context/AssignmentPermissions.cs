@@ -13,17 +13,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
+namespace System.Text.Template {
     [Flags]
-    public enum AssignmentPermissions
-    {
-        None = 0, 
-        ExistingVariable = 1, 
-        NewVariable = 2, 
-        Variable = 3, 
-        Property = 4, 
-        Indexer = 8, 
+    public enum AssignmentPermissions {
+        None = 0,
+        ExistingVariable = 1,
+        NewVariable = 2,
+        Variable = 3,
+        Property = 4,
+        Indexer = 8,
         All = 15
     }
 }

@@ -1,19 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     [ToolboxItem(false)]
-    public class TXPopupComboBox : PopupComboBox
-    {
+    public class TXPopupComboBox : PopupComboBox {
         #region fileds
 
         private IntPtr _EditHandle = IntPtr.Zero;
@@ -28,9 +26,7 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Initializes
 
-        public TXPopupComboBox()
-            : base()
-        {
+        public TXPopupComboBox() : base() {
             this.Size = new Size(150, 20);
             base.DropDownStyle = ComboBoxStyle.DropDown;
         }
@@ -39,32 +35,25 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Properties
 
-        internal Rectangle ButtonRect
-        {
-            get
-            {
+        internal Rectangle ButtonRect {
+            get {
                 return this.GetDropDownButtonRect();
             }
         }
 
-        internal Rectangle EditRect
-        {
-            get
-            {
-                if (this.DropDownStyle == ComboBoxStyle.DropDownList)
-                {
+        internal Rectangle EditRect {
+            get {
+                if (this.DropDownStyle == ComboBoxStyle.DropDownList) {
                     Rectangle rect = new Rectangle(
                         this._Margin, this._Margin, Width - this.ButtonRect.Width - this._Margin * 2, Height - this._Margin * 2);
-                    if (RightToLeft == RightToLeft.Yes)
-                    {
+                    if (RightToLeft == RightToLeft.Yes) {
                         rect.X += this.ButtonRect.Right;
                     }
 
                     return rect;
                 }
 
-                if (IsHandleCreated && this._EditHandle != IntPtr.Zero)
-                {
+                if (IsHandleCreated && this._EditHandle != IntPtr.Zero) {
                     RECT rcClient = new RECT();
                     Win32.GetWindowRect(this._EditHandle, ref rcClient);
                     return RectangleToClient(rcClient.Rect);
@@ -78,18 +67,14 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Override methods
 
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case(int)WindowMessages.MOUSEWHEEL:
+        protected override void WndProc(ref Message m) {
+            switch (m.Msg) {
+                case (int) WindowMessages.MOUSEWHEEL:
                     return;
-                case (int)WindowMessages.WM_PAINT:
-                    switch (this.DropDownStyle)
-                    {
+                case (int) WindowMessages.WM_PAINT:
+                    switch (this.DropDownStyle) {
                         case ComboBoxStyle.DropDown:
-                            if (!this._BeginPainting)
-                            {
+                            if (!this._BeginPainting) {
                                 PAINTSTRUCT ps = new PAINTSTRUCT();
                                 this._BeginPainting = true;
                                 Win32.BeginPaint(m.HWnd, ref ps);
@@ -98,8 +83,7 @@ namespace TX.Framework.WindowUI.Controls
                                 this._BeginPainting = false;
                                 m.Result = Win32.TRUE;
                             }
-                            else
-                            {
+                            else {
                                 base.WndProc(ref m);
                             }
                             break;
@@ -128,10 +112,8 @@ namespace TX.Framework.WindowUI.Controls
         /// 绘制复选框和内容.
         /// </summary>
         /// User:Ryan  CreateTime:2011-07-29 15:44.
-        private void DrawComboBox(ref Message msg)
-        {
-            using (Graphics g = Graphics.FromHwnd(msg.HWnd))
-            {
+        private void DrawComboBox(ref Message msg) {
+            using (Graphics g = Graphics.FromHwnd(msg.HWnd)) {
                 this.DrawComboBox(g);
             }
         }
@@ -141,11 +123,11 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="g">The Graphics.</param>
         /// User:Ryan  CreateTime:2011-07-29 15:44.
-        private void DrawComboBox(Graphics g)
-        {
+        private void DrawComboBox(Graphics g) {
             GDIHelper.InitializeGraphics(g);
             Rectangle rect = new Rectangle(Point.Empty, this.Size);
-            rect.Width--; rect.Height--;
+            rect.Width--;
+            rect.Height--;
             ////背景
             RoundRectangle roundRect = new RoundRectangle(rect, 0);
             Color backColor = this.Enabled ? this._BackColor : SystemColors.Control;
@@ -161,8 +143,7 @@ namespace TX.Framework.WindowUI.Controls
         /// </summary>
         /// <param name="g">The Graphics.</param>
         /// User:Ryan  CreateTime:2011-08-02 14:23.
-        private void DrawButton(Graphics g)
-        {
+        private void DrawButton(Graphics g) {
             Rectangle btnRect;
             EnumControlState btnState = this.GetComboBoxButtonPressed() ? EnumControlState.HeightLight : EnumControlState.Default;
             btnRect = new Rectangle(this.ButtonRect.X, this.ButtonRect.Y - 1, this.ButtonRect.Width + 1 + this._Margin, this.ButtonRect.Height + 2);
@@ -181,22 +162,19 @@ namespace TX.Framework.WindowUI.Controls
 
         #region GetBoxInfo
 
-        private ComboBoxInfo GetComboBoxInfo()
-        {
+        private ComboBoxInfo GetComboBoxInfo() {
             ComboBoxInfo cbi = new ComboBoxInfo();
             cbi.cbSize = Marshal.SizeOf(cbi);
             Win32.GetComboBoxInfo(base.Handle, ref cbi);
             return cbi;
         }
 
-        private bool GetComboBoxButtonPressed()
-        {
+        private bool GetComboBoxButtonPressed() {
             ComboBoxInfo cbi = this.GetComboBoxInfo();
             return cbi.stateButton == ComboBoxButtonState.STATE_SYSTEM_PRESSED;
         }
 
-        private Rectangle GetDropDownButtonRect()
-        {
+        private Rectangle GetDropDownButtonRect() {
             ComboBoxInfo cbi = this.GetComboBoxInfo();
             return cbi.rcButton.Rect;
         }

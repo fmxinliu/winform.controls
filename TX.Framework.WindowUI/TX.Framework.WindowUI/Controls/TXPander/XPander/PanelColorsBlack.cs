@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provide black theme colors for a Panel or XPanderPanel display element.
     /// </summary>
@@ -16,8 +15,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public class PanelColorsBlack : PanelColorsBse
-    {
+    public class PanelColorsBlack : PanelColorsBse {
         #region FieldsPrivate
         #endregion
 
@@ -28,18 +26,12 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Initialize a new instance of the PanelColorsBlack class.
         /// </summary>
-        public PanelColorsBlack()
-            : base()
-        {
-        }
+        public PanelColorsBlack() : base() { }
         /// <summary>
         /// Initialize a new instance of the PanelColorsBlack class.
         /// </summary>
         /// <param name="basePanel">Base class for the panel or xpanderpanel control.</param>
-        public PanelColorsBlack(BasePanel basePanel)
-            : base(basePanel)
-        {
-        }
+        public PanelColorsBlack(BasePanel basePanel) : base(basePanel) { }
 
         #endregion
 
@@ -48,8 +40,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Initialize a color Dictionary with defined colors
         /// </summary>
         /// <param name="rgbTable">Dictionary with defined colors</param>
-        protected override void InitColors(Dictionary<PanelColors.KnownColors, Color> rgbTable)
-        {
+        protected override void InitColors(Dictionary<PanelColors.KnownColors, Color> rgbTable) {
             base.InitColors(rgbTable);
             rgbTable[KnownColors.BorderColor] = Color.FromArgb(0, 0, 0);
             rgbTable[KnownColors.PanelCaptionCloseIcon] = Color.FromArgb(255, 255, 255);

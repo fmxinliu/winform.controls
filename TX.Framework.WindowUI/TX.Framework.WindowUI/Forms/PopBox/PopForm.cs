@@ -1,22 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Windows.Forms;
-using System.Media;
-using System.IO;
 
-namespace TX.Framework.WindowUI.Forms
-{
-    public partial class PopForm : BaseForm
-    {
+namespace TX.Framework.WindowUI.Forms {
+    public partial class PopForm : BaseForm {
         private SoundPlayer _Player;
 
-        public PopForm()
-        {
+        public PopForm() {
             InitializeComponent();
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -44,25 +41,21 @@ namespace TX.Framework.WindowUI.Forms
         /// User:Ryan  CreateTime:2012-11-26 11:00.
         public int ShowFormTimelag { get; set; }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            Win32.AnimateWindow(this.Handle, this.CloseFormTimeLag, (int)AnimateWindowFlag.AW_BLEND | (int)AnimateWindowFlag.AW_HIDE);
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            Win32.AnimateWindow(this.Handle, this.CloseFormTimeLag, (int) AnimateWindowFlag.AW_BLEND | (int) AnimateWindowFlag.AW_HIDE);
             base.OnFormClosing(e);
         }
 
-        protected override void OnFormClosed(FormClosedEventArgs e)
-        {
-            if (this._Player != null)
-            {
+        protected override void OnFormClosed(FormClosedEventArgs e) {
+            if (this._Player != null) {
                 this._Player.Stop();
                 this._Player.Dispose();
             }
             base.OnFormClosed(e);
         }
 
-        protected override void OnLoad(EventArgs e)
-        {
-            Win32.AnimateWindow(this.Handle, this.ShowFormTimelag, (int)EnumShowWindowMode.BottomToTop);
+        protected override void OnLoad(EventArgs e) {
+            Win32.AnimateWindow(this.Handle, this.ShowFormTimelag, (int) EnumShowWindowMode.BottomToTop);
             base.OnLoad(e);
         }
 
@@ -73,10 +66,8 @@ namespace TX.Framework.WindowUI.Forms
         /// </summary>
         /// <param name="fileStream">The file stream.</param>
         /// User:Ryan  CreateTime:2012-11-26 11:00.
-        protected void playSound(Stream fileStream)
-        {
-            if (this._Player == null)
-            {
+        protected void PlaySound(Stream fileStream) {
+            if (this._Player == null) {
                 this._Player = new SoundPlayer();
                 this._Player.Stream = fileStream;
                 this._Player.Play();

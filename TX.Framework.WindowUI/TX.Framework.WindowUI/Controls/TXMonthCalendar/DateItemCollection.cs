@@ -25,15 +25,13 @@
  */
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using System.Collections;   
 
-namespace TX.Framework.WindowUI.Controls
-{
-
+namespace TX.Framework.WindowUI.Controls {
 
     #region Delegates
 
@@ -41,12 +39,10 @@ namespace TX.Framework.WindowUI.Controls
 
     #endregion    
 
-
     /// <summary>
     /// Represents a collection of DateItem objects
     /// </summary>
-    public class DateItemCollection : CollectionBase 
-    {
+    public class DateItemCollection : CollectionBase {
         #region Class Data
 
         /// <summary>
@@ -55,45 +51,41 @@ namespace TX.Framework.WindowUI.Controls
         private MonthCalendar owner;
 
         #endregion
-        
+
         #region Events
-        
+
         public event DateItemEventHandler DateItemModified;
 
         #endregion
 
         #region Constructor
-                
-        public DateItemCollection(MonthCalendar owner) : base()
-        {
+
+        public DateItemCollection(MonthCalendar owner) : base() {
             if (owner == null)
                 throw new ArgumentNullException("owner");
-                            
+
             this.owner = owner;
         }
-            
-        public DateItemCollection(MonthCalendar owner, DateItemCollection dateItems) : this(owner)
-        {
+
+        public DateItemCollection(MonthCalendar owner, DateItemCollection dateItems) : this(owner) {
             this.Add(dateItems);
         }
 
         #endregion
 
         #region Methods
-        
-        public void ModifiedEvent()
-        {
-            if (DateItemModified!=null)
-                DateItemModified(this,new EventArgs());    
+
+        public void ModifiedEvent() {
+            if (DateItemModified != null)
+                DateItemModified(this, new EventArgs());
         }
 
-        public void Add(DateItem value)
-        {
+        public void Add(DateItem value) {
             int index;
             if (value == null)
                 throw new ArgumentNullException("value");
-            
-            if ((MonthCalendar)value.Calendar==null)
+
+            if ((MonthCalendar) value.Calendar == null)
                 value.Calendar = this.owner;
 
             index = this.IndexOf(value);
@@ -103,201 +95,166 @@ namespace TX.Framework.WindowUI.Controls
                 this.List[index] = value;
         }
 
-        public void AddRange(DateItem[] dateItems)
-        {
+        public void AddRange(DateItem[] dateItems) {
             if (dateItems == null)
                 throw new ArgumentNullException("dateItems");
-            
-            for (int i=0; i<dateItems.Length; i++)
-            {                
+
+            for (int i = 0; i < dateItems.Length; i++) {
                 dateItems[i].Calendar = owner;
                 this.Add(dateItems[i]);
             }
         }
 
-        public void Add(DateItemCollection dateItems)
-        {
+        public void Add(DateItemCollection dateItems) {
             if (dateItems == null)
                 throw new ArgumentNullException("dateItems");
-            
-            for (int i=0; i<dateItems.Count; i++)
-            {
+
+            for (int i = 0; i < dateItems.Count; i++) {
                 this.Add(dateItems[i]);
             }
         }
-            
-        public new void Clear()
-        {
-            while (this.Count > 0)
-            {
+
+        public new void Clear() {
+            while (this.Count > 0) {
                 this.RemoveAt(0);
             }
         }
 
-        public bool Contains(DateItem dateItem)
-        {
+        public bool Contains(DateItem dateItem) {
             if (dateItem == null)
                 throw new ArgumentNullException("dateItem");
-            
+
             return (this.IndexOf(dateItem) != -1);
         }
-        
-        public int IndexOf(DateTime date)
-        {
+
+        public int IndexOf(DateTime date) {
             DateItem[] d;
 
             d = DateInfo(date);
-            if (d.Length>0)
+            if (d.Length > 0)
                 return d[0].Index;
             else
                 return -1;
         }
 
-        public DateItem[] DateInfo(DateTime dt)
-        {
+        public DateItem[] DateInfo(DateTime dt) {
             DateItem[] ret = new DateItem[0];
-            ret.Initialize(); 
-            for (int i = 0;i<this.Count;i++)
-            {
-                if ( ((this[i].Date <= dt) && (this[i].Range >=dt)) )
-                {
-                    switch (this[i].Pattern)
-                    {
-                        case mcDayInfoRecurrence.None:
-                        {
-                            if (this[i].Date.ToShortDateString()  == dt.ToShortDateString())
+            ret.Initialize();
+            for (int i = 0; i < this.Count; i++) {
+                if (((this[i].Date <= dt) && (this[i].Range >= dt))) {
+                    switch (this[i].Pattern) {
+                        case MCDayInfoRecurrence.None:
                             {
-                                this[i].Index = i;
-                                ret = AddInfo(this[i],ret);
+                                if (this[i].Date.ToShortDateString() == dt.ToShortDateString()) {
+                                    this[i].Index = i;
+                                    ret = AddInfo(this[i], ret);
+                                }
+                                break;
                             }
-                            break;
-                        }
 
-                        case mcDayInfoRecurrence.Daily:
-                        {
-                            this[i].Index = i;
-                            ret = AddInfo(this[i],ret);
-                            break;
-                        }
-                        case mcDayInfoRecurrence.Weekly:
-                        {
-                            if ( (this[i].Date.DayOfWeek == dt.DayOfWeek) )
+                        case MCDayInfoRecurrence.Daily:
                             {
                                 this[i].Index = i;
-                                ret = AddInfo(this[i],ret);
+                                ret = AddInfo(this[i], ret);
+                                break;
                             }
-                            break;
-                        }
-                        case mcDayInfoRecurrence.Monthly:
-                        {
-                            if ( (this[i].Date.Day == dt.Day))
+                        case MCDayInfoRecurrence.Weekly:
                             {
-                                this[i].Index = i;                                                                            
-                                ret = AddInfo(this[i],ret);
+                                if ((this[i].Date.DayOfWeek == dt.DayOfWeek)) {
+                                    this[i].Index = i;
+                                    ret = AddInfo(this[i], ret);
+                                }
+                                break;
                             }
-                            break;
-                        }
-                        case mcDayInfoRecurrence.Yearly:
-                        {
-                            if (this[i].Date.ToShortDateString().Substring(5) ==
-                                dt.ToShortDateString().Substring(5))  
-                               {
-                                this[i].Index = i;
-                                ret = AddInfo(this[i],ret);
+                        case MCDayInfoRecurrence.Monthly:
+                            {
+                                if ((this[i].Date.Day == dt.Day)) {
+                                    this[i].Index = i;
+                                    ret = AddInfo(this[i], ret);
+                                }
+                                break;
                             }
-                            break;
-                        }
+                        case MCDayInfoRecurrence.Yearly:
+                            {
+                                if (this[i].Date.ToShortDateString().Substring(5) ==
+                                    dt.ToShortDateString().Substring(5)) {
+                                    this[i].Index = i;
+                                    ret = AddInfo(this[i], ret);
+                                }
+                                break;
+                            }
                     }
-
                 }
             }
             return ret;
         }
 
-        public DateItem[] AddInfo(DateItem dt, DateItem[] old)
-        {
-            int l =  old.Length;
+        public DateItem[] AddInfo(DateItem dt, DateItem[] old) {
+            int l = old.Length;
             int i;
-            DateItem[] n = new DateItem[l+1];
-            n.Initialize(); 
-            for (i = 0;i<l;i++)
-            {
+            DateItem[] n = new DateItem[l + 1];
+            n.Initialize();
+            for (i = 0; i < l; i++) {
                 n[i] = old[i];
             }
             n[i] = dt;
             return n;
         }
 
-        public int IndexOf(DateItem dateItem)
-        {
+        public int IndexOf(DateItem dateItem) {
             if (dateItem == null)
                 throw new ArgumentNullException("dateItem");
-                            
-            for (int i=0; i<this.Count; i++)
-            {
-                if (this[i] == dateItem)
-                {
+
+            for (int i = 0; i < this.Count; i++) {
+                if (this[i] == dateItem) {
                     return i;
                 }
             }
 
             return -1;
         }
-            
-        public void Remove(DateItem value)
-        {
+
+        public void Remove(DateItem value) {
             if (value == null)
                 throw new ArgumentNullException("value");
-            
+
             this.List.Remove(value);
-        
         }
-            
-        public new void RemoveAt(int index)
-        {
+
+        public new void RemoveAt(int index) {
             this.Remove(this[index]);
         }
 
-        public void Move(DateItem value, int index)
-        {
+        public void Move(DateItem value, int index) {
             if (value == null)
                 throw new ArgumentNullException("value");
-            
-            if (index < 0)
-            {
+
+            if (index < 0) {
                 index = 0;
             }
-            else if (index > this.Count)
-            {
+            else if (index > this.Count) {
                 index = this.Count;
             }
 
-            if (!this.Contains(value) || this.IndexOf(value) == index)
-            {
+            if (!this.Contains(value) || this.IndexOf(value) == index) {
                 return;
             }
 
             this.List.Remove(value);
 
-            if (index > this.Count)
-            {
+            if (index > this.Count) {
                 this.List.Add(value);
             }
-            else
-            {
+            else {
                 this.List.Insert(index, value);
             }
-
         }
 
-        public void MoveToTop(DateItem value)
-        {
+        public void MoveToTop(DateItem value) {
             this.Move(value, 0);
         }
 
-
-        public void MoveToBottom(DateItem value)
-        {
+        public void MoveToBottom(DateItem value) {
             this.Move(value, this.Count);
         }
 
@@ -305,16 +262,12 @@ namespace TX.Framework.WindowUI.Controls
 
         #region Properties
 
-        public virtual DateItem this[int index]
-        {
-            get
-            {
+        public virtual DateItem this[int index] {
+            get {
                 return this.List[index] as DateItem;
             }
         }
 
         #endregion
-
     }
-
 }

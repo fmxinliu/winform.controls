@@ -1,21 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// DataGridView行合并.请对属性MergeColumnNames 赋值既可
     /// </summary>
     [ToolboxBitmap(typeof(DataGridView))]
-    public partial class TXDataGridView : DataGridView
-    {
+    public partial class TXDataGridView : DataGridView {
         #region 构造函数
-        public TXDataGridView()
-        {
+        public TXDataGridView() {
             InitializeComponent();
             this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DataGridViewEx_Scroll);
         }
@@ -32,15 +29,13 @@ namespace TX.Framework.WindowUI.Controls
                 return cp;
             }
         }
-        protected override void OnPaint(PaintEventArgs e)
-        {
+        protected override void OnPaint(PaintEventArgs e) {
             // TODO: 在此处添加自定义绘制代码
 
             // 调用基类 OnPaint
             base.OnPaint(e);
         }
-        protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
-        {
+        protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e) {
             try {
                 if (e.RowIndex > -1 && e.ColumnIndex > -1) {
                     DrawCell(e);
@@ -53,7 +48,7 @@ namespace TX.Framework.WindowUI.Controls
                             Graphics g = e.Graphics;
                             e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
                             int left = e.CellBounds.Left, top = e.CellBounds.Top + 2,
-                            right = e.CellBounds.Right, bottom = e.CellBounds.Bottom;
+                                right = e.CellBounds.Right, bottom = e.CellBounds.Bottom;
 
                             switch (SpanRows[e.ColumnIndex].Position) {
                                 case 1:
@@ -114,14 +109,11 @@ namespace TX.Framework.WindowUI.Controls
                     }
                 }
             }
-            catch {
-            }
-            finally {
+            catch { } finally {
                 base.OnCellPainting(e);
             }
         }
-        protected override void OnCellClick(DataGridViewCellEventArgs e)
-        {
+        protected override void OnCellClick(DataGridViewCellEventArgs e) {
             base.OnCellClick(e);
         }
         #endregion
@@ -129,11 +121,8 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// 画单元格
         /// </summary>
-        /// <param name="e"></param>
-        private void DrawCell(DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.CellStyle.Alignment == DataGridViewContentAlignment.NotSet)
-            {
+        private void DrawCell(DataGridViewCellPaintingEventArgs e) {
+            if (e.CellStyle.Alignment == DataGridViewContentAlignment.NotSet) {
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
             Brush gridBrush = new SolidBrush(this.GridColor);
@@ -146,59 +135,47 @@ namespace TX.Framework.WindowUI.Controls
             int DownRows = 0;
             //总行数
             int count = 0;
-            if (this.MergeColumnNames.Contains(this.Columns[e.ColumnIndex].Name) && e.RowIndex != -1)
-            {
+            if (this.MergeColumnNames.Contains(this.Columns[e.ColumnIndex].Name) && e.RowIndex != -1) {
                 cellwidth = e.CellBounds.Width;
                 Pen gridLinePen = new Pen(gridBrush);
                 string curValue = e.Value == null ? "" : e.Value.ToString().Trim();
                 string curSelected = this.CurrentRow.Cells[e.ColumnIndex].Value == null ? "" : this.CurrentRow.Cells[e.ColumnIndex].Value.ToString().Trim();
-                if (!string.IsNullOrEmpty(curValue))
-                {
+                if (!string.IsNullOrEmpty(curValue)) {
                     #region 获取下面的行数
-                    for (int i = e.RowIndex; i < this.Rows.Count; i++)
-                    {
-                        if (this.Rows[i].Cells[e.ColumnIndex].Value.ToString().Equals(curValue))
-                        {
+                    for (int i = e.RowIndex; i < this.Rows.Count; i++) {
+                        if (this.Rows[i].Cells[e.ColumnIndex].Value.ToString().Equals(curValue)) {
                             //this.Rows[i].Cells[e.ColumnIndex].Selected = this.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected;
 
                             DownRows++;
-                            if (e.RowIndex != i)
-                            {
+                            if (e.RowIndex != i) {
                                 cellwidth = cellwidth < this.Rows[i].Cells[e.ColumnIndex].Size.Width ? cellwidth : this.Rows[i].Cells[e.ColumnIndex].Size.Width;
                             }
                         }
-                        else
-                        {
+                        else {
                             break;
                         }
                     }
                     #endregion
                     #region 获取上面的行数
-                    for (int i = e.RowIndex; i >= 0; i--)
-                    {
-                        if (this.Rows[i].Cells[e.ColumnIndex].Value.ToString().Equals(curValue))
-                        {
+                    for (int i = e.RowIndex; i >= 0; i--) {
+                        if (this.Rows[i].Cells[e.ColumnIndex].Value.ToString().Equals(curValue)) {
                             //this.Rows[i].Cells[e.ColumnIndex].Selected = this.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected;
                             UpRows++;
-                            if (e.RowIndex != i)
-                            {
+                            if (e.RowIndex != i) {
                                 cellwidth = cellwidth < this.Rows[i].Cells[e.ColumnIndex].Size.Width ? cellwidth : this.Rows[i].Cells[e.ColumnIndex].Size.Width;
                             }
                         }
-                        else
-                        {
+                        else {
                             break;
                         }
                     }
                     #endregion
                     count = DownRows + UpRows - 1;
-                    if (count < 2)
-                    {
+                    if (count < 2) {
                         return;
                     }
                 }
-                if (this.Rows[e.RowIndex].Selected)
-                {
+                if (this.Rows[e.RowIndex].Selected) {
                     backBrush.Color = e.CellStyle.SelectionBackColor;
                     fontBrush.Color = e.CellStyle.SelectionForeColor;
                 }
@@ -206,8 +183,7 @@ namespace TX.Framework.WindowUI.Controls
                 e.Graphics.FillRectangle(backBrush, e.CellBounds);
                 //画字符串
                 PaintingFont(e, cellwidth, UpRows, DownRows, count);
-                if (DownRows == 1)
-                {
+                if (DownRows == 1) {
                     e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
                     count = 0;
                 }
@@ -220,57 +196,41 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// 画字符串
         /// </summary>
-        /// <param name="e"></param>
-        /// <param name="cellwidth"></param>
-        /// <param name="UpRows"></param>
-        /// <param name="DownRows"></param>
-        /// <param name="count"></param>
-        private void PaintingFont(System.Windows.Forms.DataGridViewCellPaintingEventArgs e, int cellwidth, int UpRows, int DownRows, int count)
-        {
+        private void PaintingFont(System.Windows.Forms.DataGridViewCellPaintingEventArgs e, int cellwidth, int UpRows, int DownRows, int count) {
             SolidBrush fontBrush = new SolidBrush(e.CellStyle.ForeColor);
-            int fontheight = (int)e.Graphics.MeasureString(e.Value.ToString(), e.CellStyle.Font).Height;
-            int fontwidth = (int)e.Graphics.MeasureString(e.Value.ToString(), e.CellStyle.Font).Width;
+            int fontheight = (int) e.Graphics.MeasureString(e.Value.ToString(), e.CellStyle.Font).Height;
+            int fontwidth = (int) e.Graphics.MeasureString(e.Value.ToString(), e.CellStyle.Font).Width;
             int cellheight = e.CellBounds.Height;
 
-            if (e.CellStyle.Alignment == DataGridViewContentAlignment.BottomCenter)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y + cellheight * DownRows - fontheight);
+            if (e.CellStyle.Alignment == DataGridViewContentAlignment.BottomCenter) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y + cellheight * DownRows - fontheight);
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.BottomLeft)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X, e.CellBounds.Y + cellheight * DownRows - fontheight);
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.BottomLeft) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X, e.CellBounds.Y + cellheight * DownRows - fontheight);
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.BottomRight)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + cellwidth - fontwidth, e.CellBounds.Y + cellheight * DownRows - fontheight);
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.BottomRight) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + cellwidth - fontwidth, e.CellBounds.Y + cellheight * DownRows - fontheight);
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.MiddleCenter)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.MiddleCenter) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.MiddleLeft)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.MiddleLeft) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.MiddleRight)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + cellwidth - fontwidth, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.MiddleRight) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + cellwidth - fontwidth, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.TopCenter)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y - cellheight * (UpRows - 1));
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.TopCenter) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y - cellheight * (UpRows - 1));
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.TopLeft)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X, e.CellBounds.Y - cellheight * (UpRows - 1));
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.TopLeft) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X, e.CellBounds.Y - cellheight * (UpRows - 1));
             }
-            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.TopRight)
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + cellwidth - fontwidth, e.CellBounds.Y - cellheight * (UpRows - 1));
+            else if (e.CellStyle.Alignment == DataGridViewContentAlignment.TopRight) {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + cellwidth - fontwidth, e.CellBounds.Y - cellheight * (UpRows - 1));
             }
-            else
-            {
-                e.Graphics.DrawString((String)e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
+            else {
+                e.Graphics.DrawString((String) e.Value, e.CellStyle.Font, fontBrush, e.CellBounds.X + (cellwidth - fontwidth) / 2, e.CellBounds.Y - cellheight * (UpRows - 1) + (cellheight * count - fontheight) / 2);
             }
         }
         #endregion
@@ -283,14 +243,11 @@ namespace TX.Framework.WindowUI.Controls
         [DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Visible)]
         [Localizable(true)]
         [Description("设置或获取合并列的集合"), Browsable(true), Category("单元格合并")]
-        public List<string> MergeColumnNames
-        {
-            get
-            {
+        public List<string> MergeColumnNames {
+            get {
                 return _mergecolumnname;
             }
-            set
-            {
+            set {
                 _mergecolumnname = value;
             }
         }
@@ -299,8 +256,7 @@ namespace TX.Framework.WindowUI.Controls
         #region 二维表头
         private struct SpanInfo //表头信息
         {
-            public SpanInfo(string Text, int Position, int Left, int Right)
-            {
+            public SpanInfo(string Text, int Position, int Left, int Right) {
                 this.Text = Text;
                 this.Position = Position;
                 this.Left = Left;
@@ -312,15 +268,14 @@ namespace TX.Framework.WindowUI.Controls
             public int Left; //对应左行
             public int Right; //对应右行
         }
-        private Dictionary<int, SpanInfo> SpanRows = new Dictionary<int, SpanInfo>();//需要2维表头的列
+        private Dictionary<int, SpanInfo> SpanRows = new Dictionary<int, SpanInfo>(); //需要2维表头的列
         /// <summary>
         /// 合并列
         /// </summary>
         /// <param name="ColIndex">列的索引</param>
         /// <param name="ColCount">需要合并的列数</param>
         /// <param name="Text">合并列后的文本</param>
-        public void AddSpanHeader(int ColIndex, int ColCount, string Text)
-        {
+        public void AddSpanHeader(int ColIndex, int ColCount, string Text) {
             //if (ColCount < 2)
             //{
             //    throw new Exception("行宽应大于等于2，合并1列无意义。");
@@ -329,37 +284,30 @@ namespace TX.Framework.WindowUI.Controls
             int Right = ColIndex + ColCount - 1; //同一大标题下的最后一列的索引
             SpanRows[ColIndex] = new SpanInfo(Text, 1, ColIndex, Right); //添加标题下的最左列
             SpanRows[Right] = new SpanInfo(Text, 3, ColIndex, Right); //添加该标题下的最右列
-            for (int i = ColIndex + 1; i < Right; i++) //中间的列
-            {
+            for (int i = ColIndex + 1; i < Right; i++) { //中间的列
                 SpanRows[i] = new SpanInfo(Text, 2, ColIndex, Right);
             }
         }
         /// <summary>
         /// 清除合并的列
         /// </summary>
-        public void ClearSpanInfo()
-        {
+        public void ClearSpanInfo() {
             SpanRows.Clear();
             //ReDrawHead();
         }
-        public void DataGridViewEx_Scroll(object sender, ScrollEventArgs e)
-        {
-            if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)// && e.Type == ScrollEventType.EndScroll)
-            {
+        public void DataGridViewEx_Scroll(object sender, ScrollEventArgs e) {
+            if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll) { // && e.Type == ScrollEventType.EndScroll)
                 headRedrawTimer.Enabled = false;
                 headRedrawTimer.Enabled = true;
             }
         }
         //刷新显示表头
-        public void ReDrawHead()
-        {
-            foreach (int si in SpanRows.Keys)
-            {
+        public void ReDrawHead() {
+            foreach (int si in SpanRows.Keys) {
                 this.Invalidate(this.GetCellDisplayRectangle(si, -1, true));
             }
         }
-        private void headRedrawTimer_Tick(object sender, EventArgs e)
-        {
+        private void HeadRedrawTimer_Tick(object sender, EventArgs e) {
             headRedrawTimer.Enabled = false;
             ReDrawHead();
         }
@@ -367,8 +315,7 @@ namespace TX.Framework.WindowUI.Controls
         /// 二维表头的背景颜色
         /// </summary>
         [Description("二维表头的背景颜色"), Browsable(true), Category("二维表头")]
-        public Color MergeColumnHeaderBackColor
-        {
+        public Color MergeColumnHeaderBackColor {
             get { return this._mergecolumnheaderbackcolor; }
             set { this._mergecolumnheaderbackcolor = value; }
         }

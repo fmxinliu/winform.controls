@@ -13,37 +13,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Text.Template
-{
-    public class VariableExpression : Expression
-    {
+namespace System.Text.Template {
+    public class VariableExpression : Expression {
         private readonly string _Variable;
 
-        public VariableExpression(string variable)
-        {
+        public VariableExpression(string variable) {
             _Variable = variable;
         }
 
-        public override ValueExpression Evaluate(ITemplateContext context)
-        {
+        public override ValueExpression Evaluate(ITemplateContext context) {
             IValueType valueType;
-            if (context.TryGetValue(this._Variable, out valueType))
-            {
+            if (context.TryGetValue(this._Variable, out valueType)) {
                 return new ValueExpression(valueType);
             }
-            else
-            {
+            else {
                 return new ValueExpression(null, typeof(object));
             }
         }
 
-        public override string ToString()
-        {
+        public override string ToString() {
             return _Variable;
         }
 
-        public string Variable
-        {
+        public string Variable {
             get { return _Variable; }
         }
     }

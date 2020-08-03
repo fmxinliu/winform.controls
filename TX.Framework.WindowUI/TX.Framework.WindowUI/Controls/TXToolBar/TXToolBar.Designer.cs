@@ -1,7 +1,5 @@
-﻿namespace TX.Framework.WindowUI.Controls
-{
-    partial class TXToolBar
-    {
+namespace TX.Framework.WindowUI.Controls {
+    partial class TXToolBar {
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
@@ -11,10 +9,8 @@
         /// 清理所有正在使用的资源。
         /// </summary>
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// 设计器支持所需的方法 - 不要
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
             this.txToolStrip1 = new TX.Framework.WindowUI.Controls.TXToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -69,15 +64,16 @@
             this.txToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.txToolStrip1.ImageScalingSize = new System.Drawing.Size(17, 17);
             this.txToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.tsbAdd,
-            this.tsbEdit,
-            this.tsbDetails,
-            this.tsbDelete,
-            this.tsbRefresh,
-            this.toolStripSeparator2,
-            this.tsbExport,
-            this.tsbHelp});
+                this.toolStripSeparator1,
+                    this.tsbAdd,
+                    this.tsbEdit,
+                    this.tsbDetails,
+                    this.tsbDelete,
+                    this.tsbRefresh,
+                    this.toolStripSeparator2,
+                    this.tsbExport,
+                    this.tsbHelp
+            });
             this.txToolStrip1.Location = new System.Drawing.Point(72, 2);
             this.txToolStrip1.Name = "txToolStrip1";
             this.txToolStrip1.Size = new System.Drawing.Size(618, 22);
@@ -97,7 +93,7 @@
             this.tsbAdd.Name = "tsbAdd";
             this.tsbAdd.Size = new System.Drawing.Size(68, 22);
             this.tsbAdd.Text = "新增(&A)";
-            this.tsbAdd.Click += new System.EventHandler(this.tsbAdd_Click);
+            this.tsbAdd.Click += new System.EventHandler(this.TsbAdd_Click);
             // 
             // tsbEdit
             // 
@@ -107,7 +103,7 @@
             this.tsbEdit.Name = "tsbEdit";
             this.tsbEdit.Size = new System.Drawing.Size(68, 22);
             this.tsbEdit.Text = "修改(&E)";
-            this.tsbEdit.Click += new System.EventHandler(this.tsbEdit_Click);
+            this.tsbEdit.Click += new System.EventHandler(this.TsbEdit_Click);
             // 
             // tsbDetails
             // 
@@ -117,7 +113,7 @@
             this.tsbDetails.Size = new System.Drawing.Size(50, 19);
             this.tsbDetails.Text = "详情";
             this.tsbDetails.ToolTipText = "查看详情";
-            this.tsbDetails.Click += new System.EventHandler(this.tsbDetails_Click);
+            this.tsbDetails.Click += new System.EventHandler(this.TsbDetails_Click);
             // 
             // tsbDelete
             // 
@@ -127,7 +123,7 @@
             this.tsbDelete.Name = "tsbDelete";
             this.tsbDelete.Size = new System.Drawing.Size(68, 22);
             this.tsbDelete.Text = "删除(&D)";
-            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
+            this.tsbDelete.Click += new System.EventHandler(this.TsbDelete_Click);
             // 
             // tsbRefresh
             // 
@@ -137,7 +133,7 @@
             this.tsbRefresh.Name = "tsbRefresh";
             this.tsbRefresh.Size = new System.Drawing.Size(68, 22);
             this.tsbRefresh.Text = "刷新(&R)";
-            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
+            this.tsbRefresh.Click += new System.EventHandler(this.TsbRefresh_Click);
             // 
             // toolStripSeparator2
             // 
@@ -152,7 +148,7 @@
             this.tsbExport.Name = "tsbExport";
             this.tsbExport.Size = new System.Drawing.Size(92, 22);
             this.tsbExport.Text = "导出数据(&X)";
-            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
+            this.tsbExport.Click += new System.EventHandler(this.TsbExport_Click);
             // 
             // tsbHelp
             // 
@@ -162,7 +158,7 @@
             this.tsbHelp.Name = "tsbHelp";
             this.tsbHelp.Size = new System.Drawing.Size(68, 22);
             this.tsbHelp.Text = "帮助(&H)";
-            this.tsbHelp.Click += new System.EventHandler(this.tsbHelp_Click);
+            this.tsbHelp.Click += new System.EventHandler(this.TsbHelp_Click);
             // 
             // panelCheckItem
             // 
@@ -185,7 +181,7 @@
             this.linkInvert.TabIndex = 1;
             this.linkInvert.TabStop = true;
             this.linkInvert.Text = "反选";
-            this.linkInvert.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkInvert_LinkClicked);
+            this.linkInvert.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkInvert_LinkClicked);
             // 
             // linkAll
             // 
@@ -197,7 +193,7 @@
             this.linkAll.TabIndex = 0;
             this.linkAll.TabStop = true;
             this.linkAll.Text = "全选";
-            this.linkAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAll_LinkClicked);
+            this.linkAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkAll_LinkClicked);
             // 
             // label1
             // 

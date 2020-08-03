@@ -1,9 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TX.Framework.WindowUI.Controls
-{
+namespace TX.Framework.WindowUI.Controls {
     /// <summary>
     /// Provides data for the HoverStateChange event.
     /// </summary>
@@ -14,8 +13,7 @@ namespace TX.Framework.WindowUI.Controls
     /// PURPOSE. IT CAN BE DISTRIBUTED FREE OF CHARGE AS LONG AS THIS HEADER 
     /// REMAINS UNCHANGED.
     /// </copyright>
-    public class HoverStateChangeEventArgs : EventArgs
-    {
+    public class HoverStateChangeEventArgs : EventArgs {
         #region FieldsPrivate
         private HoverState m_hoverState;
         #endregion
@@ -24,8 +22,7 @@ namespace TX.Framework.WindowUI.Controls
         /// <summary>
         /// Gets the HoverState.
         /// </summary>
-        public HoverState HoverState
-        {
+        public HoverState HoverState {
             get { return this.m_hoverState; }
         }
         #endregion
@@ -35,8 +32,7 @@ namespace TX.Framework.WindowUI.Controls
         /// Initializes a new instance of the HoverStateChangeEventArgs class.
         /// </summary>
         /// <param name="hoverState">The <see cref="HoverState"/> values.</param>
-        public HoverStateChangeEventArgs(HoverState hoverState)
-        {
+        public HoverStateChangeEventArgs(HoverState hoverState) {
             this.m_hoverState = hoverState;
         }
         #endregion
