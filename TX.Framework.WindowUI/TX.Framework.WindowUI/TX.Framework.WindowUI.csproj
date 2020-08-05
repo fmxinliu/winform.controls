@@ -724,6 +724,7 @@
     <Folder Include="Controls\Map\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\monitor.ico" />
     <None Include="Resources\setting.ico" />
     <None Include="Resources\download.ico" />
     <None Include="Resources\dmu.ico" />

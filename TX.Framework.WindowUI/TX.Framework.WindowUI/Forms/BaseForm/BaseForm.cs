@@ -355,6 +355,11 @@ namespace TX.Framework.WindowUI.Forms {
                 case (int) WindowMessages.WM_NCPAINT:
                 case (int) WindowMessages.WM_NCCALCSIZE:
                     break;
+                case (int) WindowMessages.WM_NCACTIVATE:
+                    if (m.WParam == (IntPtr)Win32.FALSE) {
+                        m.Result = (IntPtr)Win32.TRUE;
+                    }
+                    break;
                 case (int) WindowMessages.WM_WINDOWPOSCHANGED:
                     _inPosChanged = true;
                     base.WndProc(ref m);
