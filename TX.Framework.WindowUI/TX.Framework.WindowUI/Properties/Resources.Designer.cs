@@ -85,6 +85,13 @@ namespace TX.Framework.WindowUI.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap bar {
+            get {
+                object obj = ResourceManager.GetObject("bar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         public static System.Drawing.Bitmap bg01 {
             get {
                 object obj = ResourceManager.GetObject("bg01", resourceCulture);
@@ -563,6 +570,13 @@ namespace TX.Framework.WindowUI.Properties {
             }
         }
         
+        public static System.Drawing.Icon query {
+            get {
+                object obj = ResourceManager.GetObject("query", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+
         public static System.Drawing.Bitmap question {
             get {
                 object obj = ResourceManager.GetObject("question", resourceCulture);

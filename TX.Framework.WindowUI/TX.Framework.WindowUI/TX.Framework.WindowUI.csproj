@@ -724,6 +724,8 @@
     <Folder Include="Controls\Map\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\bar.png" />
+    <None Include="Resources\query.ico" />
     <None Include="Resources\monitor.ico" />
     <None Include="Resources\setting.ico" />
     <None Include="Resources\download.ico" />
