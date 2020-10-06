@@ -24,6 +24,7 @@ namespace TX.Framework.WindowUI.Forms {
 
         private EnumMessageBox _MessageMode;
 
+        private bool _playSound;
         #endregion
 
         public TXMessageBox() {
@@ -42,13 +43,14 @@ namespace TX.Framework.WindowUI.Forms {
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - this.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - this.Height / 2);
         }
 
-        public TXMessageBox(string captionText, string message, EnumMessageBox messageBoxMode) : this() {
+        public TXMessageBox(string captionText, string message, EnumMessageBox messageBoxMode, bool playSound) : this() {
             this._CaptionText = captionText;
             this._MessageMode = messageBoxMode;
             if (messageBoxMode == EnumMessageBox.Error) {
                 this.CapitionLogo = Properties.Resources.logo3;
             }
 
+            this._playSound = playSound;
             this._Message = message;
             this.ResetSize();
         }
@@ -97,9 +99,11 @@ namespace TX.Framework.WindowUI.Forms {
         #region //播放声音
 
         private void PlaySound(Stream fileStream) {
-            using (SoundPlayer sp = new SoundPlayer()) {
-                sp.Stream = fileStream;
-                sp.Play();
+            if (_playSound) {
+                using (SoundPlayer sp = new SoundPlayer()) {
+                    sp.Stream = fileStream;
+                    sp.Play();
+                }
             }
         }
         #endregion

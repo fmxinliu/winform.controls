@@ -14,7 +14,11 @@ namespace TX.Framework.WindowUI.Forms {
         #region MessageBox
 
         public static DialogResult Info(string captionText, string message) {
-            return ShowMessageBox(captionText, message, EnumMessageBox.Info);
+            return ShowMessageBox(captionText, message, EnumMessageBox.Info, false);
+        }
+
+        public static DialogResult Info(string captionText, string message, bool playSound) {
+            return ShowMessageBox(captionText, message, EnumMessageBox.Info, playSound);
         }
 
         public static DialogResult Info(string message) {
@@ -22,7 +26,11 @@ namespace TX.Framework.WindowUI.Forms {
         }
 
         public static DialogResult Error(string captionText, string message) {
-            return ShowMessageBox(captionText, message, EnumMessageBox.Error);
+            return ShowMessageBox(captionText, message, EnumMessageBox.Error, false);
+        }
+
+        public static DialogResult Error(string captionText, string message, bool playSound) {
+            return ShowMessageBox(captionText, message, EnumMessageBox.Error, playSound);
         }
 
         public static DialogResult Error(string message) {
@@ -30,7 +38,11 @@ namespace TX.Framework.WindowUI.Forms {
         }
 
         public static DialogResult Question(string captionText, string message) {
-            return ShowMessageBox(captionText, message, EnumMessageBox.Question);
+            return ShowMessageBox(captionText, message, EnumMessageBox.Question, false);
+        }
+
+        public static DialogResult Question(string captionText, string message, bool playSound) {
+            return ShowMessageBox(captionText, message, EnumMessageBox.Question, playSound);
         }
 
         public static DialogResult Question(string message) {
@@ -38,15 +50,19 @@ namespace TX.Framework.WindowUI.Forms {
         }
 
         public static DialogResult Warning(string captionText, string message) {
-            return ShowMessageBox(captionText, message, EnumMessageBox.Warning);
+            return ShowMessageBox(captionText, message, EnumMessageBox.Warning, false);
+        }
+
+        public static DialogResult Warning(string captionText, string message, bool playSound) {
+            return ShowMessageBox(captionText, message, EnumMessageBox.Warning, playSound);
         }
 
         public static DialogResult Warning(string message) {
             return Warning("警告信息", message);
         }
 
-        private static DialogResult ShowMessageBox(string captionText, string message, EnumMessageBox infoType) {
-            TXMessageBox frm = new TXMessageBox(captionText, message, infoType);
+        private static DialogResult ShowMessageBox(string captionText, string message, EnumMessageBox infoType, bool playSound) {
+            TXMessageBox frm = new TXMessageBox(captionText, message, infoType, playSound);
             DialogResult result = frm.ShowDialog();
             frm.Dispose();
             return result;

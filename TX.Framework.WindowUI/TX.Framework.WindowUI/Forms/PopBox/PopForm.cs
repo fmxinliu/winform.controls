@@ -11,7 +11,8 @@ using System.Windows.Forms;
 
 namespace TX.Framework.WindowUI.Forms {
     public partial class PopForm : BaseForm {
-        private SoundPlayer _Player;
+        private SoundPlayer _player;
+        private bool _playSound;
 
         public PopForm() {
             InitializeComponent();
@@ -25,6 +26,10 @@ namespace TX.Framework.WindowUI.Forms {
             this.ShowFormTimelag = 500;
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+        }
+
+        public PopForm(bool playSound) : this() {
+            this._playSound = playSound;
         }
 
         /// <summary>
@@ -47,15 +52,16 @@ namespace TX.Framework.WindowUI.Forms {
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e) {
-            if (this._Player != null) {
-                this._Player.Stop();
-                this._Player.Dispose();
+            if (this._player != null) {
+                this._player.Stop();
+                this._player.Dispose();
             }
             base.OnFormClosed(e);
         }
 
         protected override void OnLoad(EventArgs e) {
             Win32.AnimateWindow(this.Handle, this.ShowFormTimelag, (int) EnumShowWindowMode.BottomToTop);
+            PlaySound(Properties.Resources.Music_Question);
             base.OnLoad(e);
         }
 
@@ -67,10 +73,10 @@ namespace TX.Framework.WindowUI.Forms {
         /// <param name="fileStream">The file stream.</param>
         /// User:Ryan  CreateTime:2012-11-26 11:00.
         protected void PlaySound(Stream fileStream) {
-            if (this._Player == null) {
-                this._Player = new SoundPlayer();
-                this._Player.Stream = fileStream;
-                this._Player.Play();
+            if (_playSound && this._player == null) {
+                this._player = new SoundPlayer();
+                this._player.Stream = fileStream;
+                this._player.Play();
             }
         }
         #endregion
