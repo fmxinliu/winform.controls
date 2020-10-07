@@ -439,6 +439,12 @@
     <Compile Include="Controls\TXLightsMono\TXLightsMono.designer.cs">
       <DependentUpon>TXLightsMono.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TXLightsTricolor\TXLightsTricolor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TXLightsTricolor\TXLightsTricolor.Designer.cs">
+      <DependentUpon>TXLightsTricolor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TXLights\TXLights.cs">
       <SubType>UserControl</SubType>
     </Compile>
