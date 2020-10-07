@@ -34,12 +34,12 @@ namespace TX.Framework.WindowUI.Controls {
 
         [Browsable(true)]
         [Category("控制")]
-        [Description("是否显示指示灯边框,修改Padding.All可调整边框绘制")]
+        [Description("是否显示指示灯边框。选择true，可修改Padding.All调整边框")]
         public bool IsDrawBorder { get; set; }
 
         [Browsable(true)]
         [Category("控制")]
-        [Description("是否渐变显示点亮状态，修改CenterColor可调整中心颜色")]
+        [Description("是否渐变显示点亮状态。选择true，可修改CenterColor调整中心颜色")]
         public bool IsGradient { get; set; }
 
         [Browsable(true)]

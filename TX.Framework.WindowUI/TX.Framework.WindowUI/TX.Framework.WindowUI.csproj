@@ -433,6 +433,12 @@
     <Compile Include="Controls\TXFolderBrowserDialog\TXFolderBrowserDialog.Designer.cs">
       <DependentUpon>TXFolderBrowserDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TXLightsMono\TXLightsMono.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TXLightsMono\TXLightsMono.designer.cs">
+      <DependentUpon>TXLightsMono.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TXLights\TXLights.cs">
       <SubType>UserControl</SubType>
     </Compile>
