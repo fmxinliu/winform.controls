@@ -13,7 +13,8 @@ using System.Windows.Forms.Design;
 // To simplify the process of finding the toolbox bitmap resource:
 // #1 Create an internal class called "Resfinder" outside of the root namespace.
 // #2 Use "Resfinder" in the toolbox bitmap attribute instead of the control name.
-// #3 use the "<default namespace>.<resourcename>" string to locate the resource.
+// #3 Add image resources, right-click select "Property > Build Action > mbedded Resource"
+// #4 use the "<default namespace>.<resourcename>" string to locate the resource.
 // See: http://www.bobpowell.net/toolboxbitmap.htm
 internal class Resfinder { }
 

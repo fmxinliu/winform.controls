@@ -309,6 +309,13 @@ namespace TX.Framework.WindowUI.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap green {
+            get {
+                object obj = ResourceManager.GetObject("green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         public static System.Drawing.Bitmap help {
             get {
                 object obj = ResourceManager.GetObject("help", resourceCulture);
@@ -385,6 +392,13 @@ namespace TX.Framework.WindowUI.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap light {
+            get {
+                object obj = ResourceManager.GetObject("light", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         public static System.Drawing.Bitmap loader {
             get {
                 object obj = ResourceManager.GetObject("loader", resourceCulture);
@@ -642,6 +656,13 @@ namespace TX.Framework.WindowUI.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap rgy {
+            get {
+                object obj = ResourceManager.GetObject("rgy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         public static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);

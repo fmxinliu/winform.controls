@@ -15,6 +15,7 @@ namespace TX.Framework.WindowUI.Controls {
         Gray,
     }
     [Description("单色指示灯（红、绿、黄、灰）")]
+    [ToolboxBitmap(typeof(Resfinder), "TX.Framework.WindowUI.Resources.green.bmp")]
     public partial class TXLightsMono : TXLights {
         private Colors showColor;
         [Browsable(true)]

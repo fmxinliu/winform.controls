@@ -25,6 +25,7 @@ namespace TX.Framework.WindowUI.Controls {
         Vertical,
     }
     [Description("三色指示灯（红、绿、黄）")]
+    [ToolboxBitmap(typeof(Resfinder), "TX.Framework.WindowUI.Resources.rgy.bmp")]
     public partial class TXLightsTricolor : UserControl {
         private Light redLight, greenLight, yellowLight;
         private LightLayout lightLayout;

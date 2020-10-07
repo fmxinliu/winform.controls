@@ -742,6 +742,9 @@
     <Folder Include="Controls\Map\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\rgy.bmp" />
+    <EmbeddedResource Include="Resources\light.bmp" />
+    <EmbeddedResource Include="Resources\green.bmp" />
     <None Include="Resources\bar.png" />
     <None Include="Resources\query.ico" />
     <None Include="Resources\monitor.ico" />

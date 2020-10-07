@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace TX.Framework.WindowUI.Controls {
     [Description("指示灯")]
+    [ToolboxBitmap(typeof(Resfinder), "TX.Framework.WindowUI.Resources.light.bmp")]
     public partial class TXLights : UserControl {
         protected Color centerColor = Color.White;
         protected Color lightColor = Color.Green;
