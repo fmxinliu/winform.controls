@@ -6,17 +6,16 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.APIs;
 using System.Text;
 using System.Windows.Forms;
-
 using TX.Framework.WindowUI.Forms;
 
 namespace TX.Framework.WindowUI {
     /// <summary>
     /// 控件处理的基本帮助类
     /// </summary>
-    /// User:Ryan  CreateTime:2011-08-19 16:49.
-    public class ControlHelper {
+    public static class ControlHelper {
         /// <summary>
         /// Not applicable
         /// </summary>
@@ -89,8 +88,32 @@ namespace TX.Framework.WindowUI {
 
         #endregion
 
-        #region
+        #region SetEnable
 
+        private const int GWL_STYLE = -16;
+        private const int WS_DISABLED = 0x8000000;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll ")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int wndproc);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll ")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        /// <summary>
+        /// 设置控件Enable = false，控件颜色不变
+        /// </summary>
+        public static void SetEnable(Control c, bool enabled) {
+            c.Enabled = true; // 先使能控件
+
+            if (enabled) {
+                SetWindowLong(c.Handle, GWL_STYLE, (~WS_DISABLED) & GetWindowLong(c.Handle, GWL_STYLE));
+            }
+            else {
+                SetWindowLong(c.Handle, GWL_STYLE, WS_DISABLED + GetWindowLong(c.Handle, GWL_STYLE));
+            }
+
+            c.Enabled = enabled; // 复原控件使能状态
+        }
         #endregion
 
         #region
