@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TX.Framework.WindowUI;
 using TX.Framework.WindowUI.Forms;
 
 namespace WindowsTest {
@@ -19,6 +20,9 @@ namespace WindowsTest {
             this.txTreeComboBox1.ValueMember = "Value";
             this.txTreeComboBox1.BindData();
 
+            this.ComboBoxInit();
+            this.ComboBoxSimInit();
+            this.ComboBoxBindInit();
             this.TextBoxAutoCompleteInit();
         }
 
@@ -109,6 +113,59 @@ namespace WindowsTest {
             this.txTextBox3.AutoCompleteCustomSource = source;
             this.txTextBox3.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.txTextBox3.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private void ComboBoxInit() {
+            this.cboSelect.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            this.cboSelect.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void ComboBoxSimInit() {
+            string[] names = new string[] { "张三丰", "独孤求败", "风清扬", "扫地僧" };
+            var source = new AutoCompleteStringCollection();
+            source.AddRange(names);
+            this.txtSelect.AutoCompleteCustomSource = source;
+            this.txtSelect.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            this.txtSelect.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private void lstSelect_Click(object sender, EventArgs e) {
+            this.txtSelect.Text = this.lstSelect.Text;
+            this.txtSelect.Focus();
+            this.txtSelect.SelectAll(); // 获取输入焦点，才能选中
+        }
+
+        internal class ComboBoxObject {
+            public string Name { get; set; }
+            public string Value { get; set; }
+        }
+
+        private void ComboBoxBindInit() {
+            //this.txtSelectText.ReadOnly = true; // 文本可选
+            //this.txtSelectText.Enabled = false; // 文本不可选
+            ControlHelper.SetEnable(this.txtSelectText, false);
+            this.txtSelectText.Text = "测试数据绑定";
+
+            List<ComboBoxObject> items = new List<ComboBoxObject>();
+            for (int i = 0; i < 10; i++) {
+                ComboBoxObject o = new ComboBoxObject();
+                o.Name = "ComboBox" + i;
+                o.Value = i.ToString();
+                items.Add(o);
+            }
+
+            this.lstItems.DataSource = items; // 绑定数据源
+            this.lstItems.DisplayMember = "Name"; // 列表项显示的属性值
+            this.lstItems.ValueMember = "Value";  // 列表项选中时，SelectedValue显示的属性值
+
+            this.lstItems.SelectionMode = SelectionMode.MultiExtended; // 设置可多选
+        }
+
+        private void lstItems_Click(object sender, EventArgs e) {
+            var items = this.lstItems.SelectedItems;
+
+            // 设定了ValueMember，这里显示设定的属性值；否则，显示对象本身
+            object o = this.lstItems.SelectedValue;
         }
     }
 }
