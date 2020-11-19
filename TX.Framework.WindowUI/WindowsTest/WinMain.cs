@@ -203,10 +203,6 @@ namespace WindowsTest {
             }
         }
 
-        private void WinMain_FormClosed(object sender, FormClosedEventArgs e) {
-            this.txNotifyIcon.Visible = false; // 退出前，隐藏托盘图标，否则会有残漏
-        }
-
         private void ToolStripMenuItemStart_Click(object sender, EventArgs e) {
             this.txNotifyIcon.Icon = TX.Framework.WindowUI.Properties.Resources.start;
         }
@@ -229,6 +225,14 @@ namespace WindowsTest {
 
         private void ToolStripMenuItemExit_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void TXToolStripMenuItemExit_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void WinMain_FormClosed(object sender, FormClosedEventArgs e) {
+            this.txNotifyIcon.Visible = false; // 退出前，隐藏托盘图标，否则会有残漏
         }
 
         // 单击托盘图标
