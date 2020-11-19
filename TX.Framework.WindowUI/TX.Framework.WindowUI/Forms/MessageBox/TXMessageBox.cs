@@ -39,8 +39,8 @@ namespace TX.Framework.WindowUI.Forms {
             ControlHelper.BindMouseMoveEvent(this.labMessage);
             ControlHelper.BindMouseMoveEvent(this.panel1);
             //this.StartPosition = FormStartPosition.CenterParent;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - this.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - this.Height / 2);
+            //this.StartPosition = FormStartPosition.Manual;
+            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - this.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - this.Height / 2);
         }
 
         public TXMessageBox(string captionText, string message, EnumMessageBox messageBoxMode, bool playSound) : this() {
