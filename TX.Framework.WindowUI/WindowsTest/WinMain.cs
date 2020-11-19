@@ -18,6 +18,8 @@ namespace WindowsTest {
             this.txTreeComboBox1.DisplayMember = "Name";
             this.txTreeComboBox1.ValueMember = "Value";
             this.txTreeComboBox1.BindData();
+
+            this.TextBoxAutoCompleteInit();
         }
 
         private void txButton1_Click(object sender, EventArgs e) {
@@ -68,6 +70,45 @@ namespace WindowsTest {
 
         private void tabPage3_Click(object sender, EventArgs e) {
 
+        }
+
+        private void txTextBox1_ImageButtonClick(object sender, EventArgs e) {
+        }
+
+        ToolTip toolTip = new ToolTip();
+        private void txTextBox1_TextChanged(object sender, EventArgs e) {
+            this.txTextBox1.ToolTipIsBalloon = true;
+            this.txTextBox1.ToolTipIcon = ToolTipIcon.Error;
+            this.txTextBox1.ToolTipTitle = "错误";
+            //toolTip.IsBalloon = true;
+            //toolTip.ToolTipIcon = ToolTipIcon.Error;
+            //toolTip.ToolTipTitle = "错误";
+            if (this.txTextBox1.Text.Length % 2 == 0) {
+                int x = txTextBox1.ToolTipCursorPosition.X;
+                int y = txTextBox1.ToolTipCursorPosition.Y;
+                this.txTextBox1.ShowToolTip("123hjgj dgdgsdvgdfg打广告电饭锅到发", x, -100);
+                //int x = txTextBox1.GetCurrentCursorPosition().X;
+                //toolTip.Show("123hjgj dgdgsdvgdfg打广告电饭锅到发", this.txTextBox1,
+                //    x,
+                //    -100);
+            }
+            else {
+                //toolTip.Hide(this.txTextBox1);
+                this.txTextBox1.HideToolTip();
+            }
+        }
+
+        private void txTextBox1_LostFocus(object sender, EventArgs e) {
+        }
+
+        // 文本框输入补全
+        private void TextBoxAutoCompleteInit() {
+            string[] names = new string[] { "张三丰", "独孤求败", "风清扬", "扫地僧" };
+            var source = new AutoCompleteStringCollection();
+            source.AddRange(names);
+            this.txTextBox3.AutoCompleteCustomSource = source;
+            this.txTextBox3.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            this.txTextBox3.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
     }
 }

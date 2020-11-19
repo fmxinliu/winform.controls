@@ -23,6 +23,7 @@ namespace WindowsTest {
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WinMain));
             TX.Framework.WindowUI.Controls.RangeValueHeader rangeValueHeader1 = new TX.Framework.WindowUI.Controls.RangeValueHeader();
             TX.Framework.WindowUI.Controls.Docking.DockPanelSkin dockPanelSkin1 = new TX.Framework.WindowUI.Controls.Docking.DockPanelSkin();
             TX.Framework.WindowUI.Controls.Docking.AutoHideStripSkin autoHideStripSkin1 = new TX.Framework.WindowUI.Controls.Docking.AutoHideStripSkin();
@@ -45,6 +46,8 @@ namespace WindowsTest {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.xPanderPanelList1 = new TX.Framework.WindowUI.Controls.XPanderPanelList();
             this.xPanderPanel1 = new TX.Framework.WindowUI.Controls.XPanderPanel();
+            this.txTextBox4 = new TX.Framework.WindowUI.Controls.TXTextBox();
+            this.txTextBox3 = new TX.Framework.WindowUI.Controls.TXTextBox();
             this.txTreeComboBox2 = new TX.Framework.WindowUI.Controls.TXTreeComboBox();
             this.txTextBox2 = new TX.Framework.WindowUI.Controls.TXTextBox();
             this.txButton10 = new TX.Framework.WindowUI.Controls.TXButton();
@@ -166,6 +169,8 @@ namespace WindowsTest {
             // xPanderPanel1
             // 
             this.xPanderPanel1.CaptionFont = new System.Drawing.Font("Microsoft YaHei UI", 10.25F, System.Drawing.FontStyle.Bold);
+            this.xPanderPanel1.Controls.Add(this.txTextBox4);
+            this.xPanderPanel1.Controls.Add(this.txTextBox3);
             this.xPanderPanel1.Controls.Add(this.txTreeComboBox2);
             this.xPanderPanel1.Controls.Add(this.txTextBox2);
             this.xPanderPanel1.Controls.Add(this.txButton10);
@@ -204,6 +209,56 @@ namespace WindowsTest {
             this.xPanderPanel1.ToolTipTextExpandIconPanelCollapsed = null;
             this.xPanderPanel1.ToolTipTextExpandIconPanelExpanded = null;
             // 
+            // txTextBox4
+            // 
+            this.txTextBox4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txTextBox4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txTextBox4.BackColor = System.Drawing.Color.Transparent;
+            this.txTextBox4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(182)))), ((int)(((byte)(168)))), ((int)(((byte)(192)))));
+            this.txTextBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txTextBox4.DisableIME = false;
+            this.txTextBox4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txTextBox4.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txTextBox4.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
+            this.txTextBox4.Image = null;
+            this.txTextBox4.ImageSize = new System.Drawing.Size(0, 0);
+            this.txTextBox4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txTextBox4.Location = new System.Drawing.Point(6, 219);
+            this.txTextBox4.Multiline = true;
+            this.txTextBox4.Name = "txTextBox4";
+            this.txTextBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.txTextBox4.PasswordChar = '\0';
+            this.txTextBox4.Required = false;
+            this.txTextBox4.Size = new System.Drawing.Size(238, 75);
+            this.txTextBox4.TabIndex = 18;
+            this.txTextBox4.Text = "567";
+            this.txTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txTextBox4.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            // 
+            // txTextBox3
+            // 
+            this.txTextBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txTextBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txTextBox3.BackColor = System.Drawing.Color.Transparent;
+            this.txTextBox3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(182)))), ((int)(((byte)(168)))), ((int)(((byte)(192)))));
+            this.txTextBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txTextBox3.DisableIME = false;
+            this.txTextBox3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txTextBox3.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txTextBox3.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
+            this.txTextBox3.Image = null;
+            this.txTextBox3.ImageSize = new System.Drawing.Size(0, 0);
+            this.txTextBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txTextBox3.Location = new System.Drawing.Point(5, 163);
+            this.txTextBox3.Name = "txTextBox3";
+            this.txTextBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.txTextBox3.PasswordChar = '\0';
+            this.txTextBox3.Required = false;
+            this.txTextBox3.Size = new System.Drawing.Size(239, 37);
+            this.txTextBox3.TabIndex = 17;
+            this.txTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txTextBox3.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            // 
             // txTreeComboBox2
             // 
             this.txTreeComboBox2.CheckBox = false;
@@ -226,16 +281,22 @@ namespace WindowsTest {
             // 
             // txTextBox2
             // 
+            this.txTextBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txTextBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
             this.txTextBox2.BackColor = System.Drawing.Color.Transparent;
             this.txTextBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(182)))), ((int)(((byte)(168)))), ((int)(((byte)(192)))));
+            this.txTextBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txTextBox2.CornerRadius = 0;
+            this.txTextBox2.DisableIME = false;
             this.txTextBox2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txTextBox2.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txTextBox2.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txTextBox2.Image = null;
             this.txTextBox2.ImageSize = new System.Drawing.Size(0, 0);
-            this.txTextBox2.Location = new System.Drawing.Point(5, 118);
+            this.txTextBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txTextBox2.Location = new System.Drawing.Point(5, 114);
             this.txTextBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.txTextBox2.MaxLength = 5;
             this.txTextBox2.Name = "txTextBox2";
             this.txTextBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txTextBox2.PasswordChar = '\0';
@@ -243,11 +304,13 @@ namespace WindowsTest {
             this.txTextBox2.Size = new System.Drawing.Size(240, 38);
             this.txTextBox2.TabIndex = 2;
             this.txTextBox2.Text = "123";
+            this.txTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txTextBox2.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
             // 
             // txButton10
             // 
             this.txButton10.Image = null;
-            this.txButton10.Location = new System.Drawing.Point(124, 229);
+            this.txButton10.Location = new System.Drawing.Point(156, 405);
             this.txButton10.Margin = new System.Windows.Forms.Padding(4);
             this.txButton10.Name = "txButton10";
             this.txButton10.Size = new System.Drawing.Size(109, 35);
@@ -257,22 +320,34 @@ namespace WindowsTest {
             // 
             // txTextBox1
             // 
+            this.txTextBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txTextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
             this.txTextBox1.BackColor = System.Drawing.Color.Transparent;
-            this.txTextBox1.BorderColor = System.Drawing.Color.Red;
+            this.txTextBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(182)))), ((int)(((byte)(168)))), ((int)(((byte)(192)))));
+            this.txTextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txTextBox1.DisableIME = false;
             this.txTextBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txTextBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txTextBox1.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
-            this.txTextBox1.Image = null;
-            this.txTextBox1.ImageSize = new System.Drawing.Size(0, 0);
-            this.txTextBox1.Location = new System.Drawing.Point(5, 64);
+            this.txTextBox1.Image = ((System.Drawing.Image)(resources.GetObject("txTextBox1.Image")));
+            this.txTextBox1.ImageAlignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.txTextBox1.ImageSize = new System.Drawing.Size(16, 16);
+            this.txTextBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.txTextBox1.Location = new System.Drawing.Point(4, 54);
             this.txTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.txTextBox1.Name = "txTextBox1";
             this.txTextBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txTextBox1.PasswordChar = '\0';
-            this.txTextBox1.Required = false;
-            this.txTextBox1.Size = new System.Drawing.Size(240, 28);
+            this.txTextBox1.ReadOnly = true;
+            this.txTextBox1.Required = true;
+            this.txTextBox1.Size = new System.Drawing.Size(239, 42);
             this.txTextBox1.TabIndex = 0;
-            this.txTextBox1.Text = "123";
+            this.txTextBox1.Text = "777";
+            this.txTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txTextBox1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
+            this.txTextBox1.ImageButtonClick += new TX.Framework.WindowUI.Controls.TXTextBox.ImageButtonClickEventHandler(this.txTextBox1_ImageButtonClick);
+            this.txTextBox1.TextChanged += new System.EventHandler(this.txTextBox1_TextChanged);
+            this.txTextBox1.LostFocus += new System.EventHandler(this.txTextBox1_LostFocus);
             // 
             // xPanderPanel2
             // 
@@ -690,7 +765,7 @@ namespace WindowsTest {
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(959, 665);
+            this.tabPage2.Size = new System.Drawing.Size(960, 665);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -888,7 +963,7 @@ namespace WindowsTest {
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(959, 665);
+            this.tabPage3.Size = new System.Drawing.Size(960, 665);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -941,7 +1016,7 @@ namespace WindowsTest {
             this.txMenuStrip1.Location = new System.Drawing.Point(4, 32);
             this.txMenuStrip1.Name = "txMenuStrip1";
             this.txMenuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.txMenuStrip1.Size = new System.Drawing.Size(951, 24);
+            this.txMenuStrip1.Size = new System.Drawing.Size(952, 24);
             this.txMenuStrip1.TabIndex = 2;
             this.txMenuStrip1.Text = "txMenuStrip1";
             // 
@@ -956,7 +1031,7 @@ namespace WindowsTest {
             this.txMenuStrip2.Location = new System.Drawing.Point(4, 4);
             this.txMenuStrip2.Name = "txMenuStrip2";
             this.txMenuStrip2.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.txMenuStrip2.Size = new System.Drawing.Size(951, 28);
+            this.txMenuStrip2.Size = new System.Drawing.Size(952, 28);
             this.txMenuStrip2.TabIndex = 3;
             this.txMenuStrip2.Text = "txMenuStrip2";
             // 
@@ -1008,7 +1083,7 @@ namespace WindowsTest {
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage4.Size = new System.Drawing.Size(959, 665);
+            this.tabPage4.Size = new System.Drawing.Size(960, 665);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "List";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1055,7 +1130,7 @@ namespace WindowsTest {
             this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage5.Size = new System.Drawing.Size(959, 665);
+            this.tabPage5.Size = new System.Drawing.Size(960, 665);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1196,6 +1271,8 @@ namespace WindowsTest {
         private System.Windows.Forms.ToolStripMenuItem 菜单2ToolStripMenuItem;
         private TX.Framework.WindowUI.Controls.TXGroupBox txGroupBox2;
         private TX.Framework.WindowUI.Controls.TXDateTimePicker txDateTimePicker2;
+        private TX.Framework.WindowUI.Controls.TXTextBox txTextBox3;
+        private TX.Framework.WindowUI.Controls.TXTextBox txTextBox4;
 
     }
 }

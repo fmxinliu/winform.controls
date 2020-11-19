@@ -29,7 +29,7 @@ namespace TX.Framework.WindowUI.Controls {
         /// <summary>
         /// 内部的文本控件
         /// </summary>
-        private TextBox _TextBox;
+        private TextBoxInternal _TextBox;
 
         /// <summary>
         /// 边框颜色
@@ -71,6 +71,20 @@ namespace TX.Framework.WindowUI.Controls {
         /// </summary>
         private bool _Required = false;
 
+        /// <summary>
+        /// 是否禁用IME
+        /// </summary>
+        private bool _ImeDisabled = false;
+
+        /// <summary>
+        /// 禁用前的IME模式
+        /// </summary>
+        private ImeMode _ImeMode = ImeMode.NoControl;
+
+        /// 悬浮提示框
+        /// </summary>
+        private ToolTip _ToolTip;
+
         #endregion
 
         #region Events
@@ -81,8 +95,8 @@ namespace TX.Framework.WindowUI.Controls {
         /// 当图标按钮被点击时发生
         /// </summary>
         [Category("TXEvents")]
-        [Description("当图标按钮被点击时发生")]
-        public event ImageButtonClickEventHandler OnImageButtonClick {
+        [Description("当图标按钮被点击时发生。")]
+        public event ImageButtonClickEventHandler ImageButtonClick {
             add { base.Events.AddHandler(_ImageButton, value); }
             remove { base.Events.RemoveHandler(_ImageButton, value); }
         }
@@ -90,7 +104,24 @@ namespace TX.Framework.WindowUI.Controls {
         /// <summary>
         /// 当文本框Text值发生变化时发生
         /// </summary>
-        public EventHandler OnTextChanged;
+        [Browsable(true)]
+        [Category("TXEvents")]
+        [Description("当控件上更改 Text 属性的值时引发的事件。")]
+        public new event EventHandler TextChanged {
+            add { base.Events.AddHandler("TextChanged", value); }
+            remove { base.Events.RemoveHandler("TextChanged", value); }
+        }
+
+        /// <summary>
+        /// 当文本框Text失去焦点时发生
+        /// </summary>
+        [Browsable(true)]
+        [Category("TXEvents")]
+        [Description("当控件失去焦点时引发的事件。")]
+        public new event EventHandler LostFocus {
+            add { base.Events.AddHandler("LostFocus", value); }
+            remove { base.Events.RemoveHandler("LostFocus", value); }
+        }
 
         #endregion
 
@@ -122,11 +153,33 @@ namespace TX.Framework.WindowUI.Controls {
 
         #region Properties
 
-        /// <summary>
-        /// 获取或者设置控件的圆角值
-        /// </summary>
-        /// <value>The corner radius.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:22.
+        [Browsable(true)]
+        [DefaultValue(true)]
+        [Category("TXProperties")]
+        [Description("是否启用定义的快捷方式。如果启用，则为 true；否则为 false")]
+        public bool ShortcutsEnabled {
+            get { return this._TextBox.ShortcutsEnabled; }
+            set { this._TextBox.ShortcutsEnabled = value; }
+        }
+
+        [Category("TXProperties")]
+        [Browsable(true)]
+        [Description("是否禁用IME")]
+        public bool DisableIME {
+            get { return this._ImeDisabled; }
+            set {
+                this._ImeDisabled = value;
+                this._TextBox.ImeDisabled = value;
+                if (value) {
+                    this._ImeMode = this.ImeMode;
+                    this.ImeMode = ImeMode.Disable;
+                }
+                else {
+                    this.ImeMode = this._ImeMode;
+                }
+            }
+        }
+
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("圆角的半径值")]
@@ -149,21 +202,6 @@ namespace TX.Framework.WindowUI.Controls {
             get { return BorderStyle.None; }
         }
 
-        //[Browsable(false)]
-        //public new Color BackColor
-        //{
-        //    get { return base.BackColor; }
-        //    set
-        //    {
-        //        this.BackColor = value;
-        //    }
-        //}
-
-        /// <summary>
-        ///  获取或者设置边框颜色
-        /// </summary>
-        /// <value>The color of the border.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:23.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("边框颜色")]
@@ -175,11 +213,6 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        ///  获取或者设置控件是否必填，使用该功能，不可再使用图标按钮功能了！
-        /// </summary>
-        /// <value>The color of the border.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:23.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("必填")]
@@ -191,23 +224,18 @@ namespace TX.Framework.WindowUI.Controls {
                     this.Image = string.IsNullOrEmpty(this.Text) ? Properties.Resources.requried : Properties.Resources.check;
                     this.ImageAlignment = ToolStripItemAlignment.Right;
                     this.ImageSize = new Size(14, 14);
-                    this.OnImageButtonClick += new ImageButtonClickEventHandler(TXTextBox_OnImageButtonClick);
+                    this.ImageButtonClick += new ImageButtonClickEventHandler(TXTextBox_OnImageButtonClick);
                 }
                 else {
                     //this.Image = null;
                     //this.ImageSize = new Size(18, 18);
-                    this.OnImageButtonClick -= new ImageButtonClickEventHandler(TXTextBox_OnImageButtonClick);
+                    this.ImageButtonClick -= new ImageButtonClickEventHandler(TXTextBox_OnImageButtonClick);
                 }
 
                 base.Invalidate();
             }
         }
 
-        /// <summary>
-        ///  获取或者设置高亮时的边框色
-        /// </summary>
-        /// <value>The color of the height lightColor bolor.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:23.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("边框的高亮色")]
@@ -218,11 +246,6 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        ///  获取或者设置图标对象
-        /// </summary>
-        /// <value>The image.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:24.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("图标")]
@@ -239,11 +262,6 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        ///  获取或者设置图标显示的大小
-        /// </summary>
-        /// <value>The size of the image.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:24.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("图标的大小")]
@@ -256,11 +274,6 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        ///  获取或者设置图标放置的位置
-        /// </summary>
-        /// <value>The image alignment.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:24.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("图标的安放位置")]
@@ -274,11 +287,6 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        ///  获取或者设置控件内部的偏移量
-        /// </summary>
-        /// <value>The offset.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:24.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("控件内部的偏移量")]
@@ -292,17 +300,10 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        /// 获取或设置控件显示的文字的字体。
-        /// </summary>
-        /// <returns>
-        /// 要应用于由控件显示的文本的 <see cref="T:System.Drawing.Font"/>。默认为 <see cref="P:System.Windows.Forms.Control.DefaultFont"/> 属性的值。
-        /// </returns>
-        /// User:Ryan  CreateTime:2011-08-19 15:25.
         [Category("TXProperties")]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public new Font Font {
+        public override Font Font {
             get { return base.Font; }
             set {
                 base.Font = value;
@@ -310,17 +311,10 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        /// 获取或设置控件的前景色。
-        /// </summary>
-        /// <returns>
-        /// 控件的前景 <see cref="T:System.Drawing.Color"/>。默认为 <see cref="P:System.Windows.Forms.Control.DefaultForeColor"/> 属性的值。
-        /// </returns>
-        /// User:Ryan  CreateTime:2011-08-19 15:25.
         [Category("TXProperties")]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public new Color ForeColor {
+        public override Color ForeColor {
             get { return base.ForeColor; }
             set {
                 base.ForeColor = value;
@@ -328,14 +322,10 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        /// 获取或设置一个值，该值指示是否将控件的元素对齐以支持使用从右向左的字体的区域设置。
-        /// </summary>
-        /// User:Ryan  CreateTime:2011-08-19 15:25.
         [Category("TXProperties")]
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public new RightToLeft RightToLeft {
+        public override RightToLeft RightToLeft {
             get { return base.RightToLeft; }
             set {
                 base.RightToLeft = value;
@@ -343,44 +333,31 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        /// 获取或设置哪些控件边框停靠到其父控件并确定控件如何随其父级一起调整大小。
-        /// </summary>
-        /// <returns>
-        ///     <see cref="T:System.Windows.Forms.DockStyle"/> 值之一。默认为 <see cref="F:System.Windows.Forms.DockStyle.None"/>。
-        /// </returns>
-        /// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
-        /// 分配的值不是 <see cref="T:System.Windows.Forms.DockStyle"/> 值之一。
-        /// </exception>
-        /// User:Ryan  CreateTime:2011-08-19 15:26.
         [Category("TXProperties")]
         [Browsable(true)]
-        [Description("这个，你懂的！")]
+        [Description("在父控件中的停靠方式")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public override System.Windows.Forms.DockStyle Dock {
-            get {
-                return base.Dock;
-            }
-            set {
-                base.Dock = value;
-            }
+            get { return base.Dock; }
+            set { base.Dock = value; }
         }
 
-        /// <summary>
-        /// 文本值
-        /// </summary>
-        /// <returns>
-        /// 与该控件关联的文本。
-        /// </returns>
-        /// User:Ryan  CreateTime:2011-08-19 15:26.
+        [Category("TXProperties")]
+        [Browsable(true)]
+        [Localizable(true)]
+        [Description("文本的对齐方式")]
+        public HorizontalAlignment TextAlign {
+            get { return this._TextBox.TextAlign; }
+            set { this._TextBox.TextAlign = value; }
+        }
+
         [Category("TXProperties")]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [DefaultValue("")]
-        public new string Text {
-            get {
-                return this._TextBox.Text;
-            }
+        [Localizable(true)]
+        public override string Text {
+            get { return this._TextBox.Text; }
             set {
                 this._TextBox.Text = string.IsNullOrEmpty(value) || value.Contains("txTextBox") ? string.Empty : value;
                 ////Requried attribute
@@ -390,39 +367,23 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        /// 获取设置设置文本的最大长度
-        /// </summary>
-        /// <value>The length of the max.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:28.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("最大输入字符数")]
         [DefaultValue(32767)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int MaxLength {
-            get {
-                return this._TextBox.MaxLength;
-            }
-            set {
-                this._TextBox.MaxLength = value > 0 ? value : 0;
-            }
+            get { return this._TextBox.MaxLength; }
+            set { this._TextBox.MaxLength = value > 0 ? value : 0; }
         }
 
-        /// <summary>
-        /// 获取设置设置文本输入是否支持多行
-        /// </summary>
-        /// <value><c>true</c> if multiline; otherwise, <c>false</c>.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:29.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("是否支持多行输入")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [DefaultValue(false)]
         public bool Multiline {
-            get {
-                return this._TextBox.Multiline;
-            }
+            get { return this._TextBox.Multiline; }
             set {
                 this._TextBox.Multiline = value;
                 if (value) {
@@ -434,89 +395,188 @@ namespace TX.Framework.WindowUI.Controls {
             }
         }
 
-        /// <summary>
-        /// 获取设置设置密码格式的显示字符
-        /// </summary>
-        /// <value>The password char.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:29.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("密码字符")]
         [DefaultValue("")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public char PasswordChar {
-            get {
-                return this._TextBox.PasswordChar;
-            }
-            set {
-                this._TextBox.PasswordChar = value;
-            }
+            get { return this._TextBox.PasswordChar; }
+            set { this._TextBox.PasswordChar = value; }
         }
 
-        /// <summary>
-        /// 获取设置设置文本值是否只读
-        /// </summary>
-        /// <value><c>true</c> if [read only]; otherwise, <c>false</c>.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:29.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("是否只读")]
         [DefaultValue(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool ReadOnly {
-            get {
-                return this._TextBox.ReadOnly;
-            }
+            get { return this._TextBox.ReadOnly; }
             set {
                 this._TextBox.ReadOnly = value;
+                this._pictureBox.Enabled = this.Enabled && !value;
                 this.Invalidate();
             }
         }
 
-        /// <summary>
-        /// 获取设置设置多行显示时的滑动条显示方式
-        /// </summary>
-        /// <value>The scroll bars.</value>
-        /// User:Ryan  CreateTime:2011-08-19 15:30.
         [Category("TXProperties")]
         [Browsable(true)]
         [Description("多行输入时的滚动条显示")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [DefaultValue(typeof(ScrollBars), "None")]
         public ScrollBars ScrollBars {
-            get {
-                return this._TextBox.ScrollBars;
-            }
-            set {
-                this._TextBox.ScrollBars = value;
-            }
+            get { return this._TextBox.ScrollBars; }
+            set { this._TextBox.ScrollBars = value; }
         }
 
-        /// <summary>
-        /// 获取或设置一个值，该值指示控件是否可以对用户交互作出响应。
-        /// </summary>
-        /// <value></value>
-        /// <returns>
-        /// 如果控件可以对用户交互作出响应，则为 true；否则为 false。默认为 true。
-        /// </returns>
-        /// User:Ryan  CreateTime:2011-08-19 15:30.
         [Category("TXProperties")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Browsable(true)]
+        [Description("如果控件可以对用户交互作出响应，则为 true；否则为 false。默认为 true。")]
         public new bool Enabled {
             get { return this._TextBox.Enabled; }
             set {
                 this._TextBox.Enabled = value;
+                this._pictureBox.Enabled = !this.ReadOnly && value;
+            }
+        }
+
+        [Browsable(false)]
+        [Description("文本框中当前选定文本的字符串。")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string SelectedText {
+            get { return this._TextBox.SelectedText; }
+            set { this._TextBox.SelectedText = value; }
+        }
+
+        [Browsable(false)]
+        [Description("文本框中选定的字符数。")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int SelectionLength {
+            get { return this._TextBox.SelectionLength; }
+            set { this._TextBox.SelectionLength = value; }
+        }
+
+        [Browsable(false)]
+        [Description("文本框中选定的文本的起始位置。。")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int SelectionStart {
+            get { return this._TextBox.SelectionStart; }
+            set { this._TextBox.SelectionStart = value; }
+        }
+
+        [Browsable(false)]
+        [Description("控件的文本中包含的字符数。")]
+        public virtual int TextLength {
+            get { return this._TextBox.TextLength; }
+        }
+
+        [Localizable(true)]
+        [DefaultValue(true)]
+        [Category("TXProperties")]
+        [Description("指示多行文本框控件在必要时是否自动换行到下一行的开始。如果多行文本框控件可换行，则为 true；如果当用户键入的内容超过了控件的右边缘时，文本框控件自动水平滚动，则为 false。默认值为 true。")]
+        public bool WordWrap {
+            get { return this._TextBox.WordWrap; }
+            set { this._TextBox.WordWrap = value; }
+        }
+
+        [Browsable(true)]
+        [DefaultValue(false)]
+        [Category("TXProperties")]
+        [Description(@"指示在多行 TextBox 控件中按 Enter 键时，是在控件中创建一行新文本还是激活窗体的默认按钮
+            如果按 Enter 键时在多行版本的控件中创建一行新文本，则为 true；
+            如果按 Enter 键时激活窗体的默认按钮，则为 false。默认为 false。")]
+        public bool AcceptsReturn {
+            get { return this._TextBox.AcceptsReturn; }
+            set { this._TextBox.AcceptsReturn = value; }
+        }
+
+        [Browsable(true)]
+        [Category("TXProperties")]
+        [Description(@"指示是否在字符键入时修改其大小写格式")]
+        public CharacterCasing CharacterCasing {
+            get { return this._TextBox.CharacterCasing; }
+            set { this._TextBox.CharacterCasing = value; }
+        }
+
+        [Browsable(true)]
+        [Localizable(true)]
+        [Category("TXProperties")]
+        [Description("输入补全：候选词集合。")]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public AutoCompleteStringCollection AutoCompleteCustomSource {
+            get { return this._TextBox.AutoCompleteCustomSource; }
+            set { this._TextBox.AutoCompleteCustomSource = value; }
+        }
+
+        [Browsable(true)]
+        [Category("TXProperties")]
+        [Description("输入补全：模式。")]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public AutoCompleteMode AutoCompleteMode {
+            get { return this._TextBox.AutoCompleteMode; }
+            set { this._TextBox.AutoCompleteMode = value; }
+        }
+
+        [Browsable(true)]
+        [Category("TXProperties")]
+        [Description("输入补全：指定用于自动完成的完整字符串源。")]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        public AutoCompleteSource AutoCompleteSource {
+            get { return this._TextBox.AutoCompleteSource; }
+            set { this._TextBox.AutoCompleteSource = value; }
+        }
+
+        [Browsable(true)]
+        [Category("TXProperties")]
+        [DefaultValue(false)]
+        [Description("工具提示：如果使用气球状窗口，则为 true；如果应使用标准矩形窗口，则为 false。默认值为 false。")]
+        public bool ToolTipIsBalloon {
+            get { return this._ToolTip.IsBalloon; }
+            set { this._ToolTip.IsBalloon = value; }
+        }
+
+        [Browsable(true)]
+        [Category("TXProperties")]
+        [Description("工具提示：文本旁显示的图标的类型。")]
+        public ToolTipIcon ToolTipIcon {
+            get { return this._ToolTip.ToolTipIcon; }
+            set { this._ToolTip.ToolTipIcon = value; }
+        }
+
+        [Browsable(true)]
+        [Category("TXProperties")]
+        [DefaultValue("")]
+        [Description("工具提示：工具提示窗口的标题。")]
+        public string ToolTipTitle {
+            get { return this._ToolTip.ToolTipTitle; }
+            set { this._ToolTip.ToolTipTitle = value; }
+        }
+
+        [Browsable(false)]
+        [Description("工具提示：当前输入光标位置。")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Point ToolTipCursorPosition {
+            get {
+                int index = Math.Max(0, this.SelectionStart - 1);
+                Point pt = this._TextBox.GetPositionFromCharIndex(index);
+                return pt;
             }
         }
 
         #endregion
 
-        #region  private Events
+        #region private Events
 
         private void _TextBox_LostFocus(object sender, EventArgs e) {
             this._ControlState = EnumControlState.Default;
             this.Invalidate();
+
+            EventHandler handler = base.Events["LostFocus"] as EventHandler;
+            if (handler != null) {
+                handler(this, e);
+            }
         }
 
         private void _TextBox_GotFocus(object sender, EventArgs e) {
@@ -543,7 +603,7 @@ namespace TX.Framework.WindowUI.Controls {
         private void _pictureBox_Click(object sender, EventArgs e) {
             ImageButtonClickEventHandler handler = base.Events[_ImageButton] as ImageButtonClickEventHandler;
             if (handler != null) {
-                handler(this.Text, e);
+                handler(this, e);
             }
         }
 
@@ -552,33 +612,93 @@ namespace TX.Framework.WindowUI.Controls {
                 this.Image = string.IsNullOrEmpty(this.Text.Trim()) ? Properties.Resources.requried : Properties.Resources.check;
             }
 
-            if (this.OnTextChanged != null) {
-                this.OnTextChanged(sender, e);
+            EventHandler handler = base.Events["TextChanged"] as EventHandler;
+            if (handler != null) {
+                handler(this, e);
             }
         }
 
         private void TXTextBox_OnImageButtonClick(object sender, EventArgs e) {
-            Forms.TXMessageBoxExtensions.Warning("亲，该项为必填哦！");
+            if (string.IsNullOrEmpty(this.Text)) {
+                Forms.TXMessageBoxExtensions.Warning("亲，该项为必填哦！");
+            }
         }
 
         #endregion
 
         #region public methods
 
+        public void AppendText(string text) {
+            this._TextBox.AppendText(text);
+        }
+
+        public void Clear() {
+            this._TextBox.Clear();
+        }
+
+        public void ClearUndo() {
+            this._TextBox.ClearUndo();
+        }
+
+        public void Copy() {
+            this._TextBox.Copy();
+        }
+
+        public void Cut() {
+            this._TextBox.Cut();
+        }
+
+        public void Paste() {
+            this._TextBox.Paste();
+        }
+
+        public void Undo() {
+            this._TextBox.Undo();
+        }
+
+        public void DeselectAll() {
+            this._TextBox.DeselectAll();
+        }
+
         public void SelectAll() {
             this._TextBox.SelectAll();
         }
 
-        public void Focus() {
+        public new void Focus() {
             this._TextBox.Focus();
         }
 
-        public void Select() {
+        public new void Select() {
             this._TextBox.Select();
         }
 
         public void Select(int start, int length) {
             this._TextBox.Select(start, length);
+        }
+
+        public void ScrollToCaret() {
+            this._TextBox.ScrollToCaret();
+        }
+
+        public void ShowToolTip(string text, int y) {
+            this._ToolTip.Show(text, this._TextBox, this.ToolTipCursorPosition.X, y);
+        }
+
+        public void ShowToolTip(string text, int x, int y) {
+            this._ToolTip.Show(text, this._TextBox, x, y);
+        }
+
+        public void ShowToolTip(string text, int x, int y, int duration) {
+            if (duration > 0) {
+                this._ToolTip.Show(text, this._TextBox, x, y, duration);
+            }
+            else {
+                this.ShowToolTip(text, x, y); // 一直显示
+            }
+        }
+
+        public void HideToolTip() {
+            this._ToolTip.Hide(this._TextBox);
         }
 
         #endregion
@@ -623,11 +743,24 @@ namespace TX.Framework.WindowUI.Controls {
 
         #endregion
 
+        #region protected methods
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            if (this.DisableIME && keyData == (Keys.Control | Keys.V)) {
+                return true; // 禁用 IME 时，屏蔽粘贴快捷键
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        #endregion
+
         #region InitializeComponent
 
         private void InitializeComponent() {
-            this._TextBox = new System.Windows.Forms.TextBox();
+            this._TextBox = new TextBoxInternal();
             this._pictureBox = new System.Windows.Forms.PictureBox();
+            this._ToolTip = new System.Windows.Forms.ToolTip();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -665,6 +798,28 @@ namespace TX.Framework.WindowUI.Controls {
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+        }
+
+        #endregion
+
+        #region TextBoxInternal
+
+        internal class TextBoxInternal : System.Windows.Forms.TextBox {
+            public const int WM_GETTEXT = 0x000d;
+            public const int WM_COPY = 0x0301;
+            public const int WM_PASTE = 0x0302;
+            public const int WM_CONTEXTMENU = 0x007B;
+            public const int WM_RBUTTONDOWN = 0x0204;
+
+            public bool ImeDisabled { get; set; }
+
+            protected override void WndProc(ref Message m) {
+                if (this.ImeDisabled && m.Msg == WM_CONTEXTMENU) {
+                    return; // 禁用 IME 时，禁用右键弹出菜单
+                }
+
+                base.WndProc(ref m);
+            }
         }
 
         #endregion
