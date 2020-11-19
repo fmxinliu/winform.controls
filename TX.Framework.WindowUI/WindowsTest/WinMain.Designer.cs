@@ -858,7 +858,7 @@ namespace WindowsTest {
             this.panel4.MinimumSize = new System.Drawing.Size(22, 22);
             this.panel4.Name = "panel4";
             this.panel4.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Default;
-            this.panel4.Size = new System.Drawing.Size(685, 477);
+            this.panel4.Size = new System.Drawing.Size(22, 22);
             this.panel4.TabIndex = 4;
             this.panel4.Text = "panel4";
             this.panel4.ToolTipTextCloseIcon = null;
@@ -878,7 +878,7 @@ namespace WindowsTest {
             this.txRangeValue1.Margin = new System.Windows.Forms.Padding(5);
             this.txRangeValue1.Name = "txRangeValue1";
             this.txRangeValue1.RangeValues = null;
-            this.txRangeValue1.Size = new System.Drawing.Size(683, 453);
+            this.txRangeValue1.Size = new System.Drawing.Size(20, 0);
             this.txRangeValue1.TabIndex = 0;
             // 
             // panel3
@@ -912,7 +912,7 @@ namespace WindowsTest {
             this.panel3.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
             this.panel3.ShowCloseIcon = true;
             this.panel3.ShowExpandIcon = true;
-            this.panel3.Size = new System.Drawing.Size(685, 180);
+            this.panel3.Size = new System.Drawing.Size(22, 180);
             this.panel3.TabIndex = 3;
             this.panel3.Text = "panel3";
             this.panel3.ToolTipTextCloseIcon = null;
@@ -927,7 +927,7 @@ namespace WindowsTest {
             this.dockPanel1.Location = new System.Drawing.Point(271, 4);
             this.dockPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(685, 657);
+            this.dockPanel1.Size = new System.Drawing.Size(0, 55);
             dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
             dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
             autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
@@ -1004,7 +1004,7 @@ namespace WindowsTest {
             this.panel2.Name = "panel2";
             this.panel2.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
             this.panel2.ShowExpandIcon = true;
-            this.panel2.Size = new System.Drawing.Size(267, 657);
+            this.panel2.Size = new System.Drawing.Size(267, 55);
             this.panel2.TabIndex = 0;
             this.panel2.Text = "panel2";
             this.panel2.ToolTipTextCloseIcon = null;
@@ -1169,7 +1169,7 @@ namespace WindowsTest {
             this.treeListView1.RowBackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(246)))), ((int)(((byte)(253)))));
             this.treeListView1.SelectedBeginColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
             this.treeListView1.SelectedEndColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(225)))), ((int)(((byte)(253)))));
-            this.treeListView1.Size = new System.Drawing.Size(952, 657);
+            this.treeListView1.Size = new System.Drawing.Size(184, 55);
             this.treeListView1.TabIndex = 0;
             this.treeListView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -1249,9 +1249,9 @@ namespace WindowsTest {
             // 
             this.groupBox2.Controls.Add(this.cboSelect);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox2.Location = new System.Drawing.Point(618, 0);
+            this.groupBox2.Location = new System.Drawing.Point(-150, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(342, 665);
+            this.groupBox2.Size = new System.Drawing.Size(342, 63);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ComboBox";
@@ -1268,7 +1268,7 @@ namespace WindowsTest {
             "扫地僧"});
             this.cboSelect.Location = new System.Drawing.Point(3, 21);
             this.cboSelect.Name = "cboSelect";
-            this.cboSelect.Size = new System.Drawing.Size(336, 641);
+            this.cboSelect.Size = new System.Drawing.Size(336, 39);
             this.cboSelect.TabIndex = 1;
             // 
             // groupBox1
@@ -1278,7 +1278,7 @@ namespace WindowsTest {
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(320, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(640, 665);
+            this.groupBox1.Size = new System.Drawing.Size(0, 63);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "仿ComboBox";
@@ -1295,7 +1295,7 @@ namespace WindowsTest {
             "扫地僧"});
             this.lstSelect.Location = new System.Drawing.Point(3, 46);
             this.lstSelect.Name = "lstSelect";
-            this.lstSelect.Size = new System.Drawing.Size(634, 616);
+            this.lstSelect.Size = new System.Drawing.Size(0, 14);
             this.lstSelect.TabIndex = 1;
             this.lstSelect.Click += new System.EventHandler(this.lstSelect_Click);
             // 
@@ -1304,7 +1304,7 @@ namespace WindowsTest {
             this.txtSelect.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtSelect.Location = new System.Drawing.Point(3, 21);
             this.txtSelect.Name = "txtSelect";
-            this.txtSelect.Size = new System.Drawing.Size(634, 25);
+            this.txtSelect.Size = new System.Drawing.Size(0, 25);
             this.txtSelect.TabIndex = 2;
             // 
             // groupBox3
@@ -1314,7 +1314,7 @@ namespace WindowsTest {
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(320, 665);
+            this.groupBox3.Size = new System.Drawing.Size(320, 63);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ListBox事件绑定";
@@ -1326,7 +1326,7 @@ namespace WindowsTest {
             this.lstItems.ItemHeight = 15;
             this.lstItems.Location = new System.Drawing.Point(3, 46);
             this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(314, 616);
+            this.lstItems.Size = new System.Drawing.Size(314, 14);
             this.lstItems.TabIndex = 1;
             this.lstItems.Click += new System.EventHandler(this.lstItems_Click);
             // 
@@ -1615,11 +1615,11 @@ namespace WindowsTest {
             this.ClientSize = new System.Drawing.Size(1304, 752);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip = this.txMenuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WinMain";
             this.Padding = new System.Windows.Forms.Padding(5, 8, 5, 5);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "主窗体-**ERP系统";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WinMain_FormClosed);
             this.Load += new System.EventHandler(this.winMain_Load);

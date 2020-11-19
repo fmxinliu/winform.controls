@@ -95,7 +95,7 @@ namespace TX.Framework.WindowUI.Forms {
             base.Padding = this.DefaultPadding;
             this.StartPosition = FormStartPosition.CenterParent;
             base.Size = new Size(500, 350);
-            this.ResetRegion();
+            //this.ResetRegion();
             ////任务栏的logo
             base.Icon = Properties.Resources.logo;
             this._CapitionLogo = Properties.Resources.naruto;
