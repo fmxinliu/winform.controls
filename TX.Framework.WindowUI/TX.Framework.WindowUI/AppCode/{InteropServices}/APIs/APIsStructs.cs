@@ -614,6 +614,7 @@ namespace System.Runtime.InteropServices.APIs {
         }
         #endregion
 
+        #region INPUT
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct INPUT {
             public uint type;
@@ -624,5 +625,17 @@ namespace System.Runtime.InteropServices.APIs {
             public uint time;
             public uint dwExtra;
         }
+        #endregion
+
+        #region FLASHWINFO
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct FLASHWINFO {
+            public uint cbSize;     // 该结构的字节大小
+            public IntPtr hwnd;     // 要闪烁的窗口的句柄，该窗口可以是打开的或最小化的
+            public uint dwFlags;    // 闪烁的状态
+            public uint uCount;     // 闪烁窗口的次数
+            public uint dwTimeout;  // 窗口闪烁的频率，毫秒为单位；若该值为0，则为默认图标的闪烁频率
+        }
+        #endregion
     }
 }

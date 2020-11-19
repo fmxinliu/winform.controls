@@ -108,6 +108,7 @@
     <Compile Include="AppCode\SKin\SkinThemeKissOfAngel.cs" />
     <Compile Include="AppCode\SKin\SkinThemeNoFlower.cs" />
     <Compile Include="AppCode\SKin\SkinThemeSunsetRed.cs" />
+    <Compile Include="AppCode\Utility\TaskBarHelper.cs" />
     <Compile Include="AppCode\{Reference}\Caching\Cache.cs" />
     <Compile Include="AppCode\{Reference}\Caching\CacheStrategy.cs" />
     <Compile Include="AppCode\{Reference}\Caching\ICache.cs" />
@@ -451,6 +452,9 @@
     <Compile Include="Controls\TXLights\TXLights.designer.cs">
       <DependentUpon>TXLights.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TXNotifyIcon\TXNotifyIcon.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TXRangeValue\RangeValueHeader.cs" />
     <Compile Include="Controls\TXRangeValue\RangeValueItem.cs" />
     <Compile Include="Controls\TXRangeValue\TXRangeValue.cs">
@@ -742,6 +746,10 @@
     <Folder Include="Controls\Map\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\transparent.ico" />
+    <None Include="Resources\stop.ico" />
+    <None Include="Resources\start.ico" />
+    <None Include="Resources\shell.ico" />
     <EmbeddedResource Include="Resources\rgy.bmp" />
     <EmbeddedResource Include="Resources\light.bmp" />
     <EmbeddedResource Include="Resources\green.bmp" />

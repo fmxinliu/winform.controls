@@ -1656,6 +1656,10 @@ namespace System.Runtime.InteropServices.APIs {
         }
         #endregion
 
+        #region Mouse Event Flags
+        /// <summary>
+        /// Mouse Event Flags
+        /// </summary>
         public enum MouseEventFlags {
             MOVE = 0x0001,
             LEFTDOWN = 0x0002,
@@ -1670,5 +1674,39 @@ namespace System.Runtime.InteropServices.APIs {
             VIRTUALDESK = 0x4000,
             ABSOLUTE = 0x8000,
         }
+        #endregion
+
+        #region Mouse Event Flags
+        /// <summary>
+        /// Flash Window Flags
+        /// </summary>
+        [Flags]
+        public enum FlashWindowFlags : uint {
+            //// <summary>
+            /// 同时闪烁窗口标题和窗口的任务栏按钮，相当于FALSHW_CAPTION | FLASHW_TRAY
+            /// </summary>
+            FLASHW_ALL = 0x00000003,
+            /// <summary>
+            /// 闪烁窗口的标题
+            /// </summary>
+            FLASHW_CAPTION = 0x00000001,
+            /// <summary>
+            /// 停止闪烁，系统将重置窗口到其初始状态
+            /// </summary>
+            FLASHW_STOP = 0,
+            /// <summary>
+            /// 不停地闪烁，直到FLASHW_STOP标志被设置
+            /// </summary>
+            FLASHW_TIMER = 0x00000004,
+            /// <summary>
+            /// 不停地闪烁，直到窗口前端显示
+            /// </summary>
+            FLASHW_TIMERNOFG = 0x0000000C,
+            /// <summary>
+            /// 闪烁窗口的任务栏按钮
+            /// </summary>
+            FLASHW_TRAY = 0x00000002,
+        }
+        #endregion
     }
 }

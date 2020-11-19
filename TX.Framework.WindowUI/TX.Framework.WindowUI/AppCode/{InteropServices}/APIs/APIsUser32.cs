@@ -1,7 +1,7 @@
 using System;
 
 namespace System.Runtime.InteropServices.APIs {
-    public class APIsUser32 {
+    public static class APIsUser32 {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern uint SendInput(uint nInputs, APIsStructs.INPUT[] inputs, int cbSize);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -78,58 +78,57 @@ namespace System.Runtime.InteropServices.APIs {
         public static extern int InvalidateRect(IntPtr hWnd, ref APIsStructs.RECT rc, int bErase);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int InvalidateRect(IntPtr hWnd, IntPtr rc, int bErase);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool WaitMessage();
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool PeekMessage(ref APIsStructs.MSG msg, int hWnd, uint wFilterMin, uint wFilterMax, APIsEnums.PeekMessageFlags flags);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool GetMessage(ref APIsStructs.MSG msg, int hWnd, uint wFilterMin, uint wFilterMax);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool TranslateMessage(ref APIsStructs.MSG msg);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool DispatchMessage(ref APIsStructs.MSG msg);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr LoadCursor(IntPtr hInstance, APIsEnums.CursorTypes cursor);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SetCursor(IntPtr hCursor);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetFocus();
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool ReleaseCapture();
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SetCapture(IntPtr hWnd);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr BeginPaint(IntPtr hWnd, ref APIsStructs.PAINTSTRUCT ps);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool EndPaint(IntPtr hWnd, ref APIsStructs.PAINTSTRUCT ps);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        public static extern bool UpdateLayeredWindow(IntPtr hwnd, IntPtr hdcDst, ref APIsStructs.POINTAPI pptDst, ref APIsStructs.SIZE psize,
-            IntPtr hdcSrc, ref APIsStructs.POINTAPI pprSrc, Int32 crKey, ref APIsStructs.BLENDFUNCTION pblend, APIsEnums.UpdateLayeredWindowFlags dwFlags);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool UpdateLayeredWindow(IntPtr hwnd, IntPtr hdcDst, ref APIsStructs.POINTAPI pptDst, ref APIsStructs.SIZE psize, IntPtr hdcSrc, ref APIsStructs.POINTAPI pprSrc, Int32 crKey, ref APIsStructs.BLENDFUNCTION pblend, APIsEnums.UpdateLayeredWindowFlags dwFlags);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool GetWindowRect(IntPtr hWnd, ref APIsStructs.RECT rect);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool ClientToScreen(IntPtr hWnd, ref APIsStructs.POINTAPI pt);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool TrackMouseEvent(ref APIsStructs.TRACKMOUSEEVENTS tme);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool SetWindowRgn(IntPtr hWnd, IntPtr hRgn, bool redraw);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern ushort GetKeyState(int virtKey);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool MoveWindow(IntPtr hWnd, int x, int y, int width, int height, bool repaint);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int GetClassName(IntPtr hWnd, System.Text.StringBuilder ClassName, int nMaxCount);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetDCEx(IntPtr hWnd, IntPtr hRegion, uint flags);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetWindowDC(IntPtr hWnd);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int FillRect(IntPtr hDC, ref APIsStructs.RECT rect, IntPtr hBrush);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int GetWindowPlacement(IntPtr hWnd, ref APIsStructs.WINDOWPLACEMENT wp);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SetWindowText(IntPtr hWnd, string text);
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int GetWindowText(IntPtr hWnd, System.Text.StringBuilder text, int maxCount);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
@@ -150,8 +149,7 @@ namespace System.Runtime.InteropServices.APIs {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int GetScrollInfo(IntPtr hwnd, int bar, ref APIsStructs.SCROLLINFO si);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern int ScrollWindowEx(IntPtr hWnd, int dx, int dy,
-            ref APIsStructs.RECT rcScroll, ref APIsStructs.RECT rcClip, IntPtr UpdateRegion, ref APIsStructs.RECT rcInvalidated, uint flags);
+        public static extern int ScrollWindowEx(IntPtr hWnd, int dx, int dy, ref APIsStructs.RECT rcScroll, ref APIsStructs.RECT rcClip, IntPtr UpdateRegion, ref APIsStructs.RECT rcInvalidated, uint flags);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool IsWindow(IntPtr hWnd);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -166,13 +164,15 @@ namespace System.Runtime.InteropServices.APIs {
         public static extern int SetProp(IntPtr hWnd, IntPtr atom, IntPtr hData);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int CallWindowProc(IntPtr hOldProc, IntPtr hWnd, uint message, int wParam, int lParam);
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hWnd, APIsEnums.ListViewMessages msg,
-            Int32 wParam, ref APIsStructs.LV_ITEM lParam);
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool SendMessage(IntPtr hWnd, APIsEnums.ListViewMessages msg, Int32 wParam, ref APIsStructs.LV_ITEM lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int SendMessage(IntPtr hWnd, Int32 msg, Int32 wParam, ref APIsStructs.LVHITTESTINFO lParam);
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hWnd, int msg,
-            IntPtr wParam, ref IntPtr lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref IntPtr lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool FlashWindowEx(ref APIsStructs.FLASHWINFO pwfi);
     }
 }

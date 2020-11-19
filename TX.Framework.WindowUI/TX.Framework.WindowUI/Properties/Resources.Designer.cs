@@ -91,7 +91,7 @@ namespace TX.Framework.WindowUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         public static System.Drawing.Bitmap bg01 {
             get {
                 object obj = ResourceManager.GetObject("bg01", resourceCulture);
@@ -315,7 +315,7 @@ namespace TX.Framework.WindowUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         public static System.Drawing.Bitmap help {
             get {
                 object obj = ResourceManager.GetObject("help", resourceCulture);
@@ -398,7 +398,7 @@ namespace TX.Framework.WindowUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         public static System.Drawing.Bitmap loader {
             get {
                 object obj = ResourceManager.GetObject("loader", resourceCulture);
@@ -590,7 +590,7 @@ namespace TX.Framework.WindowUI.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
-
+        
         public static System.Drawing.Bitmap question {
             get {
                 object obj = ResourceManager.GetObject("question", resourceCulture);
@@ -662,7 +662,7 @@ namespace TX.Framework.WindowUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         public static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);
@@ -677,10 +677,31 @@ namespace TX.Framework.WindowUI.Properties {
             }
         }
         
+        public static System.Drawing.Icon shell {
+            get {
+                object obj = ResourceManager.GetObject("shell", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap skin {
             get {
                 object obj = ResourceManager.GetObject("skin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon start {
+            get {
+                object obj = ResourceManager.GetObject("start", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon stop {
+            get {
+                object obj = ResourceManager.GetObject("stop", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -690,6 +711,13 @@ namespace TX.Framework.WindowUI.Properties {
         public static string TABLE_MUST_HAVE_ONE_PRIMARY_KEY {
             get {
                 return ResourceManager.GetString("TABLE_MUST_HAVE_ONE_PRIMARY_KEY", resourceCulture);
+            }
+        }
+        
+        public static System.Drawing.Icon transparent {
+            get {
+                object obj = ResourceManager.GetObject("transparent", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         

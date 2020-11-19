@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.APIs;
 using System.Text;
 
 namespace System.Win32 {
@@ -24,6 +25,25 @@ namespace System.Win32 {
             bool ok = EmptyClipboard();
             CloseClipboard();
             return ok;
+        }
+        public static void FlashWindow(IntPtr hWnd, bool invert) {
+            APIsUser32.FlashWindow(hWnd, invert);
+        }
+        public static void FlashWindow(IntPtr hWnd, int count) {
+            FlashWindow(hWnd, count, 0);
+        }
+        public static void FlashWindow(IntPtr hWnd, int count, int timeout) {
+            FlashWindow(hWnd, count, timeout,
+                APIsEnums.FlashWindowFlags.FLASHW_TRAY | APIsEnums.FlashWindowFlags.FLASHW_TIMERNOFG);
+        }
+        public static void FlashWindow(IntPtr hWnd, int count, int timeout, APIsEnums.FlashWindowFlags flags) {
+            APIsStructs.FLASHWINFO fInfo = new APIsStructs.FLASHWINFO();
+            fInfo.cbSize = Convert.ToUInt32(Marshal.SizeOf(fInfo));
+            fInfo.hwnd = hWnd;
+            fInfo.dwFlags = (uint)flags;
+            fInfo.uCount = (uint)count; // UInt32.MaxValue;
+            fInfo.dwTimeout = (uint)Math.Max(0, timeout);
+            APIsUser32.FlashWindowEx(ref fInfo);
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]

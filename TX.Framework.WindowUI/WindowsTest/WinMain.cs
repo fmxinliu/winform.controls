@@ -5,9 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Win32;
 using System.Windows.Forms;
 using TX.Framework.WindowUI;
 using TX.Framework.WindowUI.Forms;
+
 
 namespace WindowsTest {
     public partial class WinMain : MainForm {
@@ -198,6 +200,85 @@ namespace WindowsTest {
                 this.ToolTipsInForm.ToolTipTitle = "提示";
                 this.ToolTipsInForm.ToolTipIcon = ToolTipIcon.Info;
                 this.ToolTipsInForm.SetToolTip(this.lblLoginInfo, "登录成功");
+            }
+        }
+
+        private void WinMain_FormClosed(object sender, FormClosedEventArgs e) {
+            this.txNotifyIcon.Visible = false; // 退出前，隐藏托盘图标，否则会有残漏
+        }
+
+        private void ToolStripMenuItemStart_Click(object sender, EventArgs e) {
+            this.txNotifyIcon.Icon = TX.Framework.WindowUI.Properties.Resources.start;
+        }
+
+        private void ToolStripMenuItemStop_Click(object sender, EventArgs e) {
+            this.txNotifyIcon.Icon = TX.Framework.WindowUI.Properties.Resources.stop;
+        }
+
+        private void ToolStripMenuItemFlash_Click(object sender, EventArgs e) {
+            if (this.ToolStripMenuItemFlash.Text != "停止闪烁") {
+                this.txNotifyIcon.FlashEnabled = true;
+                this.ToolStripMenuItemFlash.Text = "停止闪烁";
+            }
+            else {
+                this.txNotifyIcon.FlashEnabled = false;
+                this.ToolStripMenuItemFlash.Text = "闪烁";
+                //this.txNotifyIcon.Icon = TX.Framework.WindowUI.Properties.Resources.logo;
+            }
+        }
+
+        private void ToolStripMenuItemExit_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        // 单击托盘图标
+        private void txNotifyIcon_MouseClick(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Left) {
+                this.WindowState = this.state; // 显示窗体
+                this.Activate(); // 激活窗体
+            }
+        }
+
+        private FormWindowState state;
+        private void WinMain_SizeChanged(object sender, EventArgs e) {
+            if (this.WindowState != FormWindowState.Minimized) {
+                this.state = this.WindowState; // 记录窗体最小化前的状态
+            }
+        }
+
+        // 用于捕获Form最大最小化事件，
+        // 这里，由于重绘ControlBix无法捕获到
+        const int WM_SYSCOMMAND = 0x112;
+        const int SC_CLOSE = 0xF060;
+        const int SC_MINIMIZE = 0xF020;
+        const int SC_MAXIMIZE = 0xF030;
+        protected override void WndProc(ref Message m) {
+            if (m.Msg == WM_SYSCOMMAND) {
+                switch (m.WParam.ToInt32()) {
+                    case SC_MINIMIZE:
+                        break;
+                    case SC_MAXIMIZE:
+                        break;
+                    case SC_CLOSE:
+                        break;
+                }
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void rdoFlashWindow_CheckedChanged(object sender, EventArgs e) {
+            this.nupFreq.Enabled = this.rdoFlashWindowEx.Checked;
+            this.nupCount.Enabled = this.rdoFlashWindowEx.Checked;
+        }
+
+        private void btnFlash_Click(object sender, EventArgs e) {
+            if (this.rdoFlashWindow.Checked) {
+                NativeMethods.FlashWindow(this.Handle, true);
+            }
+            else {
+                NativeMethods.FlashWindow(this.Handle, (int)this.nupCount.Value, (int)this.nupFreq.Value,
+                    System.Runtime.InteropServices.APIs.APIsEnums.FlashWindowFlags.FLASHW_TRAY);
             }
         }
     }
