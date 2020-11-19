@@ -23,6 +23,7 @@ namespace WindowsTest {
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WinMain));
             TX.Framework.WindowUI.Controls.RangeValueHeader rangeValueHeader3 = new TX.Framework.WindowUI.Controls.RangeValueHeader();
             TX.Framework.WindowUI.Controls.Docking.DockPanelSkin dockPanelSkin3 = new TX.Framework.WindowUI.Controls.Docking.DockPanelSkin();
@@ -58,6 +59,7 @@ namespace WindowsTest {
             TX.Framework.WindowUI.Controls.Docking.TabGradient tabGradient7 = new TX.Framework.WindowUI.Controls.Docking.TabGradient();
             TX.Framework.WindowUI.Controls.CheckBoxProperties checkBoxProperties1 = new TX.Framework.WindowUI.Controls.CheckBoxProperties();
             TX.Framework.WindowUI.Controls.TreeListViewItemCollection.TreeListViewItemCollectionComparer treeListViewItemCollectionComparer3 = new TX.Framework.WindowUI.Controls.TreeListViewItemCollection.TreeListViewItemCollectionComparer();
+            TX.Framework.WindowUI.Controls.TreeListViewItemCollection.TreeListViewItemCollectionComparer treeListViewItemCollectionComparer1 = new TX.Framework.WindowUI.Controls.TreeListViewItemCollection.TreeListViewItemCollectionComparer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.xPanderPanelList1 = new TX.Framework.WindowUI.Controls.XPanderPanelList();
@@ -73,6 +75,7 @@ namespace WindowsTest {
             this.xPanderPanel4 = new TX.Framework.WindowUI.Controls.XPanderPanel();
             this.txTabControl1 = new TX.Framework.WindowUI.Controls.TXTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.txGroupBox2 = new TX.Framework.WindowUI.Controls.TXGroupBox();
             this.txDateTimePicker2 = new TX.Framework.WindowUI.Controls.TXDateTimePicker();
             this.txHtmlEditor1 = new TX.Framework.WindowUI.Controls.TXHtmlEditor();
@@ -124,6 +127,15 @@ namespace WindowsTest {
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lstItems = new System.Windows.Forms.ListBox();
             this.txtSelectText = new System.Windows.Forms.TextBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.gbxLoginIn = new System.Windows.Forms.GroupBox();
+            this.lblLoginInfo = new System.Windows.Forms.Label();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.txtPassWord = new System.Windows.Forms.TextBox();
+            this.lblUserName = new System.Windows.Forms.Label();
+            this.lblPassWord = new System.Windows.Forms.Label();
+            this.ToolTipsInForm = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -133,6 +145,7 @@ namespace WindowsTest {
             this.xPanderPanel1.SuspendLayout();
             this.txTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.txGroupBox2.SuspendLayout();
             this.txGroupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -145,6 +158,8 @@ namespace WindowsTest {
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.gbxLoginIn.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -498,6 +513,7 @@ namespace WindowsTest {
             this.txTabControl1.Controls.Add(this.tabPage4);
             this.txTabControl1.Controls.Add(this.tabPage5);
             this.txTabControl1.Controls.Add(this.tabPage6);
+            this.txTabControl1.Controls.Add(this.tabPage7);
             this.txTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txTabControl1.HeightLightTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txTabControl1.Location = new System.Drawing.Point(0, 0);
@@ -510,6 +526,7 @@ namespace WindowsTest {
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.numericUpDown1);
             this.tabPage1.Controls.Add(this.txGroupBox2);
             this.tabPage1.Controls.Add(this.txHtmlEditor1);
             this.tabPage1.Controls.Add(this.txGroupBox1);
@@ -535,6 +552,13 @@ namespace WindowsTest {
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "窗体组件测试";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(398, 494);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(8, 25);
+            this.numericUpDown1.TabIndex = 17;
             // 
             // txGroupBox2
             // 
@@ -846,6 +870,10 @@ namespace WindowsTest {
             rangeValueHeader3.UpperValueTitle = "范围上限";
             rangeValueHeader3.ValueTitle = "金额数值";
             this.txRangeValue1.Header = rangeValueHeader3;
+            rangeValueHeader1.LowerValueTitle = "范围下限";
+            rangeValueHeader1.UpperValueTitle = "范围上限";
+            rangeValueHeader1.ValueTitle = "金额数值";
+            this.txRangeValue1.Header = rangeValueHeader1;
             this.txRangeValue1.Location = new System.Drawing.Point(1, 23);
             this.txRangeValue1.Margin = new System.Windows.Forms.Padding(5);
             this.txRangeValue1.Name = "txRangeValue1";
@@ -944,6 +972,50 @@ namespace WindowsTest {
             dockPaneStripSkin3.ToolWindowGradient = dockPaneStripToolWindowGradient3;
             dockPanelSkin3.DockPaneStripSkin = dockPaneStripSkin3;
             this.dockPanel1.Skin = dockPanelSkin3;
+            dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
+            autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
+            tabGradient1.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient1.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient1.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            autoHideStripSkin1.TabGradient = tabGradient1;
+            dockPanelSkin1.AutoHideStripSkin = autoHideStripSkin1;
+            tabGradient2.EndColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient2.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient2.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient1.ActiveTabGradient = tabGradient2;
+            dockPanelGradient2.EndColor = System.Drawing.SystemColors.Control;
+            dockPanelGradient2.StartColor = System.Drawing.SystemColors.Control;
+            dockPaneStripGradient1.DockStripGradient = dockPanelGradient2;
+            tabGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient3.StartColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient3.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient1.InactiveTabGradient = tabGradient3;
+            dockPaneStripSkin1.DocumentGradient = dockPaneStripGradient1;
+            tabGradient4.EndColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient4.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient4.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
+            tabGradient4.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dockPaneStripToolWindowGradient1.ActiveCaptionGradient = tabGradient4;
+            tabGradient5.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient5.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient5.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient1.ActiveTabGradient = tabGradient5;
+            dockPanelGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient3.StartColor = System.Drawing.SystemColors.ControlLight;
+            dockPaneStripToolWindowGradient1.DockStripGradient = dockPanelGradient3;
+            tabGradient6.EndColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient6.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient6.StartColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient6.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient1.InactiveCaptionGradient = tabGradient6;
+            tabGradient7.EndColor = System.Drawing.Color.Transparent;
+            tabGradient7.StartColor = System.Drawing.Color.Transparent;
+            tabGradient7.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            dockPaneStripToolWindowGradient1.InactiveTabGradient = tabGradient7;
+            dockPaneStripSkin1.ToolWindowGradient = dockPaneStripToolWindowGradient1;
+            dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
+            this.dockPanel1.Skin = dockPanelSkin1;
             this.dockPanel1.TabIndex = 1;
             // 
             // panel2
@@ -1129,6 +1201,9 @@ namespace WindowsTest {
             treeListViewItemCollectionComparer3.Column = 0;
             treeListViewItemCollectionComparer3.SortOrder = System.Windows.Forms.SortOrder.Ascending;
             this.treeListView1.Comparer = treeListViewItemCollectionComparer3;
+            treeListViewItemCollectionComparer1.Column = 0;
+            treeListViewItemCollectionComparer1.SortOrder = System.Windows.Forms.SortOrder.Ascending;
+            this.treeListView1.Comparer = treeListViewItemCollectionComparer1;
             this.treeListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeListView1.Font = new System.Drawing.Font("宋体", 9.6F);
             this.treeListView1.HeaderBeginColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
@@ -1310,6 +1385,100 @@ namespace WindowsTest {
             this.txtSelectText.Size = new System.Drawing.Size(314, 25);
             this.txtSelectText.TabIndex = 2;
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.gbxLoginIn);
+            this.tabPage7.Location = new System.Drawing.Point(4, 33);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(960, 665);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "ToolTip";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // gbxLoginIn
+            // 
+            this.gbxLoginIn.Controls.Add(this.lblLoginInfo);
+            this.gbxLoginIn.Controls.Add(this.btnLogin);
+            this.gbxLoginIn.Controls.Add(this.txtUserName);
+            this.gbxLoginIn.Controls.Add(this.txtPassWord);
+            this.gbxLoginIn.Controls.Add(this.lblUserName);
+            this.gbxLoginIn.Controls.Add(this.lblPassWord);
+            this.gbxLoginIn.Location = new System.Drawing.Point(146, 81);
+            this.gbxLoginIn.Name = "gbxLoginIn";
+            this.gbxLoginIn.Size = new System.Drawing.Size(277, 180);
+            this.gbxLoginIn.TabIndex = 5;
+            this.gbxLoginIn.TabStop = false;
+            this.gbxLoginIn.Text = "登录";
+            this.ToolTipsInForm.SetToolTip(this.gbxLoginIn, "用户登录界面");
+            // 
+            // lblLoginInfo
+            // 
+            this.lblLoginInfo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblLoginInfo.ForeColor = System.Drawing.Color.Red;
+            this.lblLoginInfo.Location = new System.Drawing.Point(56, 134);
+            this.lblLoginInfo.Name = "lblLoginInfo";
+            this.lblLoginInfo.Size = new System.Drawing.Size(106, 23);
+            this.lblLoginInfo.TabIndex = 5;
+            this.ToolTipsInForm.SetToolTip(this.lblLoginInfo, "登录提示");
+            this.lblLoginInfo.Visible = false;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(182, 134);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(76, 29);
+            this.btnLogin.TabIndex = 4;
+            this.btnLogin.Text = "登录";
+            this.ToolTipsInForm.SetToolTip(this.btnLogin, "模拟登录");
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // txtUserName
+            // 
+            this.txtUserName.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.txtUserName.Location = new System.Drawing.Point(98, 37);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.ShortcutsEnabled = false;
+            this.txtUserName.Size = new System.Drawing.Size(160, 25);
+            this.txtUserName.TabIndex = 1;
+            this.ToolTipsInForm.SetToolTip(this.txtUserName, "不支持中文字符");
+            this.txtUserName.TextChanged += new System.EventHandler(this.txtLoginInput_TextChanged);
+            // 
+            // txtPassWord
+            // 
+            this.txtPassWord.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.txtPassWord.Location = new System.Drawing.Point(98, 78);
+            this.txtPassWord.Name = "txtPassWord";
+            this.txtPassWord.ShortcutsEnabled = false;
+            this.txtPassWord.Size = new System.Drawing.Size(160, 25);
+            this.txtPassWord.TabIndex = 3;
+            this.ToolTipsInForm.SetToolTip(this.txtPassWord, "1.长度不能小于2\r\n2.至少包含数字、字母、特殊字符中的两种");
+            this.txtPassWord.UseSystemPasswordChar = true;
+            this.txtPassWord.TextChanged += new System.EventHandler(this.txtLoginInput_TextChanged);
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Location = new System.Drawing.Point(17, 40);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(52, 15);
+            this.lblUserName.TabIndex = 0;
+            this.lblUserName.Text = "用户名";
+            // 
+            // lblPassWord
+            // 
+            this.lblPassWord.AutoSize = true;
+            this.lblPassWord.Location = new System.Drawing.Point(25, 81);
+            this.lblPassWord.Name = "lblPassWord";
+            this.lblPassWord.Size = new System.Drawing.Size(37, 15);
+            this.lblPassWord.TabIndex = 2;
+            this.lblPassWord.Text = "密码";
+            // 
+            // ToolTipsInForm
+            // 
+            this.ToolTipsInForm.Popup += new System.Windows.Forms.PopupEventHandler(this.ToolTipsInForm_Popup);
+            // 
             // WinMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1335,6 +1504,7 @@ namespace WindowsTest {
             this.txTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.txGroupBox2.ResumeLayout(false);
             this.txGroupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -1351,6 +1521,9 @@ namespace WindowsTest {
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.gbxLoginIn.ResumeLayout(false);
+            this.gbxLoginIn.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1423,5 +1596,15 @@ namespace WindowsTest {
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox lstItems;
         private System.Windows.Forms.TextBox txtSelectText;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.GroupBox gbxLoginIn;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.TextBox txtPassWord;
+        private System.Windows.Forms.Label lblUserName;
+        private System.Windows.Forms.Label lblPassWord;
+        private System.Windows.Forms.Label lblLoginInfo;
+        private System.Windows.Forms.ToolTip ToolTipsInForm;
     }
 }

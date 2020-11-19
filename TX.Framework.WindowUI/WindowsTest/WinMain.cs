@@ -167,5 +167,38 @@ namespace WindowsTest {
             // 设定了ValueMember，这里显示设定的属性值；否则，显示对象本身
             object o = this.lstItems.SelectedValue;
         }
+
+        private void txtLoginInput_TextChanged(object sender, EventArgs e) {
+            //this.lblLoginInfo.Text = string.Empty;
+            this.lblLoginInfo.Visible = false;
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e) {
+            this.lblLoginInfo.Visible = true;
+            if (string.IsNullOrWhiteSpace(this.txtUserName.Text)) {
+                this.lblLoginInfo.Text = "请输入用户名";
+            }
+            else if (string.IsNullOrWhiteSpace(this.txtPassWord.Text)) {
+                this.lblLoginInfo.Text = "请输入密码";
+            }
+            else {
+                this.lblLoginInfo.Text = "登录成功!";
+            }
+        }
+
+        private void ToolTipsInForm_Popup(object sender, PopupEventArgs e) {
+            if (e.AssociatedControl.Name == "lblLoginInfo" &&
+                string.Empty != this.lblLoginInfo.Text &&
+                "登录成功!" != this.lblLoginInfo.Text) {
+                this.ToolTipsInForm.ToolTipTitle = "错误";
+                this.ToolTipsInForm.ToolTipIcon = ToolTipIcon.Error;
+                this.ToolTipsInForm.SetToolTip(this.lblLoginInfo, "登录失败");
+            }
+            else {
+                this.ToolTipsInForm.ToolTipTitle = "提示";
+                this.ToolTipsInForm.ToolTipIcon = ToolTipIcon.Info;
+                this.ToolTipsInForm.SetToolTip(this.lblLoginInfo, "登录成功");
+            }
+        }
     }
 }
