@@ -38,35 +38,11 @@ namespace TX.Framework.WindowUI.Controls {
             base.CalendarTrailingForeColor = Color.CadetBlue;
             base.CalendarMonthBackground = SkinManager.CurrentSkin.DefaultControlColor.First;
             base.CalendarTitleBackColor = SkinManager.CurrentSkin.CaptionColor.First;
-            this.ShowCheckBox = true;
-            this.Checked = true;
         }
 
         #endregion
 
         #region Properties
-
-        [Category("TXProperties")]
-        [Description("获取或者设置控件的事件日期时间值")]
-        [Browsable(true)]
-        public new DateTime? Value {
-            get {
-                if (this.Checked) {
-                    return base.Value;
-                }
-                return null;
-            }
-            set {
-                if (value == null || value == DateTime.MinValue || value == DateTime.MaxValue) {
-                    this.ShowCheckBox = true;
-                    this.Checked = false;
-                    base.Value = DateTime.Now;
-                }
-                else {
-                    base.Value = (DateTime) value;
-                }
-            }
-        }
 
         internal Rectangle ButtonRect {
             get {
@@ -189,7 +165,9 @@ namespace TX.Framework.WindowUI.Controls {
             Win32.GetComboBoxInfo(cb.Handle, ref cbi);
             cb.Dispose();
             int width = cbi.rcButton.Rect.Width;
-            Rectangle rect = new Rectangle(this.Width - width - this._Margin * 2, this._Margin, this.Height - this._Margin, this.Height - this._Margin * 2);
+            Rectangle rect = base.ShowCheckBox ?
+                new Rectangle(this.Width - width - this._Margin * 2, this._Margin, this.Height - this._Margin, this.Height - this._Margin * 2) :
+                new Rectangle(this.Width - width - this._Margin * 2 - 20, this._Margin, this.Height - this._Margin, this.Height - this._Margin * 2);
             return rect;
         }
 
