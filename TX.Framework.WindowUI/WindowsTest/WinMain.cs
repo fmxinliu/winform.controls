@@ -250,18 +250,15 @@ namespace WindowsTest {
             }
         }
 
-        // 用于捕获Form最大最小化事件，
-        // 这里，由于重绘ControlBix无法捕获到
-        const int WM_SYSCOMMAND = 0x112;
-        const int SC_CLOSE = 0xF060;
-        const int SC_MINIMIZE = 0xF020;
-        const int SC_MAXIMIZE = 0xF030;
+        // 捕获 Form 最大/最小化事件
         protected override void WndProc(ref Message m) {
             if (m.Msg == WM_SYSCOMMAND) {
                 switch (m.WParam.ToInt32()) {
                     case SC_MINIMIZE:
                         break;
                     case SC_MAXIMIZE:
+                        break;
+                    case SC_RESTORE:
                         break;
                     case SC_CLOSE:
                         break;

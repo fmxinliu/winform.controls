@@ -228,7 +228,7 @@ namespace TX.Framework.WindowUI.Forms {
         }
         #endregion
 
-        #region 鼠标事件扑捉
+        #region 鼠标事件捕获
 
         protected override void ProcessMouseDown(Point p) {
 

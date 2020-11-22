@@ -6,12 +6,24 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using TX.Framework.WindowUI.Controls.Docking;
+
 namespace TX.Framework.WindowUI.Forms {
     /// <summary>
     /// 窗台控制处理类
     /// </summary>
     /// User:Ryan  CreateTime:2012-8-3 15:39.
     public partial class BaseForm {
+        #region const fields
+
+        protected const int WM_SYSCOMMAND = (int)WindowMessages.WM_SYSCOMMAND;
+        protected const int SC_CLOSE = (int)SystemCommands.SC_CLOSE;
+        protected const int SC_MINIMIZE = (int)SystemCommands.SC_MINIMIZE;
+        protected const int SC_MAXIMIZE = (int)SystemCommands.SC_MAXIMIZE;
+        protected const int SC_RESTORE = (int)SystemCommands.SC_RESTORE;
+
+        #endregion
+
         #region fields
 
         private EnumControlState _MinBoxState;
@@ -116,7 +128,7 @@ namespace TX.Framework.WindowUI.Forms {
         }
 
         /// <summary>
-        /// 处理鼠标离开
+        /// 处理鼠标弹起
         /// </summary>
         /// <param name="p">The Point.</param>
         /// User:Ryan  CreateTime:2011-07-28 10:44.
@@ -125,29 +137,28 @@ namespace TX.Framework.WindowUI.Forms {
             Rectangle maxRect = this.MaximizeBoxRect;
             Rectangle minRect = this.MinimizeBoxRect;
             if (!closeRect.IsEmpty && closeRect.Contains(p)) {
-                base.Close();
                 this.CloseBoxState = EnumControlState.Default;
+                NativeMethods.PostMessage(this.Handle, WM_SYSCOMMAND, SC_CLOSE, 0);
             }
 
             if (!maxRect.IsEmpty && maxRect.Contains(p)) {
-                FormWindowState fs = FormWindowState.Normal;
+                uint ws = SC_RESTORE;
                 switch (base.WindowState) {
                     case FormWindowState.Maximized:
-                        fs = FormWindowState.Normal;
                         break;
                     case FormWindowState.Normal:
                     default:
-                        fs = FormWindowState.Maximized;
+                        ws = SC_MAXIMIZE;
                         break;
                 }
 
-                base.WindowState = fs;
                 this.MaxBoxState = EnumControlState.Default;
+                NativeMethods.PostMessage(this.Handle, WM_SYSCOMMAND, ws, 0);
             }
 
             if (!minRect.IsEmpty && minRect.Contains(p)) {
-                base.WindowState = FormWindowState.Minimized;
                 this.MinBoxState = EnumControlState.Default;
+                NativeMethods.PostMessage(this.Handle, WM_SYSCOMMAND, SC_MINIMIZE, 0);
             }
 
             this.Invalidate(this.CaptionRect);
