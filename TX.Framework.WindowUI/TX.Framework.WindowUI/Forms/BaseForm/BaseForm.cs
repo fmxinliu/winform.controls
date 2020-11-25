@@ -342,18 +342,15 @@ namespace TX.Framework.WindowUI.Forms {
         protected override void OnPaint(PaintEventArgs e) {
             // 双缓冲
             BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
-            BufferedGraphics myBuffer = currentContext.Allocate(e.Graphics, e.ClipRectangle);
-            Graphics g = myBuffer.Graphics;
+            BufferedGraphics bg = currentContext.Allocate(e.Graphics, e.ClipRectangle);
+            Graphics g = bg.Graphics;
             GDIHelper.InitializeGraphics(g);
             this.DrawFormBackGround(g);
-            this.DrawCaption(g);
             this.DrawFormBorder(g);
-
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighSpeed;
-            myBuffer.Render(e.Graphics);
+            this.DrawCaption(g);
+            bg.Render(e.Graphics);
             g.Dispose();
-            myBuffer.Dispose();
+            bg.Dispose();
         }
 
         protected override void WndProc(ref Message m) {

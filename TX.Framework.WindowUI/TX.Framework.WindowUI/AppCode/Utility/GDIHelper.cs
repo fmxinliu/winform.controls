@@ -24,9 +24,10 @@ namespace TX.Framework.WindowUI {
         /// User:Ryan  CreateTime:2011-08-19 16:53.
         public static void InitializeGraphics(Graphics g) {
             if (g != null) {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.SmoothingMode = SmoothingMode.HighQuality;
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.CompositingQuality = CompositingQuality.HighQuality;
+                g.PixelOffsetMode = PixelOffsetMode.HighQuality;
             }
         }
 

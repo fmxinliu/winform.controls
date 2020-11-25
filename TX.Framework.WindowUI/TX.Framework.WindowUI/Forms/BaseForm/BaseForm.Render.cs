@@ -154,10 +154,21 @@ namespace TX.Framework.WindowUI.Forms {
         /// User:Ryan  CreateTime:2012-8-3 21:18.
         private void DrawCaptionText(Graphics g) {
             Rectangle rect = new Rectangle(0, 0, base.Width, this._CaptionHeight);
-            TextRenderer.DrawText(g, this.Text, this._CaptionFont, rect, SkinManager.CurrentSkin.CaptionFontColor, TextFormatFlags.VerticalCenter |
-                TextFormatFlags.HorizontalCenter |
-                TextFormatFlags.SingleLine |
-                TextFormatFlags.WordEllipsis);
+            //TextRenderer.DrawText(g, this.Text, this._CaptionFont, rect,
+            //    SkinManager.CurrentSkin.CaptionFontColor,
+            //    TextFormatFlags.HorizontalCenter |
+            //    TextFormatFlags.VerticalCenter |
+            //    TextFormatFlags.SingleLine |
+            //    TextFormatFlags.WordEllipsis);
+            using (Brush brush = new SolidBrush(SkinManager.CurrentSkin.CaptionFontColor)) {
+                StringFormat sf = new StringFormat();
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+                sf.FormatFlags = StringFormatFlags.NoWrap;
+                sf.Trimming = StringTrimming.EllipsisWord;
+                var f = sf.FormatFlags;
+                g.DrawString(this.Text, this._CaptionFont, brush, rect, sf);
+            }
         }
 
         /// <summary>
