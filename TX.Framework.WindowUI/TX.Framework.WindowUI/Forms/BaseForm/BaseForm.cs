@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using TX.Framework.WindowUI.Controls;
 
 namespace TX.Framework.WindowUI.Forms {
@@ -46,6 +45,8 @@ namespace TX.Framework.WindowUI.Forms {
         /// 是否可以调整大小
         /// </summary>
         private bool _ResizeEnable = true;
+
+        private AutoSizeMode _AutoSizeMode = AutoSizeMode.GrowOnly;
 
         /// <summary>
         /// 控制按钮大小（最小化，最大化，关闭）
@@ -147,7 +148,25 @@ namespace TX.Framework.WindowUI.Forms {
         [Description("是否允许客户调整窗体大小")]
         public bool ResizeEnable {
             get { return this._ResizeEnable; }
-            set { this._ResizeEnable = value; }
+            set {
+                this._ResizeEnable = value;
+                if (value) {
+                    this._AutoSizeMode = AutoSizeMode.GrowOnly;
+                }
+                else {
+                    this._AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                }
+            }
+        }
+
+        [DefaultValue(true)]
+        [Description("获取或设置窗体自动调整自身大小的模式。")]
+        public new AutoSizeMode AutoSizeMode {
+            get { return this._AutoSizeMode; }
+            set {
+                this._AutoSizeMode = value;
+                this._ResizeEnable = (value != AutoSizeMode.GrowAndShrink);
+            }
         }
 
         [Category("TXProperties")]
