@@ -575,7 +575,10 @@ namespace TX.Framework.WindowUI.Controls.Docking {
         }
 
         public void Hide() {
-            IsHidden = true;
+            if (DockPanel == null)
+                Form.Hide();
+            else
+                IsHidden = true;
         }
 
         internal void SetPaneAndVisible(DockPane pane) {
