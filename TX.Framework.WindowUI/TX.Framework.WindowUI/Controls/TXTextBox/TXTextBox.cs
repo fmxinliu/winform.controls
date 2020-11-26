@@ -397,6 +397,16 @@ namespace TX.Framework.WindowUI.Controls {
 
         [Category("TXProperties")]
         [Browsable(true)]
+        [Description("指示编辑框中的文本是否以默认的密码字符显示。")]
+        [DefaultValue(false)]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        public bool UseSystemPasswordChar {
+            get { return this._TextBox.UseSystemPasswordChar; }
+            set { this._TextBox.UseSystemPasswordChar = value; }
+        }
+
+        [Category("TXProperties")]
+        [Browsable(true)]
         [Description("密码字符")]
         [DefaultValue("")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
