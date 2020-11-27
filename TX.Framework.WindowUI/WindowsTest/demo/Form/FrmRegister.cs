@@ -41,6 +41,7 @@ namespace WindowsTest {
                 inputValid = false;
             }
             if (inputValid) {
+                this.dr = DialogResult.OK;
                 this.Close();
             }
             else {
@@ -53,6 +54,12 @@ namespace WindowsTest {
             if (!this.verifying && this.lblErrorInfo.Text.Length > 0) {
                 this.lblErrorInfo.Text = string.Empty;
             }
+        }
+
+        private DialogResult dr = DialogResult.Cancel;
+        public new DialogResult ShowDialog() {
+            base.ShowDialog();
+            return this.dr;
         }
     }
 }

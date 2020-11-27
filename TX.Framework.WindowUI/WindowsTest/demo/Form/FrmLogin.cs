@@ -13,9 +13,12 @@ namespace WindowsTest {
             FrmRegister f = new FrmRegister();
             f.StartPosition = FormStartPosition.Manual;
             f.Location = this.Location;
-            f.ShowDialog();
+            var dr = f.ShowDialog();
             this.Location = f.Location;
             this.Show();
+            //if (dr != DialogResult.Cancel) {
+            //    this.Info("注册成功！");
+            //}
         }
 
         private void btnLogin_Click(object sender, System.EventArgs e) {
