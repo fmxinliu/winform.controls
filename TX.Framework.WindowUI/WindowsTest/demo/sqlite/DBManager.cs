@@ -37,11 +37,12 @@ namespace SQLite {
         /// 当前连接，是否存在表
         /// </summary>
         public Boolean tableExists(string dbName, String tableName) {
-            var dr = SQLiteHelper2.ExecuteReader(
+            using (var dr = SQLiteHelper2.ExecuteReader(
                 String.Format(connectionString1, dbName),
                 String.Format(Sql.TABLE_EXISTS, tableName),
-                CommandType.Text);
-            return dr != null && dr.HasRows;
+                CommandType.Text)) {
+                return dr != null && dr.HasRows;
+            }
         }
 
         /// <summary>
@@ -72,11 +73,11 @@ namespace SQLite {
         /// 创建表
         /// </summary>
         public Boolean createTable(String dbName, String tableName, Type type) {
-            var dr = SQLiteHelper2.ExecuteReader(
+            using (var dr = SQLiteHelper2.ExecuteReader(
                 String.Format(connectionString1, dbName),
                 String.Format(Sql.CREATE_TABLE, tableName, getTableColumnDefinition(type)),
-                CommandType.Text);
-            return tableExists(tableName, dbName);
+                CommandType.Text)) {}
+            return tableExists(dbName, tableName);
         }
 
         /// <summary>

@@ -405,6 +405,7 @@ namespace SQLite {
             cmd.CommandText = cmdText;
 
             if (useTrans) {
+                /// ExecuteReader调用处使用结束后，请关闭。否则，事务无法提交
                 trans = conn.BeginTransaction(IsolationLevel.ReadCommitted);
                 cmd.Transaction = trans;
             }
