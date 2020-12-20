@@ -24,16 +24,16 @@ namespace WindowsTest {
             }
             return us;
         }
-    }
 
-    public class User {
-        public string Name { get; set; }
-        public int Value { get; set; }
+        public class User {
+            public string Name { get; set; }
+            public int Value { get; set; }
 
-        public DateTime Birthday { get; set; }
+            public DateTime Birthday { get; set; }
 
-        public string Dept { get; set; }
+            public string Dept { get; set; }
 
-        public List<User> Users { get; set; }
+            public List<User> Users { get; set; }
+        }
     }
 }

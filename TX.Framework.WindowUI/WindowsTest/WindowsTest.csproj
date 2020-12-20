@@ -38,6 +38,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\TX.Framework.WindowUI\Lib\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="demo\bean\Column.cs" />
+    <Compile Include="demo\bean\User.cs" />
+    <Compile Include="demo\bean\UserPo.cs" />
     <Compile Include="demo\Form\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,11 @@
     <Compile Include="demo\Form\FrmRegister.designer.cs">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
+    <Compile Include="demo\sqlite\DBManager.cs" />
+    <Compile Include="demo\sqlite\Sql.cs" />
+    <Compile Include="demo\sqlite\SqliteHelper.cs" />
+    <Compile Include="demo\sqlite\SqliteHelper2.cs" />
+    <Compile Include="demo\sqlite\tables\UserTable.cs" />
     <Compile Include="FrmList.cs">
       <SubType>Form</SubType>
     </Compile>

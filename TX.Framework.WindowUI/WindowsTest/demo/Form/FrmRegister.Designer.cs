@@ -40,7 +40,7 @@
             this.btnRegister.Location = new System.Drawing.Point(230, 184);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(79, 35);
-            this.btnRegister.TabIndex = 5;
+            this.btnRegister.TabIndex = 7;
             this.btnRegister.Text = "注册";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
@@ -78,7 +78,7 @@
             this.lblConfirmPasswd.Location = new System.Drawing.Point(28, 116);
             this.lblConfirmPasswd.Name = "lblConfirmPasswd";
             this.lblConfirmPasswd.Size = new System.Drawing.Size(67, 15);
-            this.lblConfirmPasswd.TabIndex = 7;
+            this.lblConfirmPasswd.TabIndex = 4;
             this.lblConfirmPasswd.Text = "确认密码";
             // 
             // pnlBody
@@ -126,7 +126,7 @@
             this.txtConfirmPasswd.Required = false;
             this.txtConfirmPasswd.ShortcutsEnabled = false;
             this.txtConfirmPasswd.Size = new System.Drawing.Size(202, 25);
-            this.txtConfirmPasswd.TabIndex = 8;
+            this.txtConfirmPasswd.TabIndex = 5;
             this.txtConfirmPasswd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtConfirmPasswd.ToolTipIcon = System.Windows.Forms.ToolTipIcon.None;
             this.txtConfirmPasswd.UseSystemPasswordChar = true;
