@@ -37,7 +37,7 @@
             // btnLogin
             // 
             this.btnLogin.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnLogin.Location = new System.Drawing.Point(223, 146);
+            this.btnLogin.Location = new System.Drawing.Point(113, 146);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(76, 33);
             this.btnLogin.TabIndex = 5;
@@ -47,7 +47,7 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(109, 146);
+            this.btnRegister.Location = new System.Drawing.Point(230, 146);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(76, 33);
             this.btnRegister.TabIndex = 4;

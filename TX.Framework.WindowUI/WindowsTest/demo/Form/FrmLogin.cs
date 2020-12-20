@@ -28,6 +28,16 @@ namespace WindowsTest {
                 this.txtUserName.Clear();
                 this.txtPassWord.Clear();
                 this.txtUserName.Focus();
+                return;
+            }
+
+            bool ret = SQLite.Tables.UserTable.Instance.IsExist(
+                    new DB.Bean.User { UserName = this.txtUserName.Text, PassWord = this.txtPassWord.Text });
+            if (ret) {
+                this.lblErrorInfo.Text = "登录成功";
+            }
+            else {
+                this.lblErrorInfo.Text = "登录失败";
             }
         }
     }
