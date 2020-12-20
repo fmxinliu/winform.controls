@@ -64,7 +64,7 @@ namespace SQLite {
         /// </summary>
         public void createDB(String dbName) {
             if (!File.Exists(dbName)) {
-                File.Create(dbName);
+                File.Create(dbName).Close();
             }
         }
 
