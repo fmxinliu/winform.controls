@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SQLite {
+namespace TX.Framework.DbHelper.SQLite {
     public static class Sql {
         public readonly static String TABLE_EXISTS = "select * from sqlite_master where type='table' and name='{0}'";
         public readonly static String GET_ALL_TABLE_NAME = "select name from sqlite_master where type='table'";

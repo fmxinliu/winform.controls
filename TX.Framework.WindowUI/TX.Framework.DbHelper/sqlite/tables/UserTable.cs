@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DB.Bean;
-using DBUtility.SQLite;
-using System.Reflection;
 using System.Data;
 using System.Data.SQLite;
+using System.Reflection;
+using System.Text;
+using TX.Framework.DbHelper.Bean;
 
-namespace SQLite.Tables {
+namespace TX.Framework.DbHelper.SQLite {
     public class UserTable : DBManager {
-        private static UserTable userTable = new UserTable();
-        public static UserTable Instance {
-            get { return userTable; }
-        }
+        public UserTable() : this(String.Empty) { }
 
-        private UserTable() {
+        public UserTable(String dbName)
+            : base(dbName) {
             if (!this.tableExists(getTableName())) {
                 this.createTable(getDBName(), getTableName(), typeof(UserPo));
             }
@@ -25,7 +21,17 @@ namespace SQLite.Tables {
             return "user";
         }
 
-        public Boolean IsExist(User user) {
+        public Boolean IsExist(String username) {
+            using (var dr = SQLiteHelper2.ExecuteReader(
+                String.Format(connectionString1, getDBName()),
+                String.Format("select count(*) from `{0}` where UserName={1}",
+                    this.getTableName(), username),
+                CommandType.Text)) {
+                return (dr != null && dr.Read()) ? dr.GetBoolean(0) : false;
+            }
+        }
+
+        public Boolean IsMatch(User user) {
             if (user == null) {
                 return false;
             }

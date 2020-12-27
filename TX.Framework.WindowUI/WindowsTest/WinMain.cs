@@ -282,5 +282,12 @@ namespace WindowsTest {
                     System.Runtime.InteropServices.APIs.APIsEnums.FlashWindowFlags.FLASHW_TRAY);
             }
         }
+
+        private void btnShowLoginForm_Click(object sender, EventArgs e) {
+            FrmLogin f = new FrmLogin();
+            if (DialogResult.OK == f.ShowDialog()) {
+                // 显示主窗体
+            }
+        }
     }
 }

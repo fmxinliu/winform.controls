@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DB.Bean {
+namespace TX.Framework.DbHelper.Bean {
     public sealed class ColumnAttribute : Attribute {
 
         public ColumnAttribute() {

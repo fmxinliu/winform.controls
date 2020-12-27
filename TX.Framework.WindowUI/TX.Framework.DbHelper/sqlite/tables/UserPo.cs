@@ -1,6 +1,7 @@
 ﻿using System;
+using TX.Framework.DbHelper.Bean;
 
-namespace DB.Bean {
+namespace TX.Framework.DbHelper.SQLite {
     public class UserPo {
         [Column("id", "integer PRIMARY KEY", true)]
         public int ProductId { get; set; }

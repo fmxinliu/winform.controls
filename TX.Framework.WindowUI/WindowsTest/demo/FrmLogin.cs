@@ -22,19 +22,20 @@ namespace WindowsTest {
         }
 
         private void btnLogin_Click(object sender, System.EventArgs e) {
+            this.DialogResult = DialogResult.None;
             if (string.IsNullOrEmpty(this.txtUserName.Text) ||
                 string.IsNullOrEmpty(this.txtPassWord.Text)) {
-                this.lblErrorInfo.Text = "用户名或密码错误。";
+                this.lblErrorInfo.Text = "用户名或密码为空。";
                 this.txtUserName.Clear();
                 this.txtPassWord.Clear();
                 this.txtUserName.Focus();
                 return;
             }
 
-            bool ret = SQLite.Tables.UserTable.Instance.IsExist(
-                    new DB.Bean.User { UserName = this.txtUserName.Text, PassWord = this.txtPassWord.Text });
+            bool ret = DbHelper.Login(this.txtUserName.Text, this.txtPassWord.Text);
             if (ret) {
                 this.lblErrorInfo.Text = "登录成功";
+                this.DialogResult = DialogResult.OK;
             }
             else {
                 this.lblErrorInfo.Text = "登录失败";

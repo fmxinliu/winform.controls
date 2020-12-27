@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DB.Bean {
+namespace TX.Framework.DbHelper {
     public class User {
         public String UserName { get; set; }
 

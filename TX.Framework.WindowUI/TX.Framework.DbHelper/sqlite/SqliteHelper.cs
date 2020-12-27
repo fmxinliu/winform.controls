@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
+using System.Data.SQLite;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
-using System.IO;
-using System.Collections;
-using System.Data.SQLite;
 
-namespace DBUtility.SQLite {
+namespace TX.Framework.DbHelper.SQLite {
     /// <summary>
     /// SQLiteHelper is a utility class similar to "SQLHelper" in MS
     /// Data Access Application Block and follows similar pattern.
@@ -172,7 +172,7 @@ namespace DBUtility.SQLite {
         /// Executes the respective command for each inserted, updated, or deleted row in the DataSet.
         /// </summary>
         /// <remarks>
-        /// e.g.: 
+        /// e.g.:
         /// UpdateDataset(conn, insertCommand, deleteCommand, updateCommand, dataSet, "Order");
         /// </remarks>
         /// <param name="insertCommand">A valid SQL statement to insert new records into the data source</param>
@@ -309,12 +309,12 @@ namespace DBUtility.SQLite {
         /// </summary>
         /// <param name="command">SQLite Command</param>
         /// <returns>XmlReader</returns>
-        public static XmlReader ExecuteXmlReader(IDbCommand command) { // open the connection if necessary, but make sure we 
+        public static XmlReader ExecuteXmlReader(IDbCommand command) { // open the connection if necessary, but make sure we
             // know to close it when we�re done.
             if (command.Connection.State != ConnectionState.Open) {
                 command.Connection.Open();
             }
-            // get a data adapter 
+            // get a data adapter
             SQLiteDataAdapter da = new SQLiteDataAdapter((SQLiteCommand)command);
             DataSet ds = new DataSet();
             // fill the data set, and return the schema information
@@ -514,7 +514,7 @@ namespace DBUtility.SQLite {
             if (commandParameters.Length != parameterValues.Length) {
                 throw new ArgumentException("Parameter count does not match Parameter Value count.");
             }
-            // Iterate through the IDataParameters, assigning the values from the corresponding position in the 
+            // Iterate through the IDataParameters, assigning the values from the corresponding position in the
             // value array
             for (int i = 0, j = commandParameters.Length, k = 0; i < j; i++) {
                 if (commandParameters[i].Direction != ParameterDirection.ReturnValue) {

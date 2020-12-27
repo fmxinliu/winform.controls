@@ -41,14 +41,13 @@ namespace WindowsTest {
                 inputValid = false;
             }
             if (inputValid) {
-                var user = new DB.Bean.User { UserName = this.txtUserName.Text, PassWord = this.txtPassWord.Text };
-                if (SQLite.Tables.UserTable.Instance.IsExist(user)) {
+                if (DbHelper.IsUserExist(this.txtUserName.Text)) {
                     this.lblErrorInfo.Text = "用户名已经被注册";
                     this.txtUserName.Focus();
                     this.txtUserName.SelectAll();
                     return;
                 }
-                if (!SQLite.Tables.UserTable.Instance.Insert(user)) {
+                if (!DbHelper.Register(this.txtUserName.Text, this.txtPassWord.Text)) {
                     this.lblErrorInfo.Text = "注册失败";
                     return;
                 }

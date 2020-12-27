@@ -38,9 +38,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\TX.Framework.WindowUI\Lib\System.Data.SQLite.DLL</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,26 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="demo\bean\Column.cs" />
-    <Compile Include="demo\bean\User.cs" />
-    <Compile Include="demo\bean\UserPo.cs" />
-    <Compile Include="demo\Form\FrmLogin.cs">
+    <Compile Include="demo\DbHelper.cs" />
+    <Compile Include="demo\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="demo\Form\FrmLogin.Designer.cs">
+    <Compile Include="demo\FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="demo\Form\FrmRegister.cs">
+    <Compile Include="demo\FrmRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="demo\Form\FrmRegister.designer.cs">
+    <Compile Include="demo\FrmRegister.Designer.cs">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="demo\sqlite\DBManager.cs" />
-    <Compile Include="demo\sqlite\Sql.cs" />
-    <Compile Include="demo\sqlite\SqliteHelper.cs" />
-    <Compile Include="demo\sqlite\SqliteHelper2.cs" />
-    <Compile Include="demo\sqlite\tables\UserTable.cs" />
     <Compile Include="FrmList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,10 +76,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="demo\Form\FrmLogin.resx">
+    <EmbeddedResource Include="demo\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="demo\Form\FrmRegister.resx">
+    <EmbeddedResource Include="demo\FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmList.resx">
@@ -120,6 +110,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TX.Framework.DbHelper\TX.Framework.DbHelper.csproj">
+      <Project>{52F172E6-FC82-491D-A4CF-CB5E62185BEE}</Project>
+      <Name>TX.Framework.DbHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TX.Framework.WindowUI\TX.Framework.WindowUI.csproj">
       <Project>{E8746B10-EAAF-44B7-95CC-29E4C42EC8D5}</Project>
       <Name>TX.Framework.WindowUI</Name>

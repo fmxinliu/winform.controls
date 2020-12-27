@@ -4,19 +4,33 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using DB.Bean;
+using TX.Framework.DbHelper.Bean;
 
-namespace SQLite {
+namespace TX.Framework.DbHelper.SQLite {
     public class DBManager {
-        public static string connectionString1 = "Data Source={0};";
-        public static string connectionString2 = "Data Source={0};Version=3;Password=123;";
+        protected String connectionString1 = "Data Source={0};";
+        protected String connectionString2 = "Data Source={0};Version=3;Password=123;";
+        private static readonly String defaultDbDir = AppDomain.CurrentDomain.BaseDirectory;
+        private static readonly String defaultDbName = "SqliteHelper.db";
+        private String dbName = String.Empty;
 
-        protected DBManager() {
+        protected DBManager() : this(defaultDbName) { }
+
+        protected DBManager(String dbName) {
+            if (!String.IsNullOrWhiteSpace(dbName)) {
+                if (!dbName.Contains("\\")) {
+                    dbName = defaultDbDir + dbName;
+                }
+            }
+            else {
+                dbName = defaultDbDir + defaultDbName;
+            }
+            this.dbName = dbName;
             this.createDB(getDBName());
         }
 
         protected String getDBName() {
-            return AppDomain.CurrentDomain.BaseDirectory + "TXWindowsTest.db";
+            return this.dbName;
         }
 
         /// <summary>

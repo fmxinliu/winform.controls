@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
 
-namespace SQLite {
+namespace TX.Framework.DbHelper.SQLite {
     /// <summary>
     /// 本类为SQLite数据库帮助静态类,使用时只需直接调用即可,无需实例化
     /// </summary>

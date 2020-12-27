@@ -12,8 +12,7 @@ namespace WindowsTest {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmLogin());
-            //Application.Run(new WinMain());
+            Application.Run(new WinMain());
         }
     }
 }
